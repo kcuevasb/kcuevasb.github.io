@@ -330,6 +330,18 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
 }
 
 /* ---------- Skills ---------- */
+/* Plain tags, deliberately without proficiency bars: these are languages
+   used with AI assistance, and drawing a level bar next to them would
+   claim a mastery that isn't there. */
+.tag-cloud{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 4px; }
+.tag-tech{
+  font-family: var(--font-term);
+  font-size: 16px;
+  color: var(--cyan);
+  border: 1px dashed #0a3a40;
+  background: rgba(55,240,255,0.05);
+  padding: 4px 12px;
+}
 .skills-group{
   font-family: var(--font-term);
   color: var(--amber);

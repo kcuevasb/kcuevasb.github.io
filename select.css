@@ -67,9 +67,9 @@ body{
      relación de celda de 0.52 (alto/ancho). El line-height tiene que
      acompañar a esa relación: si se desvía, la cara sale estirada. */
   font-size: 7px;
-  /* 1.16 no es arbitrario: 58 columnas × ~4.2px de ancho de carácter dan
-     244px, así que las 30 filas necesitan 8.13px cada una para que el
-     recorte cuadrado original siga viéndose cuadrado (244/30 ÷ 7px). */
+  /* 1.16 no es arbitrario: 64 columnas × ~4.2px de ancho de carácter dan
+     269px, así que las 33 filas necesitan 8.15px cada una para que el
+     recorte cuadrado original siga viéndose cuadrado (269/33 ÷ 7px). */
   line-height: 1.16;
   letter-spacing: 0;
   white-space: pre;
@@ -102,7 +102,10 @@ body{
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
   .cv-summary{ margin-left:auto; margin-right:auto; }
   .cv-contact{ justify-content:center; }
-  #ascii-portrait{ font-size: 9px; }
+  /* 64 columnas a 9px se salen de una pantalla de 375px (346px + padding);
+     8px las deja en 307px y el retrato sigue entrando entero. */
+  #ascii-portrait{ font-size: 8px; }
+  .export-link{ align-self:center; }
 }
 
 /* Ahora es un <h2> de sección ("TRAYECTORIA"), no el titular de la página:
@@ -337,9 +340,11 @@ body{
   font-family: var(--font-term); background:#1a1d24; color:#fff;
 }
 
+/* Vive en la cabecera, junto al nombre y el contacto: quien entra buscando
+   el PDF de toda la vida lo encuentra sin bajar por los cinco capítulos. */
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
-  margin-top: 30px;
+  margin-top: 18px;
   color: var(--fg-dim);
   font-size: 15px;
   text-decoration: none;

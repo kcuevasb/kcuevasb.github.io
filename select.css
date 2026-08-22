@@ -62,18 +62,20 @@ body{
 }
 #ascii-portrait{
   margin:0;
-  font-family: 'Courier New', monospace;
-  /* El retrato se generó midiendo la luminancia real de la foto con una
-     relación de celda de 0.52 (alto/ancho). El line-height tiene que
-     acompañar a esa relación: si se desvía, la cara sale estirada. */
-  font-size: 7px;
-  /* 1.16 no es arbitrario: 64 columnas × ~4.2px de ancho de carácter dan
-     269px, así que las 33 filas necesitan 8.15px cada una para que el
-     recorte cuadrado original siga viéndose cuadrado (269/33 ÷ 7px). */
-  line-height: 1.16;
+  /* Los glifos son katakana half-width: los mismos que caen en la lluvia del
+     capítulo de Matrix. 'M PLUS 1 Code' los cubre y avanza 0.5em por celda. */
+  font-family: 'M PLUS 1 Code', 'MS Gothic', monospace;
+  font-size: 8px;
+  /* 0.9 no es arbitrario: 80 columnas × 0.5em = 40em de ancho, así que las
+     44 filas necesitan 0.909em cada una para que el recorte cuadrado de la
+     foto siga viéndose cuadrado (40 ÷ 44). */
+  line-height: 0.9;
   letter-spacing: 0;
   white-space: pre;
   color: #9fd8b4;
+  /* El resplandor es lo que separa el retrato de una mancha de texto: da el
+     verde fosforito de la lluvia sin tocar el color base de cada glifo. */
+  text-shadow: 0 0 6px rgba(80, 220, 130, .45);
 }
 .cv-id{ min-width:0; }
 .cv-name{
@@ -102,9 +104,8 @@ body{
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
   .cv-summary{ margin-left:auto; margin-right:auto; }
   .cv-contact{ justify-content:center; }
-  /* 64 columnas a 9px se salen de una pantalla de 375px (346px + padding);
-     8px las deja en 307px y el retrato sigue entrando entero. */
-  #ascii-portrait{ font-size: 8px; }
+  /* 80 columnas a 0.5em son 40em: a 8px ocupan 320px y con el marco caben en
+     una pantalla de 375px, así que el retrato no necesita encoger en móvil. */
   .export-link{ align-self:center; }
 }
 

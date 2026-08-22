@@ -47,12 +47,73 @@ body{
   margin: 0 0 14px;
 }
 
+/* ---------- Cabecera de CV ---------- */
+.cv-head{
+  display:flex; align-items:center; gap: 34px;
+  text-align:left; margin-bottom: 30px;
+}
+.portrait{
+  flex-shrink:0;
+  border: 2px solid #2a2f3a;
+  border-radius: 4px;
+  background:#0e1116;
+  padding: 12px 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+}
+#ascii-portrait{
+  margin:0;
+  font-family: 'Courier New', monospace;
+  /* El retrato se generó midiendo la luminancia real de la foto con una
+     relación de celda de 0.52 (alto/ancho). El line-height tiene que
+     acompañar a esa relación: si se desvía, la cara sale estirada. */
+  font-size: 7px;
+  /* 1.16 no es arbitrario: 58 columnas × ~4.2px de ancho de carácter dan
+     244px, así que las 30 filas necesitan 8.13px cada una para que el
+     recorte cuadrado original siga viéndose cuadrado (244/30 ÷ 7px). */
+  line-height: 1.16;
+  letter-spacing: 0;
+  white-space: pre;
+  color: #9fd8b4;
+}
+.cv-id{ min-width:0; }
+.cv-name{
+  font-family: var(--font-pixel);
+  font-size: clamp(15px, 2.1vw, 22px);
+  margin: 0 0 10px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  text-shadow: 3px 3px 0 #000;
+}
+.cv-role{ font-size: 21px; color: var(--accent); margin: 0 0 12px; letter-spacing: 1px; }
+.cv-summary{ font-size: 19px; color: var(--fg); opacity:.85; margin: 0 0 14px; max-width: 62ch; line-height:1.45; }
+.cv-contact{ display:flex; flex-wrap:wrap; gap: 8px 18px; }
+.cv-contact a{
+  font-size: 17px; color: var(--fg-dim); text-decoration:none;
+  border-bottom: 1px dashed #3a3f4c; padding-bottom: 2px;
+}
+.cv-contact a:hover{ color: var(--fg); border-color: var(--fg-dim); }
+
+.cv-rule{
+  height:1px; margin: 0 0 30px;
+  background: linear-gradient(to right, transparent, #3a3f4c 8%, #3a3f4c 92%, transparent);
+}
+
+@media (max-width: 720px){
+  .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
+  .cv-summary{ margin-left:auto; margin-right:auto; }
+  .cv-contact{ justify-content:center; }
+  #ascii-portrait{ font-size: 9px; }
+}
+
+/* Ahora es un <h2> de sección ("TRAYECTORIA"), no el titular de la página:
+   el titular es el nombre en la cabecera, así que este baja de tamaño para
+   no competir con él. */
 .select-title{
   font-family: var(--font-pixel);
-  font-size: clamp(22px, 5vw, 38px);
-  margin: 0 0 14px;
+  font-size: clamp(15px, 2.4vw, 22px);
+  margin: 0 0 12px;
   color: var(--fg);
-  text-shadow: 3px 3px 0 #000, 0 0 20px rgba(255,204,0,0.25);
+  text-shadow: 3px 3px 0 #000;
   letter-spacing: 2px;
 }
 

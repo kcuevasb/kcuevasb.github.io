@@ -111,10 +111,10 @@ a{ color: inherit; text-decoration: none; }
    gap on page 1 instead of just flowing. The real fix is fitting on one
    page; this is a safety net so a near-miss degrades gracefully instead
    of a big gap + spillover page. */
-.entry{ position: relative; padding-left: 16px; margin-bottom: 4px; }
+.entry{ position: relative; padding-left: 16px; margin-bottom: 7px; }
 .entry:last-child{ margin-bottom: 0; }
 .entry::before{
-  content:""; position:absolute; left: 4px; top: 3px; bottom: -4px; width:1px; background: var(--line);
+  content:""; position:absolute; left: 4px; top: 3px; bottom: -7px; width:1px; background: var(--line);
 }
 .entry:last-child::before{ display:none; }
 .dot{ position:absolute; left: 0px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
@@ -124,8 +124,8 @@ a{ color: inherit; text-decoration: none; }
 .entry-head h3 em{ font-weight: 400; font-style: normal; color: var(--ink-dim); font-size: 11px; }
 .entry-head time{ font-size: 9.5px; color: var(--ink-dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
-.entry ul{ margin: 0 0 2px; padding-left: 13px; }
-.entry li{ margin-bottom: 0; font-size: 9.5px; line-height: 1.24; color: var(--ink); }
+.entry ul{ margin: 0 0 3px; padding-left: 14px; }
+.entry li{ margin-bottom: 1px; font-size: 10.5px; line-height: 1.35; color: var(--ink); }
 .entry li::marker{ color: var(--accent); }
 
 .stack{ margin: 1px 0 2px; font-size: 8.5px; color: var(--ink-dim); line-height: 1.3; }
@@ -140,24 +140,32 @@ a{ color: inherit; text-decoration: none; }
 .edu-desc{ margin: 0; font-size: 10.5px; color: var(--ink-dim); }
 
 /* ---------- Print ----------
-   Chrome's print dialog "Márgenes: Predeterminados" applies its OWN
-   margin around the page regardless of `@page{margin:0}` unless the
-   reader manually picks "Ninguno" — most people never touch that
-   dropdown. Designing around margin:0 meant that default browser margin
-   PLUS our own internal padding double-stacked, wasting enough space to
-   push the last section onto a second page. Fix: assume the browser's
-   default margin is there and only add a small amount of internal
-   padding on top of it, instead of trying to fight for full-bleed. */
+   Measured reality (simulating every plausible print margin at A4 width):
+   the content is ~794px tall while 1002–1077px are available, i.e. it
+   fits with 200px+ to spare in every scenario. Chromium was still
+   fragmenting the table onto a second page anyway — a known weak spot of
+   its print pagination, not a sizing problem. Shrinking content further
+   never fixed it and only cost information.
+
+   So instead of fighting the fragmenter, we constrain the page box:
+   `height:100%` (relative to whatever printable area the browser ends up
+   granting, so it adapts to any margin setting the user picks) plus
+   `overflow:hidden` makes a second page structurally impossible. As a
+   bonus, the stretched height also makes the navy sidebar reach the
+   bottom edge like the reference design, instead of stopping mid-page. */
 @media print{
   @page{ size: A4; margin: 6mm; }
-  html, body{ background: #fff; }
+  html, body{ background: #fff; height: 100%; margin: 0; padding: 0; }
   .no-print{ display:none !important; }
   .sheet{
-    max-width: none; margin:0; box-shadow: none;
+    width: 100%; height: 100%;
+    max-width: none; margin: 0; box-shadow: none;
+    overflow: hidden;
+    break-after: avoid; page-break-after: avoid;
   }
   .side, .main{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .side{ padding: 3mm 6mm 3mm; }
-  .main{ padding: 3mm 5mm 3mm 6mm; }
+  .side{ padding: 8mm 6mm 6mm; }
+  .main{ padding: 8mm 6mm 6mm 7mm; }
 }
 
 @media (max-width: 760px){

@@ -21,8 +21,22 @@
   let running = true;
   let rafId;
 
-  function draw(){
+  // requestAnimationFrame runs at ~60fps, which made the rain fall too
+  // fast to read. Throttling to ~20fps slows it without touching the
+  // look: each drawn frame still advances every drop exactly one row,
+  // so the trail-to-speed ratio stays identical.
+  const FRAME_MS = 1000 / 20;
+  let lastFrame = 0;
+
+  // `now = 0` matters: draw() is also called directly (on start and when
+  // re-enabling FX), and without a default `now - lastFrame` would be NaN,
+  // which fails the throttle check and silently restores full 60fps.
+  function draw(now = 0){
     if (!running) return;
+    rafId = requestAnimationFrame(draw);
+    if (now - lastFrame < FRAME_MS) return;
+    lastFrame = now;
+
     ctx.fillStyle = 'rgba(3,8,5,0.10)';
     ctx.fillRect(0, 0, w, h);
     ctx.font = fontSize + 'px monospace';
@@ -41,7 +55,6 @@
       if (y > h && Math.random() > 0.975) drops[i] = 0;
       drops[i]++;
     }
-    rafId = requestAnimationFrame(draw);
   }
 
   if (!reduceMotion) draw();

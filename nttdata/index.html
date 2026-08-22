@@ -46,6 +46,7 @@
         <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src</div>
         <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.kepa.experiencia</div>
         <button class="tree-row tree-file active" data-file="nttdata"><span class="fi">☕</span> NTTDataEuropa.java</button>
+        <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📦</span> Proyectos.java</button>
         <button class="tree-row tree-file" data-file="stack"><span class="fi">☕</span> Stack.java</button>
         <button class="tree-row tree-file tree-file-md" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
@@ -55,6 +56,7 @@
     <main class="editor-panel">
       <div class="tabs" id="tabs">
         <button class="tab active" data-file="nttdata"><span class="fi">☕</span> NTTDataEuropa.java</button>
+        <button class="tab" data-file="proyectos"><span class="fi">📦</span> Proyectos.java</button>
         <button class="tab" data-file="stack"><span class="fi">☕</span> Stack.java</button>
         <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
@@ -86,26 +88,72 @@
 <span class="ln">24</span>    <span class="cmt">// TODO: nunca borrar esta clase — aquí empezó todo.</span>
 <span class="ln">25</span>}</pre>
 
+        <div class="projects" id="file-proyectos" hidden>
+          <p class="proj-intro"><span class="cmt">// Cinco años, cinco clientes. Sanidad sobre todo — donde un bug<br>
+          // no es una incidencia, es una receta que no llega.</span></p>
+
+          <article class="proj">
+            <h3>Portal de Mediadores <span class="proj-client">IMQ · Igualatorio Médico Quirúrgico</span></h3>
+            <p>Análisis y desarrollo de la aplicación de Portal de Mediadores.</p>
+            <p class="proj-tech">Java 11 · Spring FWK · Spring Boot 2.3 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure Services · PostgreSQL · Git</p>
+          </article>
+
+          <article class="proj">
+            <h3>Prescripción Digital <span class="proj-client">IMQ</span></h3>
+            <p>Desarrollo y mantenimiento de la aplicación de Prescripción Digital. Gestión y ejecución de los
+            despliegues en los diferentes entornos.</p>
+            <p class="proj-tech">Java 8 · Spring FWK · Spring Boot 2.1 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure Services · Oracle · PL/SQL · Git · SVN</p>
+          </article>
+
+          <article class="proj">
+            <h3>Core Asistencial <span class="proj-client">IMQ</span></h3>
+            <p>Desarrollo de mejoras funcionales y resolución de incidencias en el mantenimiento del Core
+            Asistencial.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · QueryDSL · Eclipse · Oracle · Tomcat 7.0</p>
+          </article>
+
+          <article class="proj">
+            <h3>Gestión hospitalaria <span class="proj-client">H. U. Marqués de Valdecilla</span></h3>
+            <p>Desarrollo de mejoras funcionales y resolución de incidencias en el mantenimiento de la aplicación
+            de gestión de las diferentes áreas no clínicas del hospital. Gestión y ejecución de los despliegues en
+            los diferentes entornos.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · jQuery · Eclipse · Oracle · WebLogic 11g</p>
+          </article>
+
+          <article class="proj">
+            <h3>Field Service Management <span class="proj-client">Siemens-Gamesa</span></h3>
+            <p>Análisis y parametrización de soluciones Field Service (FSM) haciendo uso de Oracle Field Service
+            Cloud (OFSC).</p>
+            <p class="proj-tech">Oracle Field Service Cloud (OFSC) · FSM</p>
+          </article>
+        </div>
+
         <pre class="code" id="file-stack" hidden><span class="ln">1</span><span class="jdoc">/**
 <span class="ln">2</span> * Stack.java
 <span class="ln">3</span> * El entorno tecnológico de la época — sin Docker, sin Kubernetes,
 <span class="ln">4</span> * sin IA. Solo el JDK, el debugger de Eclipse y mucha paciencia.
 <span class="ln">5</span> */</span>
 <span class="ln">6</span><span class="kw">public enum</span> <span class="typ">Stack</span> {
-<span class="ln">7</span>    JAVA_7, JAVA_8, JAVA_11,
-<span class="ln">8</span>    API_REST, SPRING_BOOT,
-<span class="ln">9</span>    MAVEN, SVN, GIT,
-<span class="ln">10</span>    AZURE, POSTGRESQL, ORACLE,
-<span class="ln">11</span>    JENKINS, MICROSERVICIOS, SCRUM
-<span class="ln">12</span>}</pre>
+<span class="ln">7</span>    JAVA_7, JAVA_8, JAVA_11, J2EE,
+<span class="ln">8</span>    SPRING_FWK, SPRING_BOOT_2, HATEOAS,
+<span class="ln">9</span>    JPA, HIBERNATE, QUERYDSL,
+<span class="ln">10</span>    API_RESTFUL, SOAP, ZK, JQUERY,
+<span class="ln">11</span>    ORACLE, PLSQL, POSTGRESQL,
+<span class="ln">12</span>    AZURE_SERVICES, TOMCAT_7, WEBLOGIC_11G,
+<span class="ln">13</span>    ORACLE_FIELD_SERVICE_CLOUD,
+<span class="ln">14</span>    MAVEN, SVN, GIT, JENKINS, SCRUM
+<span class="ln">15</span>}</pre>
 
         <div class="md" id="file-readme" hidden>
           <h1># Antes de todo esto</h1>
           <p>NTT Data Europa — julio de 2017. Mi primer contrato como desarrollador, después de un año en
           Domino's Pizza y seis meses en Telepizza como responsable de turno (ver capítulo 01).</p>
-          <p>Cinco años de mantenimiento, evolutivos, incidencias en producción y despliegues por Jenkins.
-          Aburrido a ratos, formativo siempre — aquí aprendí lo que ningún curso enseña: a defender un código
-          en producción a las 3 de la tarde con el cliente al teléfono.</p>
+          <p>Cinco años y cinco clientes: IMQ (Portal de Mediadores, Prescripción Digital, Core Asistencial),
+          el Hospital Universitario Marqués de Valdecilla y Siemens-Gamesa. Sanidad sobre todo — ver
+          <strong>Proyectos.java</strong> en el explorador.</p>
+          <p>Mantenimiento, evolutivos, incidencias en producción y despliegues en varios entornos. Formativo
+          siempre — aquí aprendí lo que ningún curso enseña: a defender un código en producción a las 3 de la
+          tarde con el cliente al teléfono.</p>
         </div>
       </div>
     </main>

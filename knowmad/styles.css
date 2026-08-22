@@ -1,0 +1,198 @@
+/* ===== Kepa Cuevas — CV interactivo · IntelliJ IDEA (Darcula) theme =====
+   Deliberately the dark counterpart to the Eclipse chapter: the visual
+   jump from light Eclipse (2017) to dark Darcula (2022) to the AI chat
+   (2025) carries the chronology on its own. */
+
+:root{
+  --bg: #3c3f41;          /* IDE chrome */
+  --bg-dark: #2b2b2b;     /* editor / darker panels */
+  --bg-panel: #313335;    /* tool windows */
+  --border: #555759;
+  --fg: #a9b7c6;          /* default editor text */
+  --fg-dim: #808080;
+  --sel: #4b6eaf;         /* selection blue */
+  --kw: #cc7832;          /* keyword orange */
+  --str: #6a8759;         /* string green */
+  --cmt: #808080;         /* comment gray */
+  --ann: #bbb529;         /* annotation yellow */
+  --num: #6897bb;         /* number blue */
+  --mth: #ffc66d;         /* method yellow */
+  --typ: #a9b7c6;
+  --tag: #e8bf6a;         /* xml tag */
+  --ok: #6a8759;
+  --font-code: 'JetBrains Mono', 'Consolas', monospace;
+  --font-ui: 'Inter', 'Segoe UI', sans-serif;
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; margin: 0; }
+
+body{
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--fg);
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+button{ font-family: inherit; }
+
+.ide{ display:flex; flex-direction:column; height: 100vh; height: 100dvh; }
+
+/* ---------- Title bar ---------- */
+.ide-titlebar{
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; gap: 10px;
+  padding: 6px 12px; flex-shrink:0;
+}
+.ij-logo{
+  font-family: var(--font-code); font-weight: 600; font-size: 11px;
+  background: linear-gradient(135deg,#fe315d,#f97a12,#087cfa);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  border: 1px solid var(--border); padding: 1px 5px; border-radius: 3px;
+}
+.ide-title{ color: #cfd6dd; font-size: 12px; }
+.back-link{ margin-left:auto; color: var(--num); font-size: 12px; text-decoration:none; }
+.back-link:hover{ text-decoration: underline; }
+
+/* ---------- Menu bar ---------- */
+.ide-menubar{
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; gap: 14px; padding: 4px 12px;
+  flex-shrink:0; overflow-x:auto; white-space:nowrap;
+}
+.ide-menubar span{ color: var(--fg); opacity: .8; cursor: default; }
+
+/* ---------- Navigation / run bar ---------- */
+.ide-navbar{
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; gap: 10px; padding: 5px 12px;
+  flex-shrink:0; overflow-x:auto; white-space:nowrap;
+}
+.menu-toggle{
+  display:none; background: var(--bg-panel); border: 1px solid var(--border);
+  color: var(--fg); padding: 3px 8px; cursor:pointer; border-radius: 3px; font-size: 13px;
+}
+.crumbs{ color: var(--fg-dim); font-size: 11.5px; }
+.crumbs .sep{ opacity: .6; margin: 0 2px; }
+.run-config{
+  margin-left: auto; background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: 3px; padding: 3px 9px; font-size: 11.5px; color: var(--fg);
+}
+.run-btn{ color: #59a869; font-size: 13px; }
+.dbg-btn{ font-size: 12px; }
+.chapter-tag{ color: var(--fg-dim); font-size: 11px; font-style: italic; }
+
+/* ---------- Body ---------- */
+.ide-body{ flex:1; display:flex; min-height:0; }
+
+.project-panel{
+  width: 250px; flex-shrink:0; background: var(--bg-panel);
+  border-right: 1px solid var(--border);
+  display:flex; flex-direction:column; overflow-y:auto;
+}
+.panel-head{
+  background: var(--bg); color: var(--fg); font-size: 11px; font-weight: 600;
+  padding: 5px 10px; border-bottom: 1px solid var(--border); text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.panel-head .sep{ opacity:.6; }
+.tree{ padding: 5px 0; }
+.tree-row{
+  display:flex; align-items:center; gap: 6px;
+  padding: 4px 10px 4px 12px; font-size: 12px;
+  background: transparent; border:none; width:100%; text-align:left;
+  color: var(--fg); white-space:nowrap; cursor: default;
+}
+.tree-folder{ padding-left: 22px; }
+.tree-pkg{ padding-left: 32px; }
+.tw{ width: 10px; color: var(--fg-dim); font-size: 9px; flex-shrink:0; }
+button.tree-file{ padding-left: 44px; cursor:pointer; }
+button.tree-file .fi{ color: var(--mth); flex-shrink:0; }
+button.tree-file:hover{ background: #4b5052; }
+button.tree-file.active{ background: var(--sel); color: #fff; }
+button.tree-file.active .fi{ color: #fff; }
+.project-backdrop{ display:none; }
+
+.editor-panel{ flex:1; display:flex; flex-direction:column; min-width:0; }
+
+.tabs{
+  display:flex; background: var(--bg); border-bottom: 1px solid var(--border);
+  overflow-x:auto; flex-shrink:0;
+}
+.tab{
+  display:flex; align-items:center; gap:6px;
+  background: transparent; border: none; border-right: 1px solid var(--border);
+  padding: 7px 15px; font-size: 12px; cursor:pointer; color: var(--fg-dim);
+  white-space:nowrap;
+}
+.tab .fi{ color: var(--mth); }
+.tab.active{ background: var(--bg-dark); color: var(--fg); border-bottom: 2px solid var(--mth); }
+
+.editor{ flex:1; overflow:auto; background: var(--bg-dark); }
+.code{
+  margin:0; padding: 12px 16px; font-family: var(--font-code); font-size: 13px;
+  line-height: 1.65; color: var(--fg); white-space: pre-wrap;
+}
+.ln{
+  display:inline-block; width: 2.6em; color: #606366; user-select:none;
+  text-align: right; padding-right: .9em;
+}
+.kw{ color: var(--kw); }
+.str{ color: var(--str); }
+.cmt{ color: var(--cmt); font-style: italic; }
+.ann{ color: var(--ann); }
+.typ{ color: var(--typ); }
+.mth{ color: var(--mth); }
+.tag{ color: var(--tag); }
+
+.md{ padding: 20px 26px; max-width: 70ch; }
+.md h1{ font-family: var(--font-code); font-size: 17px; color: var(--mth); margin: 0 0 14px; font-weight: 600; }
+.md p{ font-size: 13.5px; line-height:1.65; color: var(--fg); margin: 0 0 12px; }
+.md strong{ color: #fff; }
+.md em{ color: var(--fg-dim); }
+
+/* ---------- Bottom tool window ---------- */
+.ide-bottom{
+  height: 165px; flex-shrink:0; display:flex; flex-direction:column;
+  border-top: 1px solid var(--border); background: var(--bg-dark);
+}
+.bottom-tabs{ background: var(--bg); display:flex; gap: 2px; padding: 4px 8px 0; flex-shrink:0; }
+.bt{
+  padding: 4px 12px; font-size: 11px; color: var(--fg-dim);
+  border-bottom: 2px solid transparent;
+}
+.bt.active{ color: var(--fg); border-bottom-color: var(--mth); }
+.console-out{
+  flex:1; margin:0; padding: 8px 14px; overflow:auto;
+  font-family: var(--font-code); font-size: 11.5px; color: var(--fg);
+  white-space: pre; line-height: 1.35;
+}
+.console-out .ok{ color: var(--ok); }
+
+/* ---------- Status bar ---------- */
+.ide-status{
+  background: var(--bg); border-top: 1px solid var(--border);
+  display:flex; align-items:center; gap: 10px; padding: 4px 12px;
+  font-size: 11px; color: var(--fg-dim); flex-shrink:0;
+}
+.ide-status .sep{ opacity:.4; }
+.status-right{ margin-left:auto; }
+
+/* ---------- Mobile ---------- */
+@media screen and (max-width: 820px){
+  .menu-toggle{ display:inline-block; }
+  .ide-menubar{ display:none; }
+  .crumbs, .chapter-tag{ display:none; }
+  .run-config{ margin-left: 0; }
+  .project-panel{
+    position: fixed; inset: 0 auto 0 0; z-index: 50; width: min(280px, 82vw);
+    transform: translateX(-100%); transition: transform .2s ease;
+    box-shadow: 6px 0 18px rgba(0,0,0,0.5);
+  }
+  .project-panel.open{ transform: translateX(0); }
+  .project-backdrop{ display:block; position: fixed; inset:0; z-index:45; background: rgba(0,0,0,0.5); }
+  .project-backdrop[hidden]{ display:none; }
+  .ide-bottom{ height: 120px; }
+  .code{ font-size: 12px; }
+  .console-out{ font-size: 10px; }
+}

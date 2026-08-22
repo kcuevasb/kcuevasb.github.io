@@ -117,8 +117,10 @@ const KEYWORDS = {
 // Content that moved to other chapters — answer with a pointer instead of
 // pretending it lives here.
 const REDIRECTS = {
-  proyectos: { words: ['proyecto', 'app', 'personal', 'autodidact'], to: 'la edición Matrix' },
-  formacion: { words: ['estudi', 'formaci', 'colegio', 'instituto'], to: 'la edición Windows 98' },
+  proyectos: { words: ['proyecto', 'app', 'personal', 'autodidact'], to: 'el capítulo Matrix' },
+  formacion: { words: ['estudi', 'formaci', 'colegio', 'instituto'], to: 'el capítulo Windows 98' },
+  nttdata: { words: ['ntt', 'imq', 'valdecilla', 'siemens', 'eclipse'], to: 'el capítulo NTT Data (estética Eclipse)' },
+  knowmad: { words: ['knowmad', 'corte inglés', 'corte ingles', 'beedigital', 'intellij'], to: 'el capítulo Knowmad Mood (estética IntelliJ)' },
 };
 
 function matchRedirect(text){
@@ -172,7 +174,7 @@ composer.addEventListener('submit', (e) => {
 
   const redirect = matchRedirect(q);
   if (redirect){
-    appendCustomExchange(q, `<p>Eso lo cuento en ${redirect} — este capítulo se centra en la experiencia laboral reciente. Vuelve al selector y pruébala.</p>`);
+    appendCustomExchange(q, `<p>Eso lo cuento en ${redirect} — este capítulo se centra solo en mi etapa actual, en Sopra Steria. Vuelve al selector para verlo.</p>`);
     return;
   }
 

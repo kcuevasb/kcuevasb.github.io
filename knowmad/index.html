@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Software Engineer</title>
+<meta name="description" content="CV interactivo de Kepa Cuevas Barrasa en clave IntelliJ IDEA — mis años en Knowmad Mood (BeeDigital y El Corte Inglés).">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%232b2b2b%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23cc7832%22 font-family=%22monospace%22>IJ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="ide">
+
+  <!-- TITLE BAR -->
+  <div class="ide-titlebar">
+    <span class="ij-logo">IJ</span>
+    <span class="ide-title">knowmad-mood — MicroservicioCatalogo.java</span>
+    <a href="../" class="back-link">← elegir edición</a>
+  </div>
+
+  <!-- MENU BAR -->
+  <div class="ide-menubar">
+    <span>File</span><span>Edit</span><span>View</span><span>Navigate</span>
+    <span>Code</span><span>Refactor</span><span>Build</span><span>Run</span>
+    <span>Tools</span><span>VCS</span><span>Help</span>
+  </div>
+
+  <!-- NAVIGATION / RUN BAR -->
+  <div class="ide-navbar">
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="project-panel" title="Project">☰</button>
+    <span class="crumbs">knowmad-mood <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.kepa.experiencia</span>
+    <span class="run-config">☕ MicroservicioCatalogo <span class="sep">▾</span></span>
+    <span class="run-btn" title="Run">▶</span>
+    <span class="dbg-btn" title="Debug">🐞</span>
+    <span class="chapter-tag">Capítulo 03 — la etapa de consultoría</span>
+  </div>
+
+  <div class="ide-body">
+
+    <!-- PROJECT TOOL WINDOW -->
+    <aside class="project-panel" id="project-panel">
+      <div class="panel-head">Project <span class="sep">▾</span></div>
+      <div class="tree">
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 knowmad-mood</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📁 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 com.kepa.experiencia</div>
+        <button class="tree-row tree-file active" data-file="eci"><span class="fi">Ⓒ</span> ElCorteIngles.java</button>
+        <button class="tree-row tree-file" data-file="bee"><span class="fi">Ⓒ</span> BeeDigital.java</button>
+        <button class="tree-row tree-file" data-file="pom"><span class="fi">🅼</span> pom.xml</button>
+        <button class="tree-row tree-file" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+    </aside>
+    <div class="project-backdrop" id="project-backdrop" hidden></div>
+
+    <!-- EDITOR -->
+    <main class="editor-panel">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-file="eci"><span class="fi">Ⓒ</span> ElCorteIngles.java</button>
+        <button class="tab" data-file="bee"><span class="fi">Ⓒ</span> BeeDigital.java</button>
+        <button class="tab" data-file="pom"><span class="fi">🅼</span> pom.xml</button>
+        <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+
+      <div class="editor">
+
+        <pre class="code" id="file-eci"><span class="ln">1</span><span class="ann">@Service</span>
+<span class="ln">2</span><span class="ann">@Cliente</span>(<span class="str">"El Corte Inglés"</span>)
+<span class="ln">3</span><span class="ann">@Periodo</span>(desde = <span class="str">"ago 2023"</span>, hasta = <span class="str">"sep 2025"</span>)
+<span class="ln">4</span><span class="kw">public class</span> <span class="typ">ElCorteIngles</span> <span class="kw">implements</span> <span class="typ">Experiencia</span> {
+<span class="ln">5</span>
+<span class="ln">6</span>    <span class="cmt">// El dominio de catálogo de una de las mayores superficies</span>
+<span class="ln">7</span>    <span class="cmt">// comerciales de Europa. Mucho volumen, mucho dato, y cero</span>
+<span class="ln">8</span>    <span class="cmt">// margen para que un producto aparezca mal en la web.</span>
+<span class="ln">9</span>
+<span class="ln">10</span>    <span class="ann">@Override</span>
+<span class="ln">11</span>    <span class="kw">public</span> List&lt;String&gt; <span class="mth">responsabilidades</span>() {
+<span class="ln">12</span>        <span class="kw">return</span> List.of(
+<span class="ln">13</span>            <span class="str">"Análisis y desarrollo de microservicios backend con Spring Boot"</span>,
+<span class="ln">14</span>            <span class="str">"Consultas a bases de datos no relacionales con MongoDB"</span>,
+<span class="ln">15</span>            <span class="str">"Servicios de comunicación entre microservicios y agregación"</span>,
+<span class="ln">16</span>            <span class="str">"Soporte en el diseño de arquitectura del proyecto"</span>,
+<span class="ln">17</span>            <span class="str">"Despliegues con Jenkins y Clarive en varios entornos"</span>,
+<span class="ln">18</span>            <span class="str">"Calidad de código con Sonar; tests con Mockito y JUnit"</span>,
+<span class="ln">19</span>            <span class="str">"Eventos y tareas asíncronas con Kafka"</span>
+<span class="ln">20</span>        );
+<span class="ln">21</span>    }
+<span class="ln">22</span>}</pre>
+
+        <pre class="code" id="file-bee" hidden><span class="ln">1</span><span class="ann">@Service</span>
+<span class="ln">2</span><span class="ann">@Cliente</span>(<span class="str">"BeeDigital"</span>)
+<span class="ln">3</span><span class="ann">@Periodo</span>(desde = <span class="str">"nov 2022"</span>, hasta = <span class="str">"jul 2023"</span>)
+<span class="ln">4</span><span class="kw">public class</span> <span class="typ">BeeDigital</span> <span class="kw">implements</span> <span class="typ">Experiencia</span> {
+<span class="ln">5</span>
+<span class="ln">6</span>    <span class="cmt">// Posicionamiento de empresas en internet. Primer contacto</span>
+<span class="ln">7</span>    <span class="cmt">// serio con AWS y con bases de datos que no son tablas.</span>
+<span class="ln">8</span>
+<span class="ln">9</span>    <span class="ann">@Override</span>
+<span class="ln">10</span>    <span class="kw">public</span> List&lt;String&gt; <span class="mth">responsabilidades</span>() {
+<span class="ln">11</span>        <span class="kw">return</span> List.of(
+<span class="ln">12</span>            <span class="str">"Análisis y desarrollo de microservicios backend con Spring Boot"</span>,
+<span class="ln">13</span>            <span class="str">"Consultas a DocumentDB y DynamoDB"</span>,
+<span class="ln">14</span>            <span class="str">"Diseño de servicios de comunicación y agregación de datos"</span>,
+<span class="ln">15</span>            <span class="str">"Control de versiones en repositorios Git de Amazon"</span>,
+<span class="ln">16</span>            <span class="str">"Despliegues con Jenkins; calidad con Sonar"</span>,
+<span class="ln">17</span>            <span class="str">"Tests con Mockito y JUnit; eventos asíncronos con Kafka"</span>
+<span class="ln">18</span>        );
+<span class="ln">19</span>    }
+<span class="ln">20</span>}</pre>
+
+        <pre class="code" id="file-pom" hidden><span class="ln">1</span><span class="cmt">&lt;!-- El entorno tecnológico de estos tres años --&gt;</span>
+<span class="ln">2</span><span class="tag">&lt;dependencies&gt;</span>
+<span class="ln">3</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">java</span> <span class="cmt">&lt;!-- 11 · 17 · 19 --&gt;</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">4</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">spring-boot</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">5</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">spring-web</span> <span class="cmt">&lt;!-- API REST --&gt;</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">6</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kafka</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">7</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">mongodb</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">8</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">couchbase</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">9</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">dynamodb</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">10</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">documentdb</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">11</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">aws</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">12</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">docker</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">13</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kubernetes</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">14</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">jenkins</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">15</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">clarive</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">16</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kibana</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">17</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">sonar</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">18</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">mockito · junit</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">19</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">jwt</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">20</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">bitbucket · git</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">21</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">scrum</span> <span class="tag">&lt;/dependency&gt;</span>
+<span class="ln">22</span><span class="tag">&lt;/dependencies&gt;</span></pre>
+
+        <div class="md" id="file-readme" hidden>
+          <h1># Knowmad Mood · nov 2022 – sep 2025</h1>
+          <p>Tres años de consultoría en dos clientes muy distintos: <strong>BeeDigital</strong> primero
+          (posicionamiento de empresas en internet, AWS) y <strong>El Corte Inglés</strong> después (el dominio
+          de catálogo, MongoDB y mucho volumen).</p>
+          <p>Aquí es donde los microservicios dejaron de ser "lo que toca usar" para convertirse en algo que
+          entendía de verdad: por qué se separan, cuándo compensa, y qué pasa cuando uno se cae a las tres de la
+          tarde. También donde Kafka pasó de línea en el CV a herramienta del día a día.</p>
+          <p><em>La etapa anterior (NTT Data) y la actual (Sopra Steria) tienen su propio capítulo.</em></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- BOTTOM TOOL WINDOW -->
+  <div class="ide-bottom">
+    <div class="bottom-tabs">
+      <span class="bt active">▶ Run</span>
+      <span class="bt">Problems</span>
+      <span class="bt">Terminal</span>
+    </div>
+    <pre class="console-out"><span class="ok">"C:\Java\jdk-17\bin\java.exe" ...</span>
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.x)
+
+Started MicroservicioCatalogo in 3 años 10 meses (JVM running for ~1000 días)</pre>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="ide-status">
+    <span>UTF-8</span><span class="sep">|</span><span>Java 17</span><span class="sep">|</span>
+    <span>⎇ feature/knowmad-mood</span><span class="status-right">1:1 · LF</span>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

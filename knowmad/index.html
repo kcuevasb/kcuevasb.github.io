@@ -19,7 +19,7 @@
   <!-- TITLE BAR -->
   <div class="ide-titlebar">
     <span class="ij-logo">IJ</span>
-    <span class="ide-title">eci-catalogo-service — CatalogoController.java</span>
+    <span class="ide-title">knowmad-experiencia — ClienteInput.java</span>
     <a href="../" class="back-link">← elegir capítulo</a>
   </div>
 
@@ -33,8 +33,8 @@
   <!-- NAVIGATION / RUN BAR -->
   <div class="ide-navbar">
     <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="project-panel" title="Project">☰</button>
-    <span class="crumbs">eci-catalogo-service <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.eci.catalogo <span class="sep">›</span> api</span>
-    <span class="run-config">☕ CatalogoApplication <span class="sep">▾</span></span>
+    <span class="crumbs">knowmad-experiencia <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.knowmad.experiencia <span class="sep">›</span> dto</span>
+    <span class="run-config">☕ ExperienciaApplication <span class="sep">▾</span></span>
     <span class="run-btn" title="Run">▶</span>
     <span class="dbg-btn" title="Debug">🐞</span>
     <span class="chapter-tag">Capítulo 03 — nov 2022 – sep 2025</span>
@@ -46,14 +46,18 @@
     <aside class="project-panel" id="project-panel">
       <div class="panel-head">Project <span class="sep">▾</span></div>
       <div class="tree">
-        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 eci-catalogo-service</div>
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 knowmad-experiencia</div>
         <div class="tree-row tree-folder"><span class="tw">▾</span> 📁 src/main/java</div>
-        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 com.eci.catalogo</div>
-        <button class="tree-row tree-file active" data-file="controller"><span class="fi">Ⓒ</span> CatalogoController.java</button>
-        <button class="tree-row tree-file" data-file="consumer"><span class="fi">Ⓒ</span> ProductoEventConsumer.java</button>
-        <button class="tree-row tree-file" data-file="repo"><span class="fi">Ⓒ</span> ProductoRepository.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">Ⓡ</span> ClienteInput.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">Ⓒ</span> PosicionamientoController.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 messaging</div>
+        <button class="tree-row tree-file" data-file="consumer"><span class="fi">Ⓒ</span> CatalogoEventConsumer.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">Ⓡ</span> Aprendizaje.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 docs</div>
         <button class="tree-row tree-file" data-file="clientes"><span class="fi">📁</span> clientes.md</button>
-        <button class="tree-row tree-file" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tree-row tree-file" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
     </aside>
@@ -62,89 +66,139 @@
     <!-- EDITOR -->
     <main class="editor-panel">
       <div class="tabs" id="tabs">
-        <button class="tab active" data-file="controller"><span class="fi">Ⓒ</span> CatalogoController.java</button>
-        <button class="tab" data-file="consumer"><span class="fi">Ⓒ</span> ProductoEventConsumer.java</button>
-        <button class="tab" data-file="repo"><span class="fi">Ⓒ</span> ProductoRepository.java</button>
+        <button class="tab active" data-file="input"><span class="fi">Ⓡ</span> ClienteInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">Ⓒ</span> PosicionamientoController.java</button>
+        <button class="tab" data-file="consumer"><span class="fi">Ⓒ</span> CatalogoEventConsumer.java</button>
+        <button class="tab" data-file="entity"><span class="fi">Ⓡ</span> Aprendizaje.java</button>
         <button class="tab" data-file="clientes"><span class="fi">📁</span> clientes.md</button>
-        <button class="tab" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
 
       <div class="editor">
 
-        <pre class="code" id="file-controller"><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.api;
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.knowmad.experiencia.dto;
 <span class="ln">2</span>
 <span class="ln">3</span><span class="cmt">/**
-<span class="ln">4</span> * Dominio de catálogo — El Corte Inglés.
-<span class="ln">5</span> * Agregador: compone la ficha de producto a partir de varios
-<span class="ln">6</span> * microservicios y la cachea. Java 17, Spring Boot 3.
-<span class="ln">7</span> */</span>
-<span class="ln">8</span><span class="ann">@RestController</span>
-<span class="ln">9</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/catalogo"</span>)
-<span class="ln">10</span><span class="ann">@RequiredArgsConstructor</span>
-<span class="ln">11</span><span class="kw">public class</span> <span class="typ">CatalogoController</span> {
+<span class="ln">4</span> * Otra vez los clientes como entrada — pero aquí cada uno entra
+<span class="ln">5</span> * por una puerta distinta, y esa es la diferencia con NTT Data:
+<span class="ln">6</span> *
+<span class="ln">7</span> *   BeeDigital      → API REST (petición / respuesta)
+<span class="ln">8</span> *   El Corte Inglés → Kafka    (eventos, sin acoplar servicios)
+<span class="ln">9</span> */</span>
+<span class="ln">10</span><span class="kw">public sealed interface</span> <span class="typ">ClienteInput</span>
+<span class="ln">11</span>        <span class="kw">permits</span> <span class="typ">BeeDigitalRequest</span>, <span class="typ">CatalogoEvent</span> {
 <span class="ln">12</span>
-<span class="ln">13</span>    <span class="kw">private final</span> <span class="typ">CatalogoService</span> catalogoService;
-<span class="ln">14</span>
-<span class="ln">15</span>    <span class="ann">@GetMapping</span>(<span class="str">"/productos/{sku}"</span>)
-<span class="ln">16</span>    <span class="kw">public</span> <span class="typ">ResponseEntity</span>&lt;<span class="typ">ProductoDTO</span>&gt; <span class="mth">buscar</span>(<span class="ann">@PathVariable</span> <span class="typ">String</span> sku) {
-<span class="ln">17</span>        <span class="kw">return</span> catalogoService.<span class="mth">buscarPorSku</span>(sku)
-<span class="ln">18</span>                .map(<span class="typ">ResponseEntity</span>::ok)
-<span class="ln">19</span>                .orElseGet(() -&gt; <span class="typ">ResponseEntity</span>.notFound().build());
-<span class="ln">20</span>    }
+<span class="ln">13</span>    <span class="typ">String</span> <span class="mth">cliente</span>();
+<span class="ln">14</span>}
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cmt">// BeeDigital: entra por API. Java 19, records.</span>
+<span class="ln">17</span><span class="kw">record</span> <span class="typ">BeeDigitalRequest</span>(<span class="typ">String</span> empresa,
+<span class="ln">18</span>                         <span class="typ">String</span> sector,
+<span class="ln">19</span>                         <span class="typ">List</span>&lt;<span class="typ">String</span>&gt; keywords)
+<span class="ln">20</span>        <span class="kw">implements</span> <span class="typ">ClienteInput</span> {
 <span class="ln">21</span>
-<span class="ln">22</span>    <span class="ann">@GetMapping</span>(<span class="str">"/productos"</span>)
-<span class="ln">23</span>    <span class="kw">public</span> <span class="typ">Page</span>&lt;<span class="typ">ProductoDTO</span>&gt; <span class="mth">listar</span>(<span class="ann">@RequestParam</span> <span class="typ">String</span> categoria,
-<span class="ln">24</span>                                      <span class="typ">Pageable</span> pageable) {
-<span class="ln">25</span>        <span class="kw">return</span> catalogoService.<span class="mth">listarPorCategoria</span>(categoria, pageable);
+<span class="ln">22</span>    <span class="ann">@Override</span>
+<span class="ln">23</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">cliente</span>() { <span class="kw">return</span> <span class="str">"BeeDigital"</span>; }
+<span class="ln">24</span>}
+<span class="ln">25</span>
+<span class="ln">26</span><span class="cmt">// El Corte Inglés: entra por evento de Kafka. Java 17.</span>
+<span class="ln">27</span><span class="kw">record</span> <span class="typ">CatalogoEvent</span>(<span class="typ">String</span> sku,
+<span class="ln">28</span>                     <span class="typ">String</span> categoria,
+<span class="ln">29</span>                     <span class="typ">Instant</span> ocurridoEn)
+<span class="ln">30</span>        <span class="kw">implements</span> <span class="typ">ClienteInput</span> {
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="ann">@Override</span>
+<span class="ln">33</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">cliente</span>() { <span class="kw">return</span> <span class="str">"El Corte Inglés"</span>; }
+<span class="ln">34</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.beedigital.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// BeeDigital — posicionamiento de empresas en internet.</span>
+<span class="ln">4</span><span class="cmt">// Integración síncrona: API REST sobre AWS, DocumentDB y</span>
+<span class="ln">5</span><span class="cmt">// DynamoDB por debajo.</span>
+<span class="ln">6</span><span class="ann">@RestController</span>
+<span class="ln">7</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/posicionamiento"</span>)
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">PosicionamientoController</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">AprendizajeRepository</span> aprendizajes;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@PostMapping</span>
+<span class="ln">14</span>    <span class="kw">public</span> <span class="typ">ResponseEntity</span>&lt;<span class="typ">List</span>&lt;<span class="typ">Aprendizaje</span>&gt;&gt; <span class="mth">procesar</span>(
+<span class="ln">15</span>            <span class="ann">@RequestBody</span> <span class="ann">@Valid</span> <span class="typ">BeeDigitalRequest</span> peticion) {
+<span class="ln">16</span>
+<span class="ln">17</span>        <span class="kw">var</span> resultado = aprendizajes.saveAll(
+<span class="ln">18</span>                <span class="typ">Aprendizaje</span>.<span class="mth">extraerDe</span>(peticion));
+<span class="ln">19</span>
+<span class="ln">20</span>        <span class="kw">return</span> <span class="typ">ResponseEntity</span>.ok(resultado);
+<span class="ln">21</span>    }
+<span class="ln">22</span>}</pre>
+
+        <pre class="code" id="file-consumer" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.eci.messaging;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// El Corte Inglés — dominio de catálogo.</span>
+<span class="ln">4</span><span class="cmt">// Aquí Kafka dejó de ser una línea del CV: un cambio de precio</span>
+<span class="ln">5</span><span class="cmt">// se propaga sin que ningún servicio llame a otro.</span>
+<span class="ln">6</span><span class="ann">@Component</span>
+<span class="ln">7</span><span class="ann">@Slf4j</span>
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">CatalogoEventConsumer</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">AprendizajeRepository</span> aprendizajes;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@KafkaListener</span>(topics = <span class="str">"catalogo.producto.actualizado"</span>,
+<span class="ln">14</span>                   groupId = <span class="str">"catalogo-service"</span>)
+<span class="ln">15</span>    <span class="kw">public void</span> <span class="mth">onEvento</span>(<span class="typ">CatalogoEvent</span> evento, <span class="typ">Acknowledgment</span> ack) {
+<span class="ln">16</span>
+<span class="ln">17</span>        log.info(<span class="str">"Evento de {} para SKU {}"</span>,
+<span class="ln">18</span>                 evento.cliente(), evento.sku());
+<span class="ln">19</span>        <span class="kw">try</span> {
+<span class="ln">20</span>            aprendizajes.saveAll(<span class="typ">Aprendizaje</span>.<span class="mth">extraerDe</span>(evento));
+<span class="ln">21</span>            ack.acknowledge();          <span class="cmt">// commit manual del offset</span>
+<span class="ln">22</span>        } <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
+<span class="ln">23</span>            log.error(<span class="str">"Fallo procesando {} → DLQ"</span>, evento.sku(), e);
+<span class="ln">24</span>            <span class="kw">throw</span> e;
+<span class="ln">25</span>        }
 <span class="ln">26</span>    }
 <span class="ln">27</span>}</pre>
 
-        <pre class="code" id="file-consumer" hidden><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.messaging;
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.experiencia.domain;
 <span class="ln">2</span>
-<span class="ln">3</span><span class="cmt">// Aquí es donde Kafka dejó de ser una línea del CV.</span>
-<span class="ln">4</span><span class="cmt">// Un cambio de precio en el ERP se propaga a catálogo sin</span>
-<span class="ln">5</span><span class="cmt">// que ningún servicio llame a otro directamente.</span>
-<span class="ln">6</span><span class="ann">@Component</span>
-<span class="ln">7</span><span class="ann">@Slf4j</span>
-<span class="ln">8</span><span class="kw">public class</span> <span class="typ">ProductoEventConsumer</span> {
-<span class="ln">9</span>
-<span class="ln">10</span>    <span class="kw">private final</span> <span class="typ">CatalogoService</span> catalogoService;
-<span class="ln">11</span>
-<span class="ln">12</span>    <span class="ann">@KafkaListener</span>(topics = <span class="str">"producto.actualizado"</span>,
-<span class="ln">13</span>                   groupId = <span class="str">"catalogo-service"</span>)
-<span class="ln">14</span>    <span class="kw">public void</span> <span class="mth">onProductoActualizado</span>(<span class="typ">ProductoEvent</span> event,
-<span class="ln">15</span>                                      <span class="typ">Acknowledgment</span> ack) {
-<span class="ln">16</span>        log.info(<span class="str">"Evento recibido para SKU {}"</span>, event.sku());
-<span class="ln">17</span>        <span class="kw">try</span> {
-<span class="ln">18</span>            catalogoService.<span class="mth">refrescar</span>(event.sku());
-<span class="ln">19</span>            ack.acknowledge();   <span class="cmt">// commit manual del offset</span>
-<span class="ln">20</span>        } <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
-<span class="ln">21</span>            log.error(<span class="str">"Fallo procesando {} → DLQ"</span>, event.sku(), e);
-<span class="ln">22</span>            <span class="kw">throw</span> e;
-<span class="ln">23</span>        }
-<span class="ln">24</span>    }
-<span class="ln">25</span>}</pre>
-
-        <pre class="code" id="file-repo" hidden><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.repository;
-<span class="ln">2</span>
-<span class="ln">3</span><span class="cmt">// Persistencia no relacional: el catálogo encaja mejor en</span>
-<span class="ln">4</span><span class="cmt">// documentos que en tablas — cada categoría tiene atributos</span>
-<span class="ln">5</span><span class="cmt">// distintos y el esquema cambia sin migraciones.</span>
-<span class="ln">6</span><span class="ann">@Repository</span>
-<span class="ln">7</span><span class="kw">public interface</span> <span class="typ">ProductoRepository</span>
-<span class="ln">8</span>        <span class="kw">extends</span> <span class="typ">MongoRepository</span>&lt;<span class="typ">Producto</span>, <span class="typ">String</span>&gt; {
-<span class="ln">9</span>
-<span class="ln">10</span>    <span class="typ">Optional</span>&lt;<span class="typ">Producto</span>&gt; <span class="mth">findBySku</span>(<span class="typ">String</span> sku);
-<span class="ln">11</span>
-<span class="ln">12</span>    <span class="ann">@Query</span>(<span class="str">"{ 'categoria': ?0, 'activo': true }"</span>)
-<span class="ln">13</span>    <span class="typ">Page</span>&lt;<span class="typ">Producto</span>&gt; <span class="mth">findActivosPorCategoria</span>(<span class="typ">String</span> categoria,
-<span class="ln">14</span>                                            <span class="typ">Pageable</span> pageable);
-<span class="ln">15</span>}
-<span class="ln">16</span>
-<span class="ln">17</span><span class="cmt">// En BeeDigital el equivalente era DynamoDB y DocumentDB</span>
-<span class="ln">18</span><span class="cmt">// sobre AWS. Misma idea, distinto proveedor.</span></pre>
-
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * Lo aprendido se persiste igual que en la etapa anterior, pero
+<span class="ln">5</span> * ya no en una tabla: aquí el almacén es un documento.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@Document</span>(collection = <span class="str">"aprendizaje"</span>)
+<span class="ln">8</span><span class="kw">public record</span> <span class="typ">Aprendizaje</span>(
+<span class="ln">9</span>        <span class="ann">@Id</span> <span class="typ">String</span> id,
+<span class="ln">10</span>        <span class="typ">String</span> nombre,
+<span class="ln">11</span>        <span class="typ">Categoria</span> categoria,
+<span class="ln">12</span>        <span class="kw">int</span> nivel,
+<span class="ln">13</span>        <span class="typ">String</span> clienteOrigen) {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="cmt">// ————— Lo que quedó de esta etapa —————</span>
+<span class="ln">16</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Aprendizaje</span>&gt; <span class="mth">deEstaEtapa</span>() {
+<span class="ln">17</span>        <span class="kw">return</span> <span class="typ">List</span>.of(
+<span class="ln">18</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Java 11 / 17 / 19"</span>,   LENGUAJE,    5, <span class="str">"ambos"</span>),
+<span class="ln">19</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Records · streams"</span>,   LENGUAJE,    5, <span class="str">"ambos"</span>),
+<span class="ln">20</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Spring Boot 2.x / 3"</span>, FRAMEWORK,   5, <span class="str">"ambos"</span>),
+<span class="ln">21</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Microservicios"</span>,      ARQUITECTURA,5, <span class="str">"ambos"</span>),
+<span class="ln">22</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"API REST"</span>,            INTEGRACION, 5, <span class="str">"BeeDigital"</span>),
+<span class="ln">23</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"JWT"</span>,                 INTEGRACION, 4, <span class="str">"BeeDigital"</span>),
+<span class="ln">24</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"AWS"</span>,                 CLOUD,       4, <span class="str">"BeeDigital"</span>),
+<span class="ln">25</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"DynamoDB · DocumentDB"</span>,DATOS,      4, <span class="str">"BeeDigital"</span>),
+<span class="ln">26</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Kafka"</span>,               MENSAJERIA,  5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">27</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Eventos asíncronos"</span>,  ARQUITECTURA,5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">28</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"MongoDB"</span>,             DATOS,       5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">29</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Couchbase"</span>,           DATOS,       3, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">30</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Docker"</span>,              DESPLIEGUE,  4, <span class="str">"ambos"</span>),
+<span class="ln">31</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Kubernetes"</span>,          DESPLIEGUE,  4, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Jenkins · Clarive"</span>,   DESPLIEGUE,  4, <span class="str">"ambos"</span>),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Sonar · Mockito"</span>,     CALIDAD,     5, <span class="str">"ambos"</span>),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Kibana"</span>,              OBSERVABILIDAD,3,<span class="str">"El Corte Inglés"</span>)
+<span class="ln">35</span>        );
+<span class="ln">36</span>    }
+<span class="ln">37</span>}</pre>
         <div class="md" id="file-clientes" hidden>
           <h1># Clientes</h1>
           <p class="md-lede">Tres años de consultoría en dos clientes muy distintos.</p>
@@ -169,52 +223,6 @@
             Kafka.</p>
             <p class="proj-tech">Java 19 · Spring Boot · AWS · DynamoDB · DocumentDB · Kafka · JWT · Jenkins · Sonar</p>
           </article>
-        </div>
-
-        <div class="md" id="file-skills" hidden>
-          <h1># Lo que aprendí aquí</h1>
-          <p class="md-lede">El salto a Java moderno y a los microservicios de verdad: no "varios servicios",
-          sino eventos, contenedores y despliegues independientes.</p>
-
-          <div class="skill-block">
-            <h4>Java moderno</h4>
-            <div class="sk-row"><span>Java 11 / 17 / 19</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>Streams · Optional · records</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>Spring Boot 2.x / 3</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>API REST</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Microservicios y mensajería</h4>
-            <div class="sk-row"><span>Arquitectura de microservicios</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>Kafka · eventos asíncronos</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>Agregación de datos</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>JWT</span><i class="sk-bar"><b style="width:70%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Datos no relacionales</h4>
-            <div class="sk-row"><span>MongoDB</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>DynamoDB · DocumentDB</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>Couchbase</span><i class="sk-bar"><b style="width:65%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Cloud, entrega y calidad</h4>
-            <div class="sk-row"><span>Docker</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-            <div class="sk-row"><span>Kubernetes</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>AWS</span><i class="sk-bar"><b style="width:70%"></b></i></div>
-            <div class="sk-row"><span>Jenkins · Clarive</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-            <div class="sk-row"><span>Sonar · Mockito · JUnit</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>Kibana</span><i class="sk-bar"><b style="width:65%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Herramientas de la época</h4>
-            <div class="sk-row"><span>IntelliJ IDEA</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>Maven · Git · Bitbucket</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>Scrum</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-          </div>
         </div>
 
         <div class="md" id="file-readme" hidden>

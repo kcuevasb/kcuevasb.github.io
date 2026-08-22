@@ -126,55 +126,81 @@ body{
   flex-direction: column;
   align-items:center;
   text-align:center;
-  gap: 8px;
+  gap: 0;
   text-decoration:none;
   color: var(--fg);
   background: #12151c;
-  border: 3px solid #2a2f3a;
-  padding: 24px 20px 26px;
-  transition: transform .15s, border-color .15s, box-shadow .15s;
+  border: 2px solid #2a2f3a;
+  border-radius: 4px;
+  padding: 16px 16px 18px;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   image-rendering: pixelated;
+  overflow: hidden;
 }
 .card:hover, .card:focus-visible{
   transform: translateY(-6px);
-  box-shadow: 0 14px 0 rgba(0,0,0,0.35);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.5);
 }
 .card.selected{ outline: none; }
 
+/* Chapter number as a large, low-contrast watermark instead of a tiny
+   label — gives each card a visual anchor without competing for space. */
 .card-index{
   position:absolute;
-  top: 10px; left: 12px;
+  top: 2px; right: 10px;
   font-family: var(--font-pixel);
-  font-size: 10px;
-  color: var(--fg-dim);
+  font-size: 30px;
+  color: #ffffff;
+  opacity: .06;
+  letter-spacing: -1px;
+  pointer-events: none;
 }
 
 .card h2{
   font-family: var(--font-pixel);
-  font-size: 13px;
-  margin: 6px 0 2px;
-  letter-spacing: 1px;
-  line-height: 1.5;
-  /* Long names (e.g. "KNOWMAD & SOPRA") must wrap cleanly instead of
-     overflowing or cramming — the pixel font has no narrow variant. */
+  font-size: 11px;
+  margin: 14px 0 0;
+  letter-spacing: .5px;
+  line-height: 1.7;
   max-width: 100%;
   overflow-wrap: break-word;
 }
-.card-type{ font-size: 15px; color: var(--fg-dim); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-.card-desc{ font-size: 18px; color: var(--fg); opacity: 0.85; margin: 6px 0 10px; min-height: 54px; }
-.card-cta{
+.card-when{
   font-family: var(--font-term);
-  font-size: 17px;
-  padding: 6px 14px;
-  border: 2px solid currentColor;
-  margin-top: auto;
+  font-size: 15px;
+  color: var(--fg-dim);
+  margin: 5px 0 0;
+  letter-spacing: .5px;
 }
+.card-desc{
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--fg);
+  opacity: .8;
+  margin: 10px 0 0;
+  flex: 1;
+}
+/* The skin badge names the visual theme, so cards named after a company
+   (NTT Data) and cards named after a life stage (Los inicios) can sit
+   together without the naming feeling inconsistent. */
+.card-skin{
+  font-family: var(--font-term);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  margin-top: 14px;
+  opacity: .75;
+}
+.card:hover .card-skin{ opacity: 1; }
 
 /* --- Matrix card theme --- */
 .card-matrix{ border-color: #0aa62f; }
 .card-matrix:hover{ border-color: #00ff41; box-shadow: 0 14px 0 #063d14; }
 .card-matrix h2{ color: #00ff41; text-shadow: 0 0 8px rgba(0,255,65,.5); }
-.card-matrix .card-cta{ color: #00ff41; }
+.card-matrix .card-skin{ color: #00ff41; }
 .preview-matrix{
   width:100%; height: 96px; background:#020602; border:2px solid #0aa62f;
   display:flex; flex-direction:column; justify-content:space-between; padding:8px;
@@ -189,7 +215,7 @@ body{
 .card-win98{ border-color: #6b6f7a; }
 .card-win98:hover{ border-color: #c0c7d1; box-shadow: 0 14px 0 #01018a; }
 .card-win98 h2{ color: #dfe6ee; }
-.card-win98 .card-cta{ color: #dfe6ee; }
+.card-win98 .card-skin{ color: #dfe6ee; }
 .preview-win98{ width:100%; height:96px; background:#008080; display:flex; align-items:center; justify-content:center; }
 .p-win{ width: 84%; background:#c0c0c0; border: 2px solid #fff; border-right-color:#404040; border-bottom-color:#404040; }
 .p-titlebar{ background: linear-gradient(90deg,#000080,#1084d0); color:#fff; font-size:11px; display:flex; justify-content:space-between; padding:2px 4px; font-family: var(--font-term); }
@@ -201,10 +227,10 @@ body{
 
 /* --- Eclipse (NTT Data) card theme --- */
 .card-eclipse{ border-color: #a0a0a0; background:#ececec; color:#1a1a1a; }
-.card-eclipse .card-type, .card-eclipse .card-desc{ color:#5a5a5a; }
+.card-eclipse .card-when, .card-eclipse .card-desc{ color:#5a5a5a; }
 .card-eclipse:hover{ border-color:#4a6ea9; box-shadow: 0 14px 0 #c7d6ea; }
 .card-eclipse h2{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
-.card-eclipse .card-cta{ color:#4a6ea9; border-color:#4a6ea9; }
+.card-eclipse .card-skin{ color:#4a6ea9; border-color:#4a6ea9; }
 .card-eclipse .card-index{ color:#8a8a8a; }
 .preview-eclipse{ width:100%; height:96px; background:#fff; border:1px solid #a0a0a0; display:flex; }
 .p-ide{ display:flex; width:100%; }
@@ -215,10 +241,10 @@ body{
 
 /* --- IntelliJ (Knowmad Mood) card theme --- */
 .card-intellij{ border-color: #555759; background:#2b2b2b; color:#a9b7c6; }
-.card-intellij .card-type, .card-intellij .card-desc{ color:#8a949e; }
+.card-intellij .card-when, .card-intellij .card-desc{ color:#8a949e; }
 .card-intellij:hover{ border-color:#cc7832; box-shadow: 0 14px 0 #1a1a1a; }
 .card-intellij h2{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
-.card-intellij .card-cta{ color:#6a8759; border-color:#6a8759; }
+.card-intellij .card-skin{ color:#6a8759; border-color:#6a8759; }
 .card-intellij .card-index{ color:#606366; }
 .preview-intellij{ width:100%; height:96px; background:#2b2b2b; border:1px solid #555759; display:flex; }
 .p-ij{ display:flex; width:100%; }
@@ -230,13 +256,13 @@ body{
 
 /* --- IA card theme --- */
 .card-ia{ border-color: #4a4680; background:#f6f5fb; color:#1f1e2b; }
-.card-ia .card-type, .card-ia .card-desc{ color:#5c5970; }
+.card-ia .card-when, .card-ia .card-desc{ color:#5c5970; }
 .card-ia:hover{ border-color:#5b57d1; box-shadow: 0 14px 0 #d9d6f5; }
 /* "KNOWMAD & SOPRA" is the longest card name: VT323 at 20px rendered it
    cramped and visually out of step with the other cards. Use the same
    pixel face as Win98/Matrix at a smaller size so all four read alike. */
 .card-ia h2{ color:#1f1e2b; font-family: var(--font-pixel); font-size:11px; letter-spacing:.5px; line-height:1.6; }
-.card-ia .card-cta{ color:#5b57d1; border-color:#5b57d1; }
+.card-ia .card-skin{ color:#5b57d1; border-color:#5b57d1; }
 .card-ia .card-index{ color:#8b87a8; }
 .preview-ia{ width:100%; height:96px; background:#fff; border:1px solid #e5e1ee; display:flex; flex-direction:column; justify-content:center; gap:6px; padding: 10px; }
 .p-chat{ display:flex; flex-direction:column; gap:6px; }

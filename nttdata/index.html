@@ -45,12 +45,14 @@
         <div class="tree-row tree-project"><span class="tw">▾</span> 📦 imq-prescripcion-digital</div>
         <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src/main/java</div>
         <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.nttdata.imq.prescripcion</div>
-        <button class="tree-row tree-file active" data-file="service"><span class="fi">☕</span> PrescripcionService.java</button>
-        <button class="tree-row tree-file" data-file="controller"><span class="fi">☕</span> MediadorController.java</button>
-        <button class="tree-row tree-file" data-file="entity"><span class="fi">☕</span> Receta.java</button>
-        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 proyectos</div>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">☕</span> ExperienciaController.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">☕</span> ClienteInput.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">☕</span> Aprendizaje.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 docs</div>
         <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📁</span> clientes.md</button>
-        <button class="tree-row tree-file" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tree-row tree-file tree-file-md" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
     </aside>
@@ -58,101 +60,141 @@
 
     <main class="editor-panel">
       <div class="tabs" id="tabs">
-        <button class="tab active" data-file="service"><span class="fi">☕</span> PrescripcionService.java</button>
-        <button class="tab" data-file="controller"><span class="fi">☕</span> MediadorController.java</button>
-        <button class="tab" data-file="entity"><span class="fi">☕</span> Receta.java</button>
+        <button class="tab active" data-file="input"><span class="fi">☕</span> ClienteInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">☕</span> ExperienciaController.java</button>
+        <button class="tab" data-file="entity"><span class="fi">☕</span> Aprendizaje.java</button>
         <button class="tab" data-file="proyectos"><span class="fi">📁</span> clientes.md</button>
-        <button class="tab" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
 
       <div class="editor">
 
-        <pre class="code" id="file-service"><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.prescripcion.service;
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.nttdata.experiencia.dto;
 <span class="ln">2</span>
-<span class="ln">3</span><span class="kw">import</span> org.springframework.beans.factory.annotation.Autowired;
-<span class="ln">4</span><span class="kw">import</span> org.springframework.stereotype.Service;
-<span class="ln">5</span><span class="kw">import</span> org.springframework.transaction.annotation.Transactional;
-<span class="ln">6</span>
-<span class="ln">7</span><span class="jdoc">/**
-<span class="ln">8</span> * Prescripción Digital — Igualatorio Médico Quirúrgico (IMQ).
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * La entrada al sistema son los clientes: ellos traen el problema,
+<span class="ln">5</span> * el dominio y las restricciones. Todo lo demás sale de aquí.
+<span class="ln">6</span> *
+<span class="ln">7</span> * En esta etapa la integración era SIEMPRE por API — REST hacia
+<span class="ln">8</span> * fuera, SOAP contra los sistemas del cliente. Nada de eventos.
 <span class="ln">9</span> *
 <span class="ln">10</span> * <span class="jtag">@author</span> Kepa Cuevas
 <span class="ln">11</span> * <span class="jtag">@since</span>  Java 8 · Spring Boot 2.1
 <span class="ln">12</span> */</span>
-<span class="ln">13</span><span class="ann">@Service</span>
-<span class="ln">14</span><span class="kw">public class</span> <span class="typ">PrescripcionService</span> {
-<span class="ln">15</span>
-<span class="ln">16</span>    <span class="kw">private static final</span> <span class="typ">Logger</span> LOG =
-<span class="ln">17</span>            LoggerFactory.getLogger(<span class="typ">PrescripcionService</span>.<span class="kw">class</span>);
+<span class="ln">13</span><span class="kw">public class</span> <span class="typ">ClienteInput</span> {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="kw">public static final</span> <span class="typ">ClienteInput</span> IMQ_MEDIADORES =
+<span class="ln">16</span>        <span class="kw">new</span> <span class="typ">ClienteInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Portal de Mediadores"</span>,
+<span class="ln">17</span>                          <span class="typ">Integracion</span>.REST);
 <span class="ln">18</span>
-<span class="ln">19</span>    <span class="ann">@Autowired</span>
-<span class="ln">20</span>    <span class="kw">private</span> <span class="typ">RecetaRepository</span> recetaRepository;
-<span class="ln">21</span>
-<span class="ln">22</span>    <span class="ann">@Autowired</span>
-<span class="ln">23</span>    <span class="kw">private</span> <span class="typ">WsSisnetClient</span> wsSisnetClient;  <span class="cmt">// SOAP</span>
-<span class="ln">24</span>
-<span class="ln">25</span>    <span class="ann">@Transactional</span>
-<span class="ln">26</span>    <span class="kw">public</span> <span class="typ">Receta</span> <span class="mth">emitir</span>(<span class="typ">PrescripcionDTO</span> dto) {
-<span class="ln">27</span>        <span class="typ">Receta</span> receta = <span class="kw">new</span> <span class="typ">Receta</span>(dto.getPacienteId(), dto.getFarmaco());
-<span class="ln">28</span>        wsSisnetClient.validarColegiado(dto.getMedicoId());
-<span class="ln">29</span>        recetaRepository.save(receta);
-<span class="ln">30</span>        LOG.info(<span class="str">"Receta {} emitida para paciente {}"</span>,
-<span class="ln">31</span>                 receta.getId(), dto.getPacienteId());
-<span class="ln">32</span>        <span class="kw">return</span> receta;
-<span class="ln">33</span>    }
-<span class="ln">34</span>}</pre>
+<span class="ln">19</span>    <span class="kw">public static final</span> <span class="typ">ClienteInput</span> IMQ_PRESCRIPCION =
+<span class="ln">20</span>        <span class="kw">new</span> <span class="typ">ClienteInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Prescripción Digital"</span>,
+<span class="ln">21</span>                          <span class="typ">Integracion</span>.REST, <span class="typ">Integracion</span>.SOAP);
+<span class="ln">22</span>
+<span class="ln">23</span>    <span class="kw">public static final</span> <span class="typ">ClienteInput</span> IMQ_CORE =
+<span class="ln">24</span>        <span class="kw">new</span> <span class="typ">ClienteInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Core Asistencial"</span>,
+<span class="ln">25</span>                          <span class="typ">Integracion</span>.SOAP);
+<span class="ln">26</span>
+<span class="ln">27</span>    <span class="kw">public static final</span> <span class="typ">ClienteInput</span> VALDECILLA =
+<span class="ln">28</span>        <span class="kw">new</span> <span class="typ">ClienteInput</span>(<span class="str">"H. U. Marqués de Valdecilla"</span>,
+<span class="ln">29</span>                          <span class="str">"Gestión de áreas no clínicas"</span>,
+<span class="ln">30</span>                          <span class="typ">Integracion</span>.SOAP);
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="kw">public static final</span> <span class="typ">ClienteInput</span> SIEMENS_GAMESA =
+<span class="ln">33</span>        <span class="kw">new</span> <span class="typ">ClienteInput</span>(<span class="str">"Siemens-Gamesa"</span>,
+<span class="ln">34</span>                          <span class="str">"Field Service Management (OFSC)"</span>,
+<span class="ln">35</span>                          <span class="typ">Integracion</span>.REST);
+<span class="ln">36</span>
+<span class="ln">37</span>    <span class="kw">private final</span> <span class="typ">String</span> cliente;
+<span class="ln">38</span>    <span class="kw">private final</span> <span class="typ">String</span> proyecto;
+<span class="ln">39</span>    <span class="kw">private final</span> <span class="typ">List</span>&lt;<span class="typ">Integracion</span>&gt; integraciones;
+<span class="ln">40</span>
+<span class="ln">41</span>    <span class="cmt">// ...constructor y getters (Alt+Shift+S en Eclipse)</span>
+<span class="ln">42</span>}</pre>
 
-        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.mediadores.web;
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.experiencia.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// Cinco años recibiendo clientes por la puerta de entrada y</span>
+<span class="ln">4</span><span class="cmt">// devolviendo, siempre, algo aprendido.</span>
+<span class="ln">5</span><span class="ann">@RestController</span>
+<span class="ln">6</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/nttdata/experiencia"</span>)
+<span class="ln">7</span><span class="kw">public class</span> <span class="typ">ExperienciaController</span> {
+<span class="ln">8</span>
+<span class="ln">9</span>    <span class="kw">private static final</span> <span class="typ">Logger</span> LOG =
+<span class="ln">10</span>            LoggerFactory.getLogger(<span class="typ">ExperienciaController</span>.<span class="kw">class</span>);
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="ann">@Autowired</span>
+<span class="ln">13</span>    <span class="kw">private</span> <span class="typ">AprendizajeRepository</span> repository;
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="ann">@Autowired</span>
+<span class="ln">16</span>    <span class="kw">private</span> <span class="typ">WsSisnetClient</span> wsSisnet;   <span class="cmt">// SOAP, IMQ</span>
+<span class="ln">17</span>
+<span class="ln">18</span>    <span class="ann">@PostMapping</span>(<span class="str">"/proyectos"</span>)
+<span class="ln">19</span>    <span class="ann">@Transactional</span>
+<span class="ln">20</span>    <span class="kw">public</span> <span class="typ">List</span>&lt;<span class="typ">Aprendizaje</span>&gt; <span class="mth">trabajar</span>(<span class="ann">@RequestBody</span> <span class="typ">ClienteInput</span> cliente) {
+<span class="ln">21</span>
+<span class="ln">22</span>        LOG.info(<span class="str">"Nuevo proyecto para {}"</span>, cliente.getCliente());
+<span class="ln">23</span>
+<span class="ln">24</span>        <span class="kw">if</span> (cliente.usa(<span class="typ">Integracion</span>.SOAP)) {
+<span class="ln">25</span>            wsSisnet.validarConexion();
+<span class="ln">26</span>        }
+<span class="ln">27</span>
+<span class="ln">28</span>        <span class="cmt">// Lo que entra es un cliente; lo que queda es lo aprendido.</span>
+<span class="ln">29</span>        <span class="kw">return</span> repository.saveAll(<span class="typ">Aprendizaje</span>.<span class="mth">de</span>(cliente));
+<span class="ln">30</span>    }
+<span class="ln">31</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.experiencia.domain;
 <span class="ln">2</span>
 <span class="ln">3</span><span class="jdoc">/**
-<span class="ln">4</span> * Portal de Mediadores — IMQ. La etapa más moderna de estos años:
-<span class="ln">5</span> * Java 11, Spring Boot 2.3 y HATEOAS sobre PostgreSQL.
+<span class="ln">4</span> * Lo aprendido es lo único que se persiste: los proyectos terminan,
+<span class="ln">5</span> * los clientes cambian, pero esto se queda en la base de datos.
 <span class="ln">6</span> */</span>
-<span class="ln">7</span><span class="ann">@RestController</span>
-<span class="ln">8</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/mediadores"</span>)
-<span class="ln">9</span><span class="kw">public class</span> <span class="typ">MediadorController</span> {
+<span class="ln">7</span><span class="ann">@Entity</span>
+<span class="ln">8</span><span class="ann">@Table</span>(name = <span class="str">"APRENDIZAJE"</span>)
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">Aprendizaje</span> <span class="kw">implements</span> <span class="typ">Serializable</span> {
 <span class="ln">10</span>
-<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">MediadorService</span> service;
-<span class="ln">12</span>
-<span class="ln">13</span>    <span class="kw">public</span> <span class="mth">MediadorController</span>(<span class="typ">MediadorService</span> service) {
-<span class="ln">14</span>        <span class="kw">this</span>.service = service;
-<span class="ln">15</span>    }
-<span class="ln">16</span>
-<span class="ln">17</span>    <span class="ann">@GetMapping</span>(<span class="str">"/{id}/polizas"</span>)
-<span class="ln">18</span>    <span class="kw">public</span> <span class="typ">Resources</span>&lt;<span class="typ">PolizaResource</span>&gt; <span class="mth">polizas</span>(<span class="ann">@PathVariable</span> <span class="typ">Long</span> id) {
-<span class="ln">19</span>        <span class="typ">List</span>&lt;<span class="typ">PolizaResource</span>&gt; polizas = service.buscarPorMediador(id);
-<span class="ln">20</span>        <span class="kw">return</span> <span class="kw">new</span> <span class="typ">Resources</span>&lt;&gt;(polizas,
-<span class="ln">21</span>                linkTo(methodOn(<span class="typ">MediadorController</span>.<span class="kw">class</span>)
-<span class="ln">22</span>                        .polizas(id)).withSelfRel());
-<span class="ln">23</span>    }
-<span class="ln">24</span>}</pre>
-
-        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.prescripcion.domain;
-<span class="ln">2</span>
-<span class="ln">3</span><span class="cmt">// JPA + Hibernate sobre Oracle. Las consultas complejas se</span>
-<span class="ln">4</span><span class="cmt">// montaban con QueryDSL en vez de JPQL a pelo.</span>
-<span class="ln">5</span><span class="ann">@Entity</span>
-<span class="ln">6</span><span class="ann">@Table</span>(name = <span class="str">"RECETA"</span>)
-<span class="ln">7</span><span class="kw">public class</span> <span class="typ">Receta</span> <span class="kw">implements</span> <span class="typ">Serializable</span> {
-<span class="ln">8</span>
-<span class="ln">9</span>    <span class="ann">@Id</span>
-<span class="ln">10</span>    <span class="ann">@GeneratedValue</span>(strategy = <span class="typ">GenerationType</span>.SEQUENCE,
-<span class="ln">11</span>                    generator = <span class="str">"SEQ_RECETA"</span>)
-<span class="ln">12</span>    <span class="kw">private</span> <span class="typ">Long</span> id;
-<span class="ln">13</span>
-<span class="ln">14</span>    <span class="ann">@Column</span>(name = <span class="str">"PACIENTE_ID"</span>, nullable = <span class="kw">false</span>)
-<span class="ln">15</span>    <span class="kw">private</span> <span class="typ">Long</span> pacienteId;
-<span class="ln">16</span>
-<span class="ln">17</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
-<span class="ln">18</span>    <span class="kw">private</span> <span class="typ">EstadoReceta</span> estado = <span class="typ">EstadoReceta</span>.EMITIDA;
-<span class="ln">19</span>
-<span class="ln">20</span>    <span class="ann">@Temporal</span>(<span class="typ">TemporalType</span>.TIMESTAMP)
-<span class="ln">21</span>    <span class="kw">private</span> <span class="typ">Date</span> fechaEmision = <span class="kw">new</span> <span class="typ">Date</span>();
-<span class="ln">22</span>
-<span class="ln">23</span>    <span class="cmt">// getters / setters generados con Alt+Shift+S ;)</span>
-<span class="ln">24</span>}</pre>
-
+<span class="ln">11</span>    <span class="ann">@Id</span>
+<span class="ln">12</span>    <span class="ann">@GeneratedValue</span>(strategy = <span class="typ">GenerationType</span>.SEQUENCE,
+<span class="ln">13</span>                    generator = <span class="str">"SEQ_APRENDIZAJE"</span>)
+<span class="ln">14</span>    <span class="kw">private</span> <span class="typ">Long</span> id;
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="ann">@Column</span>(nullable = <span class="kw">false</span>)
+<span class="ln">17</span>    <span class="kw">private</span> <span class="typ">String</span> nombre;
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
+<span class="ln">20</span>    <span class="kw">private</span> <span class="typ">Categoria</span> categoria;   <span class="cmt">// LENGUAJE, DATOS, INTEGRACION...</span>
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Column</span>(name = <span class="str">"NIVEL"</span>)
+<span class="ln">23</span>    <span class="kw">private int</span> nivel;             <span class="cmt">// 1..5</span>
+<span class="ln">24</span>
+<span class="ln">25</span>    <span class="ann">@ManyToOne</span>(fetch = <span class="typ">FetchType</span>.LAZY)
+<span class="ln">26</span>    <span class="ann">@JoinColumn</span>(name = <span class="str">"CLIENTE_ORIGEN"</span>)
+<span class="ln">27</span>    <span class="kw">private</span> <span class="typ">Cliente</span> origen;         <span class="cmt">// de qué cliente salió</span>
+<span class="ln">28</span>
+<span class="ln">29</span>    <span class="cmt">// ————— Lo que quedó de esta etapa —————</span>
+<span class="ln">30</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Aprendizaje</span>&gt; <span class="mth">deEstaEtapa</span>() {
+<span class="ln">31</span>        <span class="kw">return</span> <span class="typ">Arrays</span>.asList(
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Java 7 / 8"</span>,        LENGUAJE,    5),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Java 11"</span>,           LENGUAJE,    4),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"J2EE"</span>,              LENGUAJE,    4),
+<span class="ln">35</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Spring Framework"</span>,  FRAMEWORK,   4),
+<span class="ln">36</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Spring Boot 2.1"</span>,   FRAMEWORK,   4),
+<span class="ln">37</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"API REST"</span>,          INTEGRACION, 4),
+<span class="ln">38</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"SOAP · WSSisnet"</span>,   INTEGRACION, 4),
+<span class="ln">39</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"HATEOAS"</span>,           INTEGRACION, 3),
+<span class="ln">40</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"JPA · Hibernate"</span>,   DATOS,       4),
+<span class="ln">41</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"QueryDSL"</span>,          DATOS,       4),
+<span class="ln">42</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Oracle · PL/SQL"</span>,   DATOS,       4),
+<span class="ln">43</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"PostgreSQL"</span>,        DATOS,       3),
+<span class="ln">44</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"ZK · jQuery"</span>,       FRONT,       3),
+<span class="ln">45</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"WebLogic · Tomcat"</span>, DESPLIEGUE,  3),
+<span class="ln">46</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Jenkins · Azure"</span>,   DESPLIEGUE,  3),
+<span class="ln">47</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Maven · SVN · Git"</span>, HERRAMIENTAS, 4),
+<span class="ln">48</span>            <span class="kw">new</span> <span class="typ">Aprendizaje</span>(<span class="str">"Scrum"</span>,             METODOLOGIA, 4)
+<span class="ln">49</span>        );
+<span class="ln">50</span>    }
+<span class="ln">51</span>}</pre>
         <div class="md" id="file-proyectos" hidden>
           <h1># Clientes y proyectos</h1>
           <p class="md-lede">Cinco años, cinco proyectos. Casi todo sanidad — donde un bug no es una incidencia,
@@ -190,46 +232,6 @@
             sanidad y fuera de Java.</p>
             <p class="proj-tech">Oracle Field Service Cloud (OFSC)</p>
           </article>
-        </div>
-
-        <div class="md" id="file-skills" hidden>
-          <h1># Lo que aprendí aquí</h1>
-          <p class="md-lede">La base. Java "de antes" — sin records, sin streams por todas partes, sin Docker y
-          desde luego sin IA. Todo a mano, y por eso se aprende.</p>
-
-          <div class="skill-block">
-            <h4>Lenguaje y framework</h4>
-            <div class="sk-row"><span>Java 7 / 8</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>Java 11</span><i class="sk-bar"><b style="width:70%"></b></i></div>
-            <div class="sk-row"><span>J2EE</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>Spring Framework</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-            <div class="sk-row"><span>Spring Boot 2.1 / 2.3</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Persistencia</h4>
-            <div class="sk-row"><span>JPA / Hibernate</span><i class="sk-bar"><b style="width:85%"></b></i></div>
-            <div class="sk-row"><span>QueryDSL</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>Oracle · PL/SQL</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>PostgreSQL</span><i class="sk-bar"><b style="width:70%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Integración y web</h4>
-            <div class="sk-row"><span>API REST · HATEOAS</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-            <div class="sk-row"><span>SOAP · WSSisnet</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>ZK · jQuery</span><i class="sk-bar"><b style="width:60%"></b></i></div>
-          </div>
-
-          <div class="skill-block">
-            <h4>Herramientas de la época</h4>
-            <div class="sk-row"><span>Eclipse IDE</span><i class="sk-bar"><b style="width:90%"></b></i></div>
-            <div class="sk-row"><span>Maven</span><i class="sk-bar"><b style="width:80%"></b></i></div>
-            <div class="sk-row"><span>SVN → Git</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-            <div class="sk-row"><span>Jenkins · Azure DevOps</span><i class="sk-bar"><b style="width:70%"></b></i></div>
-            <div class="sk-row"><span>WebLogic 11g · Tomcat 7</span><i class="sk-bar"><b style="width:65%"></b></i></div>
-            <div class="sk-row"><span>Scrum</span><i class="sk-bar"><b style="width:75%"></b></i></div>
-          </div>
         </div>
 
         <div class="md" id="file-readme" hidden>

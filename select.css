@@ -38,7 +38,7 @@ body{
   opacity: 0.6;
 }
 
-.select-screen{ position:relative; z-index:1; max-width: 1040px; width:100%; text-align:center; }
+.select-screen{ position:relative; z-index:1; max-width: 1320px; width:100%; text-align:center; }
 
 .eyebrow{
   font-size: 14px;
@@ -67,7 +67,7 @@ body{
   grid-template-columns: 1fr 1px 1fr 1fr 1px 1fr;
   grid-template-rows: auto 1fr;
   align-items: start;
-  gap: 18px 26px;
+  gap: 18px 34px;
   margin-bottom: 30px;
 }
 .col-heading{
@@ -124,7 +124,7 @@ body{
   color: var(--fg);
   background: #12151c;
   border: 3px solid #2a2f3a;
-  padding: 20px 16px 22px;
+  padding: 24px 20px 26px;
   transition: transform .15s, border-color .15s, box-shadow .15s;
   image-rendering: pixelated;
 }

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kepa Cuevas Barrasa · Software Engineer</title>
+<title>Kepa Cuevas Barrasa · NTT Data</title>
 <meta name="description" content="CV interactivo de Kepa Cuevas Barrasa en clave Eclipse IDE — mis primeros años programando, en NTT Data.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23eeeeee%22/><rect x=%221%22 y=%221%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%237f0055%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%237f0055%22 font-family=%22monospace%22>J</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Tahoma&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,14 +17,14 @@
 <div class="ide">
 
   <div class="ide-titlebar">
-    <span class="ide-title">☕ Eclipse IDE — kepa-cv-nttdata/src</span>
+    <span class="ide-title">☕ Java EE - imq-prescripcion-digital/src/main/java/com/nttdata/imq/prescripcion/service/PrescripcionService.java - Eclipse IDE</span>
   </div>
 
   <div class="ide-menubar">
     <span>Archivo</span><span>Editar</span><span>Fuente</span><span>Refactorizar</span>
     <span>Navegar</span><span>Buscar</span><span>Proyecto</span><span>Ejecutar</span>
     <span>Ventana</span><span>Ayuda</span>
-    <a href="../" class="back-link">← elegir edición</a>
+    <a href="../" class="back-link">← elegir capítulo</a>
   </div>
 
   <div class="ide-toolbar">
@@ -34,7 +34,7 @@
     <span class="tb-sep"></span>
     <span class="tbtn tbtn-run" title="Run">▶ Run</span>
     <span class="tbtn" title="Debug">🐞 Debug</span>
-    <span class="chapter-tag">Capítulo 02 — mis primeros años programando</span>
+    <span class="chapter-tag">Capítulo 02 — mis primeros años programando · jul 2017 – nov 2022</span>
   </div>
 
   <div class="ide-body">
@@ -42,12 +42,15 @@
     <aside class="explorer-panel" id="explorer-panel">
       <div class="panel-head">Package Explorer</div>
       <div class="tree">
-        <div class="tree-row tree-project"><span class="tw">▾</span> 📦 kepa-cv-nttdata</div>
-        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src</div>
-        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.kepa.experiencia</div>
-        <button class="tree-row tree-file active" data-file="nttdata"><span class="fi">☕</span> NTTDataEuropa.java</button>
-        <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📦</span> Proyectos.java</button>
-        <button class="tree-row tree-file" data-file="stack"><span class="fi">☕</span> Stack.java</button>
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📦 imq-prescripcion-digital</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.nttdata.imq.prescripcion</div>
+        <button class="tree-row tree-file active" data-file="service"><span class="fi">☕</span> PrescripcionService.java</button>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">☕</span> MediadorController.java</button>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">☕</span> Receta.java</button>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 proyectos</div>
+        <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📁</span> clientes.md</button>
+        <button class="tree-row tree-file" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tree-row tree-file tree-file-md" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
     </aside>
@@ -55,105 +58,188 @@
 
     <main class="editor-panel">
       <div class="tabs" id="tabs">
-        <button class="tab active" data-file="nttdata"><span class="fi">☕</span> NTTDataEuropa.java</button>
-        <button class="tab" data-file="proyectos"><span class="fi">📦</span> Proyectos.java</button>
-        <button class="tab" data-file="stack"><span class="fi">☕</span> Stack.java</button>
+        <button class="tab active" data-file="service"><span class="fi">☕</span> PrescripcionService.java</button>
+        <button class="tab" data-file="controller"><span class="fi">☕</span> MediadorController.java</button>
+        <button class="tab" data-file="entity"><span class="fi">☕</span> Receta.java</button>
+        <button class="tab" data-file="proyectos"><span class="fi">📁</span> clientes.md</button>
+        <button class="tab" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
 
       <div class="editor">
-        <pre class="code" id="file-nttdata"><span class="ln">1</span><span class="jdoc">/**
-<span class="ln">2</span> * NTTDataEuropa.java
-<span class="ln">3</span> * jul 2017 – nov 2022
-<span class="ln">4</span> *
-<span class="ln">5</span> * Mi primer trabajo programando en serio. Cinco años en los que pasé
-<span class="ln">6</span> * de "esto compila, ¿por qué no funciona?" a entender de verdad cómo
-<span class="ln">7</span> * se sostiene una aplicación en producción.
-<span class="ln">8</span> */</span>
-<span class="ln">9</span><span class="kw">public class</span> <span class="typ">NTTDataEuropa</span> <span class="kw">extends</span> <span class="typ">Experiencia</span> {
-<span class="ln">10</span>
-<span class="ln">11</span>    <span class="ann">@Override</span>
-<span class="ln">12</span>    <span class="kw">public</span> List&lt;String&gt; <span class="mth">funciones</span>() {
-<span class="ln">13</span>        <span class="kw">return</span> List.of(
-<span class="ln">14</span>            <span class="str">"Análisis, diseño y gestión de desarrollos"</span>,
-<span class="ln">15</span>            <span class="str">"Mantenimiento y desarrollo de evolutivos"</span>,
-<span class="ln">16</span>            <span class="str">"Desarrollo de mejoras funcionales"</span>,
-<span class="ln">17</span>            <span class="str">"Resolución de incidencias en producción"</span>,
-<span class="ln">18</span>            <span class="str">"Integración con módulos WSSisnet"</span>,
-<span class="ln">19</span>            <span class="str">"Configuración de despliegues en Jenkins y DevOps"</span>,
-<span class="ln">20</span>            <span class="str">"Metodología Scrum"</span>
-<span class="ln">21</span>        );
-<span class="ln">22</span>    }
-<span class="ln">23</span>
-<span class="ln">24</span>    <span class="cmt">// TODO: nunca borrar esta clase — aquí empezó todo.</span>
-<span class="ln">25</span>}</pre>
 
-        <div class="projects" id="file-proyectos" hidden>
-          <p class="proj-intro"><span class="cmt">// Cinco años, cinco clientes. Sanidad sobre todo — donde un bug<br>
-          // no es una incidencia, es una receta que no llega.</span></p>
+        <pre class="code" id="file-service"><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.prescripcion.service;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="kw">import</span> org.springframework.beans.factory.annotation.Autowired;
+<span class="ln">4</span><span class="kw">import</span> org.springframework.stereotype.Service;
+<span class="ln">5</span><span class="kw">import</span> org.springframework.transaction.annotation.Transactional;
+<span class="ln">6</span>
+<span class="ln">7</span><span class="jdoc">/**
+<span class="ln">8</span> * Prescripción Digital — Igualatorio Médico Quirúrgico (IMQ).
+<span class="ln">9</span> *
+<span class="ln">10</span> * <span class="jtag">@author</span> Kepa Cuevas
+<span class="ln">11</span> * <span class="jtag">@since</span>  Java 8 · Spring Boot 2.1
+<span class="ln">12</span> */</span>
+<span class="ln">13</span><span class="ann">@Service</span>
+<span class="ln">14</span><span class="kw">public class</span> <span class="typ">PrescripcionService</span> {
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="kw">private static final</span> <span class="typ">Logger</span> LOG =
+<span class="ln">17</span>            LoggerFactory.getLogger(<span class="typ">PrescripcionService</span>.<span class="kw">class</span>);
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="ann">@Autowired</span>
+<span class="ln">20</span>    <span class="kw">private</span> <span class="typ">RecetaRepository</span> recetaRepository;
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Autowired</span>
+<span class="ln">23</span>    <span class="kw">private</span> <span class="typ">WsSisnetClient</span> wsSisnetClient;  <span class="cmt">// SOAP</span>
+<span class="ln">24</span>
+<span class="ln">25</span>    <span class="ann">@Transactional</span>
+<span class="ln">26</span>    <span class="kw">public</span> <span class="typ">Receta</span> <span class="mth">emitir</span>(<span class="typ">PrescripcionDTO</span> dto) {
+<span class="ln">27</span>        <span class="typ">Receta</span> receta = <span class="kw">new</span> <span class="typ">Receta</span>(dto.getPacienteId(), dto.getFarmaco());
+<span class="ln">28</span>        wsSisnetClient.validarColegiado(dto.getMedicoId());
+<span class="ln">29</span>        recetaRepository.save(receta);
+<span class="ln">30</span>        LOG.info(<span class="str">"Receta {} emitida para paciente {}"</span>,
+<span class="ln">31</span>                 receta.getId(), dto.getPacienteId());
+<span class="ln">32</span>        <span class="kw">return</span> receta;
+<span class="ln">33</span>    }
+<span class="ln">34</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.mediadores.web;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * Portal de Mediadores — IMQ. La etapa más moderna de estos años:
+<span class="ln">5</span> * Java 11, Spring Boot 2.3 y HATEOAS sobre PostgreSQL.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@RestController</span>
+<span class="ln">8</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/mediadores"</span>)
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">MediadorController</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">MediadorService</span> service;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="kw">public</span> <span class="mth">MediadorController</span>(<span class="typ">MediadorService</span> service) {
+<span class="ln">14</span>        <span class="kw">this</span>.service = service;
+<span class="ln">15</span>    }
+<span class="ln">16</span>
+<span class="ln">17</span>    <span class="ann">@GetMapping</span>(<span class="str">"/{id}/polizas"</span>)
+<span class="ln">18</span>    <span class="kw">public</span> <span class="typ">Resources</span>&lt;<span class="typ">PolizaResource</span>&gt; <span class="mth">polizas</span>(<span class="ann">@PathVariable</span> <span class="typ">Long</span> id) {
+<span class="ln">19</span>        <span class="typ">List</span>&lt;<span class="typ">PolizaResource</span>&gt; polizas = service.buscarPorMediador(id);
+<span class="ln">20</span>        <span class="kw">return</span> <span class="kw">new</span> <span class="typ">Resources</span>&lt;&gt;(polizas,
+<span class="ln">21</span>                linkTo(methodOn(<span class="typ">MediadorController</span>.<span class="kw">class</span>)
+<span class="ln">22</span>                        .polizas(id)).withSelfRel());
+<span class="ln">23</span>    }
+<span class="ln">24</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.imq.prescripcion.domain;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// JPA + Hibernate sobre Oracle. Las consultas complejas se</span>
+<span class="ln">4</span><span class="cmt">// montaban con QueryDSL en vez de JPQL a pelo.</span>
+<span class="ln">5</span><span class="ann">@Entity</span>
+<span class="ln">6</span><span class="ann">@Table</span>(name = <span class="str">"RECETA"</span>)
+<span class="ln">7</span><span class="kw">public class</span> <span class="typ">Receta</span> <span class="kw">implements</span> <span class="typ">Serializable</span> {
+<span class="ln">8</span>
+<span class="ln">9</span>    <span class="ann">@Id</span>
+<span class="ln">10</span>    <span class="ann">@GeneratedValue</span>(strategy = <span class="typ">GenerationType</span>.SEQUENCE,
+<span class="ln">11</span>                    generator = <span class="str">"SEQ_RECETA"</span>)
+<span class="ln">12</span>    <span class="kw">private</span> <span class="typ">Long</span> id;
+<span class="ln">13</span>
+<span class="ln">14</span>    <span class="ann">@Column</span>(name = <span class="str">"PACIENTE_ID"</span>, nullable = <span class="kw">false</span>)
+<span class="ln">15</span>    <span class="kw">private</span> <span class="typ">Long</span> pacienteId;
+<span class="ln">16</span>
+<span class="ln">17</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
+<span class="ln">18</span>    <span class="kw">private</span> <span class="typ">EstadoReceta</span> estado = <span class="typ">EstadoReceta</span>.EMITIDA;
+<span class="ln">19</span>
+<span class="ln">20</span>    <span class="ann">@Temporal</span>(<span class="typ">TemporalType</span>.TIMESTAMP)
+<span class="ln">21</span>    <span class="kw">private</span> <span class="typ">Date</span> fechaEmision = <span class="kw">new</span> <span class="typ">Date</span>();
+<span class="ln">22</span>
+<span class="ln">23</span>    <span class="cmt">// getters / setters generados con Alt+Shift+S ;)</span>
+<span class="ln">24</span>}</pre>
+
+        <div class="md" id="file-proyectos" hidden>
+          <h1># Clientes y proyectos</h1>
+          <p class="md-lede">Cinco años, cinco proyectos. Casi todo sanidad — donde un bug no es una incidencia,
+          es una receta que no llega.</p>
 
           <article class="proj">
-            <h3>Portal de Mediadores <span class="proj-client">IMQ · Igualatorio Médico Quirúrgico</span></h3>
-            <p>Análisis y desarrollo de la aplicación de Portal de Mediadores.</p>
-            <p class="proj-tech">Java 11 · Spring FWK · Spring Boot 2.3 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure Services · PostgreSQL · Git</p>
+            <h3>Portal de Mediadores <span class="proj-client">IMQ</span></h3>
+            <p>Análisis y desarrollo de la aplicación desde cero. La más moderna de la etapa.</p>
+            <p class="proj-tech">Java 11 · Spring Boot 2.3 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · PostgreSQL</p>
           </article>
 
           <article class="proj">
             <h3>Prescripción Digital <span class="proj-client">IMQ</span></h3>
-            <p>Desarrollo y mantenimiento de la aplicación de Prescripción Digital. Gestión y ejecución de los
-            despliegues en los diferentes entornos.</p>
-            <p class="proj-tech">Java 8 · Spring FWK · Spring Boot 2.1 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure Services · Oracle · PL/SQL · Git · SVN</p>
+            <p>Desarrollo y mantenimiento. Además, gestión y ejecución de los despliegues en los distintos
+            entornos.</p>
+            <p class="proj-tech">Java 8 · Spring Boot 2.1 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · Oracle · PL/SQL · SVN</p>
           </article>
 
           <article class="proj">
             <h3>Core Asistencial <span class="proj-client">IMQ</span></h3>
-            <p>Desarrollo de mejoras funcionales y resolución de incidencias en el mantenimiento del Core
-            Asistencial.</p>
-            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · QueryDSL · Eclipse · Oracle · Tomcat 7.0</p>
+            <p>Mejoras funcionales y resolución de incidencias sobre el núcleo asistencial.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · QueryDSL · Oracle · Tomcat 7</p>
           </article>
 
           <article class="proj">
             <h3>Gestión hospitalaria <span class="proj-client">H. U. Marqués de Valdecilla</span></h3>
-            <p>Desarrollo de mejoras funcionales y resolución de incidencias en el mantenimiento de la aplicación
-            de gestión de las diferentes áreas no clínicas del hospital. Gestión y ejecución de los despliegues en
-            los diferentes entornos.</p>
-            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · jQuery · Eclipse · Oracle · WebLogic 11g</p>
+            <p>Mejoras y resolución de incidencias en la gestión de las áreas no clínicas del hospital, más los
+            despliegues en los distintos entornos.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · jQuery · Oracle · WebLogic 11g</p>
           </article>
 
           <article class="proj">
             <h3>Field Service Management <span class="proj-client">Siemens-Gamesa</span></h3>
-            <p>Análisis y parametrización de soluciones Field Service (FSM) haciendo uso de Oracle Field Service
-            Cloud (OFSC).</p>
-            <p class="proj-tech">Oracle Field Service Cloud (OFSC) · FSM</p>
+            <p>Análisis y parametrización de soluciones Field Service. El único proyecto de la etapa fuera de
+            sanidad y fuera de Java.</p>
+            <p class="proj-tech">Oracle Field Service Cloud (OFSC)</p>
           </article>
         </div>
 
-        <pre class="code" id="file-stack" hidden><span class="ln">1</span><span class="jdoc">/**
-<span class="ln">2</span> * Stack.java
-<span class="ln">3</span> * El entorno tecnológico de la época — sin Docker, sin Kubernetes,
-<span class="ln">4</span> * sin IA. Solo el JDK, el debugger de Eclipse y mucha paciencia.
-<span class="ln">5</span> */</span>
-<span class="ln">6</span><span class="kw">public enum</span> <span class="typ">Stack</span> {
-<span class="ln">7</span>    JAVA_7, JAVA_8, JAVA_11, J2EE,
-<span class="ln">8</span>    SPRING_FWK, SPRING_BOOT_2, HATEOAS,
-<span class="ln">9</span>    JPA, HIBERNATE, QUERYDSL,
-<span class="ln">10</span>    API_RESTFUL, SOAP, ZK, JQUERY,
-<span class="ln">11</span>    ORACLE, PLSQL, POSTGRESQL,
-<span class="ln">12</span>    AZURE_SERVICES, TOMCAT_7, WEBLOGIC_11G,
-<span class="ln">13</span>    ORACLE_FIELD_SERVICE_CLOUD,
-<span class="ln">14</span>    MAVEN, SVN, GIT, JENKINS, SCRUM
-<span class="ln">15</span>}</pre>
+        <div class="md" id="file-skills" hidden>
+          <h1># Lo que aprendí aquí</h1>
+          <p class="md-lede">La base. Java "de antes" — sin records, sin streams por todas partes, sin Docker y
+          desde luego sin IA. Todo a mano, y por eso se aprende.</p>
+
+          <div class="skill-block">
+            <h4>Lenguaje y framework</h4>
+            <div class="sk-row"><span>Java 7 / 8</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>Java 11</span><i class="sk-bar"><b style="width:70%"></b></i></div>
+            <div class="sk-row"><span>J2EE</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>Spring Framework</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+            <div class="sk-row"><span>Spring Boot 2.1 / 2.3</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Persistencia</h4>
+            <div class="sk-row"><span>JPA / Hibernate</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>QueryDSL</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>Oracle · PL/SQL</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>PostgreSQL</span><i class="sk-bar"><b style="width:70%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Integración y web</h4>
+            <div class="sk-row"><span>API REST · HATEOAS</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+            <div class="sk-row"><span>SOAP · WSSisnet</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>ZK · jQuery</span><i class="sk-bar"><b style="width:60%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Herramientas de la época</h4>
+            <div class="sk-row"><span>Eclipse IDE</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>Maven</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+            <div class="sk-row"><span>SVN → Git</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>Jenkins · Azure DevOps</span><i class="sk-bar"><b style="width:70%"></b></i></div>
+            <div class="sk-row"><span>WebLogic 11g · Tomcat 7</span><i class="sk-bar"><b style="width:65%"></b></i></div>
+            <div class="sk-row"><span>Scrum</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+          </div>
+        </div>
 
         <div class="md" id="file-readme" hidden>
-          <h1># Antes de todo esto</h1>
-          <p>NTT Data Europa — julio de 2017. Mi primer contrato como desarrollador, después de un año en
-          Domino's Pizza y seis meses en Telepizza como responsable de turno (ver capítulo 01).</p>
-          <p>Cinco años y cinco clientes: IMQ (Portal de Mediadores, Prescripción Digital, Core Asistencial),
-          el Hospital Universitario Marqués de Valdecilla y Siemens-Gamesa. Sanidad sobre todo — ver
-          <strong>Proyectos.java</strong> en el explorador.</p>
-          <p>Mantenimiento, evolutivos, incidencias en producción y despliegues en varios entornos. Formativo
-          siempre — aquí aprendí lo que ningún curso enseña: a defender un código en producción a las 3 de la
-          tarde con el cliente al teléfono.</p>
+          <h1># NTT Data · jul 2017 – nov 2022</h1>
+          <p>Mi primer contrato como desarrollador, después de un año en Domino's Pizza y seis meses en
+          Telepizza como responsable de turno (eso lo cuento en el capítulo 01).</p>
+          <p>Cinco años de análisis, diseño y gestión de desarrollos, mantenimiento y evolutivos, y bastantes
+          incidencias en producción. Aquí aprendí lo que ningún curso enseña: a defender un cambio delante del
+          cliente, y a entender que el código que escribes hoy lo mantiene alguien dentro de tres años.</p>
+          <p><em>Las etapas siguientes (Knowmad Mood y Sopra Steria) tienen su propio capítulo.</em></p>
         </div>
       </div>
     </main>

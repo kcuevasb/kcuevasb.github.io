@@ -110,26 +110,44 @@
 </template>
 
 <template id="tpl-skills">
-  <p class="user-q">¿Qué tecnologías dominas mejor?</p>
+  <p class="user-q">¿Qué estás usando y aprendiendo en esta etapa?</p>
   <div class="a-body">
-    <p>Por nivel de dominio:</p>
+    <p>Esta etapa tiene dos mitades: el backend de siempre, ya muy asentado, y una forma de trabajar nueva
+    montada sobre agentes de IA. Empiezo por lo primero:</p>
+
+    <p class="sk-group-title">Backend · el oficio</p>
     <div class="skill-rows">
-      <div class="skill-row" data-level="5"><span>Java</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="5"><span>Spring Boot</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Java 17+</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Spring Boot 4</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>API REST</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Kafka Avro</span><i class="meter"><b></b></i></div>
       <div class="skill-row" data-level="5"><span>Microservicios</span><i class="meter"><b></b></i></div>
       <div class="skill-row" data-level="4"><span>Arq. Hexagonal</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>Kafka</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>Kubernetes</span><i class="meter"><b></b></i></div>
       <div class="skill-row" data-level="4"><span>PostgreSQL</span><i class="meter"><b></b></i></div>
       <div class="skill-row" data-level="4"><span>MongoDB</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>Docker</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>CI/CD</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>Git</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>GitHub Copilot</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="3"><span>Azure / AWS / GCP</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>Scrum</span><i class="meter"><b></b></i></div>
-      <div class="skill-row" data-level="4"><span>API REST</span><i class="meter"><b></b></i></div>
     </div>
+
+    <p class="sk-group-title">Cloud · lo nuevo de aquí</p>
+    <div class="skill-rows">
+      <div class="skill-row" data-level="4"><span>GCP</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>GKE / Kubernetes</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Artifactory · Sonar</span><i class="meter"><b></b></i></div>
+    </div>
+
+    <p class="sk-group-title">IA aplicada al trabajo · lo que más he aprendido</p>
+    <div class="skill-rows">
+      <div class="skill-row" data-level="5"><span>OpenCode</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>GitHub Copilot</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Agentes</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Skills</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>MCPs</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Engram (memoria)</span><i class="meter"><b></b></i></div>
+    </div>
+
+    <p class="prose-note">Uso <strong>OpenCode con GitHub Copilot</strong> como agente en el día a día, con
+    agentes y skills propios para las tareas que se repiten, MCPs para conectarlo a las herramientas del
+    proyecto, y Engram como memoria persistente entre sesiones. En los proyectos personales hago lo mismo con
+    Claude Code — eso lo cuento en el capítulo Matrix.</p>
   </div>
 </template>
 

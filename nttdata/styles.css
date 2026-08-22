@@ -147,6 +147,20 @@ button.tree-file.active{ background: var(--tree-select); }
   line-height: 1.5; margin: 0;
 }
 
+.jtag{ color: var(--jdoc); font-weight: 600; }
+
+/* ---------- Skills blocks ---------- */
+.md-lede{ color: var(--ink-dim); font-style: italic; margin-bottom: 18px !important; }
+.skill-block{ margin-bottom: 18px; }
+.skill-block h4{
+  font-family: var(--font-code); font-size: 12px; color: var(--kw);
+  margin: 0 0 8px; text-transform: uppercase; letter-spacing: .6px;
+}
+.sk-row{ display:flex; align-items:center; gap: 12px; margin-bottom: 5px; }
+.sk-row span{ width: 175px; flex-shrink:0; font-size: 12.5px; }
+.sk-bar{ flex:1; height: 8px; background:#dcdcdc; border: 1px solid #bfbfbf; display:block; max-width: 240px; }
+.sk-bar b{ display:block; height:100%; background: var(--accent); }
+
 .md{ padding: 20px 26px; font-family: var(--font-ui); max-width: 68ch; }
 .md h1{ font-family: var(--font-code); font-size: 18px; color: var(--ink); margin: 0 0 14px; }
 .md p{ font-size: 13.5px; line-height:1.6; color: var(--ink); margin: 0 0 12px; }

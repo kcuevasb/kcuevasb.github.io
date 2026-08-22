@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kepa Cuevas Barrasa · Software Engineer</title>
+<title>Kepa Cuevas Barrasa · Knowmad Mood</title>
 <meta name="description" content="CV interactivo de Kepa Cuevas Barrasa en clave IntelliJ IDEA — mis años en Knowmad Mood (BeeDigital y El Corte Inglés).">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%232b2b2b%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23cc7832%22 font-family=%22monospace%22>IJ</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,8 @@
   <!-- TITLE BAR -->
   <div class="ide-titlebar">
     <span class="ij-logo">IJ</span>
-    <span class="ide-title">knowmad-mood — MicroservicioCatalogo.java</span>
-    <a href="../" class="back-link">← elegir edición</a>
+    <span class="ide-title">eci-catalogo-service — CatalogoController.java</span>
+    <a href="../" class="back-link">← elegir capítulo</a>
   </div>
 
   <!-- MENU BAR -->
@@ -33,11 +33,11 @@
   <!-- NAVIGATION / RUN BAR -->
   <div class="ide-navbar">
     <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="project-panel" title="Project">☰</button>
-    <span class="crumbs">knowmad-mood <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.kepa.experiencia</span>
-    <span class="run-config">☕ MicroservicioCatalogo <span class="sep">▾</span></span>
+    <span class="crumbs">eci-catalogo-service <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.eci.catalogo <span class="sep">›</span> api</span>
+    <span class="run-config">☕ CatalogoApplication <span class="sep">▾</span></span>
     <span class="run-btn" title="Run">▶</span>
     <span class="dbg-btn" title="Debug">🐞</span>
-    <span class="chapter-tag">Capítulo 03 — la etapa de consultoría</span>
+    <span class="chapter-tag">Capítulo 03 — nov 2022 – sep 2025</span>
   </div>
 
   <div class="ide-body">
@@ -46,12 +46,14 @@
     <aside class="project-panel" id="project-panel">
       <div class="panel-head">Project <span class="sep">▾</span></div>
       <div class="tree">
-        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 knowmad-mood</div>
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 eci-catalogo-service</div>
         <div class="tree-row tree-folder"><span class="tw">▾</span> 📁 src/main/java</div>
-        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 com.kepa.experiencia</div>
-        <button class="tree-row tree-file active" data-file="eci"><span class="fi">Ⓒ</span> ElCorteIngles.java</button>
-        <button class="tree-row tree-file" data-file="bee"><span class="fi">Ⓒ</span> BeeDigital.java</button>
-        <button class="tree-row tree-file" data-file="pom"><span class="fi">🅼</span> pom.xml</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 com.eci.catalogo</div>
+        <button class="tree-row tree-file active" data-file="controller"><span class="fi">Ⓒ</span> CatalogoController.java</button>
+        <button class="tree-row tree-file" data-file="consumer"><span class="fi">Ⓒ</span> ProductoEventConsumer.java</button>
+        <button class="tree-row tree-file" data-file="repo"><span class="fi">Ⓒ</span> ProductoRepository.java</button>
+        <button class="tree-row tree-file" data-file="clientes"><span class="fi">📁</span> clientes.md</button>
+        <button class="tree-row tree-file" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tree-row tree-file" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
     </aside>
@@ -60,89 +62,169 @@
     <!-- EDITOR -->
     <main class="editor-panel">
       <div class="tabs" id="tabs">
-        <button class="tab active" data-file="eci"><span class="fi">Ⓒ</span> ElCorteIngles.java</button>
-        <button class="tab" data-file="bee"><span class="fi">Ⓒ</span> BeeDigital.java</button>
-        <button class="tab" data-file="pom"><span class="fi">🅼</span> pom.xml</button>
+        <button class="tab active" data-file="controller"><span class="fi">Ⓒ</span> CatalogoController.java</button>
+        <button class="tab" data-file="consumer"><span class="fi">Ⓒ</span> ProductoEventConsumer.java</button>
+        <button class="tab" data-file="repo"><span class="fi">Ⓒ</span> ProductoRepository.java</button>
+        <button class="tab" data-file="clientes"><span class="fi">📁</span> clientes.md</button>
+        <button class="tab" data-file="skills"><span class="fi">📊</span> aprendido.md</button>
         <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
       </div>
 
       <div class="editor">
 
-        <pre class="code" id="file-eci"><span class="ln">1</span><span class="ann">@Service</span>
-<span class="ln">2</span><span class="ann">@Cliente</span>(<span class="str">"El Corte Inglés"</span>)
-<span class="ln">3</span><span class="ann">@Periodo</span>(desde = <span class="str">"ago 2023"</span>, hasta = <span class="str">"sep 2025"</span>)
-<span class="ln">4</span><span class="kw">public class</span> <span class="typ">ElCorteIngles</span> <span class="kw">implements</span> <span class="typ">Experiencia</span> {
-<span class="ln">5</span>
-<span class="ln">6</span>    <span class="cmt">// El dominio de catálogo de una de las mayores superficies</span>
-<span class="ln">7</span>    <span class="cmt">// comerciales de Europa. Mucho volumen, mucho dato, y cero</span>
-<span class="ln">8</span>    <span class="cmt">// margen para que un producto aparezca mal en la web.</span>
+        <pre class="code" id="file-controller"><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * Dominio de catálogo — El Corte Inglés.
+<span class="ln">5</span> * Agregador: compone la ficha de producto a partir de varios
+<span class="ln">6</span> * microservicios y la cachea. Java 17, Spring Boot 3.
+<span class="ln">7</span> */</span>
+<span class="ln">8</span><span class="ann">@RestController</span>
+<span class="ln">9</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/catalogo"</span>)
+<span class="ln">10</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">11</span><span class="kw">public class</span> <span class="typ">CatalogoController</span> {
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="kw">private final</span> <span class="typ">CatalogoService</span> catalogoService;
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="ann">@GetMapping</span>(<span class="str">"/productos/{sku}"</span>)
+<span class="ln">16</span>    <span class="kw">public</span> <span class="typ">ResponseEntity</span>&lt;<span class="typ">ProductoDTO</span>&gt; <span class="mth">buscar</span>(<span class="ann">@PathVariable</span> <span class="typ">String</span> sku) {
+<span class="ln">17</span>        <span class="kw">return</span> catalogoService.<span class="mth">buscarPorSku</span>(sku)
+<span class="ln">18</span>                .map(<span class="typ">ResponseEntity</span>::ok)
+<span class="ln">19</span>                .orElseGet(() -&gt; <span class="typ">ResponseEntity</span>.notFound().build());
+<span class="ln">20</span>    }
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@GetMapping</span>(<span class="str">"/productos"</span>)
+<span class="ln">23</span>    <span class="kw">public</span> <span class="typ">Page</span>&lt;<span class="typ">ProductoDTO</span>&gt; <span class="mth">listar</span>(<span class="ann">@RequestParam</span> <span class="typ">String</span> categoria,
+<span class="ln">24</span>                                      <span class="typ">Pageable</span> pageable) {
+<span class="ln">25</span>        <span class="kw">return</span> catalogoService.<span class="mth">listarPorCategoria</span>(categoria, pageable);
+<span class="ln">26</span>    }
+<span class="ln">27</span>}</pre>
+
+        <pre class="code" id="file-consumer" hidden><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.messaging;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// Aquí es donde Kafka dejó de ser una línea del CV.</span>
+<span class="ln">4</span><span class="cmt">// Un cambio de precio en el ERP se propaga a catálogo sin</span>
+<span class="ln">5</span><span class="cmt">// que ningún servicio llame a otro directamente.</span>
+<span class="ln">6</span><span class="ann">@Component</span>
+<span class="ln">7</span><span class="ann">@Slf4j</span>
+<span class="ln">8</span><span class="kw">public class</span> <span class="typ">ProductoEventConsumer</span> {
 <span class="ln">9</span>
-<span class="ln">10</span>    <span class="ann">@Override</span>
-<span class="ln">11</span>    <span class="kw">public</span> List&lt;String&gt; <span class="mth">responsabilidades</span>() {
-<span class="ln">12</span>        <span class="kw">return</span> List.of(
-<span class="ln">13</span>            <span class="str">"Análisis y desarrollo de microservicios backend con Spring Boot"</span>,
-<span class="ln">14</span>            <span class="str">"Consultas a bases de datos no relacionales con MongoDB"</span>,
-<span class="ln">15</span>            <span class="str">"Servicios de comunicación entre microservicios y agregación"</span>,
-<span class="ln">16</span>            <span class="str">"Soporte en el diseño de arquitectura del proyecto"</span>,
-<span class="ln">17</span>            <span class="str">"Despliegues con Jenkins y Clarive en varios entornos"</span>,
-<span class="ln">18</span>            <span class="str">"Calidad de código con Sonar; tests con Mockito y JUnit"</span>,
-<span class="ln">19</span>            <span class="str">"Eventos y tareas asíncronas con Kafka"</span>
-<span class="ln">20</span>        );
-<span class="ln">21</span>    }
-<span class="ln">22</span>}</pre>
+<span class="ln">10</span>    <span class="kw">private final</span> <span class="typ">CatalogoService</span> catalogoService;
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="ann">@KafkaListener</span>(topics = <span class="str">"producto.actualizado"</span>,
+<span class="ln">13</span>                   groupId = <span class="str">"catalogo-service"</span>)
+<span class="ln">14</span>    <span class="kw">public void</span> <span class="mth">onProductoActualizado</span>(<span class="typ">ProductoEvent</span> event,
+<span class="ln">15</span>                                      <span class="typ">Acknowledgment</span> ack) {
+<span class="ln">16</span>        log.info(<span class="str">"Evento recibido para SKU {}"</span>, event.sku());
+<span class="ln">17</span>        <span class="kw">try</span> {
+<span class="ln">18</span>            catalogoService.<span class="mth">refrescar</span>(event.sku());
+<span class="ln">19</span>            ack.acknowledge();   <span class="cmt">// commit manual del offset</span>
+<span class="ln">20</span>        } <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
+<span class="ln">21</span>            log.error(<span class="str">"Fallo procesando {} → DLQ"</span>, event.sku(), e);
+<span class="ln">22</span>            <span class="kw">throw</span> e;
+<span class="ln">23</span>        }
+<span class="ln">24</span>    }
+<span class="ln">25</span>}</pre>
 
-        <pre class="code" id="file-bee" hidden><span class="ln">1</span><span class="ann">@Service</span>
-<span class="ln">2</span><span class="ann">@Cliente</span>(<span class="str">"BeeDigital"</span>)
-<span class="ln">3</span><span class="ann">@Periodo</span>(desde = <span class="str">"nov 2022"</span>, hasta = <span class="str">"jul 2023"</span>)
-<span class="ln">4</span><span class="kw">public class</span> <span class="typ">BeeDigital</span> <span class="kw">implements</span> <span class="typ">Experiencia</span> {
-<span class="ln">5</span>
-<span class="ln">6</span>    <span class="cmt">// Posicionamiento de empresas en internet. Primer contacto</span>
-<span class="ln">7</span>    <span class="cmt">// serio con AWS y con bases de datos que no son tablas.</span>
-<span class="ln">8</span>
-<span class="ln">9</span>    <span class="ann">@Override</span>
-<span class="ln">10</span>    <span class="kw">public</span> List&lt;String&gt; <span class="mth">responsabilidades</span>() {
-<span class="ln">11</span>        <span class="kw">return</span> List.of(
-<span class="ln">12</span>            <span class="str">"Análisis y desarrollo de microservicios backend con Spring Boot"</span>,
-<span class="ln">13</span>            <span class="str">"Consultas a DocumentDB y DynamoDB"</span>,
-<span class="ln">14</span>            <span class="str">"Diseño de servicios de comunicación y agregación de datos"</span>,
-<span class="ln">15</span>            <span class="str">"Control de versiones en repositorios Git de Amazon"</span>,
-<span class="ln">16</span>            <span class="str">"Despliegues con Jenkins; calidad con Sonar"</span>,
-<span class="ln">17</span>            <span class="str">"Tests con Mockito y JUnit; eventos asíncronos con Kafka"</span>
-<span class="ln">18</span>        );
-<span class="ln">19</span>    }
-<span class="ln">20</span>}</pre>
+        <pre class="code" id="file-repo" hidden><span class="ln">1</span><span class="kw">package</span> com.eci.catalogo.repository;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// Persistencia no relacional: el catálogo encaja mejor en</span>
+<span class="ln">4</span><span class="cmt">// documentos que en tablas — cada categoría tiene atributos</span>
+<span class="ln">5</span><span class="cmt">// distintos y el esquema cambia sin migraciones.</span>
+<span class="ln">6</span><span class="ann">@Repository</span>
+<span class="ln">7</span><span class="kw">public interface</span> <span class="typ">ProductoRepository</span>
+<span class="ln">8</span>        <span class="kw">extends</span> <span class="typ">MongoRepository</span>&lt;<span class="typ">Producto</span>, <span class="typ">String</span>&gt; {
+<span class="ln">9</span>
+<span class="ln">10</span>    <span class="typ">Optional</span>&lt;<span class="typ">Producto</span>&gt; <span class="mth">findBySku</span>(<span class="typ">String</span> sku);
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="ann">@Query</span>(<span class="str">"{ 'categoria': ?0, 'activo': true }"</span>)
+<span class="ln">13</span>    <span class="typ">Page</span>&lt;<span class="typ">Producto</span>&gt; <span class="mth">findActivosPorCategoria</span>(<span class="typ">String</span> categoria,
+<span class="ln">14</span>                                            <span class="typ">Pageable</span> pageable);
+<span class="ln">15</span>}
+<span class="ln">16</span>
+<span class="ln">17</span><span class="cmt">// En BeeDigital el equivalente era DynamoDB y DocumentDB</span>
+<span class="ln">18</span><span class="cmt">// sobre AWS. Misma idea, distinto proveedor.</span></pre>
 
-        <pre class="code" id="file-pom" hidden><span class="ln">1</span><span class="cmt">&lt;!-- El entorno tecnológico de estos tres años --&gt;</span>
-<span class="ln">2</span><span class="tag">&lt;dependencies&gt;</span>
-<span class="ln">3</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">java</span> <span class="cmt">&lt;!-- 11 · 17 · 19 --&gt;</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">4</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">spring-boot</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">5</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">spring-web</span> <span class="cmt">&lt;!-- API REST --&gt;</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">6</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kafka</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">7</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">mongodb</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">8</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">couchbase</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">9</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">dynamodb</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">10</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">documentdb</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">11</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">aws</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">12</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">docker</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">13</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kubernetes</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">14</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">jenkins</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">15</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">clarive</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">16</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">kibana</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">17</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">sonar</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">18</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">mockito · junit</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">19</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">jwt</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">20</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">bitbucket · git</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">21</span>    <span class="tag">&lt;dependency&gt;</span> <span class="str">scrum</span> <span class="tag">&lt;/dependency&gt;</span>
-<span class="ln">22</span><span class="tag">&lt;/dependencies&gt;</span></pre>
+        <div class="md" id="file-clientes" hidden>
+          <h1># Clientes</h1>
+          <p class="md-lede">Tres años de consultoría en dos clientes muy distintos.</p>
+
+          <article class="proj">
+            <h3>El Corte Inglés <span class="proj-client">ago 2023 – sep 2025</span></h3>
+            <p>Análisis y desarrollo de microservicios backend con Spring Boot para el dominio de catálogo.
+            Consultas a bases de datos no relacionales con MongoDB. Desarrollo de los servicios de comunicación
+            entre microservicios y de agregación de datos, más soporte en el diseño de arquitectura del proyecto.</p>
+            <p>Despliegue con Jenkins y Clarive en distintos entornos, calidad con Sonar, tests con Mockito y
+            JUnit, y eventos asíncronos con Kafka.</p>
+            <p class="proj-tech">Java 11-17 · Spring Boot · MongoDB · Couchbase · Kafka · Docker · Kubernetes · Jenkins · Clarive · Kibana · Bitbucket · Sonar</p>
+          </article>
+
+          <article class="proj">
+            <h3>BeeDigital <span class="proj-client">nov 2022 – jul 2023</span></h3>
+            <p>Análisis y desarrollo de microservicios backend con Spring Boot para el posicionamiento de
+            empresas en internet. Consultas a DocumentDB y DynamoDB. Diseño de los servicios de comunicación
+            entre microservicios y de agregación de datos, con control de versiones en repositorios Git de
+            Amazon.</p>
+            <p>Despliegue con Jenkins, calidad con Sonar, tests con Mockito y JUnit, y eventos asíncronos con
+            Kafka.</p>
+            <p class="proj-tech">Java 19 · Spring Boot · AWS · DynamoDB · DocumentDB · Kafka · JWT · Jenkins · Sonar</p>
+          </article>
+        </div>
+
+        <div class="md" id="file-skills" hidden>
+          <h1># Lo que aprendí aquí</h1>
+          <p class="md-lede">El salto a Java moderno y a los microservicios de verdad: no "varios servicios",
+          sino eventos, contenedores y despliegues independientes.</p>
+
+          <div class="skill-block">
+            <h4>Java moderno</h4>
+            <div class="sk-row"><span>Java 11 / 17 / 19</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>Streams · Optional · records</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>Spring Boot 2.x / 3</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>API REST</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Microservicios y mensajería</h4>
+            <div class="sk-row"><span>Arquitectura de microservicios</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>Kafka · eventos asíncronos</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>Agregación de datos</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>JWT</span><i class="sk-bar"><b style="width:70%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Datos no relacionales</h4>
+            <div class="sk-row"><span>MongoDB</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>DynamoDB · DocumentDB</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>Couchbase</span><i class="sk-bar"><b style="width:65%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Cloud, entrega y calidad</h4>
+            <div class="sk-row"><span>Docker</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+            <div class="sk-row"><span>Kubernetes</span><i class="sk-bar"><b style="width:75%"></b></i></div>
+            <div class="sk-row"><span>AWS</span><i class="sk-bar"><b style="width:70%"></b></i></div>
+            <div class="sk-row"><span>Jenkins · Clarive</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+            <div class="sk-row"><span>Sonar · Mockito · JUnit</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>Kibana</span><i class="sk-bar"><b style="width:65%"></b></i></div>
+          </div>
+
+          <div class="skill-block">
+            <h4>Herramientas de la época</h4>
+            <div class="sk-row"><span>IntelliJ IDEA</span><i class="sk-bar"><b style="width:90%"></b></i></div>
+            <div class="sk-row"><span>Maven · Git · Bitbucket</span><i class="sk-bar"><b style="width:85%"></b></i></div>
+            <div class="sk-row"><span>Scrum</span><i class="sk-bar"><b style="width:80%"></b></i></div>
+          </div>
+        </div>
 
         <div class="md" id="file-readme" hidden>
           <h1># Knowmad Mood · nov 2022 – sep 2025</h1>
-          <p>Tres años de consultoría en dos clientes muy distintos: <strong>BeeDigital</strong> primero
-          (posicionamiento de empresas en internet, AWS) y <strong>El Corte Inglés</strong> después (el dominio
-          de catálogo, MongoDB y mucho volumen).</p>
-          <p>Aquí es donde los microservicios dejaron de ser "lo que toca usar" para convertirse en algo que
-          entendía de verdad: por qué se separan, cuándo compensa, y qué pasa cuando uno se cae a las tres de la
-          tarde. También donde Kafka pasó de línea en el CV a herramienta del día a día.</p>
+          <p>Tres años de consultoría en dos clientes: <strong>BeeDigital</strong> primero (posicionamiento de
+          empresas en internet, sobre AWS) y <strong>El Corte Inglés</strong> después (el dominio de catálogo,
+          MongoDB y mucho volumen).</p>
+          <p>Aquí los microservicios dejaron de ser "lo que toca usar" para convertirse en algo que entendía de
+          verdad: por qué se separan, cuándo compensa, y qué pasa cuando uno se cae. También donde Kafka pasó de
+          línea en el CV a herramienta del día a día.</p>
           <p><em>La etapa anterior (NTT Data) y la actual (Sopra Steria) tienen su propio capítulo.</em></p>
         </div>
       </div>
@@ -163,15 +245,15 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.7.x)
+ :: Spring Boot ::                (v3.1.x)
 
-Started MicroservicioCatalogo in 3 años 10 meses (JVM running for ~1000 días)</pre>
+Started CatalogoApplication in 3 años 10 meses (JVM running for ~1000 días)</pre>
   </div>
 
   <!-- STATUS BAR -->
   <div class="ide-status">
     <span>UTF-8</span><span class="sep">|</span><span>Java 17</span><span class="sep">|</span>
-    <span>⎇ feature/knowmad-mood</span><span class="status-right">1:1 · LF</span>
+    <span>⎇ feature/catalogo-agregador</span><span class="status-right">1:1 · LF</span>
   </div>
 
 </div>

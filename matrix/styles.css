@@ -330,6 +330,13 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
 }
 
 /* ---------- Skills ---------- */
+.skills-group{
+  font-family: var(--font-term);
+  color: var(--amber);
+  font-size: 17px;
+  letter-spacing: 1px;
+  margin: 22px 0 10px;
+}
 .skills-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kepa Cuevas Barrasa · Software Engineer</title>
+<title>Kepa Cuevas Barrasa · Proyectos propios</title>
 <meta name="description" content="CV interactivo de Kepa Cuevas Barrasa, Software Engineer especializado en Java/Spring Boot y microservicios.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23000%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%2300ff41%22 font-family=%22monospace%22>K</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="styles.css">
+<noscript>
+  <!-- The whole page is hidden until the boot animation finishes in JS.
+       Without this, a blocked or failed script leaves a blank page — for
+       a CV, the worst possible failure. An author rule beats the UA's
+       [hidden]{display:none}, so the content simply shows. -->
+  <style>
+    #boot-screen{ display:none !important; }
+    #site[hidden]{ display:block !important; }
+    #matrix-canvas{ display:none; }
+  </style>
+</noscript>
 </head>
 <body>
 
@@ -26,7 +37,7 @@
 
   <header class="topbar">
     <div class="brand">
-      <a href="../" class="back-link">&lt; elegir_edición</a>
+      <a href="../" class="back-link">&lt; elegir_capítulo</a>
       <div class="logo">KEPA_CUEVAS<span class="blink">_</span></div>
     </div>
     <nav class="pixel-nav" aria-label="Navegación principal">
@@ -212,7 +223,7 @@
 
   <footer class="site-footer">
     <p>&gt; construido con HTML/CSS/JS puro + Claude Code · sin frameworks, como en 1999 pero con IA. 2026.</p>
-    <p><a href="../" class="footer-link">&lt; volver a elegir edición</a></p>
+    <p><a href="../" class="footer-link">&lt; volver a elegir capítulo</a></p>
   </footer>
 
 </div>

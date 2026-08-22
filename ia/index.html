@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kepa Cuevas Barrasa · Software Engineer</title>
+<title>Kepa Cuevas Barrasa · Sopra Steria</title>
 <meta name="description" content="CV interactivo de Kepa Cuevas Barrasa en formato conversación con IA.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%235b57d1%22/><circle cx=%228%22 cy=%228%22 r=%223%22 fill=%22%23fff%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,15 +11,68 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared.css">
 <link rel="stylesheet" href="styles.css">
+<noscript>
+  <!-- Every answer in this chapter lives inside <template>, which CSS can
+       never reveal — templates are inert by design. So unlike the other
+       chapters, this one needs a real static fallback below, not a
+       stylesheet override. -->
+  <style>
+    .app{ display:none !important; }
+    .ns{ max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+    .ns h1{ font-size: 26px; margin: 0 0 4px; }
+    .ns .ns-role{ color: var(--fg-dim); margin: 0 0 24px; }
+    .ns h2{ font-size: 15px; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--accent); margin: 28px 0 10px; }
+    .ns p{ line-height: 1.6; margin: 0 0 12px; }
+    .ns a{ color: var(--accent); }
+    .ns ul{ padding-left: 20px; line-height: 1.6; }
+  </style>
+</noscript>
 </head>
 <body>
+
+<noscript>
+  <div class="ns">
+    <h1>Kepa Cuevas Barrasa</h1>
+    <p class="ns-role">Software Engineer · Java · Spring Boot · Microservicios</p>
+
+    <p>Esta página se ve mejor con JavaScript activado (está montada como una conversación). Aquí tienes el
+    contenido en versión simple.</p>
+
+    <h2>Sopra Steria · cliente: Leroy Merlin · sep 2025 — actualidad</h2>
+    <ul>
+      <li>Análisis y desarrollo de microservicios backend con Spring Boot para la familia de productos HF3P.</li>
+      <li>Consultas a PostgreSQL y MongoDB; servicios de comunicación entre microservicios y agregación de datos.</li>
+      <li>Soporte en diseño de arquitectura, incluyendo microservicios desde cero con arquitectura hexagonal.</li>
+      <li>Despliegue en GKE/Kubernetes, calidad con Sonar, tests con Mockito/JUnit, eventos con Kafka Avro.</li>
+    </ul>
+
+    <h2>Stack</h2>
+    <p>Java 17+ · Spring Boot 4 · API REST · Kafka Avro · PostgreSQL · MongoDB · GCP · GKE/Kubernetes ·
+    Arquitectura hexagonal · Artifactory · Sonar. Y en el día a día: OpenCode con GitHub Copilot, agentes,
+    skills, MCPs y Engram.</p>
+
+    <h2>Contacto</h2>
+    <p>
+      <a href="mailto:kepa.cuevas@gmail.com">kepa.cuevas@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/">LinkedIn</a> ·
+      <a href="https://github.com/kcuevasb">GitHub</a>
+    </p>
+
+    <h2>Otros capítulos</h2>
+    <p>
+      <a href="../">Índice</a> ·
+      <a href="../cv/">CV en una página (PDF)</a>
+    </p>
+  </div>
+</noscript>
 
 <div class="app">
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-head">
-      <a href="../" class="back-link">← elegir edición</a>
+      <a href="../" class="back-link">← elegir capítulo</a>
       <div class="brand">
         <span class="brand-mark">K</span>
         <div>

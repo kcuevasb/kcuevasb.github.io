@@ -66,12 +66,16 @@ body{
   display:grid;
   grid-template-columns: 1fr 1px 1fr 1fr 1px 1fr;
   grid-template-rows: auto 1fr;
-  align-items: start;
+  /* stretch (not start) so all four cards share the tallest card's
+     height — otherwise each one sizes to its own text and they end up
+     visibly uneven. */
+  align-items: stretch;
   gap: 18px 34px;
   margin-bottom: 30px;
 }
 .col-heading{
   grid-row: 1;
+  align-self: end;
   font-family: var(--font-pixel);
   font-size: 12px;
   letter-spacing: 1px;
@@ -147,6 +151,11 @@ body{
   font-size: 13px;
   margin: 6px 0 2px;
   letter-spacing: 1px;
+  line-height: 1.5;
+  /* Long names (e.g. "KNOWMAD & SOPRA") must wrap cleanly instead of
+     overflowing or cramming — the pixel font has no narrow variant. */
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 .card-type{ font-size: 15px; color: var(--fg-dim); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
 .card-desc{ font-size: 18px; color: var(--fg); opacity: 0.85; margin: 6px 0 10px; min-height: 54px; }
@@ -205,7 +214,10 @@ body{
 .card-ia{ border-color: #4a4680; background:#f6f5fb; color:#1f1e2b; }
 .card-ia .card-type, .card-ia .card-desc{ color:#5c5970; }
 .card-ia:hover{ border-color:#5b57d1; box-shadow: 0 14px 0 #d9d6f5; }
-.card-ia h2{ color:#1f1e2b; font-family: var(--font-term); font-size:20px; letter-spacing:0; }
+/* "KNOWMAD & SOPRA" is the longest card name: VT323 at 20px rendered it
+   cramped and visually out of step with the other cards. Use the same
+   pixel face as Win98/Matrix at a smaller size so all four read alike. */
+.card-ia h2{ color:#1f1e2b; font-family: var(--font-pixel); font-size:10px; letter-spacing:.5px; line-height:1.6; }
 .card-ia .card-cta{ color:#5b57d1; border-color:#5b57d1; }
 .card-ia .card-index{ color:#8b87a8; }
 .preview-ia{ width:100%; height:96px; background:#fff; border:1px solid #e5e1ee; display:flex; flex-direction:column; justify-content:center; gap:6px; padding: 10px; }

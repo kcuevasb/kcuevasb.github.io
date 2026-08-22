@@ -168,7 +168,13 @@ a{ color: inherit; text-decoration: none; }
   .main{ padding: 8mm 6mm 6mm 7mm; }
 }
 
-@media (max-width: 760px){
+/* `screen and` is load-bearing, not decoration: an A4 print page is only
+   ~718px of layout width once Chrome's default margins are applied, which
+   is BELOW this 760px breakpoint. Without the `screen` restriction this
+   mobile rule fired while printing, stacking the two columns vertically —
+   roughly doubling the height and pushing everything onto a second page.
+   That was the real cause of the two-page PDF, not content size. */
+@media screen and (max-width: 760px){
   .sheet{ display: block; max-width: 100%; margin: 0; box-shadow:none; }
   .side, .main{ display: block; width: auto; }
   .side{ padding: 24px 20px; }

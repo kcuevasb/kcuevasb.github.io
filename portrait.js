@@ -21,10 +21,9 @@
   const CROP = { x: 0.145, y: 0.066, w: 0.708 };
   const SAMPLE = 140;     // resolucion a la que se analiza la foto
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
-  const FIG_TH = 26;      // cuanto hay que separarse del fondo para ser figura
-  const KNEE0 = 0.22, KNEE1 = 0.62;  // umbral suave que apaga el ruido de fondo
-  const FLOOR = 0.28;     // brillo minimo dentro de la figura
-  const CC_MIN = 0.15;    // por debajo de esto una celda no conecta figura
+  const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
+  const FLOOR = 0.30;     // brillo minimo dentro de la figura
+  const CONTRAST = 1.6;   // expansion del contraste dentro de la figura
   const SHADES = 24;      // niveles de color (se agrupa el dibujo por color)
   const TRAIL = 12;       // celdas de estela por gota
   const MUTATE = 40;      // celdas que cambian de glifo por frame
@@ -69,18 +68,24 @@
 
   /* --- mascara del retrato ---------------------------------------------
 
-     Separar figura de fondo por un umbral de brillo NO funciona con esta
-     foto, y conviene dejarlo escrito: la cara esta bien iluminada, asi que
-     su luminancia es tan alta como la del fondo de estudio y el umbral se
-     comia media cara. Tampoco vale un relleno por region desde los bordes:
-     el fondo tiene bandas horizontales (saltos de tono de golpe), el
-     relleno no puede cruzarlas, y todo el fondo por debajo de la banda
-     quedaba desconectado de la semilla y contado como figura.
+     Separar figura de fondo aqui tiene tres trampas, y se pisaron las tres
+     antes de dar con esto:
 
-     Lo que si funciona: estimar el fondo como una rampa entre el borde
-     izquierdo y el derecho de cada fila, y quedarse con lo que se separa de
-     esa estimacion. Absorbe el degradado vertical, las bandas y la
-     iluminacion asimetrica, sin depender de que la cara sea oscura. */
+     1. Un umbral de brillo no vale: la cara esta bien iluminada, su
+        luminancia es tan alta como la del fondo de estudio y el umbral se
+        comia media cara.
+     2. Un relleno por region desde los bordes tampoco: el fondo tiene
+        bandas horizontales, el relleno no puede cruzarlas, y todo el fondo
+        por debajo quedaba desconectado de la semilla y contado como figura.
+     3. Medir la distancia al fondo si funciona para el CONTORNO, pero deja
+        la cara agujereada: donde la piel esta mas iluminada se parece tanto
+        al fondo que esas celdas se caian del retrato.
+
+     La salida de la 3 es no preguntarse celda a celda si algo es figura,
+     sino que es FONDO: fondo es lo que se alcanza desde el borde de la
+     imagen sin cruzar el contorno. Todo lo que queda encerrado dentro es
+     cara, por poco que se distinga. Asi la silueta sale maciza y el brillo
+     de dentro puede seguir la luz real de la foto sin abrir huecos. */
   function buildMask(img){
     const N = SAMPLE;
     const s = document.createElement('canvas');
@@ -98,8 +103,10 @@
     for (let i = 0, p = 0; i < d.length; i += 4, p++)
       L[p] = 0.2126*d[i] + 0.7152*d[i+1] + 0.0722*d[i+2];
 
-    // Fondo por fila: mediana de cada borde (mediana y no media, para que un
-    // pelo suelto o una mota no arrastren la estimacion).
+    /* Fondo por fila: mediana de cada borde — mediana y no media, para que
+       un pelo suelto o una mota no arrastren la estimacion. Se modela como
+       una rampa de un borde al otro, que absorbe de una vez el degradado
+       vertical, las bandas y la iluminacion asimetrica. */
     const median = a => { const b = a.slice().sort((x, y) => x - y); return b[b.length >> 1]; };
     const left = [], right = [];
     for (let y = 0; y < N; y++){
@@ -115,67 +122,87 @@
     });
     const BL = smooth(left), BR = smooth(right);
 
+    // Contorno: pixeles que se apartan del fondo estimado.
+    const edge = new Uint8Array(N * N);
+    for (let y = 0; y < N; y++)
+      for (let x = 0; x < N; x++){
+        const bg = BL[y] + (BR[y] - BL[y]) * (x / (N - 1));
+        edge[y*N + x] = Math.abs(L[y*N + x] - bg) > FIG_TH ? 1 : 0;
+      }
+
+    // Fondo = lo alcanzable desde el borde de la imagen sin cruzar el
+    // contorno. Lo que no se alcanza queda dentro, agujeros de la cara
+    // incluidos: eso es lo que rellena la cara.
+    const outside = new Uint8Array(N * N);
+    const q = [];
+    const flood = i => { if (!outside[i] && !edge[i]){ outside[i] = 1; q.push(i); } };
+    for (let x = 0; x < N; x++){ flood(x); flood((N-1)*N + x); }
+    for (let y = 0; y < N; y++){ flood(y*N); flood(y*N + N-1); }
+    while (q.length){
+      const i = q.pop(), x = i % N, y = (i / N) | 0;
+      for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+        flood(ny*N + nx);
+      }
+    }
+
+    /* Solo la mancha de la persona. Donde el fondo tiene un borde duro
+       quedan islotes sueltos que, si no, aparecen como trozos de figura
+       flotando alrededor de la cabeza. Se siembra en el centro del borde
+       inferior, que es por donde la persona sale del encuadre. */
+    const keep = new Uint8Array(N * N);
+    const q2 = [];
+    for (let x = Math.floor(N * 0.3); x < N * 0.7; x++){
+      const i = (N - 1) * N + x;
+      if (!outside[i] && !keep[i]){ keep[i] = 1; q2.push(i); }
+    }
+    while (q2.length){
+      const i = q2.pop(), x = i % N, y = (i / N) | 0;
+      for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        const nx = x + dx, ny = y + dy;
+        if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
+        const j = ny*N + nx;
+        if (keep[j] || outside[j]) continue;
+        keep[j] = 1; q2.push(j);
+      }
+    }
+
     // Bajar a la rejilla promediando: da bordes suaves de regalo.
-    const fig = new Float32Array(COLS * ROWS), lum = new Float32Array(COLS * ROWS);
+    const alpha = new Float32Array(COLS * ROWS), lum = new Float32Array(COLS * ROWS);
     for (let gy = 0; gy < ROWS; gy++)
       for (let gx = 0; gx < COLS; gx++){
         let f = 0, l = 0, n = 0;
         for (let y = Math.floor(gy*N/ROWS); y < Math.floor((gy+1)*N/ROWS); y++)
           for (let x = Math.floor(gx*N/COLS); x < Math.floor((gx+1)*N/COLS); x++){
-            const bg = BL[y] + (BR[y] - BL[y]) * (x / (N - 1));
-            f += Math.min(1, Math.abs(L[y*N + x] - bg) / FIG_TH);
-            l += L[y*N + x];
-            n++;
+            f += keep[y*N + x]; l += L[y*N + x]; n++;
           }
-        fig[gy*COLS + gx] = f / n;
+        alpha[gy*COLS + gx] = f / n;
         lum[gy*COLS + gx] = l / n;
       }
 
-    // Umbral suave: el ruido del sensor nunca da diferencia cero, y sin esto
-    // el fondo queda sembrado de glifos tenues en vez de apagado.
-    const knee = v => {
-      const t = Math.min(1, Math.max(0, (v - KNEE0) / (KNEE1 - KNEE0)));
-      return t * t * (3 - 2 * t);
-    };
-    const F = Array.from(fig, knee);
-
-    /* Solo la mancha conectada a la persona. Donde el fondo tiene un borde
-       duro quedan islotes sueltos (una mancha arriba, una raya en un
-       lateral) que sin esto aparecen como trozos de figura flotando
-       alrededor de la cabeza. Se siembra en el centro del borde inferior,
-       que es por donde la persona sale del encuadre. */
-    const keep = new Uint8Array(COLS * ROWS);
-    const q = [];
-    for (let x = Math.floor(COLS * 0.35); x < COLS * 0.65; x++){
-      const i = (ROWS - 1) * COLS + x;
-      if (F[i] > CC_MIN && !keep[i]){ keep[i] = 1; q.push(i); }
-    }
-    while (q.length){
-      const i = q.pop(), x = i % COLS, y = (i / COLS) | 0;
-      for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
-        const nx = x + dx, ny = y + dy;
-        if (nx < 0 || ny < 0 || nx >= COLS || ny >= ROWS) continue;
-        const j = ny * COLS + nx;
-        if (keep[j] || F[j] <= CC_MIN) continue;
-        keep[j] = 1; q.push(j);
-      }
-    }
-
-    /* Dentro de la figura el brillo vuelve a seguir la luminancia real, y
-       por eso la piel brilla y el pelo queda apagado — igual que en el plano
-       de Neo. Normalizado con los percentiles de LA FIGURA, no de la imagen
-       entera: si entra el fondo en la cuenta, la cara se queda sin rango. */
+    /* Dentro de la figura el brillo sigue la luminancia real, y por eso la
+       piel brilla y el pelo queda apagado — igual que en el plano de Neo.
+       Normalizado con los percentiles de LA FIGURA, no de la imagen entera:
+       si entra el fondo en la cuenta, la cara se queda sin rango. */
     const inside = [];
-    for (let i = 0; i < F.length; i++) if (keep[i] && F[i] > 0.5) inside.push(lum[i]);
+    for (let i = 0; i < alpha.length; i++) if (alpha[i] > 0.5) inside.push(lum[i]);
     inside.sort((a, b) => a - b);
     const at = t => inside[Math.min(inside.length - 1, Math.floor(t * inside.length))];
     const lo = at(0.05), hi = at(0.95), range = (hi - lo) || 1;
 
-    const out = new Float32Array(F.length);
-    for (let i = 0; i < F.length; i++){
-      if (!keep[i]) continue;
-      const n = Math.min(1, Math.max(0, (lum[i] - lo) / range));
-      out[i] = F[i] * (FLOOR + (1 - FLOOR) * n);
+    const out = new Float32Array(alpha.length);
+    for (let i = 0; i < alpha.length; i++){
+      let n = Math.min(1, Math.max(0, (lum[i] - lo) / range));
+      // Expandir alrededor del medio separa los rasgos, que si no quedan
+      // aplastados: la cara ocupa solo la parte alta del rango de la figura,
+      // porque el pelo y la chaqueta se llevan la parte baja.
+      n = Math.min(1, Math.max(0, 0.5 + (n - 0.5) * CONTRAST));
+      /* El suelo NO se puede bajar para ganar mas contraste: con FLOOR 0.20
+         vuelven a aparecer celdas apagadas dentro de la cara — los agujeros
+         que este metodo venia justamente a cerrar. El contraste se saca
+         estirando el rango, no hundiendo el minimo. */
+      out[i] = alpha[i] * (FLOOR + (1 - FLOOR) * n);
     }
     return out;
   }

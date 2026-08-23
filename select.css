@@ -142,148 +142,137 @@ body{
 
 .select-sub{ color: var(--fg-dim); font-size: 20px; margin: 0 0 40px; }
 
-/* 6 tracks: card, divider, card, card, divider, card — the two divider
-   tracks are thin lines separating the 3 thematic groups (Inicios |
-   Experiencia laboral | Proyectos); no divider between NTT Data and IA
-   since both belong to "Experiencia laboral". */
-.cards{
-  display:grid;
-  /* 7 pistas: tarjeta | línea | 3 tarjetas de experiencia | línea | tarjeta */
-  grid-template-columns: 1fr 1px 1fr 1fr 1fr 1px 1fr;
-  grid-template-rows: auto 1fr;
-  /* stretch (not start) so all four cards share the tallest card's
-     height — otherwise each one sizes to its own text and they end up
-     visibly uneven. */
-  align-items: stretch;
-  gap: 18px 34px;
-  margin-bottom: 30px;
-}
-.col-heading{
-  grid-row: 1;
-  align-self: end;
+/* ---------- Trayectoria: bloques de CV ----------
+   Antes los cinco capítulos iban en una fila de tarjetas verticales, todas
+   compitiendo por el mismo ancho. En un CV lo que manda es el orden de
+   lectura, así que ahora van apilados y agrupados por etapa: inicios,
+   experiencia y proyectos. Cada entrada es una fila con su miniatura a la
+   izquierda, como la ficha de un puesto. */
+.cv-block{ text-align:left; margin-bottom: 34px; }
+
+.block-title{
   font-family: var(--font-pixel);
   font-size: 12px;
-  letter-spacing: 1px;
-  color: var(--fg-dim);
-  text-align:center;
-  margin: 0;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  color: var(--fg-dim);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a2f3a;
 }
-.heading-1{ grid-column: 1; }
-.heading-2{ grid-column: 3 / 6; }
-.heading-3{ grid-column: 7; }
 
-.slot-1{ grid-column: 1; grid-row: 2; }
-.slot-2{ grid-column: 3; grid-row: 2; }
-.slot-3{ grid-column: 4; grid-row: 2; }
-.slot-4{ grid-column: 5; grid-row: 2; }
-.slot-5{ grid-column: 7; grid-row: 2; }
-
-.divider{
-  grid-row: 1 / 3;
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(to bottom, transparent, #3a3f4c 12%, #3a3f4c 88%, transparent);
-}
-.div-1{ grid-column: 2; }
-.div-2{ grid-column: 6; }
-
-@media (max-width: 820px){
-  /* Single column: force explicit stacking order (heading, card, heading,
-     card, card, heading, card) since source order alone doesn't match —
-     all 3 headings come first in the markup for the desktop grid. */
-  .cards{ grid-template-columns: 1fr; }
-  .divider{ display: none; }
-  .heading-1{ grid-column: 1; grid-row: 1; }
-  .slot-1   { grid-column: 1; grid-row: 2; }
-  .heading-2{ grid-column: 1; grid-row: 3; margin-top: 8px; }
-  .slot-2   { grid-column: 1; grid-row: 4; }
-  .slot-3   { grid-column: 1; grid-row: 5; }
-  .slot-4   { grid-column: 1; grid-row: 6; }
-  .heading-3{ grid-column: 1; grid-row: 7; margin-top: 8px; }
-  .slot-5   { grid-column: 1; grid-row: 8; }
-}
+.entries{ list-style:none; margin:0; padding:0; display:grid; gap: 14px; }
 
 .card{
   position: relative;
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-  text-align:center;
-  gap: 0;
-  text-decoration:none;
+  display: grid;
+  /* Miniatura fija + texto flexible: la miniatura es la identidad visual del
+     capítulo, así que mantiene el mismo tamaño en las cinco entradas. */
+  grid-template-columns: 190px 1fr;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
   color: var(--fg);
   background: #12151c;
   border: 2px solid #2a2f3a;
   border-radius: 4px;
-  padding: 16px 16px 18px;
+  padding: 16px;
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   image-rendering: pixelated;
   overflow: hidden;
 }
+/* Se desplaza a la derecha, no hacia arriba: en una lista vertical un salto
+   en vertical hace que las filas de al lado parezcan moverse. */
 .card:hover, .card:focus-visible{
-  transform: translateY(-6px);
-  box-shadow: 0 14px 26px rgba(0,0,0,0.5);
+  transform: translateX(6px);
+  box-shadow: -6px 0 0 0 #2a2f3a;
 }
 .card.selected{ outline: none; }
 
-/* Chapter number as a large, low-contrast watermark instead of a tiny
-   label — gives each card a visual anchor without competing for space. */
-.card-index{
-  position:absolute;
-  top: 2px; right: 10px;
-  font-family: var(--font-pixel);
-  font-size: 30px;
-  color: #ffffff;
-  opacity: .06;
-  letter-spacing: -1px;
-  pointer-events: none;
+.card-body{ min-width:0; display:flex; flex-direction:column; gap: 8px; }
+
+.card-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap: 16px; flex-wrap: wrap;
 }
 
-.card h2{
+.card-foot{
+  display:flex; align-items:center; justify-content:space-between;
+  gap: 16px; flex-wrap: wrap; margin-top: 2px;
+}
+
+/* El número deja de ser marca de agua: en una lista vertical ordenada
+   funciona mejor delante del título, como la numeración de un índice. */
+.card-index{
   font-family: var(--font-pixel);
-  font-size: 11px;
-  margin: 14px 0 0;
-  letter-spacing: .5px;
-  line-height: 1.7;
-  max-width: 100%;
-  overflow-wrap: break-word;
-}
-.card-when{
-  font-family: var(--font-term);
-  font-size: 15px;
+  font-size: .62em;
   color: var(--fg-dim);
-  margin: 5px 0 0;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+.card h4{
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
   letter-spacing: .5px;
 }
-.card-desc{
+
+.card-when{
   font-size: 17px;
-  line-height: 1.35;
-  color: var(--fg);
-  opacity: .8;
-  margin: 10px 0 0;
-  flex: 1;
+  color: var(--fg-dim);
+  margin: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
-/* The skin badge names the visual theme, so cards named after a company
-   (NTT Data) and cards named after a life stage (Los inicios) can sit
-   together without the naming feeling inconsistent. */
+
+.card-desc{
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+  opacity: .85;
+}
+
+/* La insignia nombra el tema visual, así que en las entradas con nombre de
+   empresa deja claro con qué estética se abre el capítulo. */
 .card-skin{
-  font-family: var(--font-term);
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  letter-spacing: .5px;
   text-transform: uppercase;
-  padding: 4px 12px;
   border: 1px solid currentColor;
-  border-radius: 20px;
-  margin-top: 14px;
+  border-radius: 999px;
+  padding: 4px 9px;
   opacity: .75;
+  white-space: nowrap;
 }
 .card:hover .card-skin{ opacity: 1; }
 
+.card-go{
+  font-size: 16px;
+  color: var(--fg-dim);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.card:hover .card-go, .card:focus-visible .card-go{ opacity: .9; transform:none; }
+
+.preview{ align-self: stretch; }
+
+@media (max-width: 720px){
+  /* La miniatura pasa arriba y a lo ancho: a 190px fijos el texto se queda
+     sin sitio y el título parte por la mitad. */
+  .card{ grid-template-columns: 1fr; gap: 14px; }
+  .card:hover, .card:focus-visible{ transform:none; box-shadow:none; }
+  .card-head{ flex-direction: column; gap: 4px; }
+  .card-go{ opacity: .9; transform:none; }
+}
+
 /* --- Matrix card theme --- */
 .card-matrix{ border-color: #0aa62f; }
-.card-matrix:hover{ border-color: #00ff41; box-shadow: 0 14px 0 #063d14; }
-.card-matrix h2{ color: #00ff41; text-shadow: 0 0 8px rgba(0,255,65,.5); }
+.card-matrix:hover{ border-color: #00ff41; box-shadow: -6px 0 0 0 #063d14; }
+.card-matrix h4{ color: #00ff41; text-shadow: 0 0 8px rgba(0,255,65,.5); }
 .card-matrix .card-skin{ color: #00ff41; }
 .preview-matrix{
   width:100%; height: 96px; background:#020602; border:2px solid #0aa62f;
@@ -297,8 +286,8 @@ body{
 
 /* --- Win98 card theme --- */
 .card-win98{ border-color: #6b6f7a; }
-.card-win98:hover{ border-color: #c0c7d1; box-shadow: 0 14px 0 #01018a; }
-.card-win98 h2{ color: #dfe6ee; }
+.card-win98:hover{ border-color: #c0c7d1; box-shadow: -6px 0 0 0 #01018a; }
+.card-win98 h4{ color: #dfe6ee; }
 .card-win98 .card-skin{ color: #dfe6ee; }
 .preview-win98{ width:100%; height:96px; background:#008080; display:flex; align-items:center; justify-content:center; }
 .p-win{ width: 84%; background:#c0c0c0; border: 2px solid #fff; border-right-color:#404040; border-bottom-color:#404040; }
@@ -312,8 +301,8 @@ body{
 /* --- Eclipse (NTT Data) card theme --- */
 .card-eclipse{ border-color: #a0a0a0; background:#ececec; color:#1a1a1a; }
 .card-eclipse .card-when, .card-eclipse .card-desc{ color:#5a5a5a; }
-.card-eclipse:hover{ border-color:#4a6ea9; box-shadow: 0 14px 0 #c7d6ea; }
-.card-eclipse h2{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
+.card-eclipse:hover{ border-color:#4a6ea9; box-shadow: -6px 0 0 0 #c7d6ea; }
+.card-eclipse h4{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
 .card-eclipse .card-skin{ color:#4a6ea9; border-color:#4a6ea9; }
 .card-eclipse .card-index{ color:#8a8a8a; }
 .preview-eclipse{ width:100%; height:96px; background:#fff; border:1px solid #a0a0a0; display:flex; }
@@ -326,8 +315,8 @@ body{
 /* --- IntelliJ (Knowmad Mood) card theme --- */
 .card-intellij{ border-color: #555759; background:#2b2b2b; color:#a9b7c6; }
 .card-intellij .card-when, .card-intellij .card-desc{ color:#8a949e; }
-.card-intellij:hover{ border-color:#cc7832; box-shadow: 0 14px 0 #1a1a1a; }
-.card-intellij h2{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
+.card-intellij:hover{ border-color:#cc7832; box-shadow: -6px 0 0 0 #1a1a1a; }
+.card-intellij h4{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
 .card-intellij .card-skin{ color:#6a8759; border-color:#6a8759; }
 .card-intellij .card-index{ color:#606366; }
 .preview-intellij{ width:100%; height:96px; background:#2b2b2b; border:1px solid #555759; display:flex; }
@@ -341,11 +330,11 @@ body{
 /* --- IA card theme --- */
 .card-ia{ border-color: #4a4680; background:#f6f5fb; color:#1f1e2b; }
 .card-ia .card-when, .card-ia .card-desc{ color:#5c5970; }
-.card-ia:hover{ border-color:#5b57d1; box-shadow: 0 14px 0 #d9d6f5; }
-/* "KNOWMAD & SOPRA" is the longest card name: VT323 at 20px rendered it
-   cramped and visually out of step with the other cards. Use the same
-   pixel face as Win98/Matrix at a smaller size so all four read alike. */
-.card-ia h2{ color:#1f1e2b; font-family: var(--font-pixel); font-size:11px; letter-spacing:.5px; line-height:1.6; }
+.card-ia:hover{ border-color:#5b57d1; box-shadow: -6px 0 0 0 #d9d6f5; }
+/* El tamaño reducido venia de cuando esta tarjeta se llamaba "KNOWMAD &
+   SOPRA" y no cabia en una columna estrecha. Ya no: la entrada ocupa toda
+   la fila y el nombre es corto, asi que iguala al resto. */
+.card-ia h4{ color:#1f1e2b; }
 .card-ia .card-skin{ color:#5b57d1; border-color:#5b57d1; }
 .card-ia .card-index{ color:#8b87a8; }
 .preview-ia{ width:100%; height:96px; background:#fff; border:1px solid #e5e1ee; display:flex; flex-direction:column; justify-content:center; gap:6px; padding: 10px; }

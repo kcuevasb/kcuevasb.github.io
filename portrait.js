@@ -22,12 +22,16 @@
      y la celda se queda en ~6px en vez de caer a 5.5. La proporcion
      COLS/ROWS se mantiene (1.29) para que la celda conserve su forma. */
   const COLS = 58, ROWS = 45;
-  // Mismo encuadre que el retrato ASCII: cuadrado que entra la cabeza
-  // entera y los hombros, sin cortar por la barbilla.
-  const CROP = { x: 0.145, y: 0.066, w: 0.708 };
+  /* Cuadrado que entra la cabeza entera y los hombros. Se ensancho de
+     0.708 a 0.756 porque el encuadre anterior cortaba el hombro derecho:
+     en la foto esta girado y el torso sale descentrado, asi que el borde
+     del recorte llegaba antes de que el hombro terminase de abrirse. Con
+     este, la fila inferior pasa de cubrir el 72% del ancho al 93%. */
+  const CROP = { x: 0.121, y: 0.066, w: 0.756 };
   const SAMPLE = 200;     // resolucion a la que se analiza la foto
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
+  const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const FLOOR = 0.30;     // brillo minimo dentro de la figura
   const CONTRAST = 1.6;   // expansion del contraste dentro de la figura
   const SHADES = 32;      // niveles de color (se agrupa el dibujo por color)
@@ -71,6 +75,32 @@
   const cellFont = () => cellW.toFixed(2) + 'px "M PLUS 1 Code", "MS Gothic", monospace';
   let drops = [];
   let raf = 0, lastFrame = 0, running = false;
+
+  /* Erosion o dilatacion con elemento cuadrado, en dos pasadas 1D en vez de
+     una 2D: para radio 3 son 14 lecturas por pixel en lugar de 49. */
+  function morph(src, r, dilate){
+    const N = SAMPLE;
+    const tmp = new Uint8Array(N * N), out = new Uint8Array(N * N);
+    for (let y = 0; y < N; y++)
+      for (let x = 0; x < N; x++){
+        let v = dilate ? 0 : 1;
+        for (let k = -r; k <= r; k++){
+          const xx = Math.min(N - 1, Math.max(0, x + k));
+          v = dilate ? (v | src[y*N + xx]) : (v & src[y*N + xx]);
+        }
+        tmp[y*N + x] = v;
+      }
+    for (let y = 0; y < N; y++)
+      for (let x = 0; x < N; x++){
+        let v = dilate ? 0 : 1;
+        for (let k = -r; k <= r; k++){
+          const yy = Math.min(N - 1, Math.max(0, y + k));
+          v = dilate ? (v | tmp[yy*N + x]) : (v & tmp[yy*N + x]);
+        }
+        out[y*N + x] = v;
+      }
+    return out;
+  }
 
   /* --- mascara del retrato ---------------------------------------------
 
@@ -153,6 +183,24 @@
       }
     }
 
+    /* Limpieza de forma antes de decidir la silueta definitiva.
+
+       Apertura (erosionar y volver a dilatar): se lleva las estructuras mas
+       finas que el radio. Son las lineas que salian de la cabeza, el cuello
+       y los hombros hacia los lados — el fondo tiene bordes duros donde
+       cambian sus bandas, y esos bordes encierran tiras estrechas de fondo
+       que el relleno no alcanza y acaban pegadas a la figura.
+
+       Cierre (dilatar y volver a erosionar): tapa las mordidas del contorno,
+       donde la chaqueta se parece demasiado al fondo.
+
+       El radio va en pixeles de SAMPLE, no del canvas: si se cambia la
+       resolucion de analisis hay que reescalarlo. */
+    let solid = new Uint8Array(N * N);
+    for (let i = 0; i < N * N; i++) solid[i] = outside[i] ? 0 : 1;
+    solid = morph(morph(solid, MORPH, false), MORPH, true);   // apertura
+    solid = morph(morph(solid, MORPH, true), MORPH, false);   // cierre
+
     /* Solo la mancha de la persona. Donde el fondo tiene un borde duro
        quedan islotes sueltos que, si no, aparecen como trozos de figura
        flotando alrededor de la cabeza. Se siembra en el centro del borde
@@ -161,7 +209,7 @@
     const q2 = [];
     for (let x = Math.floor(N * 0.3); x < N * 0.7; x++){
       const i = (N - 1) * N + x;
-      if (!outside[i] && !keep[i]){ keep[i] = 1; q2.push(i); }
+      if (solid[i] && !keep[i]){ keep[i] = 1; q2.push(i); }
     }
     while (q2.length){
       const i = q2.pop(), x = i % N, y = (i / N) | 0;
@@ -169,7 +217,7 @@
         const nx = x + dx, ny = y + dy;
         if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
         const j = ny*N + nx;
-        if (keep[j] || outside[j]) continue;
+        if (keep[j] || !solid[j]) continue;
         keep[j] = 1; q2.push(j);
       }
     }

@@ -39,8 +39,8 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
-  const FLARE = 0.7;      // curva con la que el hombro sale del encuadre
-  const SIDE_AT = 0.90;   // altura a la que el hombro alcanza los lados
+  const FLARE = 2.2;      // curva con la que el hombro sale del encuadre
+  const TONE_CAP = 1.2;   // techo de luz del hombro, sobre el tono de su fila
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
@@ -338,15 +338,9 @@
 
         /* El torso de la foto deja de ensancharse antes de llegar al borde,
            asi que el hombro se quedaba en una meseta y parecia cortado a
-           media altura. Se le anade una apertura hacia los LADOS del cuadro,
-           no hacia las esquinas de abajo: el hombro alcanza el borde lateral
-           a la altura de SIDE_AT y de ahi para abajo el torso ya ocupa todo
-           el ancho, que es como sale de un encuadre cuadrado un busto de
-           verdad. El exponente es menor que uno para que la linea abra
-           rapido y se aplane al acercarse al lado, en vez de seguir cayendo
-           en diagonal hasta el fondo. */
-        const span = N * SIDE_AT - shoulderFrom;
-        const t = Math.min(1, Math.max(0, (y - shoulderFrom) / span));
+           media altura en vez de salirse del cuadro. Se le anade una
+           apertura que termina en el borde inferior. */
+        const t = (y - shoulderFrom) / (N - 1 - shoulderFrom);
         const r = base + (cx - base) * Math.pow(t, FLARE);
 
         x0 = Math.max(0, Math.round(cx - r));
@@ -360,6 +354,18 @@
        Por eso el hombro rellenado se veia de otro material que el bueno.
        Se le da la luz de su reflejo, que es el hombro de verdad — inventar
        la forma obliga a inventar tambien la luz, si no el parche canta. */
+    /* Tono propio de cada fila: la mediana de la luz de la figura REAL que
+       haya en ella. Se arrastra hacia abajo el ultimo tono conocido para las
+       filas que ya son todo invento. */
+    const rowTone = new Float32Array(N);
+    let lastTone = -1;
+    for (let y = 0; y < N; y++){
+      const v = [];
+      for (let x = 0; x < N; x++) if (real[y*N + x]) v.push(L[y*N + x]);
+      if (v.length){ v.sort((a, b) => a - b); lastTone = v[v.length >> 1]; }
+      rowTone[y] = lastTone;
+    }
+
     const lumSrc = new Float32Array(N * N);
     for (let y = 0; y < N; y++)
       for (let x = 0; x < N; x++){
@@ -367,9 +373,30 @@
         if (!keep[i] || real[i]){ lumSrc[i] = L[i]; continue; }
         const mx = Math.min(N - 1, Math.max(0, Math.round(2*cx - x)));
         const j = y*N + mx;
-        // Si el reflejo tampoco es figura de verdad, no hay nada que copiar.
-        lumSrc[i] = real[j] ? L[j] : L[i];
+        if (real[j]){ lumSrc[i] = L[j]; continue; }
+        /* Sin reflejo real que copiar hay que inventar el tono, y NO vale la
+           luz que tiene la foto ahi: debajo del hombro inventado hay fondo
+           claro, asi que copiarla metia rachas de celdas casi blancas dentro
+           de la chaqueta. Se prolonga el negro propio del hombro. */
+        lumSrc[i] = rowTone[y] >= 0 ? rowTone[y] : L[i];
       }
+
+    /* Techo de luz en la zona del hombro.
+
+       En las ultimas filas quedaban rachas de celdas casi blancas dentro de
+       la chaqueta, y no venian del invento: son esquinas de fondo claro que
+       el relleno encerro y dio por figura, conservando su luz. Ahi abajo no
+       hay rasgos que preservar — es todo chaqueta — asi que se le pone un
+       techo por encima del tono de la fila y el hombro conserva su negro
+       hasta el borde. */
+    for (let y = shoulderFrom; y < N; y++){
+      if (rowTone[y] < 0) continue;
+      const techo = rowTone[y] * TONE_CAP;
+      for (let x = 0; x < N; x++){
+        const i = y*N + x;
+        if (keep[i] && lumSrc[i] > techo) lumSrc[i] = techo;
+      }
+    }
 
     // Bajar a la rejilla promediando: da bordes suaves de regalo.
     const alpha = new Float32Array(COLS * ROWS), lum = new Float32Array(COLS * ROWS);

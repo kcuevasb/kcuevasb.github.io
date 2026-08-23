@@ -33,7 +33,9 @@
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
-  const FLOOR = 0.42;     // brillo minimo dentro de la figura
+  const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
+  const FLOOR = 0.40;     // brillo minimo dentro de la figura
+  const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
   const UNSHARP = 1.4;    // realce local de los rasgos de la cara
   const BLUR_R = 3;       // radio del desenfoque de referencia, en celdas
@@ -54,11 +56,11 @@
      porque es lo que da el verde saturado de la pelicula; con rojo de por
      medio el conjunto tira a oliva y se ve descolorido. */
   const STOPS = [
-    [0.00, [ 10,  52,  26]],
-    [0.30, [  0, 152,  58]],
-    [0.62, [  0, 245,  92]],
-    [0.85, [110, 255, 150]],
-    [1.00, [215, 255, 228]]
+    [0.00, [  8,  44,  22]],
+    [0.30, [  0, 128,  48]],
+    [0.62, [  0, 208,  78]],
+    [0.85, [ 88, 232, 126]],
+    [1.00, [188, 246, 202]]
   ];
   function shade(t){
     for (let i = 1; i < STOPS.length; i++){
@@ -229,42 +231,75 @@
     }
 
 
-    /* Aqui se deja de ser fiel a la foto para que el retrato se lea, que es
-       lo que pide un retrato.
-
-       1. Relleno de cada fila de extremo a extremo. Un busto es convexo en
-          horizontal a casi cualquier altura, asi que si en una fila hay
-          figura a izquierda y a derecha, lo de en medio es figura tambien.
-          Se lleva por delante las mordidas que dejaba el cuello de la
-          camisa: al ser claro se confundia con el fondo y abria una muesca
-          bajo la barbilla que parecia un agujero. Esto va DESPUES de
-          quedarnos con la mancha conectada; si fuese antes, un islote suelto
-          en un lateral rellenaria toda la fila hasta el cuerpo.
-
-       2. Simetria de los hombros. En la foto esta girado, asi que el torso
-          sale descentrado y un hombro se corta antes que el otro por mucho
-          que se ensanche el recorte — se comprobo que mas alla del corte ya
-          es fondo de verdad, no es un fallo de deteccion. Se refleja el
-          alcance del hombro mas largo sobre el corto, tomando como eje el
-          centro del encuadre. */
     // Copia previa: hace falta saber luego que celdas son inventadas.
     const real = keep.slice();
 
+    /* Aqui se deja de ser fiel a la foto para que el retrato se lea, que es
+       lo que pide un retrato. Se trabaja sobre el PERFIL — la x del primer y
+       del ultimo pixel de figura de cada fila — y luego se reconstruye la
+       silueta a partir de el. Eso rellena de paso cada fila de extremo a
+       extremo, que es lo que cierra las mordidas del cuello de la camisa:
+       al ser claro se confundia con el fondo y abria una muesca bajo la
+       barbilla.
+
+       El perfil se filtra con una MEDIANA, no con un cierre morfologico ni
+       con una media. La mediana se lleva las mellas sueltas sin arrastrar la
+       forma: probado, un cierre necesitaba una ventana tan ancha para
+       cerrarlas que aplanaba la coronilla (de 41 a 57 px de ancho), mientras
+       que la mediana la deja en 42. Las mellas del lado izquierdo bajan de
+       14 px de fondo a 6, y las del derecho de 36 a 5, que es menos de una
+       celda de la rejilla. La media posterior solo quita el escalonado. */
+    const profileMedian = a => a.map((v, y) => {
+      if (v < 0) return v;
+      const g = [];
+      for (let k = -PROFILE_W; k <= PROFILE_W; k++){
+        const j = y + k;
+        if (j < 0 || j >= N || a[j] < 0) continue;   // fila vacia: no cuenta
+        g.push(a[j]);
+      }
+      g.sort((p, q) => p - q);
+      return g[g.length >> 1];
+    });
+    const profileMean = (a, w) => a.map((v, y) => {
+      if (v < 0) return v;
+      let t = 0, n = 0;
+      for (let k = -w; k <= w; k++){
+        const j = y + k;
+        if (j < 0 || j >= N || a[j] < 0) continue;
+        t += a[j]; n++;
+      }
+      return Math.round(t / n);
+    });
+
+    const rawL = [], rawR = [];
     for (let y = 0; y < N; y++){
       let l = -1, r = -1;
       for (let x = 0; x < N; x++) if (keep[y*N + x]){ if (l < 0) l = x; r = x; }
-      if (l >= 0) for (let x = l; x <= r; x++) keep[y*N + x] = 1;
+      rawL.push(l); rawR.push(r);
     }
+    const profL = profileMean(profileMedian(rawL), 2);
+    const profR = profileMean(profileMedian(rawR), 2);
 
-    const shoulderFrom = Math.floor(N * SHOULDER_AT);
+    /* Simetria de los hombros. En la foto esta girado, asi que el torso sale
+       descentrado y un hombro se corta antes que el otro por mucho que se
+       ensanche el recorte — se comprobo que mas alla del corte ya es fondo
+       de verdad, no es un fallo de deteccion. Se refleja el alcance del
+       hombro largo sobre el corto, tomando como eje el centro del encuadre,
+       y se suaviza el alcance para que la linea del hombro no salga a
+       escalones. */
     const cx = (N - 1) / 2;
-    for (let y = shoulderFrom; y < N; y++){
-      let l = -1, r = -1;
-      for (let x = 0; x < N; x++) if (keep[y*N + x]){ if (l < 0) l = x; r = x; }
-      if (l < 0) continue;
-      const reach = Math.max(cx - l, r - cx);
-      const x0 = Math.max(0, Math.round(cx - reach));
-      const x1 = Math.min(N - 1, Math.round(cx + reach));
+    const shoulderFrom = Math.floor(N * SHOULDER_AT);
+    const reach = profL.map((v, y) => v < 0 ? -1 : Math.max(cx - v, profR[y] - cx));
+    const reachS = profileMean(profileMedian(reach), 3);
+
+    keep.fill(0);
+    for (let y = 0; y < N; y++){
+      if (profL[y] < 0) continue;
+      let x0 = profL[y], x1 = profR[y];
+      if (y >= shoulderFrom){
+        x0 = Math.max(0, Math.round(cx - reachS[y]));
+        x1 = Math.min(N - 1, Math.round(cx + reachS[y]));
+      }
       for (let x = x0; x <= x1; x++) keep[y*N + x] = 1;
     }
 
@@ -345,6 +380,30 @@
          estirando el rango, no hundiendo el minimo. */
       out[i] = alpha[i] * (FLOOR + (1 - FLOOR) * n);
     }
+
+    /* Luz de contorno.
+
+       Los huecos que se seguian viendo — el de debajo de la oreja, sobre
+       todo — no eran agujeros de silueta: la silueta ya sale entera. Eran
+       sombras cerradas que caen justo en el BORDE, y ahi el ojo no lee una
+       sombra, lee que falta un trozo de cabeza. Subir el suelo de toda la
+       figura no lo arreglaba (probado con 0.50, 0.56 y 0.62: el borde no
+       mejoraba y la cara perdia un tercio de su contraste), porque el
+       problema no es cuanta luz tiene la cara sino que el contorno se corte.
+
+       Asi que el minimo se aplica solo a las celdas del borde. El contorno
+       queda continuo y el interior conserva su rango para los rasgos. */
+    for (let y = 0; y < ROWS; y++)
+      for (let x = 0; x < COLS; x++){
+        const i = y*COLS + x;
+        if (alpha[i] < 0.5) continue;
+        let borde = false;
+        for (const j of [i-1, i+1, i-COLS, i+COLS]){
+          if (j < 0 || j >= alpha.length){ borde = true; break; }
+          if (alpha[j] < 0.5){ borde = true; break; }
+        }
+        if (borde) out[i] = Math.max(out[i], RIM * alpha[i]);
+      }
     return out;
   }
 
@@ -458,8 +517,8 @@
         const lit = 0.20 + 0.80 * mask[i];
         const a = fade * fade * (k === 0 ? 0.95 : 0.5) * lit;
         ctx.fillStyle = k === 0
-          ? 'rgba(215,255,228,' + a.toFixed(3) + ')'
-          : 'rgba(0,245,105,' + a.toFixed(3) + ')';
+          ? 'rgba(190,246,205,' + a.toFixed(3) + ')'
+          : 'rgba(0,212,90,' + a.toFixed(3) + ')';
         ctx.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
       }
     }

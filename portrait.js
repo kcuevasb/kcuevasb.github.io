@@ -39,7 +39,8 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
-  const FLARE = 2.2;      // curva con la que el hombro sale del encuadre
+  const FLARE = 0.7;      // curva con la que el hombro sale del encuadre
+  const SIDE_AT = 0.90;   // altura a la que el hombro alcanza los lados
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
@@ -335,13 +336,17 @@
            cuadro, que es justo lo contrario de adelgazar el hombro. */
         const base = Math.max(0, reachS[y] - SHOULDER_IN * (N / COLS));
 
-        /* El torso de la foto deja de ensancharse antes de llegar abajo, asi
-           que el hombro se quedaba en una meseta y parecia cortado a media
-           altura en vez de salirse del cuadro. Se le anade una apertura que
-           termina justo en el borde: exponente alto para que casi no se note
-           en la parte estrecha y solo abra al final, como el vuelo de un
-           hombro de verdad. */
-        const t = (y - shoulderFrom) / (N - 1 - shoulderFrom);
+        /* El torso de la foto deja de ensancharse antes de llegar al borde,
+           asi que el hombro se quedaba en una meseta y parecia cortado a
+           media altura. Se le anade una apertura hacia los LADOS del cuadro,
+           no hacia las esquinas de abajo: el hombro alcanza el borde lateral
+           a la altura de SIDE_AT y de ahi para abajo el torso ya ocupa todo
+           el ancho, que es como sale de un encuadre cuadrado un busto de
+           verdad. El exponente es menor que uno para que la linea abra
+           rapido y se aplane al acercarse al lado, en vez de seguir cayendo
+           en diagonal hasta el fondo. */
+        const span = N * SIDE_AT - shoulderFrom;
+        const t = Math.min(1, Math.max(0, (y - shoulderFrom) / span));
         const r = base + (cx - base) * Math.pow(t, FLARE);
 
         x0 = Math.max(0, Math.round(cx - r));
@@ -481,10 +486,16 @@
            hay un corte. Contarlo encendia la ultima fila entera al valor del
            contorno y dibujaba una raya horizontal de lado a lado bajo el
            retrato — medido, 44 de 58 celdas de esa fila a 0.62 clavado. */
+        /* Los vecinos se calculan con x e y, no sumando y restando al indice:
+           en la primera columna, i-1 cae en la ultima celda de la fila de
+           arriba y en la ultima columna i+1 cae en la primera de la de
+           abajo. Con el hombro tocando ya los lados del cuadro, esas celdas
+           existen y el fallo se notaria. */
         let borde = false;
-        for (const j of [i-1, i+1, i-COLS]){
-          if (j < 0){ borde = true; break; }
-          if (alpha[j] < 0.5){ borde = true; break; }
+        for (const [dx, dy] of [[-1,0],[1,0],[0,-1]]){
+          const xx = x + dx, yy = y + dy;
+          if (xx < 0 || xx >= COLS || yy < 0){ borde = true; break; }
+          if (alpha[yy*COLS + xx] < 0.5){ borde = true; break; }
         }
         if (borde) out[i] = Math.max(out[i], RIM * alpha[i]);
       }

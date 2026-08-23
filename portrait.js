@@ -33,7 +33,9 @@
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const FLOOR = 0.30;     // brillo minimo dentro de la figura
-  const CONTRAST = 1.6;   // expansion del contraste dentro de la figura
+  const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
+  const UNSHARP = 1.4;    // realce local de los rasgos de la cara
+  const BLUR_R = 3;       // radio del desenfoque de referencia, en celdas
   const SHADES = 32;      // niveles de color (se agrupa el dibujo por color)
   const TRAIL = 15;       // celdas de estela por gota
   const MUTATE = 63;      // celdas que cambian de glifo por frame
@@ -245,21 +247,47 @@
     const at = t => inside[Math.min(inside.length - 1, Math.floor(t * inside.length))];
     const lo = at(0.05), hi = at(0.95), range = (hi - lo) || 1;
 
+    /* Realce local de detalle, o mascara de enfoque de toda la vida.
+
+       Sin esto la cara sale plana. El motivo: el brillo se normaliza con los
+       percentiles de TODA la figura, y el pelo y la chaqueta se llevan el
+       rango bajo, asi que los rasgos — que viven en un margen estrecho de
+       luz — se comprimen hasta desaparecer y la cabeza queda como una mancha
+       uniforme. Restando una version desenfocada y amplificando la
+       diferencia, cada rasgo recupera su contraste local sin perder la
+       estructura general de luces y sombras. */
+    const blur = new Float32Array(alpha.length);
+    for (let y = 0; y < ROWS; y++)
+      for (let x = 0; x < COLS; x++){
+        let t = 0, n = 0;
+        for (let dy = -BLUR_R; dy <= BLUR_R; dy++)
+          for (let dx = -BLUR_R; dx <= BLUR_R; dx++){
+            const yy = y + dy, xx = x + dx;
+            if (yy < 0 || xx < 0 || yy >= ROWS || xx >= COLS) continue;
+            const j = yy*COLS + xx;
+            // Solo promedian celdas de figura: si entra el fondo en la media,
+            // el borde de la silueta se rodea de un halo brillante.
+            if (alpha[j] < 0.4) continue;
+            t += lum[j]; n++;
+          }
+        blur[y*COLS + x] = n ? t / n : lum[y*COLS + x];
+      }
+
     const out = new Float32Array(alpha.length);
     for (let i = 0; i < alpha.length; i++){
-      let n = Math.min(1, Math.max(0, (lum[i] - lo) / range));
-      // Expandir alrededor del medio separa los rasgos, que si no quedan
-      // aplastados: la cara ocupa solo la parte alta del rango de la figura,
-      // porque el pelo y la chaqueta se llevan la parte baja.
+      const detail = (lum[i] - blur[i]) * UNSHARP;
+      let n = Math.min(1, Math.max(0, (lum[i] + detail - lo) / range));
+      // Expandir alrededor del medio separa los rasgos que aun queden juntos.
       n = Math.min(1, Math.max(0, 0.5 + (n - 0.5) * CONTRAST));
       /* El suelo NO se puede bajar para ganar mas contraste: con FLOOR 0.20
          vuelven a aparecer celdas apagadas dentro de la cara — los agujeros
-         que este metodo venia justamente a cerrar. El contraste se saca
+         que el relleno venia justamente a cerrar. El contraste se saca
          estirando el rango, no hundiendo el minimo. */
       out[i] = alpha[i] * (FLOOR + (1 - FLOOR) * n);
     }
     return out;
   }
+
 
   /* --- capa base: el retrato en glifos --------------------------------- */
   function rebuild(){

@@ -38,7 +38,7 @@
   const CLOSE_FROM = 0.35; // altura desde la que se cierra (debajo de la coronilla)
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
-  const TRIM_ROWS = 4;    // filas de rejilla que se recortan por abajo
+  const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
@@ -325,17 +325,16 @@
     const reachS = profileMean(profileMedian(reach), 3);
 
     keep.fill(0);
-    /* El hombro se abria hasta arriba y luego se quedaba plano cinco filas
-       seguidas contra el borde inferior, y esa banda no se lee como un
-       hombro sino como una barra. Se recortan las ultimas filas para que el
-       busto termine mientras la linea del hombro todavia baja. */
-    const bottom = N - Math.round(TRIM_ROWS * N / ROWS);
-    for (let y = 0; y < bottom; y++){
+    for (let y = 0; y < N; y++){
       if (profL[y] < 0) continue;
       let x0 = profL[y], x1 = profR[y];
       if (y >= shoulderFrom){
-        x0 = Math.max(0, Math.round(cx - reachS[y]));
-        x1 = Math.min(N - 1, Math.round(cx + reachS[y]));
+        /* El hombro se estrecha, NO se acorta. Recortar filas por abajo deja
+           hueco bajo el busto y lo que hace es subir el retrato dentro del
+           cuadro, que es justo lo contrario de adelgazar el hombro. */
+        const r = Math.max(0, reachS[y] - SHOULDER_IN * (N / COLS));
+        x0 = Math.max(0, Math.round(cx - r));
+        x1 = Math.min(N - 1, Math.round(cx + r));
       }
       for (let x = x0; x <= x1; x++) keep[y*N + x] = 1;
     }

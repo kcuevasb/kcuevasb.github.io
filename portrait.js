@@ -34,11 +34,11 @@
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
-  const CLOSE_W = 14;     // ventana del cierre que borra las mellas largas
+  const CLOSE_W = 12;     // ventana del cierre que borra las mellas largas
   const CLOSE_FROM = 0.35; // altura desde la que se cierra (debajo de la coronilla)
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
-  const TRIM_ROWS = 2;    // filas de rejilla que se recortan por abajo
+  const TRIM_ROWS = 4;    // filas de rejilla que se recortan por abajo
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
@@ -466,9 +466,14 @@
       for (let x = 0; x < COLS; x++){
         const i = y*COLS + x;
         if (alpha[i] < 0.5) continue;
+        /* El vecino de ABAJO no cuenta como contorno. El busto siempre sale
+           del encuadre por abajo, asi que ahi no hay silueta que perfilar:
+           hay un corte. Contarlo encendia la ultima fila entera al valor del
+           contorno y dibujaba una raya horizontal de lado a lado bajo el
+           retrato — medido, 44 de 58 celdas de esa fila a 0.62 clavado. */
         let borde = false;
-        for (const j of [i-1, i+1, i-COLS, i+COLS]){
-          if (j < 0 || j >= alpha.length){ borde = true; break; }
+        for (const j of [i-1, i+1, i-COLS]){
+          if (j < 0){ borde = true; break; }
           if (alpha[j] < 0.5){ borde = true; break; }
         }
         if (borde) out[i] = Math.max(out[i], RIM * alpha[i]);

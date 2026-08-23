@@ -33,7 +33,7 @@
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
-  const FLOOR = 0.30;     // brillo minimo dentro de la figura
+  const FLOOR = 0.42;     // brillo minimo dentro de la figura
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
   const UNSHARP = 1.4;    // realce local de los rasgos de la cara
   const BLUR_R = 3;       // radio del desenfoque de referencia, en celdas
@@ -49,13 +49,16 @@
     return a;
   })();
 
-  /* Rampa de verdes: de la lluvia de fondo casi apagada al blanco verdoso
-     de las zonas mas iluminadas de la cara. */
+  /* Rampa de verdes: de la lluvia de fondo apagada al blanco verdoso de las
+     zonas mas iluminadas de la cara. Los tramos medios llevan el rojo a 0
+     porque es lo que da el verde saturado de la pelicula; con rojo de por
+     medio el conjunto tira a oliva y se ve descolorido. */
   const STOPS = [
-    [0.00, [  7,  34,  18]],
-    [0.35, [ 20, 120,  52]],
-    [0.70, [ 52, 224, 108]],
-    [1.00, [200, 255, 214]]
+    [0.00, [ 10,  52,  26]],
+    [0.30, [  0, 152,  58]],
+    [0.62, [  0, 245,  92]],
+    [0.85, [110, 255, 150]],
+    [1.00, [215, 255, 228]]
   ];
   function shade(t){
     for (let i = 1; i < STOPS.length; i++){
@@ -244,6 +247,9 @@
           es fondo de verdad, no es un fallo de deteccion. Se refleja el
           alcance del hombro mas largo sobre el corto, tomando como eje el
           centro del encuadre. */
+    // Copia previa: hace falta saber luego que celdas son inventadas.
+    const real = keep.slice();
+
     for (let y = 0; y < N; y++){
       let l = -1, r = -1;
       for (let x = 0; x < N; x++) if (keep[y*N + x]){ if (l < 0) l = x; r = x; }
@@ -262,6 +268,22 @@
       for (let x = x0; x <= x1; x++) keep[y*N + x] = 1;
     }
 
+    /* La silueta inventada no puede tomar su luz de la foto: debajo de esas
+       celdas no hay chaqueta, hay fondo, y el fondo tiene otra luminancia.
+       Por eso el hombro rellenado se veia de otro material que el bueno.
+       Se le da la luz de su reflejo, que es el hombro de verdad — inventar
+       la forma obliga a inventar tambien la luz, si no el parche canta. */
+    const lumSrc = new Float32Array(N * N);
+    for (let y = 0; y < N; y++)
+      for (let x = 0; x < N; x++){
+        const i = y*N + x;
+        if (!keep[i] || real[i]){ lumSrc[i] = L[i]; continue; }
+        const mx = Math.min(N - 1, Math.max(0, Math.round(2*cx - x)));
+        const j = y*N + mx;
+        // Si el reflejo tampoco es figura de verdad, no hay nada que copiar.
+        lumSrc[i] = real[j] ? L[j] : L[i];
+      }
+
     // Bajar a la rejilla promediando: da bordes suaves de regalo.
     const alpha = new Float32Array(COLS * ROWS), lum = new Float32Array(COLS * ROWS);
     for (let gy = 0; gy < ROWS; gy++)
@@ -269,7 +291,7 @@
         let f = 0, l = 0, n = 0;
         for (let y = Math.floor(gy*N/ROWS); y < Math.floor((gy+1)*N/ROWS); y++)
           for (let x = Math.floor(gx*N/COLS); x < Math.floor((gx+1)*N/COLS); x++){
-            f += keep[y*N + x]; l += L[y*N + x]; n++;
+            f += keep[y*N + x]; l += lumSrc[y*N + x]; n++;
           }
         alpha[gy*COLS + gx] = f / n;
         lum[gy*COLS + gx] = l / n;
@@ -437,7 +459,7 @@
         const a = fade * fade * (k === 0 ? 0.95 : 0.5) * lit;
         ctx.fillStyle = k === 0
           ? 'rgba(215,255,228,' + a.toFixed(3) + ')'
-          : 'rgba(60,220,110,' + a.toFixed(3) + ')';
+          : 'rgba(0,245,105,' + a.toFixed(3) + ')';
         ctx.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
       }
     }

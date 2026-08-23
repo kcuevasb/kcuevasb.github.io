@@ -34,8 +34,13 @@
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
+  const CLOSE_W = 14;     // ventana del cierre que borra las mellas largas
+  const CLOSE_FROM = 0.35; // altura desde la que se cierra (debajo de la coronilla)
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
+  const TRIM_ROWS = 2;    // filas de rejilla que se recortan por abajo
+  const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
+  const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
   const UNSHARP = 1.4;    // realce local de los rasgos de la cara
   const BLUR_R = 3;       // radio del desenfoque de referencia, en celdas
@@ -280,6 +285,33 @@
     const profL = profileMean(profileMedian(rawL), 2);
     const profR = profileMean(profileMedian(rawR), 2);
 
+    /* La mediana se lleva las mellas cortas, pero la de debajo de la oreja
+       — que es barba en sombra tomada por fondo — mide unas catorce filas,
+       mas que la ventana de la mediana, y sobrevivia entera: el borde
+       izquierdo se metia diecinueve pixeles y volvia a salir. Un cierre 1D
+       con ventana mayor que la mella la borra del todo.
+
+       Se aplica solo por debajo de la coronilla porque arriba aplanaria la
+       curva de la cabeza: el cierre no distingue una concavidad de la
+       pendiente con la que se abre el craneo. */
+    const runProfile = (a, w, max) => a.map((v, y) => {
+      if (v < 0) return v;
+      let b = v;
+      for (let k = -w; k <= w; k++){
+        const j = y + k;
+        if (j < 0 || j >= N || a[j] < 0) continue;
+        b = max ? Math.max(b, a[j]) : Math.min(b, a[j]);
+      }
+      return b;
+    });
+    // Izquierda: menor x es mas figura, asi que cerrar es minimo y luego maximo.
+    const closedL = runProfile(runProfile(profL, CLOSE_W, false), CLOSE_W, true);
+    const closedR = runProfile(runProfile(profR, CLOSE_W, true), CLOSE_W, false);
+    for (let y = Math.floor(N * CLOSE_FROM); y < N; y++){
+      profL[y] = closedL[y];
+      profR[y] = closedR[y];
+    }
+
     /* Simetria de los hombros. En la foto esta girado, asi que el torso sale
        descentrado y un hombro se corta antes que el otro por mucho que se
        ensanche el recorte — se comprobo que mas alla del corte ya es fondo
@@ -293,7 +325,12 @@
     const reachS = profileMean(profileMedian(reach), 3);
 
     keep.fill(0);
-    for (let y = 0; y < N; y++){
+    /* El hombro se abria hasta arriba y luego se quedaba plano cinco filas
+       seguidas contra el borde inferior, y esa banda no se lee como un
+       hombro sino como una barra. Se recortan las ultimas filas para que el
+       busto termine mientras la linea del hombro todavia baja. */
+    const bottom = N - Math.round(TRIM_ROWS * N / ROWS);
+    for (let y = 0; y < bottom; y++){
       if (profL[y] < 0) continue;
       let x0 = profL[y], x1 = profR[y];
       if (y >= shoulderFrom){
@@ -380,6 +417,38 @@
          estirando el rango, no hundiendo el minimo. */
       out[i] = alpha[i] * (FLOOR + (1 - FLOOR) * n);
     }
+
+    /* Relleno de pozos.
+
+       El hueco que quedaba bajo la oreja es barba, no un agujero: la barba
+       en sombra cae tan por debajo de lo que la rodea que el ojo lee un
+       trozo que falta. Como es barba, lo que corresponde es darle el tono de
+       lo que tiene alrededor, no iluminarlo aparte.
+
+       Se busca cada celda que este muy por debajo de la MEDIANA de sus
+       vecinas de figura y se la sube hasta cerca de esa mediana. La mediana
+       y no la media: junto a un rasgo oscuro de verdad, como la linea de la
+       boca, la media se hunde y el pozo dejaria de detectarse. Se lee de una
+       copia para que una celda ya corregida no arrastre a la siguiente. */
+    const src = out.slice();
+    for (let y = 0; y < ROWS; y++)
+      for (let x = 0; x < COLS; x++){
+        const i = y*COLS + x;
+        if (alpha[i] < 0.6) continue;
+        const vec = [];
+        for (let dy = -2; dy <= 2; dy++)
+          for (let dx = -2; dx <= 2; dx++){
+            const yy = y + dy, xx = x + dx;
+            if (yy < 0 || xx < 0 || yy >= ROWS || xx >= COLS) continue;
+            const j = yy*COLS + xx;
+            if (j === i || alpha[j] < 0.6) continue;
+            vec.push(src[j]);
+          }
+        if (vec.length < 8) continue;
+        vec.sort((a, b) => a - b);
+        const med = vec[vec.length >> 1];
+        if (src[i] < PIT * med) out[i] = PIT_TO * med;
+      }
 
     /* Luz de contorno.
 

@@ -15,18 +15,24 @@
   const pre = document.getElementById('ascii-portrait');
   const ctx = cv.getContext('2d');
 
-  const COLS = 46, ROWS = 36;
+  /* La rejilla marca el detalle del retrato, pero no se puede subir sin
+     mirar el tamaño de celda: el glifo se dibuja a cellW y por debajo de
+     unos 5px los katakana se empastan y dejan de leerse como glifos. Por
+     eso al subir de 46x36 a 58x45 crece tambien el retrato (320 -> 352px),
+     y la celda se queda en ~6px en vez de caer a 5.5. La proporcion
+     COLS/ROWS se mantiene (1.29) para que la celda conserve su forma. */
+  const COLS = 58, ROWS = 45;
   // Mismo encuadre que el retrato ASCII: cuadrado que entra la cabeza
   // entera y los hombros, sin cortar por la barbilla.
   const CROP = { x: 0.145, y: 0.066, w: 0.708 };
-  const SAMPLE = 140;     // resolucion a la que se analiza la foto
+  const SAMPLE = 200;     // resolucion a la que se analiza la foto
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const FLOOR = 0.30;     // brillo minimo dentro de la figura
   const CONTRAST = 1.6;   // expansion del contraste dentro de la figura
-  const SHADES = 24;      // niveles de color (se agrupa el dibujo por color)
-  const TRAIL = 12;       // celdas de estela por gota
-  const MUTATE = 40;      // celdas que cambian de glifo por frame
+  const SHADES = 32;      // niveles de color (se agrupa el dibujo por color)
+  const TRAIL = 15;       // celdas de estela por gota
+  const MUTATE = 63;      // celdas que cambian de glifo por frame
   const FRAME_MS = 1000 / 24;
 
   const GLYPHS = (() => {
@@ -264,7 +270,7 @@
     drops = Array.from({ length: COLS }, () => ({
       y: -Math.random() * ROWS * 1.5,
       // Lento a proposito: la lluvia acompaña al retrato, no compite con el.
-      v: 4 + Math.random() * 5
+      v: 5 + Math.random() * 6
     }));
   }
 
@@ -301,7 +307,7 @@
     for (let x = 0; x < COLS; x++){
       const d = drops[x];
       d.y += d.v * dt;
-      if (d.y - TRAIL > ROWS){ d.y = -Math.random() * ROWS * 0.6; d.v = 4 + Math.random() * 5; }
+      if (d.y - TRAIL > ROWS){ d.y = -Math.random() * ROWS * 0.6; d.v = 5 + Math.random() * 6; }
       const head = Math.floor(d.y);
       for (let k = 0; k < TRAIL; k++){
         const y = head - k;

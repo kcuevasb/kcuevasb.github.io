@@ -74,7 +74,7 @@ body{
   display: block;
 }
 #portrait-rain{
-  width: 320px;
+  width: 352px;
   max-width: 100%;
   /* Lo pinta portrait.js; aqui solo el color de reposo del primer frame. */
   background: #05070a;

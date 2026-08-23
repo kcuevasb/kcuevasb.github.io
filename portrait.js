@@ -7,8 +7,8 @@
    azar y van cambiando — sino cuanto brilla cada celda. Por eso esto es un
    canvas y no un <pre>: hace falta modular tono y brillo celda a celda.
 
-   El <pre> con el retrato en ASCII se queda como fallback para cuando no
-   hay JS; en cuanto esto arranca, lo sustituye. */
+   El mismo retrato en ASCII estatico queda como respaldo dentro de un
+   <noscript>, para quien navegue sin JS. */
 (function(){
   const cv = document.getElementById('portrait-rain');
   if (!cv || !cv.getContext) return;
@@ -32,6 +32,7 @@
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
+  const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const FLOOR = 0.30;     // brillo minimo dentro de la figura
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
   const UNSHARP = 1.4;    // realce local de los rasgos de la cara
@@ -222,6 +223,43 @@
         if (keep[j] || !solid[j]) continue;
         keep[j] = 1; q2.push(j);
       }
+    }
+
+
+    /* Aqui se deja de ser fiel a la foto para que el retrato se lea, que es
+       lo que pide un retrato.
+
+       1. Relleno de cada fila de extremo a extremo. Un busto es convexo en
+          horizontal a casi cualquier altura, asi que si en una fila hay
+          figura a izquierda y a derecha, lo de en medio es figura tambien.
+          Se lleva por delante las mordidas que dejaba el cuello de la
+          camisa: al ser claro se confundia con el fondo y abria una muesca
+          bajo la barbilla que parecia un agujero. Esto va DESPUES de
+          quedarnos con la mancha conectada; si fuese antes, un islote suelto
+          en un lateral rellenaria toda la fila hasta el cuerpo.
+
+       2. Simetria de los hombros. En la foto esta girado, asi que el torso
+          sale descentrado y un hombro se corta antes que el otro por mucho
+          que se ensanche el recorte — se comprobo que mas alla del corte ya
+          es fondo de verdad, no es un fallo de deteccion. Se refleja el
+          alcance del hombro mas largo sobre el corto, tomando como eje el
+          centro del encuadre. */
+    for (let y = 0; y < N; y++){
+      let l = -1, r = -1;
+      for (let x = 0; x < N; x++) if (keep[y*N + x]){ if (l < 0) l = x; r = x; }
+      if (l >= 0) for (let x = l; x <= r; x++) keep[y*N + x] = 1;
+    }
+
+    const shoulderFrom = Math.floor(N * SHOULDER_AT);
+    const cx = (N - 1) / 2;
+    for (let y = shoulderFrom; y < N; y++){
+      let l = -1, r = -1;
+      for (let x = 0; x < N; x++) if (keep[y*N + x]){ if (l < 0) l = x; r = x; }
+      if (l < 0) continue;
+      const reach = Math.max(cx - l, r - cx);
+      const x0 = Math.max(0, Math.round(cx - reach));
+      const x1 = Math.min(N - 1, Math.round(cx + reach));
+      for (let x = x0; x <= x1; x++) keep[y*N + x] = 1;
     }
 
     // Bajar a la rejilla promediando: da bordes suaves de regalo.
@@ -434,8 +472,10 @@
     mask = buildMask(img);
     const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
     fonts.then(() => {
+      // El respaldo ASCII vive dentro de <noscript>, asi que con JS activo ni
+      // siquiera esta en el DOM y esto es null. Se comprueba por si algun dia
+      // vuelve a sacarse fuera.
       if (pre) pre.hidden = true;
-      cv.hidden = false;
       resize();
       seedDrops();
 

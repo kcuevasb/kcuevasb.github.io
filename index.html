@@ -52,8 +52,15 @@
        las tarjetas pasan a ser la sección "trayectoria" de este CV. -->
   <header class="cv-head">
     <div class="portrait" aria-label="Retrato de Kepa Cuevas Barrasa en ASCII" role="img">
-    <canvas id="portrait-rain" aria-hidden="true" hidden></canvas>
-<pre id="ascii-portrait" aria-hidden="true">                                                                                
+    <canvas id="portrait-rain" aria-hidden="true"></canvas>
+    <!-- El mismo retrato en ASCII estatico, solo para quien no tenga JS. Va
+         dentro de <noscript> y no suelto: suelto se pintaba siempre, y como
+         el canvas tarda en aparecer (espera a la foto y a la fuente), se veia
+         el ASCII un instante y luego saltaba al retrato. Dentro de <noscript>
+         el navegador ni lo parsea como elementos mientras haya JS. -->
+    <noscript>
+      <style>#portrait-rain{ display:none; }</style>
+    <pre id="ascii-portrait" aria-hidden="true">                                                                                
                                                                                 
                                                                                 
                                        ﾉｧ ﾝ                                     
@@ -97,6 +104,7 @@
 ｯｮｪﾝﾃﾏﾂｹﾓﾀ76ｵ7ﾇﾀﾈ71ﾇ1ﾛﾀﾛ9ﾎ50907ｸﾓｷﾑｹﾑﾑｶｾﾈﾔﾀ68ｾｶｾｸﾘｽﾛ8ﾎ8393ｻ49ﾄｼｩﾌﾗﾕｩﾍﾕﾌﾌｭﾗﾐﾚｺﾕｿﾌ
 ﾒﾒｴﾖﾜｸﾁﾀｶﾀｵ5ﾔ57ｾﾔﾀ1ｾﾔ938ｵﾈﾔﾛ026ｻ1ﾁﾖｽｹｹｽｷｷｽｳﾁﾑｷｸｳﾔﾘ12ﾎｻﾎ549ﾛ2ﾎﾉｼｨｿｭｩﾌｼﾌﾕｿｴｱｺﾕｩﾚﾅｩ
 ｹｽｸﾑｽ7ﾈﾙﾀ7ﾔ3ｾ3ﾀﾀ249ﾛ2ﾙﾛ353ﾀ11ﾀｻﾙｻ61ﾓｽｷﾘﾑﾑﾖｹﾓﾇﾀﾖﾁｳｾ235380941ﾀ7ｨｨﾍｩﾌｪｬﾐﾚｮｧｨｭﾆﾆｺﾝﾆｨ</pre>
+    </noscript>
     </div>
 
     <div class="cv-id">

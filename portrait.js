@@ -39,6 +39,7 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
+  const FLARE = 2.2;      // curva con la que el hombro sale del encuadre
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
@@ -332,7 +333,17 @@
         /* El hombro se estrecha, NO se acorta. Recortar filas por abajo deja
            hueco bajo el busto y lo que hace es subir el retrato dentro del
            cuadro, que es justo lo contrario de adelgazar el hombro. */
-        const r = Math.max(0, reachS[y] - SHOULDER_IN * (N / COLS));
+        const base = Math.max(0, reachS[y] - SHOULDER_IN * (N / COLS));
+
+        /* El torso de la foto deja de ensancharse antes de llegar abajo, asi
+           que el hombro se quedaba en una meseta y parecia cortado a media
+           altura en vez de salirse del cuadro. Se le anade una apertura que
+           termina justo en el borde: exponente alto para que casi no se note
+           en la parte estrecha y solo abra al final, como el vuelo de un
+           hombro de verdad. */
+        const t = (y - shoulderFrom) / (N - 1 - shoulderFrom);
+        const r = base + (cx - base) * Math.pow(t, FLARE);
+
         x0 = Math.max(0, Math.round(cx - r));
         x1 = Math.min(N - 1, Math.round(cx + r));
       }

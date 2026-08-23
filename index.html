@@ -30,13 +30,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<!-- El retrato ASCII usa los katakana half-width de la lluvia de Matrix, y
-     'Courier New' no los trae: sin una fuente que los cubra, cada glifo cae
-     en un tipo distinto por fallback y la cuadricula del retrato se
-     descuadra. Va en su propia peticion porque 'text=' recorta el subset a
-     los 65 glifos que aparecen de verdad (unos pocos KB en vez de la fuente
-     japonesa entera) y afectaria a las demas familias si compartieran URL. -->
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&text=%EF%BE%89%EF%BD%A7%EF%BE%9D%EF%BD%BF%EF%BE%83%EF%BD%AB%EF%BD%BD%EF%BE%9C%EF%BD%B9%EF%BE%96%EF%BE%82%EF%BE%98%EF%BE%93%EF%BE%95%EF%BD%AD%EF%BE%84%EF%BD%B7%EF%BD%B87%EF%BD%B3%EF%BE%81%EF%BE%97%EF%BE%91%EF%BE%8B%EF%BD%B1%EF%BE%8C%EF%BE%9A%EF%BD%AA%EF%BE%8F%EF%BE%88%EF%BD%B6%EF%BE%87%EF%BD%BE%EF%BE%9B%EF%BE%90%EF%BD%AE%EF%BD%B5%EF%BE%94861%EF%BE%80%EF%BE%92%EF%BE%992%EF%BD%BB%EF%BE%8E4%EF%BD%AC0539%EF%BD%B4%EF%BD%BA%EF%BE%8D%EF%BD%A9%EF%BE%85%EF%BE%86%EF%BE%8A%EF%BD%A6%EF%BD%B2%EF%BD%BC%EF%BD%A8%EF%BD%AF&display=swap" rel="stylesheet">
+<!-- El retrato usa los katakana de la lluvia de Matrix, y 'Courier New' no
+     los trae: sin una fuente que los cubra caen en tipos distintos por
+     fallback, y tanto la cuadricula del <pre> como las celdas del canvas se
+     descuadran. Va en su propia peticion porque 'text=' recorta el subset a
+     los 147 glifos que se usan de verdad — half-width para el retrato ASCII
+     de respaldo, full-width para la lluvia — en vez de la fuente japonesa
+     entera, y afectaria a las demas familias si compartieran URL. -->
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&text=%EF%BE%89%EF%BD%A7%EF%BE%9D%EF%BD%BF%EF%BE%83%EF%BD%AB%EF%BD%BD%EF%BE%9C%EF%BD%B9%EF%BE%96%EF%BE%82%EF%BE%98%EF%BE%93%EF%BE%95%EF%BD%AD%EF%BE%84%EF%BD%B7%EF%BD%B87%EF%BD%B3%EF%BE%81%EF%BE%97%EF%BE%91%EF%BE%8B%EF%BD%B1%EF%BE%8C%EF%BE%9A%EF%BD%AA%EF%BE%8F%EF%BE%88%EF%BD%B6%EF%BE%87%EF%BD%BE%EF%BE%9B%EF%BE%90%EF%BD%AE%EF%BD%B5%EF%BE%94861%EF%BE%80%EF%BE%92%EF%BE%992%EF%BD%BB%EF%BE%8E4%EF%BD%AC0539%EF%BD%B4%EF%BD%BA%EF%BE%8D%EF%BD%A9%EF%BE%85%EF%BE%86%EF%BE%8A%EF%BD%A6%EF%BD%B2%EF%BD%BC%EF%BD%A8%EF%BD%AF%E3%82%A2%E3%82%A3%E3%82%A4%E3%82%A5%E3%82%A6%E3%82%A7%E3%82%A8%E3%82%A9%E3%82%AA%E3%82%AB%E3%82%AC%E3%82%AD%E3%82%AE%E3%82%AF%E3%82%B0%E3%82%B1%E3%82%B2%E3%82%B3%E3%82%B4%E3%82%B5%E3%82%B6%E3%82%B7%E3%82%B8%E3%82%B9%E3%82%BA%E3%82%BB%E3%82%BC%E3%82%BD%E3%82%BE%E3%82%BF%E3%83%80%E3%83%81%E3%83%82%E3%83%83%E3%83%84%E3%83%85%E3%83%86%E3%83%87%E3%83%88%E3%83%89%E3%83%8A%E3%83%8B%E3%83%8C%E3%83%8D%E3%83%8E%E3%83%8F%E3%83%90%E3%83%91%E3%83%92%E3%83%93%E3%83%94%E3%83%95%E3%83%96%E3%83%97%E3%83%98%E3%83%99%E3%83%9A%E3%83%9B%E3%83%9C%E3%83%9D%E3%83%9E%E3%83%9F%E3%83%A0%E3%83%A1%E3%83%A2%E3%83%A3%E3%83%A4%E3%83%A5%E3%83%A6%E3%83%A7%E3%83%A8%E3%83%A9%E3%83%AA%E3%83%AB%E3%83%AC%E3%83%AD%E3%83%AE%E3%83%AF%E3%83%B0%E3%83%B1%E3%83%B2%E3%83%B3&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="select.css">
 </head>
 <body>
@@ -51,6 +52,7 @@
        las tarjetas pasan a ser la sección "trayectoria" de este CV. -->
   <header class="cv-head">
     <div class="portrait" aria-label="Retrato de Kepa Cuevas Barrasa en ASCII" role="img">
+    <canvas id="portrait-rain" aria-hidden="true" hidden></canvas>
 <pre id="ascii-portrait" aria-hidden="true">                                                                                
                                                                                 
                                                                                 
@@ -204,6 +206,7 @@
 
 </main>
 
+<script src="portrait.js"></script>
 <script src="select.js"></script>
 </body>
 </html>

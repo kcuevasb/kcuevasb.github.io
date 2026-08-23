@@ -60,6 +60,23 @@ body{
   padding: 12px 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,.45);
 }
+/* El retrato de verdad es este canvas: la lluvia de Matrix donde la cara no
+   la dibujan los glifos sino cuanto brilla cada celda (ver portrait.js). El
+   <pre> de debajo es el mismo retrato en ASCII estatico y solo se ve si no
+   hay JS — portrait.js lo oculta en cuanto arranca. */
+#portrait-rain:not([hidden]){
+  /* Condicionado a :not([hidden]) a proposito: un `display` suelto le gana
+     al [hidden]{display:none} del navegador (el origen pesa antes que la
+     especificidad) y el canvas se veria aunque el JS no hubiera arrancado,
+     encima del fallback y en blanco. */
+  display: block;
+}
+#portrait-rain{
+  width: 320px;
+  max-width: 100%;
+  /* Lo pinta portrait.js; aqui solo el color de reposo del primer frame. */
+  background: #05070a;
+}
 #ascii-portrait{
   margin:0;
   /* Los glifos son katakana half-width: los mismos que caen en la lluvia del

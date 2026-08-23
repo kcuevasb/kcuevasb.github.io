@@ -27,7 +27,7 @@
   const CC_MIN = 0.15;    // por debajo de esto una celda no conecta figura
   const SHADES = 24;      // niveles de color (se agrupa el dibujo por color)
   const TRAIL = 12;       // celdas de estela por gota
-  const REBUILD_MS = 380; // cada cuanto mutan los glifos
+  const MUTATE = 40;      // celdas que cambian de glifo por frame
   const FRAME_MS = 1000 / 24;
 
   const GLYPHS = (() => {
@@ -62,8 +62,10 @@
   const glyph = new Array(COLS * ROWS).fill(0);
   const base = document.createElement('canvas');
   let cellW = 0, cellH = 0, dpr = 1;
+  // Una sola definicion: la usan la capa base, la mutacion y las gotas.
+  const cellFont = () => cellW.toFixed(2) + 'px "M PLUS 1 Code", "MS Gothic", monospace';
   let drops = [];
-  let raf = 0, lastFrame = 0, lastBuild = 0, running = false;
+  let raf = 0, lastFrame = 0, running = false;
 
   /* --- mascara del retrato ---------------------------------------------
 
@@ -187,7 +189,7 @@
     const b = base.getContext('2d');
     b.setTransform(dpr, 0, 0, dpr, 0, 0);
     b.clearRect(0, 0, COLS * cellW, ROWS * cellH);
-    b.font = cellW.toFixed(2) + 'px "M PLUS 1 Code", "MS Gothic", monospace';
+    b.font = cellFont();
     b.textAlign = 'center';
     b.textBaseline = 'middle';
 
@@ -204,6 +206,29 @@
         const x = i % COLS, y = (i / COLS) | 0;
         b.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
       }
+    }
+  }
+
+  const shadeOf = i => PALETTE[Math.round(mask[i] * (SHADES - 1))];
+
+  /* Cambia unas pocas celdas por frame en vez de rehacer la rejilla entera
+     cada X ms. Renovarlas todas a la vez daba un parpadeo global, no el
+     titileo continuo de la lluvia; y repintar solo las celdas tocadas es
+     ademas mucho mas barato que las 1656 de la rejilla completa. */
+  function mutate(count){
+    if (!mask || !cellW) return;
+    const b = base.getContext('2d');
+    b.setTransform(dpr, 0, 0, dpr, 0, 0);
+    b.font = cellFont();
+    b.textAlign = 'center';
+    b.textBaseline = 'middle';
+    for (let k = 0; k < count; k++){
+      const i = (Math.random() * mask.length) | 0;
+      const x = i % COLS, y = (i / COLS) | 0;
+      glyph[i] = (Math.random() * GLYPHS.length) | 0;
+      b.clearRect(x * cellW, y * cellH, cellW, cellH);
+      b.fillStyle = shadeOf(i);
+      b.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
     }
   }
 
@@ -234,7 +259,7 @@
     const dt = Math.min(0.1, (now - lastFrame) / 1000);
     lastFrame = now;
 
-    if (now - lastBuild > REBUILD_MS){ rebuild(); lastBuild = now; }
+    mutate(MUTATE);
 
     blit();
 
@@ -242,7 +267,7 @@
     // 'lighter' suma luz sobre lo que ya hay, que es justo lo que hace una
     // gota al pasar por delante de la figura: la enciende, no la tapa.
     ctx.globalCompositeOperation = 'lighter';
-    ctx.font = cellW.toFixed(2) + 'px "M PLUS 1 Code", "MS Gothic", monospace';
+    ctx.font = cellFont();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
@@ -256,7 +281,13 @@
         if (y < 0 || y >= ROWS) continue;
         const i = y * COLS + x;
         const fade = 1 - k / TRAIL;
-        const a = fade * fade * (k === 0 ? 0.95 : 0.5);
+        /* La gota tambien se modula con el retrato: cae tenue sobre el
+           fondo y se enciende al pasar por delante de la figura. Sin esto
+           la lluvia reparte la misma luz por todo el cuadro y aplana la
+           cara, que es justo lo que separa el plano de Neo de un fondo de
+           Matrix cualquiera. */
+        const lit = 0.20 + 0.80 * mask[i];
+        const a = fade * fade * (k === 0 ? 0.95 : 0.5) * lit;
         ctx.fillStyle = k === 0
           ? 'rgba(215,255,228,' + a.toFixed(3) + ')'
           : 'rgba(60,220,110,' + a.toFixed(3) + ')';

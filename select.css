@@ -56,7 +56,9 @@ body{
   flex-shrink:0;
   border: 2px solid #2a2f3a;
   border-radius: 4px;
-  background:#0e1116;
+  /* Mismo negro que el canvas: con el gris de antes se notaba el escalon
+     entre el marco y la lluvia. */
+  background:#05070a;
   padding: 12px 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,.45);
 }

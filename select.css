@@ -49,7 +49,7 @@ body{
 
 /* ---------- Cabecera de CV ---------- */
 .cv-head{
-  display:flex; align-items:center;
+  display:flex; align-items:stretch;
   /* Ni pegado a la foto (34px, como estaba) ni empujado al borde derecho:
      punto intermedio, con el texto alineado a la izquierda para que forme
      columna y quede holgura tambien por la derecha. El clamp evita que en
@@ -102,7 +102,7 @@ body{
      verde fosforito de la lluvia sin tocar el color base de cada glifo. */
   text-shadow: 0 0 6px rgba(80, 220, 130, .45);
 }
-.cv-id{ min-width:0; }
+.cv-id{ min-width:0; display:flex; flex-direction:column; }
 .cv-name{
   font-family: var(--font-pixel);
   font-size: clamp(15px, 2.1vw, 22px);
@@ -126,7 +126,9 @@ body{
   .cv-contact{ justify-content:center; }
   /* 80 columnas a 0.5em son 40em: a 8px ocupan 320px y con el marco caben en
      una pantalla de 375px, así que el retrato no necesita encoger en móvil. */
-  .export-link{ align-self:center; }
+  /* Mas especifico a proposito: la regla base define align-self y vive mas
+     abajo en el archivo, asi que a igual peso ganaria ella. */
+  .cv-head .export-link{ align-self:center; }
 }
 
 /* ---------- Trayectoria: bloques de CV ----------
@@ -347,17 +349,21 @@ body{
    borde gris de antes se perdia contra el fondo. */
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
-  margin: 0 0 16px;
-  color: var(--accent);
-  font-size: 16px;
+  /* auto en vez de una medida fija: la columna de texto es tan alta como el
+     retrato, asi que esto lo empuja hasta cuadrar con el borde de abajo del
+     marco. Y flex-start para que la pildora siga midiendo lo que su texto:
+     como hijo de una columna flex, por defecto se estiraria a todo el ancho. */
+  margin-top: auto;
+  align-self: flex-start;
+  color: var(--fg-dim);
+  font-size: 15px;
   text-decoration: none;
-  border: 1px solid var(--accent);
-  background: rgba(255, 204, 0, .08);
-  padding: 9px 18px;
+  border: 1px solid #2a2f3a;
+  padding: 8px 16px;
   border-radius: 20px;
-  transition: background .15s, color .15s;
+  transition: color .15s, border-color .15s;
 }
-.export-link:hover{ background: var(--accent); color: #0b0d12; }
+.export-link:hover{ color: var(--fg); border-color: var(--fg-dim); }
 
 /* ---------- Pie ----------
    Sustituye al cartel de navegacion por teclado. El prompt es el mismo que

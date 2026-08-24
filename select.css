@@ -50,7 +50,10 @@ body{
 /* ---------- Cabecera de CV ---------- */
 .cv-head{
   display:flex; align-items:center; gap: 34px;
-  text-align:left; margin-bottom: 30px;
+  text-align:left;
+  /* Absorbe el hueco de la regla en degradado que iba aqui: sobraba, porque
+     el titulo de cada seccion ya trae su propio subrayado. */
+  margin-bottom: 46px;
 }
 .portrait{
   flex-shrink:0;
@@ -110,11 +113,6 @@ body{
   border-bottom: 1px dashed #3a3f4c; padding-bottom: 2px;
 }
 .cv-contact a:hover{ color: var(--fg); border-color: var(--fg-dim); }
-
-.cv-rule{
-  height:1px; margin: 0 0 30px;
-  background: linear-gradient(to right, transparent, #3a3f4c 8%, #3a3f4c 92%, transparent);
-}
 
 @media (max-width: 720px){
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }

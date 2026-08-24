@@ -15,12 +15,15 @@
   const pre = document.getElementById('ascii-portrait');
   const ctx = cv.getContext('2d');
 
-  /* La rejilla marca el detalle del retrato, pero no se puede subir sin
-     mirar el tamaño de celda: el glifo se dibuja a cellW y por debajo de
-     unos 5px los katakana se empastan y dejan de leerse como glifos. Por
-     eso al subir de 46x36 a 58x45 crece tambien el retrato (320 -> 352px),
-     y la celda se queda en ~6px en vez de caer a 5.5. La proporcion
-     COLS/ROWS se mantiene (1.29) para que la celda conserve su forma. */
+  /* La rejilla marca el detalle del retrato, pero no se puede mirar sola:
+     el glifo se dibuja al ancho de celda y por debajo de unos 5px los
+     katakana se empastan y dejan de leerse como glifos. Con 58 columnas en
+     un retrato de 272px la celda queda en 4.7px, que estaria justo por
+     debajo — por eso resize() dibuja siempre al doble de resolucion como
+     minimo, y el glifo acaba saliendo a 9.4 pixeles de dispositivo.
+
+     La proporcion COLS/ROWS se mantiene en 1.29 para que la celda conserve
+     su forma; si se cambia una hay que cambiar la otra. */
   const COLS = 58, ROWS = 45;
   /* Cuadrado que entra la cabeza entera y los hombros. Se ensancho de
      0.708 a 0.756 porque el encuadre anterior cortaba el hombro derecho:
@@ -683,7 +686,12 @@
   function resize(){
     const w = cv.clientWidth;
     if (!w) return;
-    dpr = Math.min(2, window.devicePixelRatio || 1);
+    /* Suelo de 2, no solo techo. El retrato mide 272px y con 58 columnas la
+       celda cae a 4.7px, por debajo del umbral en que los katakana se
+       empastan. Dibujando siempre al doble, el glifo sale a 9.4 pixeles de
+       dispositivo aunque la pantalla sea de densidad 1, y asi se puede
+       tener el retrato pequeño sin perder ni detalle ni nitidez. */
+    dpr = Math.max(2, Math.min(3, window.devicePixelRatio || 1));
     cellW = w / COLS;
     cellH = w / ROWS;   // el recorte es cuadrado, asi que el canvas tambien
     cv.width  = Math.round(COLS * cellW * dpr);

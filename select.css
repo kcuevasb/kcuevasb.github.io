@@ -38,7 +38,7 @@ body{
   opacity: 0.6;
 }
 
-.select-screen{ position:relative; z-index:1; max-width: 1320px; width:100%; text-align:center; }
+.select-screen{ position:relative; z-index:1; max-width: 1000px; width:100%; text-align:center; }
 
 .eyebrow{
   font-size: 14px;
@@ -71,7 +71,7 @@ body{
   /* El cuadrado se reserva desde el primer pintado, antes de que el JS mida
      y dimensione el canvas: sin esto la cabecera da un salto al aparecer. */
   aspect-ratio: 1;
-  width: 352px;
+  width: 272px;
   max-width: 100%;
   /* Lo pinta portrait.js; aqui solo el color de reposo del primer frame. */
   background: #05070a;

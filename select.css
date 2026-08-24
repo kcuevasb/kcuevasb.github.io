@@ -158,51 +158,64 @@ body{
   border-bottom: 1px solid #2a2f3a;
 }
 
-.entries{ list-style:none; margin:0; padding:0; display:grid; gap: 14px; }
+/* Tres columnas fijas, no auto-fit: con auto-fit las secciones de un solo
+   capitulo — Inicios y Proyectos — estirarian su tarjeta a todo el ancho y
+   volveria el problema que se venia a resolver. Asi una tarjeta suelta ocupa
+   un tercio y todas miden igual, sea cual sea la seccion. */
+.entries{
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+/* El <li> es el hijo de la rejilla y se estira solo, pero la tarjeta de
+   dentro no le seguia: las tres experiencias quedaban con alturas distintas
+   y las insignias sin alinear. */
+.entries li{ display:flex; }
+.entries .card{ flex:1; }
 
+/* La miniatura va ARRIBA y el texto debajo. Antes iba al lado, y con la
+   pagina a 1000px eso dejaba cada capitulo en una caja de 1000x130: una
+   franja, no una tarjeta. En columna la proporcion se endereza y ademas las
+   tres experiencias se ven de un vistazo, una al lado de otra. */
 .card{
   position: relative;
-  display: grid;
-  /* Miniatura fija + texto flexible: la miniatura es la identidad visual del
-     capítulo, así que mantiene el mismo tamaño en las cinco entradas. */
-  grid-template-columns: 190px 1fr;
-  gap: 20px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   text-decoration: none;
   color: var(--fg);
   background: #12151c;
   border: 2px solid #2a2f3a;
   border-radius: 4px;
-  padding: 16px;
+  padding: 14px;
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
   image-rendering: pixelated;
   overflow: hidden;
 }
-/* Se desplaza a la derecha, no hacia arriba: en una lista vertical un salto
-   en vertical hace que las filas de al lado parezcan moverse. */
+/* Ahora que vuelven a estar en fila, el salto es hacia arriba otra vez. */
 .card:hover, .card:focus-visible{
-  transform: translateX(6px);
-  box-shadow: -6px 0 0 0 #2a2f3a;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 22px rgba(0,0,0,.5);
 }
 .card.selected{ outline: none; }
 
-.card-body{ min-width:0; display:flex; flex-direction:column; gap: 8px; }
+/* Crece para llenar la tarjeta, y asi el pie queda alineado entre las tres
+   aunque las descripciones tengan distinto numero de lineas. */
+.card-body{ min-width:0; flex:1; display:flex; flex-direction:column; gap: 7px; }
 
-.card-head{
-  display:flex; align-items:baseline; justify-content:space-between;
-  gap: 16px; flex-wrap: wrap;
-}
+/* En columna estrecha el titulo y la fecha ya no caben en la misma linea. */
+.card-head{ display:flex; flex-direction:column; gap: 4px; }
 
 .card-foot{
   display:flex; align-items:center; justify-content:space-between;
-  gap: 16px; flex-wrap: wrap; margin-top: 2px;
+  gap: 10px; flex-wrap: wrap;
+  margin-top: auto; padding-top: 4px;
 }
 
-/* El número deja de ser marca de agua: en una lista vertical ordenada
-   funciona mejor delante del título, como la numeración de un índice. */
 .card-index{
   font-family: var(--font-pixel);
-  font-size: .62em;
+  font-size: .7em;
   color: var(--fg-dim);
   margin-right: 6px;
   vertical-align: baseline;
@@ -210,23 +223,22 @@ body{
 
 .card h4{
   font-family: var(--font-pixel);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.6;
   margin: 0;
   letter-spacing: .5px;
 }
 
 .card-when{
-  font-size: 17px;
+  font-size: 16px;
   color: var(--fg-dim);
   margin: 0;
-  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
 .card-desc{
-  font-size: 18px;
-  line-height: 1.4;
+  font-size: 17px;
+  line-height: 1.35;
   margin: 0;
   opacity: .85;
 }
@@ -255,14 +267,17 @@ body{
 }
 .card:hover .card-go, .card:focus-visible .card-go{ opacity: .9; transform:none; }
 
-.preview{ align-self: stretch; }
+.preview{ width: 100%; flex-shrink: 0; }
 
-@media (max-width: 720px){
-  /* La miniatura pasa arriba y a lo ancho: a 190px fijos el texto se queda
-     sin sitio y el título parte por la mitad. */
-  .card{ grid-template-columns: 1fr; gap: 14px; }
+/* Dos columnas antes de que la tarjeta se quede sin sitio para el titulo,
+   que con fuente de pixeles es lo primero que parte. */
+@media (max-width: 860px){
+  .entries{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px){
+  .entries{ grid-template-columns: 1fr; }
   .card:hover, .card:focus-visible{ transform:none; box-shadow:none; }
-  .card-head{ flex-direction: column; gap: 4px; }
   .card-go{ opacity: .9; transform:none; }
 }
 

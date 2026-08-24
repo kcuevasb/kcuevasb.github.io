@@ -50,6 +50,9 @@ body{
 /* ---------- Cabecera de CV ---------- */
 .cv-head{
   display:flex; align-items:stretch;
+  /* El par foto + texto no llena los 1000px del contenedor: sin esto se queda
+     pegado al borde izquierdo y todo el sobrante cae a la derecha. */
+  justify-content: center;
   /* Ni pegado a la foto (34px, como estaba) ni empujado al borde derecho:
      punto intermedio, con el texto alineado a la izquierda para que forme
      columna y quede holgura tambien por la derecha. El clamp evita que en

@@ -37,24 +37,32 @@
      La progresion de ancho, en celdas de las 58 de la rejilla y de la base
      del cuello hacia abajo:
 
-       24, 26, 27, 30, 33, 39, 50, 58, 58, 58, 58, 58, 58
+       24, 26, 27, 29, 32, 35, 42, 48, 54, 56, 58, 58, 58
 
-     Lo que importa no es solo cuanto ensancha, sino HACIA DONDE. El hombro
-     tiene que ensanchar hacia los BORDES del marco, no hacia la cabeza: la
-     parte de arriba, junto al cuello, se queda estrecha (24, 26, 27) y todo
-     el crecimiento se va hacia fuera, hasta apoyarse en el lateral y bajar
-     por el.
+     Hay que acertar en dos cosas a la vez y son independientes:
+
+     1. HACIA DONDE ensancha. Tiene que ser hacia los BORDES del marco, no
+        hacia la cabeza: la parte de arriba, junto al cuello, se queda
+        estrecha (24, 26, 27) y el crecimiento se va hacia fuera. Bajar
+        FLARE a secas fue el error — con 1.0 la zona del cuello pasaba a
+        26, 31, 34, 38, 41, o sea el bulto crecia contra la cabeza.
+
+     2. CUANTO CAE mientras ensancha. El hombro tiene que describir una
+        curva que baja hasta topar con el lateral, no salir en horizontal
+        y apoyarse en el borde durante media docena de filas. Se mide por
+        las filas que quedan al ancho completo: con SIDE_AT 0.88 eran 6 y
+        se veia tumbado; con 0.94 son 3, y el tramo de bajada — de 42 a 58
+        celdas — pasa de 2 filas a 4.
 
      Las dos constantes tiran en direcciones opuestas y hay que moverlas a
-     la vez. SIDE_AT adelanta la altura a la que se alcanza el lateral, pero
-     por si solo comprime la misma curva en menos filas y engorda tambien la
-     parte de arriba. FLARE alto compensa: mantiene el hombro estrecho mas
-     tiempo y luego lo saca de golpe. Medido, bajar FLARE a secas fue el
-     error — con 1.0 la parte junto al cuello pasaba de 24, 26, 28, 30, 32 a
-     26, 31, 34, 38, 41, o sea el bulto crecia hacia la cabeza.
+     la vez. SIDE_AT adelanta la altura a la que se alcanza el lateral pero
+     por si solo comprime la curva y engorda la parte de arriba; FLARE alto
+     compensa manteniendo el hombro estrecho mas tiempo.
 
-     Tambien se probo y NO vale recortar filas por abajo: no adelgaza el
-     hombro, deja hueco y sube el retrato dentro del cuadro. */
+     Por encima de SIDE_AT 0.97 el resultado es indistinguible de no tener
+     salida lateral, y ahi las esquinas de abajo se quedan vacias. Y
+     recortar filas por abajo no vale: no adelgaza el hombro, deja hueco y
+     sube el retrato dentro del cuadro. */
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
   const CLOSE_W = 12;     // ventana del cierre que borra las mellas largas
@@ -62,8 +70,8 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
-  const FLARE = 4.5;      // curva con la que el hombro sale del encuadre
-  const SIDE_AT = 0.88;   // altura a la que el hombro alcanza el lateral
+  const FLARE = 3.5;      // curva con la que el hombro sale del encuadre
+  const SIDE_AT = 0.94;   // altura a la que el hombro alcanza el lateral
   const TONE_CAP = 1.2;   // techo de luz del hombro, sobre el tono de su fila
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo

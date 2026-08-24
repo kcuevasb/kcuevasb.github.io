@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Knowmad Mood</title>
+<meta name="description" content="Kepa Cuevas Barrasaren CV interaktiboa IntelliJ IDEA gisa — Knowmad Mooden nire urteak (BeeDigital eta El Corte Inglés).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/eu/knowmad/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Knowmad Mood">
+<meta property="og:description" content="BeeDigital eta El Corte Inglés: mikrozerbitzuak eta Kafka. IntelliJ IDEA gisa.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="eu_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%232b2b2b%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23cc7832%22 font-family=%22monospace%22>IJ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/knowmad/styles.css">
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/knowmad/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/knowmad/">
+<link rel="alternate" hreflang="eu" href="https://kcuevasb.github.io/eu/knowmad/">
+</head>
+<body>
+<nav class="lang" aria-label="Hizkuntza">
+  <a href="/knowmad/" hreflang="es" title="Gaztelania"><img src="/flags/es.svg" alt="Gaztelania" width="26" height="17"></a>
+  <a href="/en/knowmad/" hreflang="en" title="Ingelesa"><img src="/flags/gb.svg" alt="Ingelesa" width="26" height="17"></a>
+  <a href="/eu/knowmad/" hreflang="eu" title="Euskara" aria-current="true"><img src="/flags/eu.svg" alt="Euskara" width="26" height="17"></a>
+</nav>
+
+
+<div class="ide">
+
+  <!-- TITLE BAR -->
+  <div class="ide-titlebar">
+    <span class="ij-logo">IJ</span>
+    <span class="ide-title">knowmad-esperientzia — BezeroInput.java</span>
+    <a href="/eu/" class="back-link">← kapitulua aukeratu</a>
+  </div>
+
+  <!-- MENU BAR -->
+  <div class="ide-menubar">
+    <span>File</span><span>Edit</span><span>View</span><span>Navigate</span>
+    <span>Code</span><span>Refactor</span><span>Build</span><span>Run</span>
+    <span>Tools</span><span>VCS</span><span>Help</span>
+  </div>
+
+  <!-- NAVIGATION / RUN BAR -->
+  <div class="ide-navbar">
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="project-panel" title="Project">☰</button>
+    <span class="crumbs">knowmad-esperientzia <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.knowmad.esperientzia <span class="sep">›</span> dto</span>
+    <span class="run-config">☕ EsperientziaApplication <span class="sep">▾</span></span>
+    <span class="run-btn" title="Run">▶</span>
+    <span class="dbg-btn" title="Debug">🐞</span>
+    <span class="chapter-tag">03. kapitulua — 2022 aza – 2025 ira</span>
+  </div>
+
+  <div class="ide-body">
+
+    <!-- PROJECT TOOL WINDOW -->
+    <aside class="project-panel" id="project-panel">
+      <div class="panel-head">Project <span class="sep">▾</span></div>
+      <div class="tree">
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 knowmad-esperientzia</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📁 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">Ⓡ</span> BezeroInput.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">Ⓒ</span> KokapenController.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 messaging</div>
+        <button class="tree-row tree-file" data-file="consumer"><span class="fi">Ⓒ</span> KatalogoEventConsumer.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">Ⓡ</span> Ikasitakoa.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 docs</div>
+        <button class="tree-row tree-file" data-file="clientes"><span class="fi">📁</span> bezeroak.md</button>
+        <button class="tree-row tree-file" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+    </aside>
+    <div class="project-backdrop" id="project-backdrop" hidden></div>
+
+    <!-- EDITOR -->
+    <main class="editor-panel">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-file="input"><span class="fi">Ⓡ</span> BezeroInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">Ⓒ</span> KokapenController.java</button>
+        <button class="tab" data-file="consumer"><span class="fi">Ⓒ</span> KatalogoEventConsumer.java</button>
+        <button class="tab" data-file="entity"><span class="fi">Ⓡ</span> Ikasitakoa.java</button>
+        <button class="tab" data-file="clientes"><span class="fi">📁</span> bezeroak.md</button>
+        <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+
+      <div class="editor">
+
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.knowmad.esperientzia.dto;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * Berriro bezeroak sarrera gisa — baina hemen bakoitza
+<span class="ln">5</span> * ate desberdin batetik sartzen da, eta hori da NTT Datarekiko aldea:
+<span class="ln">6</span> *
+<span class="ln">7</span> *   BeeDigital      → REST APIa (eskaera / erantzuna)
+<span class="ln">8</span> *   El Corte Inglés → Kafka    (gertaerak, zerbitzuak akoplatu gabe)
+<span class="ln">9</span> */</span>
+<span class="ln">10</span><span class="kw">public sealed interface</span> <span class="typ">BezeroInput</span>
+<span class="ln">11</span>        <span class="kw">permits</span> <span class="typ">BeeDigitalRequest</span>, <span class="typ">KatalogoEvent</span> {
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="typ">String</span> <span class="mth">bezeroa</span>();
+<span class="ln">14</span>}
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cmt">// BeeDigital: APItik sartzen da. Java 19, records.</span>
+<span class="ln">17</span><span class="kw">record</span> <span class="typ">BeeDigitalRequest</span>(<span class="typ">String</span> enpresa,
+<span class="ln">18</span>                         <span class="typ">String</span> sektorea,
+<span class="ln">19</span>                         <span class="typ">List</span>&lt;<span class="typ">String</span>&gt; keywords)
+<span class="ln">20</span>        <span class="kw">implements</span> <span class="typ">BezeroInput</span> {
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Override</span>
+<span class="ln">23</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">bezeroa</span>() { <span class="kw">return</span> <span class="str">"BeeDigital"</span>; }
+<span class="ln">24</span>}
+<span class="ln">25</span>
+<span class="ln">26</span><span class="cmt">// El Corte Inglés: Kafka gertaera batetik sartzen da. Java 17.</span>
+<span class="ln">27</span><span class="kw">record</span> <span class="typ">KatalogoEvent</span>(<span class="typ">String</span> sku,
+<span class="ln">28</span>                     <span class="typ">String</span> kategoria,
+<span class="ln">29</span>                     <span class="typ">Instant</span> gertatuZen)
+<span class="ln">30</span>        <span class="kw">implements</span> <span class="typ">BezeroInput</span> {
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="ann">@Override</span>
+<span class="ln">33</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">bezeroa</span>() { <span class="kw">return</span> <span class="str">"El Corte Inglés"</span>; }
+<span class="ln">34</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.beedigital.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// BeeDigital — enpresen kokapena interneten.</span>
+<span class="ln">4</span><span class="cmt">// Integrazio sinkronoa: REST APIa AWSen gainean, DocumentDB eta</span>
+<span class="ln">5</span><span class="cmt">// DynamoDB azpian.</span>
+<span class="ln">6</span><span class="ann">@RestController</span>
+<span class="ln">7</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/posicionamiento"</span>)
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">KokapenController</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">IkasitakoaRepository</span> ikasitakoak;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@PostMapping</span>
+<span class="ln">14</span>    <span class="kw">public</span> <span class="typ">ResponseEntity</span>&lt;<span class="typ">List</span>&lt;<span class="typ">Ikasitakoa</span>&gt;&gt; <span class="mth">prozesatu</span>(
+<span class="ln">15</span>            <span class="ann">@RequestBody</span> <span class="ann">@Valid</span> <span class="typ">BeeDigitalRequest</span> eskaera) {
+<span class="ln">16</span>
+<span class="ln">17</span>        <span class="kw">var</span> emaitza = ikasitakoak.saveAll(
+<span class="ln">18</span>                <span class="typ">Ikasitakoa</span>.<span class="mth">atera</span>(eskaera));
+<span class="ln">19</span>
+<span class="ln">20</span>        <span class="kw">return</span> <span class="typ">ResponseEntity</span>.ok(emaitza);
+<span class="ln">21</span>    }
+<span class="ln">22</span>}</pre>
+
+        <pre class="code" id="file-consumer" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.eci.messaging;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// El Corte Inglés — katalogo domeinua.</span>
+<span class="ln">4</span><span class="cmt">// Hemen Kafka CVko lerro bat izateari utzi zion: prezio aldaketa bat</span>
+<span class="ln">5</span><span class="cmt">// hedatzen da zerbitzu batek besteari deitu gabe.</span>
+<span class="ln">6</span><span class="ann">@Component</span>
+<span class="ln">7</span><span class="ann">@Slf4j</span>
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">KatalogoEventConsumer</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">IkasitakoaRepository</span> ikasitakoak;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@KafkaListener</span>(topics = <span class="str">"katalogoa.produktua.eguneratua"</span>,
+<span class="ln">14</span>                   groupId = <span class="str">"katalogo-service"</span>)
+<span class="ln">15</span>    <span class="kw">public void</span> <span class="mth">onGertaera</span>(<span class="typ">KatalogoEvent</span> gertaera, <span class="typ">Acknowledgment</span> ack) {
+<span class="ln">16</span>
+<span class="ln">17</span>        log.info(<span class="str">"{}(r)en gertaera {} SKUrako"</span>,
+<span class="ln">18</span>                 gertaera.bezeroa(), gertaera.sku());
+<span class="ln">19</span>        <span class="kw">try</span> {
+<span class="ln">20</span>            ikasitakoak.saveAll(<span class="typ">Ikasitakoa</span>.<span class="mth">atera</span>(gertaera));
+<span class="ln">21</span>            ack.acknowledge();          <span class="cmt">// offsetaren eskuzko commita</span>
+<span class="ln">22</span>        } <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
+<span class="ln">23</span>            log.error(<span class="str">"Errorea {} prozesatzean → DLQ"</span>, gertaera.sku(), e);
+<span class="ln">24</span>            <span class="kw">throw</span> e;
+<span class="ln">25</span>        }
+<span class="ln">26</span>    }
+<span class="ln">27</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.esperientzia.domain;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * Ikasitakoa aurreko etapan bezala gordetzen da, baina
+<span class="ln">5</span> * jada ez taula batean: hemen biltegia dokumentu bat da.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@Document</span>(collection = <span class="str">"aprendizaje"</span>)
+<span class="ln">8</span><span class="kw">public record</span> <span class="typ">Ikasitakoa</span>(
+<span class="ln">9</span>        <span class="ann">@Id</span> <span class="typ">String</span> id,
+<span class="ln">10</span>        <span class="typ">String</span> izena,
+<span class="ln">11</span>        <span class="typ">Kategoria</span> kategoria,
+<span class="ln">12</span>        <span class="kw">int</span> maila,
+<span class="ln">13</span>        <span class="typ">String</span> jatorriBezeroa) {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="cmt">// ————— Etapa honek utzi zuena —————</span>
+<span class="ln">16</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Ikasitakoa</span>&gt; <span class="mth">etapaHonetakoa</span>() {
+<span class="ln">17</span>        <span class="kw">return</span> <span class="typ">List</span>.of(
+<span class="ln">18</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Java 11 / 17 / 19"</span>,   HIZKUNTZA,   5, <span class="str">"biak"</span>),
+<span class="ln">19</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Records · streams"</span>,   HIZKUNTZA,   5, <span class="str">"biak"</span>),
+<span class="ln">20</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Spring Boot 2.x / 3"</span>, FRAMEWORK,   5, <span class="str">"biak"</span>),
+<span class="ln">21</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Mikrozerbitzuak"</span>,      ARKITEKTURA,5, <span class="str">"biak"</span>),
+<span class="ln">22</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"API REST"</span>,            INTEGRAZIOA, 5, <span class="str">"BeeDigital"</span>),
+<span class="ln">23</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"JWT"</span>,                 INTEGRAZIOA, 4, <span class="str">"BeeDigital"</span>),
+<span class="ln">24</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"AWS"</span>,                 CLOUD,       4, <span class="str">"BeeDigital"</span>),
+<span class="ln">25</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"DynamoDB · DocumentDB"</span>,DATUAK,     4, <span class="str">"BeeDigital"</span>),
+<span class="ln">26</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Kafka"</span>,               MEZULARITZA, 5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">27</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Gertaera asinkronoak"</span>,  ARKITEKTURA,5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">28</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"MongoDB"</span>,             DATUAK,      5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">29</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Couchbase"</span>,           DATUAK,      3, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">30</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Docker"</span>,              HEDAPENA,    4, <span class="str">"biak"</span>),
+<span class="ln">31</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Kubernetes"</span>,          HEDAPENA,    4, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Jenkins · Clarive"</span>,   HEDAPENA,    4, <span class="str">"biak"</span>),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Sonar · Mockito"</span>,     KALITATEA,   5, <span class="str">"biak"</span>),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Kibana"</span>,              BEHAGARRITASUNA,3,<span class="str">"El Corte Inglés"</span>)
+<span class="ln">35</span>        );
+<span class="ln">36</span>    }
+<span class="ln">37</span>}</pre>
+        <div class="md" id="file-clientes" hidden>
+          <h1># Bezeroak</h1>
+          <p class="md-lede">Hiru urte aholkularitzan oso desberdinak diren bi bezerorentzat.</p>
+
+          <article class="proj">
+            <h3>El Corte Inglés <span class="proj-client">2023 abu – 2025 ira</span></h3>
+            <p>Backend mikrozerbitzuen analisia eta garapena Spring Bootekin, katalogo domeinurako.
+            Kontsultak datu-base ez-erlazionaletan MongoDBrekin. Mikrozerbitzuen arteko komunikazio
+            eta datu agregazio zerbitzuen garapena, baita proiektuaren arkitektura diseinuan laguntza ere.</p>
+            <p>Hedapena Jenkins eta Clariverekin hainbat ingurunetan, kalitatea Sonarrekin, testak Mockito eta
+            JUniti-rekin, eta gertaera asinkronoak Kafkarekin.</p>
+            <p class="proj-tech">Java 11-17 · Spring Boot · MongoDB · Couchbase · Kafka · Docker · Kubernetes · Jenkins · Clarive · Kibana · Bitbucket · Sonar</p>
+          </article>
+
+          <article class="proj">
+            <h3>BeeDigital <span class="proj-client">2022 aza – 2023 uzt</span></h3>
+            <p>Backend mikrozerbitzuen analisia eta garapena Spring Bootekin, enpresak interneten
+            kokatzeko. Kontsultak DocumentDB eta DynamoDBra. Mikrozerbitzuen arteko komunikazio eta
+            datu agregazio zerbitzuen diseinua, bertsio kontrolarekin Amazonen Git biltegietan.</p>
+            <p>Hedapena Jenkinsekin, kalitatea Sonarrekin, testak Mockito eta JUniti-rekin, eta gertaera
+            asinkronoak Kafkarekin.</p>
+            <p class="proj-tech">Java 19 · Spring Boot · AWS · DynamoDB · DocumentDB · Kafka · JWT · Jenkins · Sonar</p>
+          </article>
+        </div>
+
+        <div class="md" id="file-readme" hidden>
+          <h1># Knowmad Mood · 2022 aza – 2025 ira</h1>
+          <p>Hiru urte aholkularitzan bi bezerorentzat: <strong>BeeDigital</strong> primero (enpresen kokapena interneten, AWSen gainean) eta <strong>El Corte Inglés</strong> gero (katalogo domeinua, MongoDB eta bolumen handia).</p>
+          <p>Hemen mikrozerbitzuek "erabili behar dena" izateari utzi zioten eta benetan ulertzen nuen zerbait
+bihurtu ziren: zergatik banatzen diren, noiz merezi duen, eta bat erortzen denean zer gertatzen den.
+Hemen bihurtu zen Kafka CVko lerro bat izatetik eguneroko tresna izatera.</p>
+          <p><em>Aurreko etapak (NTT Data) eta oraingoak (Sopra Steria) beren kapitulua dute.</em></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- BOTTOM TOOL WINDOW -->
+  <div class="ide-bottom">
+    <div class="bottom-tabs">
+      <span class="bt active">▶ Run</span>
+      <span class="bt">Problems</span>
+      <span class="bt">Terminal</span>
+    </div>
+    <pre class="console-out"><span class="ok">"C:\Java\jdk-17\bin\java.exe" ...</span>
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.x)
+
+Started KatalogoApplication in 2 urte 10 hilabete (JVM running for ~1000 egun)</pre>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="ide-status">
+    <span>UTF-8</span><span class="sep">|</span><span>Java 17</span><span class="sep">|</span>
+    <span>⎇ feature/katalogo-agregatzailea</span><span class="status-right">1:1 · LF</span>
+  </div>
+
+</div>
+
+<script src="/knowmad/script.js"></script>
+</body>
+</html>

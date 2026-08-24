@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" role="img" aria-label="Ikurriña">
+  <rect width="60" height="40" fill="#d52b1e"/>
+  <g stroke="#009b48" stroke-width="7">
+    <path d="M0 0 L60 40"/>
+    <path d="M60 0 L0 40"/>
+  </g>
+  <g stroke="#fff" stroke-width="7">
+    <path d="M30 0 V40"/>
+    <path d="M0 20 H60"/>
+  </g>
+</svg>

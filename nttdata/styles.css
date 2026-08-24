@@ -201,7 +201,9 @@ button.tree-file.active{ background: var(--tree-select); }
 }
 
 /* Hueco para el selector de idioma, que va fijo arriba a la derecha por
-   encima de esta barra. Solo en pantalla: al imprimir no hay selector. */
+   encima de esta barra. Solo en pantalla: al imprimir no hay selector.
+   Son tres banderas desde que existe la version en euskera: cada una ocupa
+   26px mas 6 de separacion, asi que anadir un idioma son 32px mas de hueco. */
 @media screen{
-  .back-link{ margin-right: 88px; }
+  .back-link{ margin-right: 124px; }
 }

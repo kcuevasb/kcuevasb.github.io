@@ -22,11 +22,13 @@
 <link rel="stylesheet" href="/lang.css">
 <link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/nttdata/">
 <link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/nttdata/">
+<link rel="alternate" hreflang="eu" href="https://kcuevasb.github.io/eu/nttdata/">
 </head>
 <body>
 <nav class="lang" aria-label="Language">
   <a href="/nttdata/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
   <a href="/en/nttdata/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+  <a href="/eu/nttdata/" hreflang="eu" title="Basque"><img src="/flags/eu.svg" alt="Basque" width="26" height="17"></a>
 </nav>
 
 
@@ -181,7 +183,7 @@
 <span class="ln">19</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
 <span class="ln">20</span>    <span class="kw">private</span> <span class="typ">Category</span> categoria;   <span class="cmt">// LANGUAGE, DATA, INTEGRATION...</span>
 <span class="ln">21</span>
-<span class="ln">22</span>    <span class="ann">@Column</span>(name = <span class="str">"NIVEL"</span>)
+<span class="ln">22</span>    <span class="ann">@Column</span>(name = <span class="str">"LEVEL"</span>)
 <span class="ln">23</span>    <span class="kw">private int</span> level;             <span class="cmt">// 1..5</span>
 <span class="ln">24</span>
 <span class="ln">25</span>    <span class="ann">@ManyToOne</span>(fetch = <span class="typ">FetchType</span>.LAZY)

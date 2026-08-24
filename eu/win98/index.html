@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Kodea baino lehen</title>
+<meta name="description" content="Kepa Cuevas Barrasaren CV interaktiboa Windows 98 gisa — leihoak, mahaigaina eta Hasi menua.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/eu/win98/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Kodea baino lehen">
+<meta property="og:description" content="Prestakuntza, zaletasunak eta programatu aurretik zertan aritzen nintzen. Windows 98 gisa.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="eu_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23008080%22/><rect x=%222%22 y=%222%22 width=%2212%22 height=%2212%22 fill=%22%23c0c0c0%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/win98/styles.css">
+<noscript>
+  <!-- Without JS the BIOS never finishes and #desktop stays hidden, so the
+       page would render blank. Show the desktop and lay the windows out as
+       a normal document instead of as draggable floating windows. -->
+  <style>
+    #bios{ display:none !important; }
+    #desktop[hidden]{ display:block !important; height:auto; overflow:visible; }
+    .win[hidden]{ display:block !important; }
+    .win{ position:static !important; width:auto !important; margin:0 0 18px; }
+    .icons, .taskbar, .balloon, .wbtn{ display:none !important; }
+    #desktop{ padding: 16px; }
+  </style>
+</noscript>
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/win98/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/win98/">
+<link rel="alternate" hreflang="eu" href="https://kcuevasb.github.io/eu/win98/">
+</head>
+<body>
+<nav class="lang" aria-label="Hizkuntza">
+  <a href="/win98/" hreflang="es" title="Gaztelania"><img src="/flags/es.svg" alt="Gaztelania" width="26" height="17"></a>
+  <a href="/en/win98/" hreflang="en" title="Ingelesa"><img src="/flags/gb.svg" alt="Ingelesa" width="26" height="17"></a>
+  <a href="/eu/win98/" hreflang="eu" title="Euskara" aria-current="true"><img src="/flags/eu.svg" alt="Euskara" width="26" height="17"></a>
+</nav>
+
+
+<!-- BIOS / BOOT -->
+<div id="bios" role="status" aria-live="polite">
+  <pre id="bios-text"></pre>
+  <div id="bios-skip">sakatu edozein tekla jarraitzeko_</div>
+</div>
+
+<div id="desktop" hidden>
+
+  <!-- DESKTOP ICONS -->
+  <div class="icons" id="desktop-icons">
+    <button class="dicon" data-win="whoami"><span class="dicon-img">🖥️</span><span>Nire PCa</span></button>
+    <button class="dicon" data-win="skills"><span class="dicon-img">📊</span><span>Profila.dll</span></button>
+    <button class="dicon" data-win="aficiones"><span class="dicon-img">🏀</span><span>Zaletasunak.txt</span></button>
+    <button class="dicon" data-win="pizza"><span class="dicon-img">🍕</span><span>programatu_aurretik</span></button>
+    <button class="dicon" data-win="formacion"><span class="dicon-img">🎓</span><span>Prestakuntza.doc</span></button>
+    <button class="dicon" data-win="contacto"><span class="dicon-img">✉️</span><span>Harremana.exe</span></button>
+    <button class="dicon" id="recycle-icon"><span class="dicon-img">🗑️</span><span>Zakarrontzia</span></button>
+    <a class="dicon" href="/eu/"><span class="dicon-img">🚪</span><span>Beste kapitulu bat aukeratu</span></a>
+  </div>
+
+  <!-- BALLOON -->
+  <div id="balloon" class="balloon" hidden>
+    <div class="balloon-title">Sistema<span id="balloon-x" class="balloon-x">×</span></div>
+    <div class="balloon-body">Mezu berria — <strong>kepa_cuevas</strong>: eskerrik asko nire CVtik pasatzeagatik! 👋</div>
+  </div>
+
+  <!-- WINDOWS -->
+  <section class="win" id="win-whoami" data-title="Nire PCa — Propietateak" hidden style="left:6%;top:8%;width:min(560px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🖥️ Nire PCa — Propietateak</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p class="chapter-tag">01. kapitulua — ordenagailuen mundura nire sarrera</p>
+      <p>Kepa Cuevas Barrasa naiz, Bilbokoa. Hemen hasten da istorioa: honelako mahaigain bat,
+      leihoen atzean zegoenaren inguruko jakin-min handia, eta edozer hautsi eta konpon
+      zitekeela sentitzea, inori baimenik eskatu gabe.</p>
+      <p>Hortik atera zen gainerakoa — garapena ikastea, eta honetatik bizitzea. Baina lehen
+      lerro profesionala baino lehen pizza txandak egon ziren, eta pantailatik kanpoko bizitza
+      bat oraindik oso bizirik dagoena: begiratu mahaigaineko beste ikonoei.</p>
+      <p>Hurrengo kapituluek gainerakoa kontatzen dute: non egin dudan lan, eta inork eskatzen ez didanean zer eraikitzen dudan.</p>
+      <table class="win-table">
+        <tr><th>Hizkuntza</th><th>Maila</th></tr>
+        <tr><td>Gaztelania</td><td>C2 — jatorrizkoa</td></tr>
+        <tr><td>Euskara</td><td>C1</td></tr>
+        <tr><td>Ingelesa</td><td>B2</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="win" id="win-aficiones" data-title="Zaletasunak.txt — Ohar-bloka" hidden style="left:10%;top:12%;width:min(560px,90vw)">
+    <header class="win-title">
+      <span class="win-title-text">🏀 Zaletasunak.txt — Ohar-bloka</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-menubar">Fitxategia&nbsp;&nbsp;Editatu&nbsp;&nbsp;Ikusi&nbsp;&nbsp;Laguntza</div>
+    <div class="win-body win-body-mono">
+<pre>AISIA
+--------------------------------------------------------------------
+Saskibaloia. Bideojokoak. Zinema eta telesailak — igande
+arratsalde batean tiraldi batean ikusten direnetakoak.
+
+ABENTURA KIROLA
+--------------------------------------------------------------------
+Paraxutismoa. Urpekaritza. Parapentea. Bide ferratak. Mendi ibiliak.
+
+Denek zerbait badute komunean: kontrola askatzea eta aurretik
+prestatu duzunak (ekipoak, ibilbideak, arnesak... edo testek)
+eutsiko duela sinestea.
+</pre>
+    </div>
+  </section>
+
+  <section class="win" id="win-pizza" data-title="programatu_aurretik — Ohar-bloka" hidden style="left:16%;top:16%;width:min(520px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🍕 programatu_aurretik — Ohar-bloka</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-menubar">Fitxategia&nbsp;&nbsp;Editatu&nbsp;&nbsp;Ikusi&nbsp;&nbsp;Laguntza</div>
+    <div class="win-body win-body-mono">
+<pre>PARE BAT CURRICULUM LEHENAGO
+--------------------------------------------------------------------
+Kode lerro bakar bat serio ukitu aurretik, banaketa eta sukaldeko
+txandak kudeatu nituen Txanda Arduradun gisa: urtebete Domino's
+Pizzan eta sei hilabete Telepizzan.
+
+Han "ostiraleko ordu punta" deitzen zenari hemen "ostiraleko
+18:00etako produkzio hedapena" esaten zaio — pultsu bera,
+labe desberdina.
+</pre>
+    </div>
+  </section>
+
+  <section class="win" id="win-skills" data-title="Profila.dll — Kontrol panela" hidden style="left:14%;top:16%;width:min(520px,90vw)">
+    <header class="win-title">
+      <span class="win-title-text">📊 Profila.dll — Kontrol panela</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p style="margin-top:0">Skill teknikoak esperientzia eta proiektuen kapituluetan daude. Hauek beste horiek dira,
+      Javaren bertsioarekin iraungitzen ez direnak:</p>
+      <div class="skills98">
+        <div class="skill98" data-level="5"><span>Arazoak konpontzen</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Komunikazioa</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Konpromisoa</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Bakarrik ikastea</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Taldean lan egitea</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Presioari eustea</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Negozioarekin hitz egitea</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Sustraiko arrazoia bilatzea</span><div class="p98"><div class="p98-fill"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="win" id="win-formacion" data-title="Prestakuntza.doc — WordPad" hidden style="left:18%;top:14%;width:min(480px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🎓 Prestakuntza.doc — WordPad</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p><strong>Colegio Zabalburu</strong> — 2013 – 2015<br>Goi Mailako Teknikaria, Web Aplikazioen Garapena. Arautua.</p>
+      <p><strong>IEFPS Elorrieta-Erreka Mari LHII</strong> — 2010 – 2012<br>Goi Mailako Teknikaria, Informatika Aplikazioen Garapena. Arautua.</p>
+    </div>
+  </section>
+
+  <section class="win win-dialog" id="win-contacto" data-title="Harremana.exe" hidden style="left:32%;top:22%;width:min(360px,86vw)">
+    <header class="win-title">
+      <span class="win-title-text">✉️ Harremana.exe</span>
+      <span class="win-btns"><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body win-dialog-body">
+      <p class="dialog-icon">✉️</p>
+      <p>Hitz egingo dugu? Aukeratu nondik:</p>
+      <div class="dialog-btns">
+        <a class="win98-btn" href="mailto:kepa.cuevas@gmail.com">Email</a>
+        <a class="win98-btn" href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="win98-btn" href="https://github.com/kcuevasb" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHUTDOWN OVERLAY -->
+  <div id="shutdown" class="shutdown" hidden>
+    <p>Orain segurtasunez itzal dezakezu ordenagailua.</p>
+    <p class="shutdown-sub">azalera birbideratzen…</p>
+  </div>
+
+  <!-- TASKBAR -->
+  <footer class="taskbar">
+    <div class="start-wrap">
+      <button id="start-btn" class="start-btn"><span class="start-flag">⊞</span> Hasi</button>
+      <div id="start-menu" class="start-menu" hidden>
+        <div class="start-side">KEPA CUEVAS 98</div>
+        <div class="start-items">
+          <button data-win="whoami">🖥️ Nire PCa</button>
+          <button data-win="skills">📊 Profila.dll</button>
+          <button data-win="aficiones">🏀 Zaletasunak.txt</button>
+          <button data-win="pizza">🍕 programatu_aurretik</button>
+          <button data-win="formacion">🎓 Prestakuntza.doc</button>
+          <button data-win="contacto">✉️ Harremana.exe</button>
+          <hr>
+          <a href="/eu/">🚪 Beste kapitulu bat aukeratu</a>
+          <hr>
+          <button id="shutdown-btn">⏻ Sistema itzali…</button>
+        </div>
+      </div>
+    </div>
+    <div class="taskbar-tasks" id="taskbar-tasks"></div>
+    <div class="tray"><span id="clock">00:00</span></div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · NTT Data</title>
+<meta name="description" content="Kepa Cuevas Barrasaren CV interaktiboa Eclipse IDE gisa — programatzen nituen lehen urteak, NTT Datan.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/eu/nttdata/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · NTT Data">
+<meta property="og:description" content="Bost urte eta bost bezero, ia dena osasungintza. Java 7/8 Eclipse gisa.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="eu_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23eeeeee%22/><rect x=%221%22 y=%221%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%237f0055%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%237f0055%22 font-family=%22monospace%22>J</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/nttdata/styles.css">
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/nttdata/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/nttdata/">
+<link rel="alternate" hreflang="eu" href="https://kcuevasb.github.io/eu/nttdata/">
+</head>
+<body>
+<nav class="lang" aria-label="Hizkuntza">
+  <a href="/nttdata/" hreflang="es" title="Gaztelania"><img src="/flags/es.svg" alt="Gaztelania" width="26" height="17"></a>
+  <a href="/en/nttdata/" hreflang="en" title="Ingelesa"><img src="/flags/gb.svg" alt="Ingelesa" width="26" height="17"></a>
+  <a href="/eu/nttdata/" hreflang="eu" title="Euskara" aria-current="true"><img src="/flags/eu.svg" alt="Euskara" width="26" height="17"></a>
+</nav>
+
+
+<div class="ide">
+
+  <div class="ide-titlebar">
+    <span class="ide-title">☕ Java EE - imq-errezeta-digitala/src/main/java/com/nttdata/imq/prescripcion/service/ErrezetaService.java - Eclipse IDE</span>
+  </div>
+
+  <div class="ide-menubar">
+    <span>Fitxategia</span><span>Editatu</span><span>Iturburua</span><span>Birfaktorizatu</span>
+    <span>Nabigatu</span><span>Bilatu</span><span>Proiektua</span><span>Exekutatu</span>
+    <span>Leihoa</span><span>Laguntza</span>
+    <a href="/eu/" class="back-link">← kapitulua aukeratu</a>
+  </div>
+
+  <div class="ide-toolbar">
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="explorer-panel" title="Package Explorer">☰</button>
+    <span class="tbtn" title="Nuevo">📄</span>
+    <span class="tbtn" title="Guardar">💾</span>
+    <span class="tb-sep"></span>
+    <span class="tbtn tbtn-run" title="Run">▶ Run</span>
+    <span class="tbtn" title="Debug">🐞 Debug</span>
+    <span class="chapter-tag">02. kapitulua — programatzen nituen lehen urteak · 2017 uzt – 2022 aza</span>
+  </div>
+
+  <div class="ide-body">
+
+    <aside class="explorer-panel" id="explorer-panel">
+      <div class="panel-head">Package Explorer</div>
+      <div class="tree">
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📦 imq-errezeta-digitala</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.nttdata.imq.errezeta</div>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">☕</span> EsperientziaController.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">☕</span> BezeroInput.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">☕</span> Ikasitakoa.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 docs</div>
+        <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📁</span> bezeroak.md</button>
+        <button class="tree-row tree-file tree-file-md" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+    </aside>
+    <div class="explorer-backdrop" id="explorer-backdrop" hidden></div>
+
+    <main class="editor-panel">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-file="input"><span class="fi">☕</span> BezeroInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">☕</span> EsperientziaController.java</button>
+        <button class="tab" data-file="entity"><span class="fi">☕</span> Ikasitakoa.java</button>
+        <button class="tab" data-file="proyectos"><span class="fi">📁</span> bezeroak.md</button>
+        <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+
+      <div class="editor">
+
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.nttdata.esperientzia.dto;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * Sistemarako sarrera bezeroak dira: haiek dakarte arazoa,
+<span class="ln">5</span> * domeinua eta mugak. Gainerako guztia hemendik ateratzen da.
+<span class="ln">6</span> *
+<span class="ln">7</span> * Etapa honetan integrazioa BETI zen APIz — REST kanpora,
+<span class="ln">8</span> * SOAP bezeroaren sistemen aurka. Gertaerarik ez.
+<span class="ln">9</span> *
+<span class="ln">10</span> * <span class="jtag">@author</span> Kepa Cuevas
+<span class="ln">11</span> * <span class="jtag">@since</span>  Java 8 · Spring Boot 2.1
+<span class="ln">12</span> */</span>
+<span class="ln">13</span><span class="kw">public class</span> <span class="typ">BezeroInput</span> {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="kw">public static final</span> <span class="typ">BezeroInput</span> IMQ_MEDIADORES =
+<span class="ln">16</span>        <span class="kw">new</span> <span class="typ">BezeroInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Bitartekarien Ataria"</span>,
+<span class="ln">17</span>                          <span class="typ">Integrazioa</span>.REST);
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="kw">public static final</span> <span class="typ">BezeroInput</span> IMQ_PRESCRIPCION =
+<span class="ln">20</span>        <span class="kw">new</span> <span class="typ">BezeroInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Errezeta Digitala"</span>,
+<span class="ln">21</span>                          <span class="typ">Integrazioa</span>.REST, <span class="typ">Integrazioa</span>.SOAP);
+<span class="ln">22</span>
+<span class="ln">23</span>    <span class="kw">public static final</span> <span class="typ">BezeroInput</span> IMQ_CORE =
+<span class="ln">24</span>        <span class="kw">new</span> <span class="typ">BezeroInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Asistentzia Nukleoa"</span>,
+<span class="ln">25</span>                          <span class="typ">Integrazioa</span>.SOAP);
+<span class="ln">26</span>
+<span class="ln">27</span>    <span class="kw">public static final</span> <span class="typ">BezeroInput</span> VALDECILLA =
+<span class="ln">28</span>        <span class="kw">new</span> <span class="typ">BezeroInput</span>(<span class="str">"H. U. Marqués de Valdecilla"</span>,
+<span class="ln">29</span>                          <span class="str">"Arlo ez-klinikoen kudeaketa"</span>,
+<span class="ln">30</span>                          <span class="typ">Integrazioa</span>.SOAP);
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="kw">public static final</span> <span class="typ">BezeroInput</span> SIEMENS_GAMESA =
+<span class="ln">33</span>        <span class="kw">new</span> <span class="typ">BezeroInput</span>(<span class="str">"Siemens-Gamesa"</span>,
+<span class="ln">34</span>                          <span class="str">"Field Service Management (OFSC)"</span>,
+<span class="ln">35</span>                          <span class="typ">Integrazioa</span>.REST);
+<span class="ln">36</span>
+<span class="ln">37</span>    <span class="kw">private final</span> <span class="typ">String</span> bezeroa;
+<span class="ln">38</span>    <span class="kw">private final</span> <span class="typ">String</span> proiektua;
+<span class="ln">39</span>    <span class="kw">private final</span> <span class="typ">List</span>&lt;<span class="typ">Integrazioa</span>&gt; integrazioak;
+<span class="ln">40</span>
+<span class="ln">41</span>    <span class="cmt">// ...eraikitzailea eta getterrak (Alt+Shift+S Eclipsen)</span>
+<span class="ln">42</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.esperientzia.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// Bost urte bezeroak sarrerako atetik jasotzen eta</span>
+<span class="ln">4</span><span class="cmt">// beti zerbait ikasita itzultzen.</span>
+<span class="ln">5</span><span class="ann">@RestController</span>
+<span class="ln">6</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/nttdata/esperientzia"</span>)
+<span class="ln">7</span><span class="kw">public class</span> <span class="typ">EsperientziaController</span> {
+<span class="ln">8</span>
+<span class="ln">9</span>    <span class="kw">private static final</span> <span class="typ">Logger</span> LOG =
+<span class="ln">10</span>            LoggerFactory.getLogger(<span class="typ">EsperientziaController</span>.<span class="kw">class</span>);
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="ann">@Autowired</span>
+<span class="ln">13</span>    <span class="kw">private</span> <span class="typ">IkasitakoaRepository</span> repository;
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="ann">@Autowired</span>
+<span class="ln">16</span>    <span class="kw">private</span> <span class="typ">WsSisnetClient</span> wsSisnet;   <span class="cmt">// SOAP, IMQ</span>
+<span class="ln">17</span>
+<span class="ln">18</span>    <span class="ann">@PostMapping</span>(<span class="str">"/proiektuak"</span>)
+<span class="ln">19</span>    <span class="ann">@Transactional</span>
+<span class="ln">20</span>    <span class="kw">public</span> <span class="typ">List</span>&lt;<span class="typ">Ikasitakoa</span>&gt; <span class="mth">lanEgin</span>(<span class="ann">@RequestBody</span> <span class="typ">BezeroInput</span> bezeroa) {
+<span class="ln">21</span>
+<span class="ln">22</span>        LOG.info(<span class="str">"Proiektu berria {}(r)entzat"</span>, bezeroa.getBezeroa());
+<span class="ln">23</span>
+<span class="ln">24</span>        <span class="kw">if</span> (bezeroa.usa(<span class="typ">Integrazioa</span>.SOAP)) {
+<span class="ln">25</span>            wsSisnet.validarConexion();
+<span class="ln">26</span>        }
+<span class="ln">27</span>
+<span class="ln">28</span>        <span class="cmt">// Sartzen dena bezero bat da; gelditzen dena ikasitakoa.</span>
+<span class="ln">29</span>        <span class="kw">return</span> repository.saveAll(<span class="typ">Ikasitakoa</span>.<span class="mth">de</span>(bezeroa));
+<span class="ln">30</span>    }
+<span class="ln">31</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.esperientzia.domain;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * Ikasitakoa da irauten duen bakarra: proiektuak amaitu egiten dira,
+<span class="ln">5</span> * bezeroak aldatu, baina hau datu-basean gelditzen da.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@Entity</span>
+<span class="ln">8</span><span class="ann">@Table</span>(name = <span class="str">"IKASITAKOA"</span>)
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">Ikasitakoa</span> <span class="kw">implements</span> <span class="typ">Serializable</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="ann">@Id</span>
+<span class="ln">12</span>    <span class="ann">@GeneratedValue</span>(strategy = <span class="typ">GenerationType</span>.SEQUENCE,
+<span class="ln">13</span>                    generator = <span class="str">"SEQ_IKASITAKOA"</span>)
+<span class="ln">14</span>    <span class="kw">private</span> <span class="typ">Long</span> id;
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="ann">@Column</span>(nullable = <span class="kw">false</span>)
+<span class="ln">17</span>    <span class="kw">private</span> <span class="typ">String</span> izena;
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
+<span class="ln">20</span>    <span class="kw">private</span> <span class="typ">Kategoria</span> categoria;   <span class="cmt">// HIZKUNTZA, DATUAK, INTEGRAZIOA...</span>
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Column</span>(name = <span class="str">"MAILA"</span>)
+<span class="ln">23</span>    <span class="kw">private int</span> maila;             <span class="cmt">// 1..5</span>
+<span class="ln">24</span>
+<span class="ln">25</span>    <span class="ann">@ManyToOne</span>(fetch = <span class="typ">FetchType</span>.LAZY)
+<span class="ln">26</span>    <span class="ann">@JoinColumn</span>(name = <span class="str">"JATORRI_BEZEROA"</span>)
+<span class="ln">27</span>    <span class="kw">private</span> <span class="typ">Bezero</span> jatorria;         <span class="cmt">// zein bezerotatik atera zen</span>
+<span class="ln">28</span>
+<span class="ln">29</span>    <span class="cmt">// ————— Etapa honek utzi zuena —————</span>
+<span class="ln">30</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Ikasitakoa</span>&gt; <span class="mth">etapaHonetakoa</span>() {
+<span class="ln">31</span>        <span class="kw">return</span> <span class="typ">Arrays</span>.asList(
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Java 7 / 8"</span>,        HIZKUNTZA,   5),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Java 11"</span>,           HIZKUNTZA,   4),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"J2EE"</span>,              HIZKUNTZA,   4),
+<span class="ln">35</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Spring Framework"</span>,  FRAMEWORK,   4),
+<span class="ln">36</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Spring Boot 2.1"</span>,   FRAMEWORK,   4),
+<span class="ln">37</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"API REST"</span>,          INTEGRAZIOA, 4),
+<span class="ln">38</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"SOAP · WSSisnet"</span>,   INTEGRAZIOA, 4),
+<span class="ln">39</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"HATEOAS"</span>,           INTEGRAZIOA, 3),
+<span class="ln">40</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"JPA · Hibernate"</span>,   DATUAK,      4),
+<span class="ln">41</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"QueryDSL"</span>,          DATUAK,      4),
+<span class="ln">42</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Oracle · PL/SQL"</span>,   DATUAK,      4),
+<span class="ln">43</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"PostgreSQL"</span>,        DATUAK,      3),
+<span class="ln">44</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"ZK · jQuery"</span>,       FRONT,       3),
+<span class="ln">45</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"WebLogic · Tomcat"</span>, HEDAPENA,    3),
+<span class="ln">46</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Jenkins · Azure"</span>,   HEDAPENA,    3),
+<span class="ln">47</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Maven · SVN · Git"</span>, TRESNAK,     4),
+<span class="ln">48</span>            <span class="kw">new</span> <span class="typ">Ikasitakoa</span>(<span class="str">"Scrum"</span>,             METODOLOGIA, 4)
+<span class="ln">49</span>        );
+<span class="ln">50</span>    }
+<span class="ln">51</span>}</pre>
+        <div class="md" id="file-proyectos" hidden>
+          <h1># Bezeroak eta proiektuak</h1>
+          <p class="md-lede">Bost urte, bost proiektu. Ia dena osasungintza — non bug bat ez den intzidentzia bat,
+heltzen ez den errezeta bat baizik.</p>
+
+          <article class="proj">
+            <h3>Bitartekarien Ataria <span class="proj-client">IMQ</span></h3>
+            <p>Aplikazioaren analisia eta garapena hutsetik. Etapako modernoena.</p>
+            <p class="proj-tech">Java 11 · Spring Boot 2.3 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · PostgreSQL</p>
+          </article>
+
+          <article class="proj">
+            <h3>Errezeta Digitala <span class="proj-client">IMQ</span></h3>
+            <p>Garapena eta mantentzea. Gainera, hedapenen kudeaketa eta exekuzioa hainbat ingurunetan.</p>
+            <p class="proj-tech">Java 8 · Spring Boot 2.1 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · Oracle · PL/SQL · SVN</p>
+          </article>
+
+          <article class="proj">
+            <h3>Asistentzia Nukleoa <span class="proj-client">IMQ</span></h3>
+            <p>Hobekuntza funtzionalak eta intzidentzien konponketa asistentzia nukleoan.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · QueryDSL · Oracle · Tomcat 7</p>
+          </article>
+
+          <article class="proj">
+            <h3>Ospitale kudeaketa <span class="proj-client">H. U. Marqués de Valdecilla</span></h3>
+            <p>Hobekuntzak eta intzidentzien konponketa ospitaleko arlo ez-klinikoen kudeaketan, baita
+hedapenak ere hainbat ingurunetan.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · jQuery · Oracle · WebLogic 11g</p>
+          </article>
+
+          <article class="proj">
+            <h3>Field Service Management <span class="proj-client">Siemens-Gamesa</span></h3>
+            <p>Field Service soluzioen analisia eta parametrizazioa. Etapako proiektu bakarra osasungintzatik
+eta Javatik kanpo.</p>
+            <p class="proj-tech">Oracle Field Service Cloud (OFSC)</p>
+          </article>
+        </div>
+
+        <div class="md" id="file-readme" hidden>
+          <h1># NTT Data · 2017 uzt – 2022 aza</h1>
+          <p>Nire lehen kontratua garatzaile gisa, Domino's Pizzan urtebete eta Telepizzan sei hilabete
+txanda arduradun gisa egin ondoren (hori 01. kapituluan kontatzen dut).</p>
+          <p>Bost urte analisi, diseinu eta garapenen kudeaketa, mantentze eta bilakaeren artean, eta
+produkzioko intzidentzia dezente. Hemen ikasi nuen ikastaro batek ere irakasten ez duena: nola
+defendatu aldaketa bat bezeroaren aurrean, eta gaur idazten duzun kodea beste norbaitek
+mantenduko duela hiru urte barru.</p>
+          <p><em>Hurrengo etapek (Knowmad Mood eta Sopra Steria) beren kapitulua dute.</em></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="ide-bottom">
+    <div class="bottom-tabs">
+      <span class="bt active">Console</span>
+      <span class="bt">Problems <b class="ok">0</b></span>
+    </div>
+    <pre class="console-out">Buildfile: build.xml
+   [javac] Compiling 2 source files to /bin
+   [javac] Note: uses unchecked or unsafe operations. Recompile with -Xlint.
+BUILD SUCCESSFUL
+Total time: 5 urte</pre>
+  </div>
+
+</div>
+
+<script src="/nttdata/script.js"></script>
+</body>
+</html>

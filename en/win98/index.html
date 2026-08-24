@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Before the code</title>
+<meta name="description" content="Interactive CV of Kepa Cuevas Barrasa, Windows 98 style — windows, desktop and Start menu.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/en/win98/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Before the code">
+<meta property="og:description" content="Education, hobbies and what I did before coding. Windows 98 style.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23008080%22/><rect x=%222%22 y=%222%22 width=%2212%22 height=%2212%22 fill=%22%23c0c0c0%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/win98/styles.css">
+<noscript>
+  <!-- Without JS the BIOS never finishes and #desktop stays hidden, so the
+       page would render blank. Show the desktop and lay the windows out as
+       a normal document instead of as draggable floating windows. -->
+  <style>
+    #bios{ display:none !important; }
+    #desktop[hidden]{ display:block !important; height:auto; overflow:visible; }
+    .win[hidden]{ display:block !important; }
+    .win{ position:static !important; width:auto !important; margin:0 0 18px; }
+    .icons, .taskbar, .balloon, .wbtn{ display:none !important; }
+    #desktop{ padding: 16px; }
+  </style>
+</noscript>
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/win98/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/win98/">
+</head>
+<body>
+<nav class="lang" aria-label="Language">
+  <a href="/win98/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/win98/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+</nav>
+
+
+<!-- BIOS / BOOT -->
+<div id="bios" role="status" aria-live="polite">
+  <pre id="bios-text"></pre>
+  <div id="bios-skip">press any key to continue_</div>
+</div>
+
+<div id="desktop" hidden>
+
+  <!-- DESKTOP ICONS -->
+  <div class="icons" id="desktop-icons">
+    <button class="dicon" data-win="whoami"><span class="dicon-img">🖥️</span><span>My Computer</span></button>
+    <button class="dicon" data-win="skills"><span class="dicon-img">📊</span><span>Profile.dll</span></button>
+    <button class="dicon" data-win="aficiones"><span class="dicon-img">🏀</span><span>Hobbies.txt</span></button>
+    <button class="dicon" data-win="pizza"><span class="dicon-img">🍕</span><span>before_coding</span></button>
+    <button class="dicon" data-win="formacion"><span class="dicon-img">🎓</span><span>Education.doc</span></button>
+    <button class="dicon" data-win="contacto"><span class="dicon-img">✉️</span><span>Contact.exe</span></button>
+    <button class="dicon" id="recycle-icon"><span class="dicon-img">🗑️</span><span>Recycle Bin</span></button>
+    <a class="dicon" href="/en/"><span class="dicon-img">🚪</span><span>Pick another chapter</span></a>
+  </div>
+
+  <!-- BALLOON -->
+  <div id="balloon" class="balloon" hidden>
+    <div class="balloon-title">System<span id="balloon-x" class="balloon-x">×</span></div>
+    <div class="balloon-body">Nuevo mensaje de <strong>kepa_cuevas</strong>: thanks for stopping by my CV! 👋</div>
+  </div>
+
+  <!-- WINDOWS -->
+  <section class="win" id="win-whoami" data-title="My Computer — Properties" hidden style="left:6%;top:8%;width:min(560px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🖥️ My Computer — Properties</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p class="chapter-tag">Chapter 01 — how I got into computers</p>
+      <p>I'm Kepa Cuevas Barrasa, from Bilbao. The story starts here: a desktop like this one, a lot of
+      curiosity about what was behind the windows, and the feeling that you could break and fix
+      anything without asking anyone for permission.</p>
+      <p>Everything else came out of that — studying development, and ending up doing this for a living.
+      But before the first professional line of code there were pizza shifts and a life away from the
+      screen that is still very much intact: have a look at the other desktop icons.</p>
+      <p>The next chapters cover the rest: where I have worked, and what I build when nobody asks me to.</p>
+      <table class="win-table">
+        <tr><th>Language</th><th>Level</th></tr>
+        <tr><td>Spanish</td><td>C2 — native</td></tr>
+        <tr><td>Basque</td><td>C1</td></tr>
+        <tr><td>English</td><td>B2</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="win" id="win-aficiones" data-title="Hobbies.txt — Notepad" hidden style="left:10%;top:12%;width:min(560px,90vw)">
+    <header class="win-title">
+      <span class="win-title-text">🏀 Hobbies.txt — Notepad</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Help</div>
+    <div class="win-body win-body-mono">
+<pre>LEISURE
+--------------------------------------------------------------------
+Basketball. Video games. Films and series — the kind you binge
+in a single Sunday afternoon.
+
+ADVENTURE SPORTS
+--------------------------------------------------------------------
+Skydiving. Diving. Paragliding. Via ferrata. Hiking.
+
+If all of it has one thing in common: letting go of control and
+trusting that what you prepared beforehand (the gear, the route,
+the harness... or the tests) is going to hold.
+</pre>
+    </div>
+  </section>
+
+  <section class="win" id="win-pizza" data-title="before_coding — Notepad" hidden style="left:16%;top:16%;width:min(520px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🍕 before_coding — Notepad</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-menubar">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Help</div>
+    <div class="win-body win-body-mono">
+<pre>A COUPLE OF CVS EARLIER
+--------------------------------------------------------------------
+Before touching a single serious line of code I ran delivery and
+kitchen shifts as Shift Manager: a year at Domino's Pizza and six
+months at Telepizza.
+
+What was called "the Friday rush" there is called "a Friday 6pm
+production deploy" here — same pulse, different oven.
+</pre>
+    </div>
+  </section>
+
+  <section class="win" id="win-skills" data-title="Profile.dll — Control Panel" hidden style="left:14%;top:16%;width:min(520px,90vw)">
+    <header class="win-title">
+      <span class="win-title-text">📊 Profile.dll — Control Panel</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p style="margin-top:0">The technical skills live in the experience and project chapters. These are the other ones,
+      the kind that do not expire with the Java version:</p>
+      <div class="skills98">
+        <div class="skill98" data-level="5"><span>Problem-solver</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Communication</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Commitment</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="5"><span>Self-teaching</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Teamwork</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Working under pressure</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Talking to business</span><div class="p98"><div class="p98-fill"></div></div></div>
+        <div class="skill98" data-level="4"><span>Root-cause hunting</span><div class="p98"><div class="p98-fill"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="win" id="win-formacion" data-title="Education.doc — WordPad" hidden style="left:18%;top:14%;width:min(480px,88vw)">
+    <header class="win-title">
+      <span class="win-title-text">🎓 Education.doc — WordPad</span>
+      <span class="win-btns"><button class="wbtn" data-act="min">_</button><button class="wbtn" data-act="max">□</button><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body">
+      <p><strong>Colegio Zabalburu</strong> — 2013 – 2015<br>Higher Technician, Web Application Development. Accredited vocational degree.</p>
+      <p><strong>IEFPS Elorrieta-Erreka Mari LHII</strong> — 2010 – 2012<br>Higher Technician, Computer Application Development. Accredited vocational degree.</p>
+    </div>
+  </section>
+
+  <section class="win win-dialog" id="win-contacto" data-title="Contact.exe" hidden style="left:32%;top:22%;width:min(360px,86vw)">
+    <header class="win-title">
+      <span class="win-title-text">✉️ Contact.exe</span>
+      <span class="win-btns"><button class="wbtn wbtn-x" data-act="close">×</button></span>
+    </header>
+    <div class="win-body win-dialog-body">
+      <p class="dialog-icon">✉️</p>
+      <p>Shall we talk? Pick a channel:</p>
+      <div class="dialog-btns">
+        <a class="win98-btn" href="mailto:kepa.cuevas@gmail.com">Email</a>
+        <a class="win98-btn" href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="win98-btn" href="https://github.com/kcuevasb" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHUTDOWN OVERLAY -->
+  <div id="shutdown" class="shutdown" hidden>
+    <p>It is now safe to turn off your computer.</p>
+    <p class="shutdown-sub">redirecting to the home page…</p>
+  </div>
+
+  <!-- TASKBAR -->
+  <footer class="taskbar">
+    <div class="start-wrap">
+      <button id="start-btn" class="start-btn"><span class="start-flag">⊞</span> Start</button>
+      <div id="start-menu" class="start-menu" hidden>
+        <div class="start-side">KEPA CUEVAS 98</div>
+        <div class="start-items">
+          <button data-win="whoami">🖥️ My Computer</button>
+          <button data-win="skills">📊 Profile.dll</button>
+          <button data-win="aficiones">🏀 Hobbies.txt</button>
+          <button data-win="pizza">🍕 before_coding</button>
+          <button data-win="formacion">🎓 Education.doc</button>
+          <button data-win="contacto">✉️ Contact.exe</button>
+          <hr>
+          <a href="/en/">🚪 Pick another chapter</a>
+          <hr>
+          <button id="shutdown-btn">⏻ Shut down…</button>
+        </div>
+      </div>
+    </div>
+    <div class="taskbar-tasks" id="taskbar-tasks"></div>
+    <div class="tray"><span id="clock">00:00</span></div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

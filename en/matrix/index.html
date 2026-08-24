@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Own projects</title>
+<meta name="description" content="Interactive CV of Kepa Cuevas Barrasa, Software Engineer specialising in Java/Spring Boot and microservices.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/en/matrix/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Own projects">
+<meta property="og:description" content="Apps, a service in production and tools of my own. Matrix style.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23000%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%2300ff41%22 font-family=%22monospace%22>K</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/matrix/styles.css">
+<noscript>
+  <!-- The whole page is hidden until the boot animation finishes in JS.
+       Without this, a blocked or failed script leaves a blank page — for
+       a CV, the worst possible failure. An author rule beats the UA's
+       [hidden]{display:none}, so the content simply shows. -->
+  <style>
+    #boot-screen{ display:none !important; }
+    #site[hidden]{ display:block !important; }
+    #matrix-canvas{ display:none; }
+  </style>
+</noscript>
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/matrix/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/matrix/">
+</head>
+<body>
+<nav class="lang" aria-label="Language">
+  <a href="/matrix/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/matrix/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+</nav>
+
+
+<canvas id="matrix-canvas" aria-hidden="true"></canvas>
+<div class="crt-overlay" aria-hidden="true"></div>
+
+<div id="boot-screen" role="status" aria-live="polite">
+  <pre id="boot-text"></pre>
+  <div id="boot-skip">[ press any key or click to skip ]</div>
+</div>
+
+<div id="site" hidden>
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="/en/" class="back-link">&lt; pick_chapter</a>
+      <div class="logo">KEPA_CUEVAS<span class="blink">_</span></div>
+    </div>
+    <nav class="pixel-nav" aria-label="Navegación principal">
+      <button data-target="#whoami">whoami</button>
+      <button data-target="#skills">skills</button>
+      <button data-target="#proyectos">projects</button>
+      <button data-target="#contacto">contact</button>
+    </nav>
+    <button id="fx-toggle" class="fx-toggle" aria-pressed="true" title="Activar/desactivar efectos de fondo">FX: ON</button>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="section hero">
+      <div class="terminal-window">
+        <div class="terminal-titlebar"><span></span><span></span><span></span><p>kepa@portfolio:~$</p></div>
+        <div class="terminal-body">
+          <p class="prompt-line"><span class="prompt">$</span> whoami</p>
+          <p class="chapter-tag">// chapter 05 — what I build on my own</p>
+          <h1 class="glitch" data-text="KEPA CUEVAS BARRASA">KEPA CUEVAS BARRASA</h1>
+          <p class="role">&gt; WHAT I BUILD WHEN NOBODY ASKS ME TO</p>
+          <p class="prompt-line"><span class="prompt">$</span> cat mission.txt</p>
+          <p class="typewriter-static">The other chapters cover where I have worked. This one covers what I do after work: mobile apps,
+        a service with real users, tools I use myself every day. Almost all of it in languages that are
+        not mine — and that is where AI comes in. The interesting part is not that I use it, it is where
+        it ends and where I begin.</p>
+          <div class="hero-actions">
+            <a href="#proyectos" class="pixel-btn">&gt; SEE PROJECTS</a>
+            <a href="#skills" class="pixel-btn pixel-btn-alt">&gt; SEE SKILLS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHOAMI / ABOUT -->
+    <section id="whoami" class="section">
+      <h2 class="section-title">// 01 · whoami</h2>
+      <div class="pixel-card">
+        <p>This is the self-taught side: what I have built on my own, in my own time. None of these projects
+        came from a ticket — all of them from "what if I tried building this?".</p>
+        <p>And here comes the honest part: except for cartelera-app (Java and Spring, my home turf), they are
+        written in languages I do not master. What I bring is not typing Kotlin from memory, but knowing
+        what I want to build, how it should be structured, and recognising when what comes out is not
+        good enough and has to be redone. AI supplies the language; the engineering judgement is mine —
+        which is exactly what I have been doing since 2017.</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2 class="section-title">// 02 · what I bring and what the AI brings</h2>
+      <p class="section-intro">I would rather be precise here, because it is easy to take undue credit: of everything below, the
+        only project on my home turf is <strong>cartelera-app</strong> (Java and Spring, the same thing
+        I do every day). The rest is written in languages I <strong>do not master</strong>.</p>
+
+      <p class="skills-group">&gt; WHAT I MASTER AND APPLY</p>
+      <div class="skills-grid">
+        <div class="skill" data-level="5"><span class="skill-name">Java / Spring Boot</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Architecture</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Data modelling</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Product decisions</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Reviewing and discarding</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Shipping and deploying</span><div class="bar"><div class="bar-fill"></div></div></div>
+      </div>
+
+      <p class="skills-group">&gt; LANGUAGES I USE WITH AI SUPPORT</p>
+      <p class="section-intro" style="margin-top:0">I can read them, decide the architecture and spot when something is badly solved — but I would not
+        write them from memory. The language expertise comes from Claude; I bring the what, the why, and
+        the judgement to throw away what is not good enough.</p>
+      <div class="tag-cloud">
+        <span class="tag-tech">Kotlin</span><span class="tag-tech">Native Android</span>
+        <span class="tag-tech">Jetpack Compose</span><span class="tag-tech">React Native</span>
+        <span class="tag-tech">Expo</span><span class="tag-tech">TypeScript</span>
+        <span class="tag-tech">Supabase</span><span class="tag-tech">HTML / CSS / JS</span>
+      </div>
+
+      <p class="skills-group">&gt; AI AS A WORKING TOOL</p>
+      <div class="skills-grid">
+        <div class="skill" data-level="5"><span class="skill-name">Claude Code</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="5"><span class="skill-name">Agents</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="5"><span class="skill-name">Skills</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">MCPs</span><div class="bar"><div class="bar-fill"></div></div></div>
+        <div class="skill" data-level="4"><span class="skill-name">Engram (memory)</span><div class="bar"><div class="bar-fill"></div></div></div>
+      </div>
+      <p class="section-intro" style="margin-top:14px">Here I use <strong>Claude Code</strong>: my own agents and skills for whatever repeats, MCPs to
+        wire it to whatever is needed, and Engram as memory between sessions. At work I do the same with
+        OpenCode and GitHub Copilot — that is in the Sopra chapter.</p>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="section">
+      <h2 class="section-title">// 03 · self_taught_projects --with-ai</h2>
+      <p class="section-intro">Real projects, finished and in use — starting with me. None of them is a demo or a half-finished
+        tutorial: if they are here it is because they work. The code is private; what can be shown is the
+        problem they solve and the decisions behind them.</p>
+
+      <div class="project-grid">
+
+        <article class="pixel-card project-card">
+          <h3>StiEx <span class="ptag">Native Android</span></h3>
+          <p>Export and import WhatsApp stickers without rooting the phone or relying on dodgy third-party apps.
+          It reads WhatsApp's protected folder through the Storage Access Framework, turns photos into
+          stickers respecting WhatsApp's real limits to the letter (≤30 per pack, ≤100KB static / 500KB
+          animated) and publishes them with the official third-party API.</p>
+          <div class="stack"><span>Kotlin</span><span>Jetpack Compose</span><span>SAF</span><span>WebP</span></div>
+        </article>
+
+        <article class="pixel-card project-card">
+          <h3>gim-app <span class="ptag">Expo / React Native</span></h3>
+          <p>Training and nutrition end to end, not a spreadsheet on steroids. It generates routines with a
+          rule-based algorithm (goal, level, days, equipment) without leaning on an AI for something that
+          does not need one, guides the session with a rest timer, and keeps a pantry tracker that works
+          out when each product runs out without storing a history nobody is going to read. Auth and data
+          on Supabase with proper Row Level Security.</p>
+          <div class="stack"><span>Expo</span><span>React Native</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span></div>
+        </article>
+
+        <article class="pixel-card project-card">
+          <h3>cartelera-app <span class="ptag">Java · Spring Boot · in production</span></h3>
+          <p>A personal replacement for TV Time when it shut down: tracking series and films with Google login,
+          real multi-user support, friends, chat and an activity feed. Hexagonal architecture from
+          scratch, Caffeine cache, incremental library saving. In production, with real users who are
+          not me.</p>
+          <div class="stack"><span>Java</span><span>Spring Boot</span><span>Arq. Hexagonal</span><span>PostgreSQL</span><span>Docker</span><span>Render</span></div>
+          <a class="pixel-link" href="https://cartelera-app.onrender.com" target="_blank" rel="noopener">&gt; see it in production ↗</a>
+        </article>
+
+        <article class="pixel-card project-card">
+          <h3>PhotoSwipe <span class="ptag">Expo / React Native</span></h3>
+          <p>Clearing out a backed-up camera roll without friction: going through the gallery swipe by swipe,
+          like a card game, deciding in a single gesture which photo stays and which one goes.</p>
+          <div class="stack"><span>Expo</span><span>React Native</span><span>TypeScript</span></div>
+        </article>
+
+        <article class="pixel-card project-card">
+          <h3>Bounce <span class="ptag">Native Android</span></h3>
+          <p>The hybrid native + WebView pattern taken seriously: an HTML/JS interface reused across screens,
+          with native Android integration underneath for when the embedded browser falls short.</p>
+          <div class="stack"><span>Kotlin</span><span>WebView</span><span>HTML/JS</span></div>
+        </article>
+
+        <article class="pixel-card project-card project-card-ghost">
+          <h3>&gt; next commit...</h3>
+          <p>This very site, built with Claude Code. Self-teaching does not stop at mobile — it carries on into
+          frontend, into deploying without friction, and into how to fold AI into your own workflow
+          without it being just autocomplete.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section">
+      <h2 class="section-title">// 04 · contact.sh</h2>
+      <div class="terminal-window">
+        <div class="terminal-titlebar"><span></span><span></span><span></span><p>contact</p></div>
+        <div class="terminal-body">
+          <p class="prompt-line"><span class="prompt">$</span> ./contact.sh --send</p>
+          <div class="contact-links">
+            <a class="pixel-btn" href="mailto:kepa.cuevas@gmail.com">&gt; EMAIL</a>
+            <a class="pixel-btn" href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/" target="_blank" rel="noopener">&gt; LINKEDIN</a>
+            <a class="pixel-btn" href="https://github.com/kcuevasb" target="_blank" rel="noopener">&gt; GITHUB</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="console-wrap">
+        <div class="terminal-window">
+          <div class="terminal-titlebar"><span></span><span></span><span></span><p>interactive console</p></div>
+          <div class="terminal-body">
+            <div id="console-log" aria-live="polite">
+              <p>Type <strong>help</strong> to see the available commands.</p>
+            </div>
+            <p class="prompt-line console-input-line">
+              <span class="prompt">kepa@portfolio:~$</span>
+              <input id="console-input" type="text" autocomplete="off" spellcheck="false" aria-label="Consola interactiva">
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&gt; built with plain HTML/CSS/JS + Claude Code · no frameworks, like 1999 but with AI. 2026.</p>
+    <p><a href="/en/" class="footer-link">&lt; back to chapters</a></p>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

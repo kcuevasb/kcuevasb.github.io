@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Knowmad Mood</title>
+<meta name="description" content="Interactive CV of Kepa Cuevas Barrasa, IntelliJ IDEA style — my years at Knowmad Mood (BeeDigital and El Corte Inglés).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/en/knowmad/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Knowmad Mood">
+<meta property="og:description" content="BeeDigital and El Corte Inglés: microservices and Kafka. IntelliJ IDEA style.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%232b2b2b%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23cc7832%22 font-family=%22monospace%22>IJ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/knowmad/styles.css">
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/knowmad/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/knowmad/">
+</head>
+<body>
+<nav class="lang" aria-label="Language">
+  <a href="/knowmad/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/knowmad/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+</nav>
+
+
+<div class="ide">
+
+  <!-- TITLE BAR -->
+  <div class="ide-titlebar">
+    <span class="ij-logo">IJ</span>
+    <span class="ide-title">knowmad-experience — ClientInput.java</span>
+    <a href="/en/" class="back-link">← back to chapters</a>
+  </div>
+
+  <!-- MENU BAR -->
+  <div class="ide-menubar">
+    <span>File</span><span>Edit</span><span>View</span><span>Navigate</span>
+    <span>Code</span><span>Refactor</span><span>Build</span><span>Run</span>
+    <span>Tools</span><span>VCS</span><span>Help</span>
+  </div>
+
+  <!-- NAVIGATION / RUN BAR -->
+  <div class="ide-navbar">
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="project-panel" title="Project">☰</button>
+    <span class="crumbs">knowmad-experience <span class="sep">›</span> src <span class="sep">›</span> main <span class="sep">›</span> java <span class="sep">›</span> com.knowmad.experience <span class="sep">›</span> dto</span>
+    <span class="run-config">☕ ExperienceApplication <span class="sep">▾</span></span>
+    <span class="run-btn" title="Run">▶</span>
+    <span class="dbg-btn" title="Debug">🐞</span>
+    <span class="chapter-tag">Chapter 03 — Nov 2022 – Sep 2025</span>
+  </div>
+
+  <div class="ide-body">
+
+    <!-- PROJECT TOOL WINDOW -->
+    <aside class="project-panel" id="project-panel">
+      <div class="panel-head">Project <span class="sep">▾</span></div>
+      <div class="tree">
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📁 knowmad-experience</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📁 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">Ⓡ</span> ClientInput.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">Ⓒ</span> PositioningController.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 messaging</div>
+        <button class="tree-row tree-file" data-file="consumer"><span class="fi">Ⓒ</span> CatalogueEventConsumer.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">Ⓡ</span> Learning.java</button>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📦 docs</div>
+        <button class="tree-row tree-file" data-file="clientes"><span class="fi">📁</span> clients.md</button>
+        <button class="tree-row tree-file" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+    </aside>
+    <div class="project-backdrop" id="project-backdrop" hidden></div>
+
+    <!-- EDITOR -->
+    <main class="editor-panel">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-file="input"><span class="fi">Ⓡ</span> ClientInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">Ⓒ</span> PositioningController.java</button>
+        <button class="tab" data-file="consumer"><span class="fi">Ⓒ</span> CatalogueEventConsumer.java</button>
+        <button class="tab" data-file="entity"><span class="fi">Ⓡ</span> Learning.java</button>
+        <button class="tab" data-file="clientes"><span class="fi">📁</span> clients.md</button>
+        <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+
+      <div class="editor">
+
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.knowmad.experience.dto;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * Clients as input again — but here each one comes in
+<span class="ln">5</span> * through a different door, and that is the difference from NTT Data:
+<span class="ln">6</span> *
+<span class="ln">7</span> *   BeeDigital      → REST API (request / response)
+<span class="ln">8</span> *   El Corte Inglés → Kafka    (events, no coupling between services)
+<span class="ln">9</span> */</span>
+<span class="ln">10</span><span class="kw">public sealed interface</span> <span class="typ">ClientInput</span>
+<span class="ln">11</span>        <span class="kw">permits</span> <span class="typ">BeeDigitalRequest</span>, <span class="typ">CatalogueEvent</span> {
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="typ">String</span> <span class="mth">client</span>();
+<span class="ln">14</span>}
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cmt">// BeeDigital: comes in through the API. Java 19, records.</span>
+<span class="ln">17</span><span class="kw">record</span> <span class="typ">BeeDigitalRequest</span>(<span class="typ">String</span> company,
+<span class="ln">18</span>                         <span class="typ">String</span> sector,
+<span class="ln">19</span>                         <span class="typ">List</span>&lt;<span class="typ">String</span>&gt; keywords)
+<span class="ln">20</span>        <span class="kw">implements</span> <span class="typ">ClientInput</span> {
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Override</span>
+<span class="ln">23</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">client</span>() { <span class="kw">return</span> <span class="str">"BeeDigital"</span>; }
+<span class="ln">24</span>}
+<span class="ln">25</span>
+<span class="ln">26</span><span class="cmt">// El Corte Inglés: comes in through a Kafka event. Java 17.</span>
+<span class="ln">27</span><span class="kw">record</span> <span class="typ">CatalogueEvent</span>(<span class="typ">String</span> sku,
+<span class="ln">28</span>                     <span class="typ">String</span> category,
+<span class="ln">29</span>                     <span class="typ">Instant</span> occurredAt)
+<span class="ln">30</span>        <span class="kw">implements</span> <span class="typ">ClientInput</span> {
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="ann">@Override</span>
+<span class="ln">33</span>    <span class="kw">public</span> <span class="typ">String</span> <span class="mth">client</span>() { <span class="kw">return</span> <span class="str">"El Corte Inglés"</span>; }
+<span class="ln">34</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.beedigital.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// BeeDigital — online business positioning.</span>
+<span class="ln">4</span><span class="cmt">// Synchronous integration: REST API over AWS, with DocumentDB and</span>
+<span class="ln">5</span><span class="cmt">// DynamoDB underneath.</span>
+<span class="ln">6</span><span class="ann">@RestController</span>
+<span class="ln">7</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/posicionamiento"</span>)
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">PositioningController</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">LearningRepository</span> learnings;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@PostMapping</span>
+<span class="ln">14</span>    <span class="kw">public</span> <span class="typ">ResponseEntity</span>&lt;<span class="typ">List</span>&lt;<span class="typ">Learning</span>&gt;&gt; <span class="mth">process</span>(
+<span class="ln">15</span>            <span class="ann">@RequestBody</span> <span class="ann">@Valid</span> <span class="typ">BeeDigitalRequest</span> request) {
+<span class="ln">16</span>
+<span class="ln">17</span>        <span class="kw">var</span> result = learnings.saveAll(
+<span class="ln">18</span>                <span class="typ">Learning</span>.<span class="mth">extractFrom</span>(request));
+<span class="ln">19</span>
+<span class="ln">20</span>        <span class="kw">return</span> <span class="typ">ResponseEntity</span>.ok(result);
+<span class="ln">21</span>    }
+<span class="ln">22</span>}</pre>
+
+        <pre class="code" id="file-consumer" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.eci.messaging;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// El Corte Inglés — catalogue domain.</span>
+<span class="ln">4</span><span class="cmt">// This is where Kafka stopped being a CV line: a price change</span>
+<span class="ln">5</span><span class="cmt">// propagates without any service calling another.</span>
+<span class="ln">6</span><span class="ann">@Component</span>
+<span class="ln">7</span><span class="ann">@Slf4j</span>
+<span class="ln">8</span><span class="ann">@RequiredArgsConstructor</span>
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">CatalogueEventConsumer</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="kw">private final</span> <span class="typ">LearningRepository</span> learnings;
+<span class="ln">12</span>
+<span class="ln">13</span>    <span class="ann">@KafkaListener</span>(topics = <span class="str">"catalogue.product.updated"</span>,
+<span class="ln">14</span>                   groupId = <span class="str">"catalogue-service"</span>)
+<span class="ln">15</span>    <span class="kw">public void</span> <span class="mth">onEvent</span>(<span class="typ">CatalogueEvent</span> event, <span class="typ">Acknowledgment</span> ack) {
+<span class="ln">16</span>
+<span class="ln">17</span>        log.info(<span class="str">"Event from {} for SKU {}"</span>,
+<span class="ln">18</span>                 event.client(), event.sku());
+<span class="ln">19</span>        <span class="kw">try</span> {
+<span class="ln">20</span>            learnings.saveAll(<span class="typ">Learning</span>.<span class="mth">extractFrom</span>(event));
+<span class="ln">21</span>            ack.acknowledge();          <span class="cmt">// manual offset commit</span>
+<span class="ln">22</span>        } <span class="kw">catch</span> (<span class="typ">Exception</span> e) {
+<span class="ln">23</span>            log.error(<span class="str">"Failed processing {} → DLQ"</span>, event.sku(), e);
+<span class="ln">24</span>            <span class="kw">throw</span> e;
+<span class="ln">25</span>        }
+<span class="ln">26</span>    }
+<span class="ln">27</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.knowmad.experience.domain;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">/**
+<span class="ln">4</span> * What is learned is persisted as in the previous stage, but
+<span class="ln">5</span> * no longer in a table: here the store is a document.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@Document</span>(collection = <span class="str">"aprendizaje"</span>)
+<span class="ln">8</span><span class="kw">public record</span> <span class="typ">Learning</span>(
+<span class="ln">9</span>        <span class="ann">@Id</span> <span class="typ">String</span> id,
+<span class="ln">10</span>        <span class="typ">String</span> name,
+<span class="ln">11</span>        <span class="typ">Category</span> category,
+<span class="ln">12</span>        <span class="kw">int</span> level,
+<span class="ln">13</span>        <span class="typ">String</span> sourceClient) {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="cmt">// ————— What this stage left behind —————</span>
+<span class="ln">16</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Learning</span>&gt; <span class="mth">fromThisStage</span>() {
+<span class="ln">17</span>        <span class="kw">return</span> <span class="typ">List</span>.of(
+<span class="ln">18</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Java 11 / 17 / 19"</span>,   LANGUAGE,    5, <span class="str">"both"</span>),
+<span class="ln">19</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Records · streams"</span>,   LANGUAGE,    5, <span class="str">"both"</span>),
+<span class="ln">20</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Spring Boot 2.x / 3"</span>, FRAMEWORK,   5, <span class="str">"both"</span>),
+<span class="ln">21</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Microservices"</span>,      ARCHITECTURE,5, <span class="str">"both"</span>),
+<span class="ln">22</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"API REST"</span>,            INTEGRATION, 5, <span class="str">"BeeDigital"</span>),
+<span class="ln">23</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"JWT"</span>,                 INTEGRATION, 4, <span class="str">"BeeDigital"</span>),
+<span class="ln">24</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"AWS"</span>,                 CLOUD,       4, <span class="str">"BeeDigital"</span>),
+<span class="ln">25</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"DynamoDB · DocumentDB"</span>,DATA,       4, <span class="str">"BeeDigital"</span>),
+<span class="ln">26</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Kafka"</span>,               MESSAGING,   5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">27</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Async events"</span>,  ARCHITECTURE,5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">28</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"MongoDB"</span>,             DATA,        5, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">29</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Couchbase"</span>,           DATA,        3, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">30</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Docker"</span>,              DEPLOYMENT,  4, <span class="str">"both"</span>),
+<span class="ln">31</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Kubernetes"</span>,          DEPLOYMENT,  4, <span class="str">"El Corte Inglés"</span>),
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Jenkins · Clarive"</span>,   DEPLOYMENT,  4, <span class="str">"both"</span>),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Sonar · Mockito"</span>,     QUALITY,     5, <span class="str">"both"</span>),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Kibana"</span>,              OBSERVABILITY,3,<span class="str">"El Corte Inglés"</span>)
+<span class="ln">35</span>        );
+<span class="ln">36</span>    }
+<span class="ln">37</span>}</pre>
+        <div class="md" id="file-clientes" hidden>
+          <h1># Clients</h1>
+          <p class="md-lede">Three years of consultancy for two very different clients.</p>
+
+          <article class="proj">
+            <h3>El Corte Inglés <span class="proj-client">Aug 2023 – Sep 2025</span></h3>
+            <p>Analysis and development of backend microservices with Spring Boot for the catalogue domain.
+            Queries against non-relational databases with MongoDB. Development of inter-service
+            communication and data aggregation services, plus support on the project's architecture design.</p>
+            <p>Deployment with Jenkins and Clarive across environments, quality with Sonar, tests with Mockito and
+            JUnit, and asynchronous events with Kafka.</p>
+            <p class="proj-tech">Java 11-17 · Spring Boot · MongoDB · Couchbase · Kafka · Docker · Kubernetes · Jenkins · Clarive · Kibana · Bitbucket · Sonar</p>
+          </article>
+
+          <article class="proj">
+            <h3>BeeDigital <span class="proj-client">Nov 2022 – Jul 2023</span></h3>
+            <p>Analysis and development of backend microservices with Spring Boot for online business
+            positioning. Queries against DocumentDB and DynamoDB. Design of inter-service communication
+            and data aggregation services, with version control on Amazon Git repositories.</p>
+            <p>Deployment with Jenkins, quality with Sonar, tests with Mockito and JUnit, and asynchronous events
+            with Kafka.</p>
+            <p class="proj-tech">Java 19 · Spring Boot · AWS · DynamoDB · DocumentDB · Kafka · JWT · Jenkins · Sonar</p>
+          </article>
+        </div>
+
+        <div class="md" id="file-readme" hidden>
+          <h1># Knowmad Mood · Nov 2022 – Sep 2025</h1>
+          <p>Three years of consultancy for two clients: <strong>BeeDigital</strong> primero (online business positioning, on AWS) and <strong>El Corte Inglés</strong> afterwards (the catalogue domain, MongoDB and a lot of volume).</p>
+          <p>This is where microservices stopped being "what you are supposed to use" and became something I
+actually understood: why they are split, when it pays off, and what happens when one goes down. Also
+where Kafka went from a line on the CV to an everyday tool.</p>
+          <p><em>The previous stage (NTT Data) and the current one (Sopra Steria) have their own chapter.</em></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- BOTTOM TOOL WINDOW -->
+  <div class="ide-bottom">
+    <div class="bottom-tabs">
+      <span class="bt active">▶ Run</span>
+      <span class="bt">Problems</span>
+      <span class="bt">Terminal</span>
+    </div>
+    <pre class="console-out"><span class="ok">"C:\Java\jdk-17\bin\java.exe" ...</span>
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.x)
+
+Started CatalogueApplication in 2 years 10 months (JVM running for ~1000 days)</pre>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="ide-status">
+    <span>UTF-8</span><span class="sep">|</span><span>Java 17</span><span class="sep">|</span>
+    <span>⎇ feature/catalogue-aggregator</span><span class="status-right">1:1 · LF</span>
+  </div>
+
+</div>
+
+<script src="/knowmad/script.js"></script>
+</body>
+</html>

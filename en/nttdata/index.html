@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · NTT Data</title>
+<meta name="description" content="Interactive CV of Kepa Cuevas Barrasa, Eclipse IDE style — my first years writing code, at NTT Data.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/en/nttdata/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · NTT Data">
+<meta property="og:description" content="Five years and five clients, mostly healthcare. Java 7/8, Eclipse style.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%23eeeeee%22/><rect x=%221%22 y=%221%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%237f0055%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%237f0055%22 font-family=%22monospace%22>J</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/nttdata/styles.css">
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/nttdata/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/nttdata/">
+</head>
+<body>
+<nav class="lang" aria-label="Language">
+  <a href="/nttdata/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/nttdata/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+</nav>
+
+
+<div class="ide">
+
+  <div class="ide-titlebar">
+    <span class="ide-title">☕ Java EE - imq-digital-prescription/src/main/java/com/nttdata/imq/prescripcion/service/PrescriptionService.java - Eclipse IDE</span>
+  </div>
+
+  <div class="ide-menubar">
+    <span>File</span><span>Edit</span><span>Source</span><span>Refactor</span>
+    <span>Navigate</span><span>Search</span><span>Project</span><span>Run</span>
+    <span>Window</span><span>Help</span>
+    <a href="/en/" class="back-link">← back to chapters</a>
+  </div>
+
+  <div class="ide-toolbar">
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="explorer-panel" title="Package Explorer">☰</button>
+    <span class="tbtn" title="Nuevo">📄</span>
+    <span class="tbtn" title="Guardar">💾</span>
+    <span class="tb-sep"></span>
+    <span class="tbtn tbtn-run" title="Run">▶ Run</span>
+    <span class="tbtn" title="Debug">🐞 Debug</span>
+    <span class="chapter-tag">Chapter 02 — my first years writing code · Jul 2017 – Nov 2022</span>
+  </div>
+
+  <div class="ide-body">
+
+    <aside class="explorer-panel" id="explorer-panel">
+      <div class="panel-head">Package Explorer</div>
+      <div class="tree">
+        <div class="tree-row tree-project"><span class="tw">▾</span> 📦 imq-digital-prescription</div>
+        <div class="tree-row tree-folder"><span class="tw">▾</span> 📂 src/main/java</div>
+        <div class="tree-row tree-pkg"><span class="tw">▾</span> 📂 com.nttdata.imq.prescription</div>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 api</div>
+        <button class="tree-row tree-file" data-file="controller"><span class="fi">☕</span> ExperienceController.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 dto</div>
+        <button class="tree-row tree-file active" data-file="input"><span class="fi">☕</span> ClientInput.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 domain</div>
+        <button class="tree-row tree-file" data-file="entity"><span class="fi">☕</span> Learning.java</button>
+        <div class="tree-row tree-pkg2"><span class="tw">▾</span> 📂 docs</div>
+        <button class="tree-row tree-file" data-file="proyectos"><span class="fi">📁</span> clients.md</button>
+        <button class="tree-row tree-file tree-file-md" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+    </aside>
+    <div class="explorer-backdrop" id="explorer-backdrop" hidden></div>
+
+    <main class="editor-panel">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-file="input"><span class="fi">☕</span> ClientInput.java</button>
+        <button class="tab" data-file="controller"><span class="fi">☕</span> ExperienceController.java</button>
+        <button class="tab" data-file="entity"><span class="fi">☕</span> Learning.java</button>
+        <button class="tab" data-file="proyectos"><span class="fi">📁</span> clients.md</button>
+        <button class="tab" data-file="readme"><span class="fi">📄</span> README.md</button>
+      </div>
+
+      <div class="editor">
+
+        <pre class="code" id="file-input"><span class="ln">1</span><span class="kw">package</span> com.nttdata.experience.dto;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * Clients are the input to the system: they bring the problem,
+<span class="ln">5</span> * the domain and the constraints. Everything else comes from here.
+<span class="ln">6</span> *
+<span class="ln">7</span> * In this stage integration was ALWAYS via API — REST outwards,
+<span class="ln">8</span> * SOAP against the client's systems. No events at all.
+<span class="ln">9</span> *
+<span class="ln">10</span> * <span class="jtag">@author</span> Kepa Cuevas
+<span class="ln">11</span> * <span class="jtag">@since</span>  Java 8 · Spring Boot 2.1
+<span class="ln">12</span> */</span>
+<span class="ln">13</span><span class="kw">public class</span> <span class="typ">ClientInput</span> {
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="kw">public static final</span> <span class="typ">ClientInput</span> IMQ_MEDIADORES =
+<span class="ln">16</span>        <span class="kw">new</span> <span class="typ">ClientInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Broker Portal"</span>,
+<span class="ln">17</span>                          <span class="typ">Integration</span>.REST);
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="kw">public static final</span> <span class="typ">ClientInput</span> IMQ_PRESCRIPCION =
+<span class="ln">20</span>        <span class="kw">new</span> <span class="typ">ClientInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Digital Prescription"</span>,
+<span class="ln">21</span>                          <span class="typ">Integration</span>.REST, <span class="typ">Integration</span>.SOAP);
+<span class="ln">22</span>
+<span class="ln">23</span>    <span class="kw">public static final</span> <span class="typ">ClientInput</span> IMQ_CORE =
+<span class="ln">24</span>        <span class="kw">new</span> <span class="typ">ClientInput</span>(<span class="str">"IMQ"</span>, <span class="str">"Care Core"</span>,
+<span class="ln">25</span>                          <span class="typ">Integration</span>.SOAP);
+<span class="ln">26</span>
+<span class="ln">27</span>    <span class="kw">public static final</span> <span class="typ">ClientInput</span> VALDECILLA =
+<span class="ln">28</span>        <span class="kw">new</span> <span class="typ">ClientInput</span>(<span class="str">"H. U. Marqués de Valdecilla"</span>,
+<span class="ln">29</span>                          <span class="str">"Non-clinical area management"</span>,
+<span class="ln">30</span>                          <span class="typ">Integration</span>.SOAP);
+<span class="ln">31</span>
+<span class="ln">32</span>    <span class="kw">public static final</span> <span class="typ">ClientInput</span> SIEMENS_GAMESA =
+<span class="ln">33</span>        <span class="kw">new</span> <span class="typ">ClientInput</span>(<span class="str">"Siemens-Gamesa"</span>,
+<span class="ln">34</span>                          <span class="str">"Field Service Management (OFSC)"</span>,
+<span class="ln">35</span>                          <span class="typ">Integration</span>.REST);
+<span class="ln">36</span>
+<span class="ln">37</span>    <span class="kw">private final</span> <span class="typ">String</span> client;
+<span class="ln">38</span>    <span class="kw">private final</span> <span class="typ">String</span> project;
+<span class="ln">39</span>    <span class="kw">private final</span> <span class="typ">List</span>&lt;<span class="typ">Integration</span>&gt; integrations;
+<span class="ln">40</span>
+<span class="ln">41</span>    <span class="cmt">// ...constructor and getters (Alt+Shift+S in Eclipse)</span>
+<span class="ln">42</span>}</pre>
+
+        <pre class="code" id="file-controller" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.experience.api;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="cmt">// Five years taking clients in through the front door and</span>
+<span class="ln">4</span><span class="cmt">// always handing back something learned.</span>
+<span class="ln">5</span><span class="ann">@RestController</span>
+<span class="ln">6</span><span class="ann">@RequestMapping</span>(<span class="str">"/api/nttdata/experience"</span>)
+<span class="ln">7</span><span class="kw">public class</span> <span class="typ">ExperienceController</span> {
+<span class="ln">8</span>
+<span class="ln">9</span>    <span class="kw">private static final</span> <span class="typ">Logger</span> LOG =
+<span class="ln">10</span>            LoggerFactory.getLogger(<span class="typ">ExperienceController</span>.<span class="kw">class</span>);
+<span class="ln">11</span>
+<span class="ln">12</span>    <span class="ann">@Autowired</span>
+<span class="ln">13</span>    <span class="kw">private</span> <span class="typ">LearningRepository</span> repository;
+<span class="ln">14</span>
+<span class="ln">15</span>    <span class="ann">@Autowired</span>
+<span class="ln">16</span>    <span class="kw">private</span> <span class="typ">WsSisnetClient</span> wsSisnet;   <span class="cmt">// SOAP, IMQ</span>
+<span class="ln">17</span>
+<span class="ln">18</span>    <span class="ann">@PostMapping</span>(<span class="str">"/projects"</span>)
+<span class="ln">19</span>    <span class="ann">@Transactional</span>
+<span class="ln">20</span>    <span class="kw">public</span> <span class="typ">List</span>&lt;<span class="typ">Learning</span>&gt; <span class="mth">work</span>(<span class="ann">@RequestBody</span> <span class="typ">ClientInput</span> client) {
+<span class="ln">21</span>
+<span class="ln">22</span>        LOG.info(<span class="str">"New project for {}"</span>, client.getClient());
+<span class="ln">23</span>
+<span class="ln">24</span>        <span class="kw">if</span> (client.usa(<span class="typ">Integration</span>.SOAP)) {
+<span class="ln">25</span>            wsSisnet.validarConexion();
+<span class="ln">26</span>        }
+<span class="ln">27</span>
+<span class="ln">28</span>        <span class="cmt">// What comes in is a client; what stays is what was learned.</span>
+<span class="ln">29</span>        <span class="kw">return</span> repository.saveAll(<span class="typ">Learning</span>.<span class="mth">de</span>(client));
+<span class="ln">30</span>    }
+<span class="ln">31</span>}</pre>
+
+        <pre class="code" id="file-entity" hidden><span class="ln">1</span><span class="kw">package</span> com.nttdata.experience.domain;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="jdoc">/**
+<span class="ln">4</span> * What is learned is the only thing persisted: projects end,
+<span class="ln">5</span> * clients change, but this stays in the database.
+<span class="ln">6</span> */</span>
+<span class="ln">7</span><span class="ann">@Entity</span>
+<span class="ln">8</span><span class="ann">@Table</span>(name = <span class="str">"LEARNING"</span>)
+<span class="ln">9</span><span class="kw">public class</span> <span class="typ">Learning</span> <span class="kw">implements</span> <span class="typ">Serializable</span> {
+<span class="ln">10</span>
+<span class="ln">11</span>    <span class="ann">@Id</span>
+<span class="ln">12</span>    <span class="ann">@GeneratedValue</span>(strategy = <span class="typ">GenerationType</span>.SEQUENCE,
+<span class="ln">13</span>                    generator = <span class="str">"SEQ_LEARNING"</span>)
+<span class="ln">14</span>    <span class="kw">private</span> <span class="typ">Long</span> id;
+<span class="ln">15</span>
+<span class="ln">16</span>    <span class="ann">@Column</span>(nullable = <span class="kw">false</span>)
+<span class="ln">17</span>    <span class="kw">private</span> <span class="typ">String</span> name;
+<span class="ln">18</span>
+<span class="ln">19</span>    <span class="ann">@Enumerated</span>(<span class="typ">EnumType</span>.STRING)
+<span class="ln">20</span>    <span class="kw">private</span> <span class="typ">Category</span> categoria;   <span class="cmt">// LANGUAGE, DATA, INTEGRATION...</span>
+<span class="ln">21</span>
+<span class="ln">22</span>    <span class="ann">@Column</span>(name = <span class="str">"NIVEL"</span>)
+<span class="ln">23</span>    <span class="kw">private int</span> level;             <span class="cmt">// 1..5</span>
+<span class="ln">24</span>
+<span class="ln">25</span>    <span class="ann">@ManyToOne</span>(fetch = <span class="typ">FetchType</span>.LAZY)
+<span class="ln">26</span>    <span class="ann">@JoinColumn</span>(name = <span class="str">"SOURCE_CLIENT"</span>)
+<span class="ln">27</span>    <span class="kw">private</span> <span class="typ">Client</span> source;         <span class="cmt">// which client it came from</span>
+<span class="ln">28</span>
+<span class="ln">29</span>    <span class="cmt">// ————— What this stage left behind —————</span>
+<span class="ln">30</span>    <span class="kw">public static</span> <span class="typ">List</span>&lt;<span class="typ">Learning</span>&gt; <span class="mth">fromThisStage</span>() {
+<span class="ln">31</span>        <span class="kw">return</span> <span class="typ">Arrays</span>.asList(
+<span class="ln">32</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Java 7 / 8"</span>,        LANGUAGE,    5),
+<span class="ln">33</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Java 11"</span>,           LANGUAGE,    4),
+<span class="ln">34</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"J2EE"</span>,              LANGUAGE,    4),
+<span class="ln">35</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Spring Framework"</span>,  FRAMEWORK,   4),
+<span class="ln">36</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Spring Boot 2.1"</span>,   FRAMEWORK,   4),
+<span class="ln">37</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"API REST"</span>,          INTEGRATION, 4),
+<span class="ln">38</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"SOAP · WSSisnet"</span>,   INTEGRATION, 4),
+<span class="ln">39</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"HATEOAS"</span>,           INTEGRATION, 3),
+<span class="ln">40</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"JPA · Hibernate"</span>,   DATA,        4),
+<span class="ln">41</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"QueryDSL"</span>,          DATA,        4),
+<span class="ln">42</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Oracle · PL/SQL"</span>,   DATA,        4),
+<span class="ln">43</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"PostgreSQL"</span>,        DATA,        3),
+<span class="ln">44</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"ZK · jQuery"</span>,       FRONT,       3),
+<span class="ln">45</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"WebLogic · Tomcat"</span>, DEPLOYMENT,  3),
+<span class="ln">46</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Jenkins · Azure"</span>,   DEPLOYMENT,  3),
+<span class="ln">47</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Maven · SVN · Git"</span>, TOOLING,     4),
+<span class="ln">48</span>            <span class="kw">new</span> <span class="typ">Learning</span>(<span class="str">"Scrum"</span>,             METHODOLOGY, 4)
+<span class="ln">49</span>        );
+<span class="ln">50</span>    }
+<span class="ln">51</span>}</pre>
+        <div class="md" id="file-proyectos" hidden>
+          <h1># Clients and projects</h1>
+          <p class="md-lede">Five years, five projects. Mostly healthcare — where a bug is not an incident,
+it is a prescription that never arrives.</p>
+
+          <article class="proj">
+            <h3>Broker Portal <span class="proj-client">IMQ</span></h3>
+            <p>Analysis and development of the application from scratch. The most modern one of the stage.</p>
+            <p class="proj-tech">Java 11 · Spring Boot 2.3 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · PostgreSQL</p>
+          </article>
+
+          <article class="proj">
+            <h3>Digital Prescription <span class="proj-client">IMQ</span></h3>
+            <p>Development and maintenance. Plus managing and running the deployments across environments.</p>
+            <p class="proj-tech">Java 8 · Spring Boot 2.1 · HATEOAS · JPA · QueryDSL · Hibernate · API REST · SOAP · Azure · Oracle · PL/SQL · SVN</p>
+          </article>
+
+          <article class="proj">
+            <h3>Care Core <span class="proj-client">IMQ</span></h3>
+            <p>Functional improvements and incident resolution on the care core.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · QueryDSL · Oracle · Tomcat 7</p>
+          </article>
+
+          <article class="proj">
+            <h3>Hospital management <span class="proj-client">H. U. Marqués de Valdecilla</span></h3>
+            <p>Improvements and incident resolution in the management of the hospital's non-clinical areas, plus
+deployments across environments.</p>
+            <p class="proj-tech">J2EE · Hibernate · Spring · ZK · jQuery · Oracle · WebLogic 11g</p>
+          </article>
+
+          <article class="proj">
+            <h3>Field Service Management <span class="proj-client">Siemens-Gamesa</span></h3>
+            <p>Analysis and configuration of Field Service solutions. The only project of the stage outside
+healthcare and outside Java.</p>
+            <p class="proj-tech">Oracle Field Service Cloud (OFSC)</p>
+          </article>
+        </div>
+
+        <div class="md" id="file-readme" hidden>
+          <h1># NTT Data · Jul 2017 – Nov 2022</h1>
+          <p>My first contract as a developer, after a year at Domino's Pizza and six months at Telepizza as
+shift manager (that one is in chapter 01).</p>
+          <p>Five years of analysis, design and management of developments, maintenance and enhancements, and a
+fair few production incidents. This is where I learned what no course teaches: how to defend a change
+in front of the client, and that the code you write today will be maintained by someone else three
+years from now.</p>
+          <p><em>The following stages (Knowmad Mood and Sopra Steria) have their own chapter.</em></p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="ide-bottom">
+    <div class="bottom-tabs">
+      <span class="bt active">Console</span>
+      <span class="bt">Problems <b class="ok">0</b></span>
+    </div>
+    <pre class="console-out">Buildfile: build.xml
+   [javac] Compiling 2 source files to /bin
+   [javac] Note: uses unchecked or unsafe operations. Recompile with -Xlint.
+BUILD SUCCESSFUL
+Total time: 5 years</pre>
+  </div>
+
+</div>
+
+<script src="/nttdata/script.js"></script>
+</body>
+</html>

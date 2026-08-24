@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepa Cuevas Barrasa · Sopra Steria</title>
+<meta name="description" content="Interactive CV of Kepa Cuevas Barrasa, in the shape of a conversation with an AI.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kcuevasb.github.io/en/ia/">
+<meta property="og:title" content="Kepa Cuevas Barrasa · Sopra Steria">
+<meta property="og:description" content="Leroy Merlin: hexagonal architecture, Kafka and GCP. The CV as a conversation.">
+<meta property="og:image" content="https://kcuevasb.github.io/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kcuevasb.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%235b57d1%22/><circle cx=%228%22 cy=%228%22 r=%223%22 fill=%22%23fff%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<link rel="stylesheet" href="/ia/styles.css">
+<noscript>
+  <!-- Every answer in this chapter lives inside <template>, which CSS can
+       never reveal — templates are inert by design. So unlike the other
+       chapters, this one needs a real static fallback below, not a
+       stylesheet override. -->
+  <style>
+    .app{ display:none !important; }
+    .ns{ max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+    .ns h1{ font-size: 26px; margin: 0 0 4px; }
+    .ns .ns-role{ color: var(--fg-dim); margin: 0 0 24px; }
+    .ns h2{ font-size: 15px; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--accent); margin: 28px 0 10px; }
+    .ns p{ line-height: 1.6; margin: 0 0 12px; }
+    .ns a{ color: var(--accent); }
+    .ns ul{ padding-left: 20px; line-height: 1.6; }
+  </style>
+</noscript>
+<link rel="stylesheet" href="/lang.css">
+<link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/ia/">
+<link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/ia/">
+</head>
+<body>
+<nav class="lang" aria-label="Language">
+  <a href="/ia/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/ia/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
+</nav>
+
+
+<noscript>
+  <div class="ns">
+    <h1>Kepa Cuevas Barrasa</h1>
+    <p class="ns-role">Software Engineer · Java · Spring Boot · Microservices</p>
+
+    <p>This page works best with JavaScript enabled (it is built as a conversation). Here is the
+    content in plain form.</p>
+
+    <h2>Sopra Steria · client: Leroy Merlin · Sep 2025 — present</h2>
+    <ul>
+      <li>Analysis and development of backend microservices with Spring Boot for the HF3P product family.</li>
+      <li>Queries against PostgreSQL and MongoDB; inter-service communication and data aggregation services.</li>
+      <li>Support on architecture design, including microservices built from scratch with hexagonal architecture.</li>
+      <li>Deployment on GKE/Kubernetes, quality with Sonar, tests with Mockito/JUnit, events with Kafka Avro.</li>
+    </ul>
+
+    <h2>Stack</h2>
+    <p>Java 17+ · Spring Boot 4 · API REST · Kafka Avro · PostgreSQL · MongoDB · GCP · GKE/Kubernetes ·
+    Hexagonal architecture · Artifactory · Sonar. And day to day: OpenCode with GitHub Copilot, agents,
+    skills, MCPs and Engram.</p>
+
+    <h2>Contact</h2>
+    <p>
+      <a href="mailto:kepa.cuevas@gmail.com">kepa.cuevas@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/">LinkedIn</a> ·
+      <a href="https://github.com/kcuevasb">GitHub</a>
+    </p>
+
+    <h2>Other chapters</h2>
+    <p>
+      <a href="/en/">Home</a> ·
+      <a href="/en/cv/">One-page CV (PDF)</a>
+    </p>
+  </div>
+</noscript>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a href="/en/" class="back-link">← back to chapters</a>
+      <div class="brand">
+        <span class="brand-mark">K</span>
+        <div>
+          <p class="brand-name">Kepa CV</p>
+          <p class="brand-chapter">Chapter 04 — where I am now</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="new-chat" id="new-chat-btn">+ New question</button>
+
+    <nav class="thread-list" aria-label="CV sections">
+      <button class="thread active" data-thread="sobre-mi"><span class="t-icon">👤</span> About me</button>
+      <button class="thread" data-thread="experiencia"><span class="t-icon">💼</span> Experience</button>
+      <button class="thread" data-thread="skills"><span class="t-icon">⚡</span> Skills</button>
+      <button class="thread" data-thread="contacto"><span class="t-icon">✉️</span> Contact</button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <span class="model-pill">kepa-cv · v2026.1</span>
+      <p class="disclaimer">Scripted answers, not a real model — for the real thing, use the contact links 🙂</p>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+  <!-- MAIN -->
+  <main class="chat">
+    <header class="chat-top">
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar" title="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <span class="chat-top-title" id="chat-top-title">About me</span>
+    </header>
+
+    <div class="messages" id="messages" aria-live="polite"></div>
+
+    <form class="composer" id="composer">
+      <input id="composer-input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="Ask this CV something… (try &quot;help&quot;)" aria-label="Type a question">
+      <button type="submit" class="send-btn" aria-label="Send">↑</button>
+    </form>
+  </main>
+
+</div>
+
+<!-- THREAD CONTENT TEMPLATES -->
+<template id="tpl-sobre-mi">
+  <p class="user-q">Who are you and what do you do?</p>
+  <div class="a-body">
+    <p>I am Kepa Cuevas Barrasa, a software engineer: in the industry since 2017, with seven years of
+    coding behind me. I build Java/Spring Boot backends for sectors where a failure is not a
+    footnote: insurance, ecommerce, healthcare.</p>
+    <p>Analysis, design and development of microservices, focused on data integrity, asynchronous
+    messaging and deployments that do not depend on me being there. A problem-solver: I would rather
+    find the root cause than a patch that holds until Friday.</p>
+    <p>This chapter covers my current stage, at <strong>Sopra Steria</strong> — and it is built as a chat
+    because that is exactly how I work today: with an AI copilot beside me all day. The earlier chapters
+    each wear the look of the tool of their time.</p>
+    <div class="chip-row">
+      <span class="chip">Spanish · C2</span>
+      <span class="chip">Basque · C1</span>
+      <span class="chip">English · B2</span>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-experiencia">
+  <p class="user-q">What are you working on right now?</p>
+  <div class="a-body">
+    <article class="role-card">
+      <div class="role-card-head"><strong>Sopra Steria</strong><span>· client: Leroy Merlin</span><time>Sep 2025 — present</time></div>
+      <p>Analysis and development of backend microservices with Spring Boot for the HF3P product family at
+      Leroy Merlin Spain. Queries against relational (PostgreSQL) and non-relational (MongoDB) databases,
+      plus development of the inter-service communication and data aggregation services.</p>
+      <p>Support on the project's architecture design, including microservices built from scratch with
+      hexagonal architecture. Deployment on GKE/Kubernetes, code quality with Sonar, unit and integration
+      tests with Mockito/JUnit, and asynchronous events with Kafka Avro.</p>
+      <div class="chip-row small">
+        <span class="chip">Java 17+</span><span class="chip">Spring Boot 4</span><span class="chip">API REST</span>
+        <span class="chip">Kafka Avro</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+        <span class="chip">GKE/Kubernetes</span><span class="chip">Artifactory</span><span class="chip">Hexagonal arch.</span>
+      </div>
+    </article>
+
+    <p class="prose-note">Each earlier stage has its own chapter, styled after the tool I used back then:
+    <strong>NTT Data</strong> (2017–2022) in Eclipse and <strong>Knowmad Mood</strong> (2022–2025) in
+    IntelliJ. They are on the home page.</p>
+  </div>
+</template>
+
+<template id="tpl-skills">
+  <p class="user-q">What are you using and learning in this stage?</p>
+  <div class="a-body">
+    <p>This stage has two halves: the usual backend work, now well settled, and a new way of working
+    built on AI agents. Starting with the first:</p>
+
+    <p class="sk-group-title">Backend · the craft</p>
+    <div class="skill-rows">
+      <div class="skill-row" data-level="5"><span>Java 17+</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Spring Boot 4</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>API REST</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Kafka Avro</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>Microservices</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Hexagonal arch.</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>PostgreSQL</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>MongoDB</span><i class="meter"><b></b></i></div>
+    </div>
+
+    <p class="sk-group-title">Cloud · what is new here</p>
+    <div class="skill-rows">
+      <div class="skill-row" data-level="4"><span>GCP</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>GKE / Kubernetes</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Artifactory · Sonar</span><i class="meter"><b></b></i></div>
+    </div>
+
+    <p class="sk-group-title">AI applied to work · what I have learned most from</p>
+    <div class="skill-rows">
+      <div class="skill-row" data-level="5"><span>OpenCode</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="5"><span>GitHub Copilot</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Agents</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Skills</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>MCPs</span><i class="meter"><b></b></i></div>
+      <div class="skill-row" data-level="4"><span>Engram (memory)</span><i class="meter"><b></b></i></div>
+    </div>
+
+    <p class="prose-note">I use <strong>OpenCode with GitHub Copilot</strong> as my day-to-day agent, with my own agents and
+    skills for whatever repeats, MCPs to wire it into the project's tools, and Engram as persistent memory
+    between sessions. On personal projects I do the same with Claude Code — that is in the Matrix chapter.</p>
+  </div>
+</template>
+
+<template id="tpl-contacto">
+  <p class="user-q">How can I get in touch?</p>
+  <div class="a-body">
+    <p>Through any of these — you get me, not a model:</p>
+    <div class="action-row">
+      <a class="action-btn" href="mailto:kepa.cuevas@gmail.com">✉️ Email</a>
+      <a class="action-btn" href="https://www.linkedin.com/in/kepa-cuevas-barrasa-135338137/" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a class="action-btn" href="https://github.com/kcuevasb" target="_blank" rel="noopener">🐙 GitHub</a>
+    </div>
+  </div>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -102,7 +102,11 @@ body{
      verde fosforito de la lluvia sin tocar el color base de cada glifo. */
   text-shadow: 0 0 6px rgba(80, 220, 130, .45);
 }
-.cv-id{ min-width:0; display:flex; flex-direction:column; }
+/* space-between en vez de un margin-top:auto en el enlace del PDF: con auto,
+   todo el sobrante respecto al alto del retrato caia en un unico hueco y
+   dejaba un vacio enorme antes del boton. Repartido, cada separacion crece lo
+   mismo y se mantiene el ritmo original, que ya era mas apretado arriba. */
+.cv-id{ min-width:0; display:flex; flex-direction:column; justify-content: space-between; }
 .cv-name{
   font-family: var(--font-pixel);
   font-size: clamp(15px, 2.1vw, 22px);
@@ -349,12 +353,11 @@ body{
    borde gris de antes se perdia contra el fondo. */
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
-  /* auto en vez de una medida fija: la columna de texto es tan alta como el
-     retrato, asi que esto lo empuja hasta cuadrar con el borde de abajo del
-     marco. Y flex-start para que la pildora siga midiendo lo que su texto:
-     como hijo de una columna flex, por defecto se estiraria a todo el ancho. */
-  margin-top: auto;
   align-self: flex-start;
+  /* Los otros tres huecos heredan el margen inferior del elemento de arriba
+     (10, 12 y 14px); sin esto el del PDF seria el unico sin nada propio y se
+     quedaria mas apretado que los demas. */
+  margin-top: 12px;
   color: var(--fg-dim);
   font-size: 15px;
   text-decoration: none;

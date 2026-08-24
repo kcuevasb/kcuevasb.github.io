@@ -32,24 +32,29 @@
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
-  /* GEOMETRIA DEL HOMBRO APROBADA — no tocar sin motivo.
+  /* GEOMETRIA DEL HOMBRO — leer antes de tocar FLARE o SIDE_AT.
 
-     Costo muchas vueltas llegar aqui y el resultado esta validado por el
-     usuario. Las cuatro constantes de abajo trabajan juntas y cambiar una
-     sola descuadra el conjunto. La progresion de ancho que producen, en
-     celdas de las 58 de la rejilla, de la base del cuello hacia abajo:
+     La progresion de ancho, en celdas de las 58 de la rejilla y de la base
+     del cuello hacia abajo:
 
-       24, 26, 28, 30, 32, 36, 42, 48, 52, 54, 55, 56, 58
+       24, 26, 27, 30, 33, 39, 50, 58, 58, 58, 58, 58, 58
 
-     Es decir: arranca estrecho en el cuello, se abre de forma continua sin
-     mesetas y toca las DOS esquinas inferiores en la ultima fila. Si al
-     tocar algo la progresion se aplana a media altura o deja de llegar a
-     58, se ha roto.
+     Lo que importa no es solo cuanto ensancha, sino HACIA DONDE. El hombro
+     tiene que ensanchar hacia los BORDES del marco, no hacia la cabeza: la
+     parte de arriba, junto al cuello, se queda estrecha (24, 26, 27) y todo
+     el crecimiento se va hacia fuera, hasta apoyarse en el lateral y bajar
+     por el.
 
-     Dos cosas que se probaron y NO gustaron: recortar filas por abajo (no
-     adelgaza el hombro, deja hueco y sube el retrato dentro del cuadro) y
-     sacar el hombro por los LADOS con exponente menor que uno (deja media
-     docena de filas planas apoyadas en los bordes). */
+     Las dos constantes tiran en direcciones opuestas y hay que moverlas a
+     la vez. SIDE_AT adelanta la altura a la que se alcanza el lateral, pero
+     por si solo comprime la misma curva en menos filas y engorda tambien la
+     parte de arriba. FLARE alto compensa: mantiene el hombro estrecho mas
+     tiempo y luego lo saca de golpe. Medido, bajar FLARE a secas fue el
+     error — con 1.0 la parte junto al cuello pasaba de 24, 26, 28, 30, 32 a
+     26, 31, 34, 38, 41, o sea el bulto crecia hacia la cabeza.
+
+     Tambien se probo y NO vale recortar filas por abajo: no adelgaza el
+     hombro, deja hueco y sube el retrato dentro del cuadro. */
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
   const CLOSE_W = 12;     // ventana del cierre que borra las mellas largas
@@ -57,7 +62,8 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
-  const FLARE = 2.2;      // curva con la que el hombro sale del encuadre
+  const FLARE = 4.5;      // curva con la que el hombro sale del encuadre
+  const SIDE_AT = 0.88;   // altura a la que el hombro alcanza el lateral
   const TONE_CAP = 1.2;   // techo de luz del hombro, sobre el tono de su fila
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
@@ -358,7 +364,7 @@
            asi que el hombro se quedaba en una meseta y parecia cortado a
            media altura en vez de salirse del cuadro. Se le anade una
            apertura que termina en el borde inferior. */
-        const t = (y - shoulderFrom) / (N - 1 - shoulderFrom);
+        const t = Math.min(1, (y - shoulderFrom) / (N * SIDE_AT - shoulderFrom));
         const r = base + (cx - base) * Math.pow(t, FLARE);
 
         x0 = Math.max(0, Math.round(cx - r));

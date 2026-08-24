@@ -342,20 +342,22 @@ body{
 .p-bubble-ai{ align-self:flex-start; background:#eeecfb; color:#1f1e2b; border-bottom-left-radius: 3px; }
 
 
-/* Vive en la cabecera, junto al nombre y el contacto: quien entra buscando
-   el PDF de toda la vida lo encuentra sin bajar por los cinco capítulos. */
+/* Va justo debajo del rol, antes del resumen: quien entra con prisa quiere el
+   PDF, no leerse tres parrafos primero. Y en color de acento, porque con el
+   borde gris de antes se perdia contra el fondo. */
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
-  margin-top: 18px;
-  color: var(--fg-dim);
-  font-size: 15px;
+  margin: 0 0 16px;
+  color: var(--accent);
+  font-size: 16px;
   text-decoration: none;
-  border: 1px solid #2a2f3a;
-  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  background: rgba(255, 204, 0, .08);
+  padding: 9px 18px;
   border-radius: 20px;
-  transition: color .15s, border-color .15s;
+  transition: background .15s, color .15s;
 }
-.export-link:hover{ color: var(--fg); border-color: var(--fg-dim); }
+.export-link:hover{ background: var(--accent); color: #0b0d12; }
 
 /* ---------- Pie ----------
    Sustituye al cartel de navegacion por teclado. El prompt es el mismo que

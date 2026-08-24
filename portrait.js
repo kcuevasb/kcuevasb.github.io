@@ -94,15 +94,19 @@
   })();
 
   /* Rampa de verdes: de la lluvia de fondo apagada al blanco verdoso de las
-     zonas mas iluminadas de la cara. Los tramos medios llevan el rojo a 0
-     porque es lo que da el verde saturado de la pelicula; con rojo de por
-     medio el conjunto tira a oliva y se ve descolorido. */
+     zonas mas iluminadas de la cara.
+
+     Para ACLARAR el verde hay dos caminos y dan resultados distintos: subir
+     el rojo aclara pero tira a oliva y descolorido, mientras que subir verde
+     y azul aclara hacia menta y sigue leyendose verde. Se va por el segundo,
+     por eso el rojo se mueve poco y el azul es el que mas sube en los tramos
+     medios. */
   const STOPS = [
-    [0.00, [  8,  44,  22]],
-    [0.30, [  0, 128,  48]],
-    [0.62, [  0, 208,  78]],
-    [0.85, [ 88, 232, 126]],
-    [1.00, [188, 246, 202]]
+    [0.00, [ 10,  54,  30]],
+    [0.30, [  8, 158,  82]],
+    [0.62, [ 52, 236, 132]],
+    [0.85, [136, 248, 180]],
+    [1.00, [208, 252, 224]]
   ];
   function shade(t){
     for (let i = 1; i < STOPS.length; i++){
@@ -674,8 +678,8 @@
         const lit = 0.20 + 0.80 * mask[i];
         const a = fade * fade * (k === 0 ? 0.95 : 0.5) * lit;
         ctx.fillStyle = k === 0
-          ? 'rgba(190,246,205,' + a.toFixed(3) + ')'
-          : 'rgba(0,212,90,' + a.toFixed(3) + ')';
+          ? 'rgba(208,252,226,' + a.toFixed(3) + ')'
+          : 'rgba(45,236,128,' + a.toFixed(3) + ')';
         ctx.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
       }
     }

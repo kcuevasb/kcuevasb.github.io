@@ -32,6 +32,24 @@
   const EDGE_K = 5;       // columnas de borde que estiman el fondo
   const FIG_TH = 12;      // distancia al fondo a partir de la cual hay contorno
   const MORPH = 3;        // radio de limpieza de forma, en pixeles de SAMPLE
+  /* GEOMETRIA DEL HOMBRO APROBADA — no tocar sin motivo.
+
+     Costo muchas vueltas llegar aqui y el resultado esta validado por el
+     usuario. Las cuatro constantes de abajo trabajan juntas y cambiar una
+     sola descuadra el conjunto. La progresion de ancho que producen, en
+     celdas de las 58 de la rejilla, de la base del cuello hacia abajo:
+
+       24, 26, 28, 30, 32, 36, 42, 48, 52, 54, 55, 56, 58
+
+     Es decir: arranca estrecho en el cuello, se abre de forma continua sin
+     mesetas y toca las DOS esquinas inferiores en la ultima fila. Si al
+     tocar algo la progresion se aplana a media altura o deja de llegar a
+     58, se ha roto.
+
+     Dos cosas que se probaron y NO gustaron: recortar filas por abajo (no
+     adelgaza el hombro, deja hueco y sube el retrato dentro del cuadro) y
+     sacar el hombro por los LADOS con exponente menor que uno (deja media
+     docena de filas planas apoyadas en los bordes). */
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
   const CLOSE_W = 12;     // ventana del cierre que borra las mellas largas

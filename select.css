@@ -63,6 +63,10 @@ body{
 }
 .portrait{
   flex-shrink:0;
+  /* Sin esto, el align-items:stretch de la cabecera estira el marco hasta el
+     alto (o el ancho, en movil) de la columna de texto y el canvas se queda
+     dentro rodeado de negro. El marco lo define el canvas, no la fila. */
+  align-self: flex-start;
   border: 2px solid #2a2f3a;
   border-radius: 4px;
   /* Mismo negro que el canvas: con el gris de antes se notaba el escalon
@@ -80,7 +84,7 @@ body{
   /* El cuadrado se reserva desde el primer pintado, antes de que el JS mida
      y dimensione el canvas: sin esto la cabecera da un salto al aparecer. */
   aspect-ratio: 1;
-  width: 272px;
+  width: 240px;
   max-width: 100%;
   /* Lo pinta portrait.js; aqui solo el color de reposo del primer frame. */
   background: #05070a;
@@ -126,6 +130,9 @@ body{
 
 @media (max-width: 720px){
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
+  /* Mas especifico que el align-self de la regla base, que si no lo pegaria
+     al borde izquierdo. */
+  .cv-head .portrait{ align-self: center; }
   .cv-summary{ margin-left:auto; margin-right:auto; }
   .cv-contact{ justify-content:center; }
   /* 80 columnas a 0.5em son 40em: a 8px ocupan 320px y con el marco caben en

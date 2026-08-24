@@ -79,7 +79,7 @@
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo
   const CONTRAST = 1.3;   // expansion del contraste dentro de la figura
-  const UNSHARP = 1.4;    // realce local de los rasgos de la cara
+  const UNSHARP = 2.2;    // realce local de los rasgos de la cara
   const BLUR_R = 3;       // radio del desenfoque de referencia, en celdas
   const SHADES = 32;      // niveles de color (se agrupa el dibujo por color)
   const TRAIL = 15;       // celdas de estela por gota
@@ -99,14 +99,22 @@
      Para ACLARAR el verde hay dos caminos y dan resultados distintos: subir
      el rojo aclara pero tira a oliva y descolorido, mientras que subir verde
      y azul aclara hacia menta y sigue leyendose verde. Se va por el segundo,
-     por eso el rojo se mueve poco y el azul es el que mas sube en los tramos
-     medios. */
+     por eso el rojo se mueve poco y el azul es el que mas sube.
+
+     Pero aclarar sin mirar el RECORRIDO cuesta contraste: si los tramos
+     medios suben mas que el techo, el rango se comprime y la cara se aplana
+     — paso, y la distancia de luminancia entre el tono 0.62 y el maximo bajo
+     de 77 a 50. Con estos valores el recorrido vuelve a 73 conservando el
+     menta. Y ojo: eso NO se arregla desde la mascara. Se probo subir UNSHARP
+     y bajar CONTRAST con la rampa comprimida y el contraste no se movia,
+     porque el 42% de la cara ya esta pegada al techo y el realce solo empuja
+     mas celdas contra el. */
   const STOPS = [
-    [0.00, [ 10,  54,  30]],
-    [0.30, [  8, 158,  82]],
-    [0.62, [ 52, 236, 132]],
-    [0.85, [136, 248, 180]],
-    [1.00, [208, 252, 224]]
+    [  0.00, [  8,  40,  24]],
+    [  0.30, [ 10, 120,  68]],
+    [  0.62, [ 40, 214, 122]],
+    [  0.85, [126, 245, 175]],
+    [  1.00, [214, 253, 230]]
   ];
   function shade(t){
     for (let i = 1; i < STOPS.length; i++){

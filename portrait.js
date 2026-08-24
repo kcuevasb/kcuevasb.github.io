@@ -93,28 +93,36 @@
     return a;
   })();
 
-  /* Rampa de verdes: de la lluvia de fondo apagada al blanco verdoso de las
-     zonas mas iluminadas de la cara.
+  /* Rampa construida sobre #00ff41 = rgb(0,255,65), que es la variable
+     --green del capitulo de Matrix y el color de sus titulos: el retrato
+     usa el mismo verde que el resto del sitio en vez de uno inventado.
 
-     Para ACLARAR el verde hay dos caminos y dan resultados distintos: subir
-     el rojo aclara pero tira a oliva y descolorido, mientras que subir verde
-     y azul aclara hacia menta y sigue leyendose verde. Se va por el segundo,
-     por eso el rojo se mueve poco y el azul es el que mas sube.
+     Dos numeros mandan y conviene respetarlos al tocar la rampa:
+       - El rojo se queda en 0. Cualquier rojo desatura y tira a oliva.
+       - La proporcion azul/verde se mantiene en ~0.25, la del tono de
+         referencia. Subirla aclara hacia menta y el verde deja de ser
+         electrico: se probo con 0.57 y salia pastel, muy lejos del original.
 
-     Pero aclarar sin mirar el RECORRIDO cuesta contraste: si los tramos
-     medios suben mas que el techo, el rango se comprime y la cara se aplana
-     — paso, y la distancia de luminancia entre el tono 0.62 y el maximo bajo
-     de 77 a 50. Con estos valores el recorrido vuelve a 73 conservando el
-     menta. Y ojo: eso NO se arregla desde la mascara. Se probo subir UNSHARP
-     y bajar CONTRAST con la rampa comprimida y el contraste no se movia,
-     porque el 42% de la cara ya esta pegada al techo y el realce solo empuja
-     mas celdas contra el. */
+     El tono exacto cae en 0.85 y no en el tope, porque el 1.00 tiene que
+     dejar sitio a las luces; aun asi el remate se queda en verde claro y no
+     en blanco, o la cara — que tiene mucha celda en la parte alta — se
+     leeria descolorida.
+
+     Y ojo con el RECORRIDO: si los tramos medios suben mas que el techo, el
+     rango se comprime y la cara se aplana. Paso al aclarar, y no se arregla
+     desde la mascara — subir UNSHARP o bajar CONTRAST no movian el
+     contraste, porque buena parte de la cara ya esta pegada al techo.
+
+     Aqui el techo lo fija el tono de referencia, que es mas oscuro que un
+     blanco, asi que el recorrido se gana OSCURECIENDO la parte baja y no
+     aclarando la alta: aclarar el tope romperia la coincidencia de color, que
+     es justo lo que se buscaba. */
   const STOPS = [
-    [  0.00, [  8,  40,  24]],
-    [  0.30, [ 10, 120,  68]],
-    [  0.62, [ 40, 214, 122]],
-    [  0.85, [126, 245, 175]],
-    [  1.00, [214, 253, 230]]
+    [  0.00, [  0,  24,   6]],
+    [  0.30, [  0,  92,  23]],
+    [  0.62, [  0, 182,  46]],
+    [  0.85, [  0, 255,  65]],
+    [  1.00, [150, 255, 175]]
   ];
   function shade(t){
     for (let i = 1; i < STOPS.length; i++){
@@ -686,8 +694,8 @@
         const lit = 0.20 + 0.80 * mask[i];
         const a = fade * fade * (k === 0 ? 0.95 : 0.5) * lit;
         ctx.fillStyle = k === 0
-          ? 'rgba(208,252,226,' + a.toFixed(3) + ')'
-          : 'rgba(45,236,128,' + a.toFixed(3) + ')';
+          ? 'rgba(170,255,192,' + a.toFixed(3) + ')'
+          : 'rgba(0,255,65,' + a.toFixed(3) + ')';
         ctx.fillText(GLYPHS[glyph[i]], (x + 0.5) * cellW, (y + 0.5) * cellH);
       }
     }

@@ -39,17 +39,23 @@
      sola descuadra el conjunto. La progresion de ancho que producen, en
      celdas de las 58 de la rejilla, de la base del cuello hacia abajo:
 
-       24, 26, 28, 30, 32, 36, 42, 48, 52, 54, 55, 56, 58
+       24, 28, 30, 33, 36, 40, 46, 50, 54, 54, 56, 57, 58
 
-     Es decir: arranca estrecho en el cuello, se abre de forma continua sin
-     mesetas y toca las DOS esquinas inferiores en la ultima fila. Si al
-     tocar algo la progresion se aplana a media altura o deja de llegar a
-     58, se ha roto.
+     Arranca estrecho en el cuello, abre PRONTO y de forma continua, y toca
+     las DOS esquinas inferiores justo en la ultima fila. Si al tocar algo
+     la progresion se aplana a media altura o deja de llegar a 58, se ha
+     roto.
 
-     Dos cosas que se probaron y NO gustaron: recortar filas por abajo (no
-     adelgaza el hombro, deja hueco y sube el retrato dentro del cuadro) y
+     Que abra pronto es la clave y es sutil: con FLARE 2.2 el hombro se
+     quedaba estrecho un buen tramo (26, 28, 30, 32) y pegaba el estiron al
+     final. Se nota en dos sitios — el hombro cae mas y las esquinas de
+     abajo quedan mas vacias — pero hay que buscarlo para verlo.
+
+     Tres cosas que se probaron y NO valen: recortar filas por abajo (no
+     adelgaza el hombro, deja hueco y sube el retrato dentro del cuadro),
      sacar el hombro por los LADOS con exponente menor que uno (deja media
-     docena de filas planas apoyadas en los bordes). */
+     docena de filas planas apoyadas en los bordes) y bajar de 1.4, que
+     llega al ancho completo antes de la ultima fila y deja meseta. */
   const SHOULDER_AT = 0.70; // altura desde la que se simetrizan los hombros
   const PROFILE_W = 5;    // ventana de la mediana que pule el perfil
   const CLOSE_W = 12;     // ventana del cierre que borra las mellas largas
@@ -57,7 +63,7 @@
   const FLOOR = 0.40;     // brillo minimo dentro de la figura
   const RIM = 0.62;       // brillo minimo en el borde de la silueta
   const SHOULDER_IN = 4;  // columnas que se estrecha el hombro
-  const FLARE = 2.2;      // curva con la que el hombro sale del encuadre
+  const FLARE = 1.5;      // curva con la que el hombro sale del encuadre
   const TONE_CAP = 1.2;   // techo de luz del hombro, sobre el tono de su fila
   const PIT = 0.62;       // por debajo de esta fraccion del entorno, es un pozo
   const PIT_TO = 0.85;    // a que fraccion del entorno se sube el pozo

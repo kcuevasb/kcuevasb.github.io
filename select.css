@@ -368,12 +368,11 @@ body{
   font-family: var(--font-term);
   font-size: 18px;
   letter-spacing: .5px;
-  margin: 0 0 6px;
+  margin: 0;
 }
 .foot-prompt{ color: #00c853; }
 /* Mismo parpadeo que el cursor de la miniatura de Matrix. */
 .foot-caret{ animation: blink 1s steps(2) infinite; }
-.foot-note{ font-size: 15px; margin: 0; opacity: .7; }
 
 /* Quien tenga el sistema en modo sin animaciones no quiere un cursor
    parpadeando en bucle al final de la pagina. */

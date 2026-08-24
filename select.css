@@ -224,13 +224,6 @@ body{
   letter-spacing: .5px;
 }
 
-.card-when{
-  font-size: 16px;
-  color: var(--fg-dim);
-  margin: 0;
-  font-variant-numeric: tabular-nums;
-}
-
 .card-desc{
   font-size: 17px;
   line-height: 1.35;
@@ -253,8 +246,29 @@ body{
 }
 .card:hover .card-skin{ opacity: 1; }
 
+/* La fecha vive dentro de la pildora, no bajo el titulo: el pie de la tarjeta
+   ya era la linea de "con que y cuando", y arriba competia con el titulo.
+   En VT323 ocupa la mitad que en la tipografia de pixel de la etiqueta. */
+.skin-when{
+  font-family: var(--font-term);
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  opacity: .75;
+  margin-left: 7px;
+}
+
+/* El rotulo entero no cabe desde que la fecha vive en la pildora, pero se
+   conserva para lectores de pantalla: la flecha sola no dice nada. */
+.vh{
+  position:absolute; width:1px; height:1px; overflow:hidden;
+  clip-path: inset(50%); white-space:nowrap;
+}
+
 .card-go{
-  font-size: 16px;
+  font-size: 20px;
   color: var(--fg-dim);
   opacity: 0;
   transform: translateX(-4px);
@@ -300,7 +314,7 @@ body{
 
 /* --- Eclipse (NTT Data) card theme --- */
 .card-eclipse{ border-color: #a0a0a0; background:#ececec; color:#1a1a1a; }
-.card-eclipse .card-when, .card-eclipse .card-desc{ color:#5a5a5a; }
+.card-eclipse .card-desc{ color:#5a5a5a; }
 .card-eclipse:hover{ border-color:#4a6ea9; box-shadow: -6px 0 0 0 #c7d6ea; }
 .card-eclipse h3{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
 .card-eclipse .card-skin{ color:#4a6ea9; border-color:#4a6ea9; }
@@ -314,7 +328,7 @@ body{
 
 /* --- IntelliJ (Knowmad Mood) card theme --- */
 .card-intellij{ border-color: #555759; background:#2b2b2b; color:#a9b7c6; }
-.card-intellij .card-when, .card-intellij .card-desc{ color:#8a949e; }
+.card-intellij .card-desc{ color:#8a949e; }
 .card-intellij:hover{ border-color:#cc7832; box-shadow: -6px 0 0 0 #1a1a1a; }
 .card-intellij h3{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
 .card-intellij .card-skin{ color:#6a8759; border-color:#6a8759; }
@@ -329,7 +343,7 @@ body{
 
 /* --- IA card theme --- */
 .card-ia{ border-color: #4a4680; background:#f6f5fb; color:#1f1e2b; }
-.card-ia .card-when, .card-ia .card-desc{ color:#5c5970; }
+.card-ia .card-desc{ color:#5c5970; }
 .card-ia:hover{ border-color:#5b57d1; box-shadow: -6px 0 0 0 #d9d6f5; }
 /* El tamaño reducido venia de cuando esta tarjeta se llamaba "KNOWMAD &
    SOPRA" y no cabia en una columna estrecha. Ya no: la entrada ocupa toda

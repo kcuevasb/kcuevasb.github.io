@@ -199,3 +199,9 @@ button.tree-file.active{ background: var(--tree-select); }
   .ide-bottom{ height: 110px; }
   .code{ font-size: 12px; }
 }
+
+/* Hueco para el selector de idioma, que va fijo arriba a la derecha por
+   encima de esta barra. Solo en pantalla: al imprimir no hay selector. */
+@media screen{
+  .back-link{ margin-right: 88px; }
+}

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kepa Cuevas Barrasa — CV</title>
-<meta name="description" content="Currículum de Kepa Cuevas Barrasa, Software Engineer especializado en Java, Spring Boot y microservicios. Exportable a PDF.">
+<meta name="description" content="Résumé of Kepa Cuevas Barrasa, Software Engineer specialising in Java, Spring Boot and microservices. Exportable to PDF.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kcuevasb.github.io/cv/">
 <meta property="og:title" content="Kepa Cuevas Barrasa · CV en PDF">
@@ -18,21 +18,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared.css">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/cv/styles.css">
 <link rel="stylesheet" href="/lang.css">
 <link rel="alternate" hreflang="es" href="https://kcuevasb.github.io/cv/">
 <link rel="alternate" hreflang="en" href="https://kcuevasb.github.io/en/cv/">
 </head>
 <body>
-<nav class="lang" aria-label="Idioma">
-  <a href="/cv/" hreflang="es" title="Español" aria-current="true"><img src="/flags/es.svg" alt="Español" width="26" height="17"></a>
-  <a href="/en/cv/" hreflang="en" title="Inglés"><img src="/flags/gb.svg" alt="Inglés" width="26" height="17"></a>
+<nav class="lang" aria-label="Language">
+  <a href="/cv/" hreflang="es" title="Spanish"><img src="/flags/es.svg" alt="Spanish" width="26" height="17"></a>
+  <a href="/en/cv/" hreflang="en" title="English" aria-current="true"><img src="/flags/gb.svg" alt="English" width="26" height="17"></a>
 </nav>
 
 
 <div class="toolbar no-print">
-  <a href="../" class="back-link">← elegir capítulo</a>
-  <button id="print-btn" class="export-btn">⭳ Exportar a PDF</button>
+  <a href="/en/" class="back-link">← back to chapters</a>
+  <button id="print-btn" class="export-btn">⭳ Export to PDF</button>
 </div>
 
 <main class="sheet">
@@ -47,29 +47,29 @@
       <a href="https://github.com/kcuevasb">github.com/kcuevasb</a>
     </div>
 
-    <p class="side-bio">Profesional IT desde 2017, con experiencia en seguros, ecommerce y sanidad. Análisis,
-    diseño y desarrollo de microservicios, además de mantenimiento y evolución de sistemas en producción.
-    Perfil resolutivo, buena comunicación y compromiso.</p>
+    <p class="side-bio">IT professional since 2017, with experience in insurance, ecommerce and healthcare. Analysis,
+    design and development of microservices, plus maintenance and evolution of production systems.
+    Problem-solver, good communicator, committed.</p>
 
-    <h2>Idiomas</h2>
+    <h2>Languages</h2>
     <ul class="side-langs">
-      <li><span>Inglés</span><b>B2</b></li>
-      <li><span>Euskera</span><b>C1</b></li>
-      <li><span>Español</span><b>C2</b></li>
+      <li><span>English</span><b>B2</b></li>
+      <li><span>Basque</span><b>C1</b></li>
+      <li><span>Spanish</span><b>C2</b></li>
     </ul>
 
-    <h2>Conocimientos principales</h2>
+    <h2>Core skills</h2>
     <ul class="side-skills">
       <li><span>Java</span><i class="stars" data-n="5"></i></li>
       <li><span>Spring Boot</span><i class="stars" data-n="5"></i></li>
-      <li><span>Microservicios</span><i class="stars" data-n="5"></i></li>
+      <li><span>Microservices</span><i class="stars" data-n="5"></i></li>
       <li><span>API REST</span><i class="stars" data-n="5"></i></li>
       <li><span>Kafka</span><i class="stars" data-n="5"></i></li>
       <li><span>PostgreSQL</span><i class="stars" data-n="4"></i></li>
       <li><span>MongoDB</span><i class="stars" data-n="4"></i></li>
       <li><span>Claude Code · Copilot</span><i class="stars" data-n="5"></i></li>
-      <li><span>Agentes · MCPs</span><i class="stars" data-n="4"></i></li>
-      <li><span>Arq. Hexagonal</span><i class="stars" data-n="4"></i></li>
+      <li><span>Agents · MCPs</span><i class="stars" data-n="4"></i></li>
+      <li><span>Hexagonal arch.</span><i class="stars" data-n="4"></i></li>
       <li><span>Kubernetes</span><i class="stars" data-n="4"></i></li>
       <li><span>Docker</span><i class="stars" data-n="4"></i></li>
       <li><span>CI/CD</span><i class="stars" data-n="4"></i></li>
@@ -82,19 +82,19 @@
   <section class="main">
 
     <div class="main-block">
-      <h2>Experiencia</h2>
+      <h2>Experience</h2>
 
       <article class="entry">
         <span class="dot"></span>
         <div class="entry-head">
           <h3>Sopra Steria <em>— Leroy Merlin</em></h3>
-          <time>sep 2025 — actualidad</time>
+          <time>Sep 2025 — present</time>
         </div>
         <ul>
-          <li>Análisis y desarrollo de microservicios backend con Spring Boot para la familia de productos HF3P en Leroy Merlin España.</li>
-          <li>Consultas a base de datos relacional (PostgreSQL) y no relacional (MongoDB); desarrollo de servicios de comunicación entre microservicios y agregación de datos.</li>
-          <li>Soporte en diseño de arquitectura, incluyendo microservicios desde cero con arquitectura hexagonal; despliegue en GKE/Kubernetes.</li>
-          <li>Calidad de código con Sonar; tests unitarios y de integración con Mockito/JUnit; eventos asíncronos con Kafka Avro.</li>
+          <li>Analysis and development of backend microservices with Spring Boot for the HF3P product family at Leroy Merlin Spain.</li>
+          <li>Queries against relational (PostgreSQL) and non-relational (MongoDB) databases; development of inter-service communication and data aggregation services.</li>
+          <li>Support on architecture design, including microservices built from scratch with hexagonal architecture; deployment on GKE/Kubernetes.</li>
+          <li>Code quality with Sonar; unit and integration tests with Mockito/JUnit; asynchronous events with Kafka Avro.</li>
         </ul>
         <p class="stack">Java 17+ · Spring Boot 4 · Kafka Avro · PostgreSQL · MongoDB · GKE/Kubernetes · Artifactory · Sonar</p>
       </article>
@@ -103,25 +103,25 @@
         <span class="dot"></span>
         <div class="entry-head">
           <h3>Knowmad Mood</h3>
-          <time>nov 2022 — sep 2025</time>
+          <time>Nov 2022 — Sep 2025</time>
         </div>
 
         <div class="sub-role">
-          <div class="sub-role-head"><strong>El Corte Inglés</strong><time>ago 2023 — sep 2025</time></div>
+          <div class="sub-role-head"><strong>El Corte Inglés</strong><time>Aug 2023 — Sep 2025</time></div>
           <ul>
-            <li>Análisis y desarrollo de microservicios backend con Spring Boot para el dominio de catálogo de El Corte Inglés; consultas a bases de datos no relacionales con MongoDB.</li>
-            <li>Desarrollo de servicios de comunicación entre microservicios y agregación de datos; soporte en diseño de arquitectura del proyecto.</li>
-            <li>Despliegue con Jenkins y Clarive en distintos entornos; calidad con Sonar; tests con Mockito/JUnit; eventos asíncronos con Kafka.</li>
+            <li>Analysis and development of backend microservices with Spring Boot for El Corte Inglés's catalogue domain; queries against non-relational databases with MongoDB.</li>
+            <li>Development of inter-service communication and data aggregation services; support on the project's architecture design.</li>
+            <li>Deployment with Jenkins and Clarive across environments; quality with Sonar; tests with Mockito/JUnit; asynchronous events with Kafka.</li>
           </ul>
           <p class="stack">Java 11-17 · Spring Boot · MongoDB · Jenkins · Clarive · Docker · Kubernetes · Kibana · Kafka</p>
         </div>
 
         <div class="sub-role">
-          <div class="sub-role-head"><strong>BeeDigital</strong><time>nov 2022 — jul 2023</time></div>
+          <div class="sub-role-head"><strong>BeeDigital</strong><time>Nov 2022 — Jul 2023</time></div>
           <ul>
-            <li>Análisis y desarrollo de microservicios backend con Spring Boot para el posicionamiento de empresas en internet; consultas a DocumentDB y DynamoDB.</li>
-            <li>Diseño de servicios de comunicación entre microservicios y agregación de datos; control de versiones en repositorios Git de Amazon.</li>
-            <li>Despliegue con Jenkins; calidad con Sonar; tests con Mockito/JUnit; eventos asíncronos con Kafka.</li>
+            <li>Analysis and development of backend microservices with Spring Boot for online business positioning; queries against DocumentDB and DynamoDB.</li>
+            <li>Design of inter-service communication and data aggregation services; version control on Amazon Git repositories.</li>
+            <li>Deployment with Jenkins; quality with Sonar; tests with Mockito/JUnit; asynchronous events with Kafka.</li>
           </ul>
           <p class="stack">Java 19 · Spring Boot · AWS · DynamoDB · DocumentDB · JWT · Jenkins · Kafka</p>
         </div>
@@ -131,19 +131,19 @@
         <span class="dot"></span>
         <div class="entry-head">
           <h3>NTT Data</h3>
-          <time>jul 2017 — nov 2022</time>
+          <time>Jul 2017 — Nov 2022</time>
         </div>
         <ul>
-          <li>Análisis, diseño y gestión de desarrollos; mantenimiento y desarrollo de evolutivos y mejoras funcionales.</li>
-          <li>Resolución de incidencias en producción; integración con módulos WSSisnet.</li>
-          <li>Configuración de despliegues en Jenkins y DevOps; metodología Scrum.</li>
+          <li>Analysis, design and management of developments; maintenance plus enhancements and functional improvements.</li>
+          <li>Production incident resolution; integration with WSSisnet modules.</li>
+          <li>Deployment configuration on Jenkins and DevOps; Scrum methodology.</li>
         </ul>
         <p class="stack">Java 7-11 · API REST · Spring Boot · SVN · Git · Azure · PostgreSQL · Oracle · Jenkins</p>
       </article>
     </div>
 
     <div class="main-block">
-      <h2>Formación</h2>
+      <h2>Education</h2>
 
       <article class="entry entry-edu">
         <span class="dot"></span>
@@ -151,7 +151,7 @@
           <h3>Colegio Zabalburu</h3>
           <time>2013 — 2015</time>
         </div>
-        <p class="edu-desc">Técnico Superior, Desarrollo de Aplicaciones Web. Formación reglada.</p>
+        <p class="edu-desc">Higher Technician, Web Application Development. Accredited vocational degree.</p>
       </article>
 
       <article class="entry entry-edu">
@@ -160,7 +160,7 @@
           <h3>IEFPS Elorrieta-Erreka Mari LHII</h3>
           <time>2010 — 2012</time>
         </div>
-        <p class="edu-desc">Técnico Superior, Desarrollo de Aplicaciones Informáticas. Formación reglada.</p>
+        <p class="edu-desc">Higher Technician, Computer Application Development. Accredited vocational degree.</p>
       </article>
     </div>
 
@@ -168,6 +168,6 @@
 
 </main>
 
-<script src="script.js"></script>
+<script src="/cv/script.js"></script>
 </body>
 </html>

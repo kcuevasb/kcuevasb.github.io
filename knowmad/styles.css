@@ -222,3 +222,9 @@ button.tree-file.active .fi{ color: #fff; }
   .code{ font-size: 12px; }
   .console-out{ font-size: 10px; }
 }
+
+/* Hueco para el selector de idioma, que va fijo arriba a la derecha por
+   encima de esta barra. Solo en pantalla: al imprimir no hay selector. */
+@media screen{
+  .back-link{ margin-right: 88px; }
+}

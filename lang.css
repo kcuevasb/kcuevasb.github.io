@@ -1,0 +1,65 @@
+/* Selector de idioma — hoja compartida por las catorce paginas, en los dos
+   idiomas, para no repetir estos estilos en cada una.
+
+   Va fijo arriba a la derecha y por encima de todo: cada capitulo trae su
+   propia barra (el menu de Eclipse, la de IntelliJ, la terminal de Matrix,
+   el escritorio de Win98), asi que el z-index tiene que ganarles a todas. */
+.lang{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 99999;
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 6px;
+  /* Fondo propio: sin el, las banderas se pierden sobre el escritorio claro
+     de Win98 y sobre el editor blanco de Eclipse. */
+  background: rgba(12, 14, 20, .72);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+
+.lang a{
+  display: block;
+  line-height: 0;
+  border-radius: 3px;
+  outline-offset: 2px;
+  /* La que no esta activa se apaga, para que se vea de un vistazo en que
+     idioma estas sin necesidad de texto. */
+  opacity: .45;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.lang a:hover,
+.lang a:focus-visible{ opacity: 1; transform: translateY(-1px); }
+
+/* aria-current marca el idioma actual, asi que sirve de gancho de estilo y
+   de informacion para un lector de pantalla a la vez. */
+.lang a[aria-current]{
+  opacity: 1;
+  cursor: default;
+  box-shadow: 0 0 0 2px #ffc400;
+}
+
+.lang img{
+  display: block;
+  width: 26px;
+  height: 17px;
+  border-radius: 2px;
+}
+
+@media (max-width: 560px){
+  .lang{ top: 8px; right: 8px; padding: 4px; gap: 4px; }
+  .lang img{ width: 22px; height: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .lang a{ transition: none; }
+  .lang a:hover, .lang a:focus-visible{ transform: none; }
+}
+
+/* El CV se exporta a PDF desde su propia pagina, y ahi el selector no pinta
+   nada: es navegacion, no contenido del curriculum. */
+@media print{
+  .lang{ display: none; }
+}

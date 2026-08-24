@@ -181,3 +181,9 @@ a{ color: inherit; text-decoration: none; }
   .main{ padding: 20px 18px; }
   .entry-head{ flex-direction: column; align-items: flex-start; gap: 2px; }
 }
+
+/* Hueco para el selector de idioma, que va fijo arriba a la derecha por
+   encima de esta barra. Solo en pantalla: al imprimir no hay selector. */
+@media screen{
+  .export-btn{ margin-right: 88px; }
+}

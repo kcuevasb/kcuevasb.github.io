@@ -730,6 +730,13 @@
   }
   function stop(){ running = false; cancelAnimationFrame(raf); }
 
+  /* La ruta de la foto se saca del propio script y no se escribe relativa a
+     la pagina: este fichero lo cargan tanto la portada como su gemela en
+     /en/, y "perfil.png" a secas se resolveria contra /en/ y daria 404. */
+  const rutaBase = document.currentScript
+    ? document.currentScript.src.replace(/[^/]+$/, '')
+    : '';
+
   const img = new Image();
   img.onload = () => {
     mask = buildMask(img);
@@ -775,5 +782,5 @@
       document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
     });
   };
-  img.src = 'perfil.png';
+  img.src = rutaBase + 'perfil.png';
 })();

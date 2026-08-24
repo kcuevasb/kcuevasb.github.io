@@ -125,20 +125,6 @@ body{
   .export-link{ align-self:center; }
 }
 
-/* Ahora es un <h2> de sección ("TRAYECTORIA"), no el titular de la página:
-   el titular es el nombre en la cabecera, así que este baja de tamaño para
-   no competir con él. */
-.select-title{
-  font-family: var(--font-pixel);
-  font-size: clamp(15px, 2.4vw, 22px);
-  margin: 0 0 12px;
-  color: var(--fg);
-  text-shadow: 3px 3px 0 #000;
-  letter-spacing: 2px;
-}
-
-.select-sub{ color: var(--fg-dim); font-size: 20px; margin: 0 0 40px; }
-
 /* ---------- Trayectoria: bloques de CV ----------
    Antes los cinco capítulos iban en una fila de tarjetas verticales, todas
    compitiendo por el mismo ancho. En un CV lo que manda es el orden de
@@ -156,16 +142,22 @@ body{
   margin: 0 0 14px;
   padding-bottom: 10px;
   border-bottom: 1px solid #2a2f3a;
+  text-align: center;
 }
 
-/* Tres columnas fijas, no auto-fit: con auto-fit las secciones de un solo
-   capitulo — Inicios y Proyectos — estirarian su tarjeta a todo el ancho y
-   volveria el problema que se venia a resolver. Asi una tarjeta suelta ocupa
-   un tercio y todas miden igual, sea cual sea la seccion. */
 .entries{
   list-style:none; margin:0; padding:0;
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* auto-fit con ancho FIJO, no 1fr. El 1fr estiraria la tarjeta suelta de
+     Inicios a todo el ancho; y tres pistas fijas que suman justo el ancho no
+     dejan hueco que repartir, asi que esa tarjeta se quedaba pegada a la
+     izquierda. Con auto-fit las pistas vacias se colapsan: una tarjeta sola
+     genera una sola pista y justify-content la centra, mientras que las tres
+     de experiencia siguen ocupando el ancho entero.
+     El min(320px, 100%) evita que la pista se salga en pantallas mas
+     estrechas que la propia tarjeta. */
+  grid-template-columns: repeat(auto-fit, min(320px, 100%));
+  justify-content: center;
   gap: 20px;
 }
 /* El <li> es el hijo de la rejilla y se estira solo, pero la tarjeta de
@@ -198,7 +190,6 @@ body{
   transform: translateY(-5px);
   box-shadow: 0 12px 22px rgba(0,0,0,.5);
 }
-.card.selected{ outline: none; }
 
 /* Crece para llenar la tarjeta, y asi el pie queda alineado entre las tres
    aunque las descripciones tengan distinto numero de lineas. */
@@ -221,7 +212,7 @@ body{
   vertical-align: baseline;
 }
 
-.card h4{
+.card h3{
   font-family: var(--font-pixel);
   font-size: 12px;
   line-height: 1.6;
@@ -269,14 +260,7 @@ body{
 
 .preview{ width: 100%; flex-shrink: 0; }
 
-/* Dos columnas antes de que la tarjeta se quede sin sitio para el titulo,
-   que con fuente de pixeles es lo primero que parte. */
-@media (max-width: 860px){
-  .entries{ grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 560px){
-  .entries{ grid-template-columns: 1fr; }
   .card:hover, .card:focus-visible{ transform:none; box-shadow:none; }
   .card-go{ opacity: .9; transform:none; }
 }
@@ -284,7 +268,7 @@ body{
 /* --- Matrix card theme --- */
 .card-matrix{ border-color: #0aa62f; }
 .card-matrix:hover{ border-color: #00ff41; box-shadow: -6px 0 0 0 #063d14; }
-.card-matrix h4{ color: #00ff41; text-shadow: 0 0 8px rgba(0,255,65,.5); }
+.card-matrix h3{ color: #00ff41; text-shadow: 0 0 8px rgba(0,255,65,.5); }
 .card-matrix .card-skin{ color: #00ff41; }
 .preview-matrix{
   width:100%; height: 96px; background:#020602; border:2px solid #0aa62f;
@@ -299,7 +283,7 @@ body{
 /* --- Win98 card theme --- */
 .card-win98{ border-color: #6b6f7a; }
 .card-win98:hover{ border-color: #c0c7d1; box-shadow: -6px 0 0 0 #01018a; }
-.card-win98 h4{ color: #dfe6ee; }
+.card-win98 h3{ color: #dfe6ee; }
 .card-win98 .card-skin{ color: #dfe6ee; }
 .preview-win98{ width:100%; height:96px; background:#008080; display:flex; align-items:center; justify-content:center; }
 .p-win{ width: 84%; background:#c0c0c0; border: 2px solid #fff; border-right-color:#404040; border-bottom-color:#404040; }
@@ -314,7 +298,7 @@ body{
 .card-eclipse{ border-color: #a0a0a0; background:#ececec; color:#1a1a1a; }
 .card-eclipse .card-when, .card-eclipse .card-desc{ color:#5a5a5a; }
 .card-eclipse:hover{ border-color:#4a6ea9; box-shadow: -6px 0 0 0 #c7d6ea; }
-.card-eclipse h4{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
+.card-eclipse h3{ color:#1a1a1a; font-family: 'Consolas', monospace; font-size:18px; letter-spacing:0; }
 .card-eclipse .card-skin{ color:#4a6ea9; border-color:#4a6ea9; }
 .card-eclipse .card-index{ color:#8a8a8a; }
 .preview-eclipse{ width:100%; height:96px; background:#fff; border:1px solid #a0a0a0; display:flex; }
@@ -328,7 +312,7 @@ body{
 .card-intellij{ border-color: #555759; background:#2b2b2b; color:#a9b7c6; }
 .card-intellij .card-when, .card-intellij .card-desc{ color:#8a949e; }
 .card-intellij:hover{ border-color:#cc7832; box-shadow: -6px 0 0 0 #1a1a1a; }
-.card-intellij h4{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
+.card-intellij h3{ color:#ffc66d; font-family:'Consolas', monospace; font-size:16px; letter-spacing:0; }
 .card-intellij .card-skin{ color:#6a8759; border-color:#6a8759; }
 .card-intellij .card-index{ color:#606366; }
 .preview-intellij{ width:100%; height:96px; background:#2b2b2b; border:1px solid #555759; display:flex; }
@@ -346,7 +330,7 @@ body{
 /* El tamaño reducido venia de cuando esta tarjeta se llamaba "KNOWMAD &
    SOPRA" y no cabia en una columna estrecha. Ya no: la entrada ocupa toda
    la fila y el nombre es corto, asi que iguala al resto. */
-.card-ia h4{ color:#1f1e2b; }
+.card-ia h3{ color:#1f1e2b; }
 .card-ia .card-skin{ color:#5b57d1; border-color:#5b57d1; }
 .card-ia .card-index{ color:#8b87a8; }
 .preview-ia{ width:100%; height:96px; background:#fff; border:1px solid #e5e1ee; display:flex; flex-direction:column; justify-content:center; gap:6px; padding: 10px; }
@@ -355,11 +339,6 @@ body{
 .p-bubble-user{ align-self:flex-end; background:#5b57d1; color:#fff; border-bottom-right-radius: 3px; }
 .p-bubble-ai{ align-self:flex-start; background:#eeecfb; color:#1f1e2b; border-bottom-left-radius: 3px; }
 
-.select-hint{ color: var(--fg-dim); font-size: 16px; }
-.select-hint kbd{
-  border: 1px solid #444; border-bottom-width:2px; padding: 1px 6px; border-radius:3px;
-  font-family: var(--font-term); background:#1a1d24; color:#fff;
-}
 
 /* Vive en la cabecera, junto al nombre y el contacto: quien entra buscando
    el PDF de toda la vida lo encuentra sin bajar por los cinco capítulos. */
@@ -375,3 +354,25 @@ body{
   transition: color .15s, border-color .15s;
 }
 .export-link:hover{ color: var(--fg); border-color: var(--fg-dim); }
+
+/* ---------- Pie ----------
+   Sustituye al cartel de navegacion por teclado. El prompt es el mismo que
+   aparece en la miniatura del capitulo de Matrix, asi que el pie remata la
+   pagina con su propio lenguaje en vez de con una linea legal suelta. */
+.cv-foot{ margin-top: 6px; color: var(--fg-dim); }
+.foot-cmd{
+  font-family: var(--font-term);
+  font-size: 18px;
+  letter-spacing: .5px;
+  margin: 0 0 6px;
+}
+.foot-prompt{ color: #00c853; }
+/* Mismo parpadeo que el cursor de la miniatura de Matrix. */
+.foot-caret{ animation: blink 1s steps(2) infinite; }
+.foot-note{ font-size: 15px; margin: 0; opacity: .7; }
+
+/* Quien tenga el sistema en modo sin animaciones no quiere un cursor
+   parpadeando en bucle al final de la pagina. */
+@media (prefers-reduced-motion: reduce){
+  .foot-caret{ animation: none; }
+}

@@ -49,7 +49,13 @@ body{
 
 /* ---------- Cabecera de CV ---------- */
 .cv-head{
-  display:flex; align-items:center; gap: 34px;
+  display:flex; align-items:center;
+  /* Ni pegado a la foto (34px, como estaba) ni empujado al borde derecho:
+     punto intermedio, con el texto alineado a la izquierda para que forme
+     columna y quede holgura tambien por la derecha. El clamp evita que en
+     pantallas intermedias el hueco se coma el ancho del texto: a 1440px son
+     120px, y a 760 baja a 84 en vez de ahogar la columna. */
+  gap: clamp(48px, 11vw, 120px);
   text-align:left;
   /* Absorbe el hueco de la regla en degradado que iba aqui: sobraba, porque
      el titulo de cada seccion ya trae su propio subrayado. */
@@ -96,10 +102,7 @@ body{
      verde fosforito de la lluvia sin tocar el color base de cada glifo. */
   text-shadow: 0 0 6px rgba(80, 220, 130, .45);
 }
-/* El bloque de texto se va al borde derecho y se alinea a la derecha, con el
-   retrato haciendo de ancla en el izquierdo. El margen automatico es lo que
-   lo empuja: sin el se quedaria pegado al retrato con el hueco a la derecha. */
-.cv-id{ min-width:0; margin-left:auto; text-align:right; }
+.cv-id{ min-width:0; }
 .cv-name{
   font-family: var(--font-pixel);
   font-size: clamp(15px, 2.1vw, 22px);
@@ -109,8 +112,8 @@ body{
   text-shadow: 3px 3px 0 #000;
 }
 .cv-role{ font-size: 21px; color: var(--accent); margin: 0 0 12px; letter-spacing: 1px; }
-.cv-summary{ font-size: 19px; color: var(--fg); opacity:.85; margin: 0 0 14px auto; max-width: 62ch; line-height:1.45; }
-.cv-contact{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap: 8px 18px; }
+.cv-summary{ font-size: 19px; color: var(--fg); opacity:.85; margin: 0 0 14px; max-width: 62ch; line-height:1.45; }
+.cv-contact{ display:flex; flex-wrap:wrap; gap: 8px 18px; }
 .cv-contact a{
   font-size: 17px; color: var(--fg-dim); text-decoration:none;
   border-bottom: 1px dashed #3a3f4c; padding-bottom: 2px;
@@ -119,10 +122,8 @@ body{
 
 @media (max-width: 720px){
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
-  .cv-id{ text-align:center; margin-left:0; }
   .cv-summary{ margin-left:auto; margin-right:auto; }
   .cv-contact{ justify-content:center; }
-  .cv-summary{ margin-bottom: 14px; }
   /* 80 columnas a 0.5em son 40em: a 8px ocupan 320px y con el marco caben en
      una pantalla de 375px, así que el retrato no necesita encoger en móvil. */
   .export-link{ align-self:center; }

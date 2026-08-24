@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+
+# Config local de Claude Code: no tiene por que publicarse en Pages.
+.claude/

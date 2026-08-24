@@ -106,11 +106,11 @@ body{
      verde fosforito de la lluvia sin tocar el color base de cada glifo. */
   text-shadow: 0 0 6px rgba(80, 220, 130, .45);
 }
-/* space-between en vez de un margin-top:auto en el enlace del PDF: con auto,
-   todo el sobrante respecto al alto del retrato caia en un unico hueco y
-   dejaba un vacio enorme antes del boton. Repartido, cada separacion crece lo
-   mismo y se mantiene el ritmo original, que ya era mas apretado arriba. */
-.cv-id{ min-width:0; display:flex; flex-direction:column; justify-content: space-between; }
+/* El texto se apila con sus margenes propios (10, 12 y 14px), que es un ritmo
+   apretado a proposito: nombre, rol, resumen y contacto son un solo bloque de
+   identidad. El sobrante respecto al alto del retrato no se reparte entre
+   ellos, se acumula antes del enlace al PDF para separarlo del bloque. */
+.cv-id{ min-width:0; display:flex; flex-direction:column; }
 .cv-name{
   font-family: var(--font-pixel);
   font-size: clamp(15px, 2.1vw, 22px);
@@ -139,7 +139,10 @@ body{
      una pantalla de 375px, así que el retrato no necesita encoger en móvil. */
   /* Mas especifico a proposito: la regla base define align-self y vive mas
      abajo en el archivo, asi que a igual peso ganaria ella. */
-  .cv-head .export-link{ align-self:center; }
+  /* Y con margen propio: aqui la columna no se estira contra el retrato, asi
+     que el margin-top:auto de la regla base colapsa a cero y el boton se
+     quedaria pegado al contacto. */
+  .cv-head .export-link{ align-self:center; margin-top: 22px; }
 }
 
 /* ---------- Trayectoria: bloques de CV ----------
@@ -355,16 +358,15 @@ body{
 .p-bubble-ai{ align-self:flex-start; background:#eeecfb; color:#1f1e2b; border-bottom-left-radius: 3px; }
 
 
-/* Va justo debajo del rol, antes del resumen: quien entra con prisa quiere el
-   PDF, no leerse tres parrafos primero. Y en color de acento, porque con el
-   borde gris de antes se perdia contra el fondo. */
+/* Cierra la cabecera, debajo del contacto: quien entra buscando el PDF de
+   toda la vida lo encuentra sin bajar por los cinco capitulos. */
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
   align-self: flex-start;
-  /* Los otros tres huecos heredan el margen inferior del elemento de arriba
-     (10, 12 y 14px); sin esto el del PDF seria el unico sin nada propio y se
-     quedaria mas apretado que los demas. */
-  margin-top: 12px;
+  /* auto: se come todo el hueco que sobra hasta el borde de abajo del marco.
+     Con el retrato a 240px ese sobrante son unos 25px, asi que el salto queda
+     al triple que los del texto: separa sin abrir un vacio. */
+  margin-top: auto;
   color: var(--fg-dim);
   font-size: 15px;
   text-decoration: none;

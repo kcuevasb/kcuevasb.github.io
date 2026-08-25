@@ -3,3 +3,7 @@ node_modules/
 
 # Config local de Claude Code: no tiene por que publicarse en Pages.
 .claude/
+
+# La foto original ya no se publica: el retrato usa la mascara precalculada
+# de portrait-mask.js. Se conserva en local para poder regenerarla.
+perfil.png

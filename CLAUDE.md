@@ -204,3 +204,43 @@ Lo genérico está en el skill `web-vanilla`; esto es lo que solo aplica aquí.
 - **Exportar un canvas animado como imagen fija, GIF o vídeo (avatar, `og:image`) sin poder ver la página**. Cuatro piezas, todas necesarias: (1) **shim de `requestAnimationFrame` a `setTimeout`** antes de cargar el script, o el panel que no compone frames deja el canvas en negro; (2) **exporta la capa BASE, no el frame compuesto** — en un retrato de lluvia de Matrix las gotas encienden columnas al azar, y lo que en movimiento da vida, congelado son rayas brillantes que no tienen que ver con la cara y emborronan el retrato (el usuario lo detectó al primer vistazo con una imagen de referencia); (3) para que la cara se lea a tamaño de avatar, **parchea el fuente al vuelo** subiendo la rejilla (58×45 → 84×65) y **levanta el fondo del negro** a un verde tenue (`if (mask[i] < FLOOR_FIGURA) mask[i] = 0.13`), que es lo que recorta la silueta; al subir la rejilla hay que escalar las constantes que van en celdas (`PROFILE_W`, `CLOSE_W`, `SHOULDER_IN`, `MORPH`) o la geometría del hombro se descuadra — verifícalo comparando el perfil de anchos por fila, normalizado, contra el de la rejilla original; (4) **no leas la imagen por el contexto**: un PNG de 640×640 son ~430 KB en base64. Levanta un receptor HTTP local de 15 líneas con `Access-Control-Allow-Origin: *` y que la página haga `fetch(..., {method:'POST', body: canvas.toDataURL()})`. Sirve igual para volcar 96 fotogramas seguidos y montarlos con ffmpeg.
 - **No "optimices" la foto de origen de un generador de arte: el resultado cambia**. Servir la foto original completa de alguien es exposición real (en un CV, 1483×1364 y 1,7MB descargables), y la reacción natural es reducirla — pero el pipeline analiza bordes sobre un fondo con bandas, y el remuestreo mueve la máscara. Medido contra el original: a 1000px cambian 200 de 2610 celdas y 2 de silueta; a 500px, 332 y 8; a 400px, 373 y 21. **No hay un tamaño gratis**, así que no es una optimización sino un cambio de diseño: hay que enseñarlo y que lo decida quien aprobó el retrato. Y el matiz que cierra el tema: la foto **no se puede ocultar**, porque el generador la necesita en el navegador; reducirla limita la calidad de la copia que se lleva un scraper, nada más.
 - **Añadir un idioma a un selector de banderas es un cambio de layout, no solo de contenido**. La tercera bandera ensanchó la barra de 68 a 100px y se comió el hueco que tenían reservado las barras de tres capítulos (`margin-right: 88px`), solapando en los tres idiomas — no solo en el nuevo. Regla: **cada bandera son ~32px** (26 de ancho más la separación), así que el hueco reservado tiene que derivarse del número de idiomas, y hay que volver a medir el solape después de añadir uno. Y genera el bloque del selector **con un script sobre todas las páginas** en vez de editarlas una a una: con 21 páginas × 3 idiomas, el `aria-current`, el `hreflang`, la bandera y el nombre del idioma en la lengua de cada página son cuatro cosas que se descuadran solas.
+## Máscara precalculada del retrato
+
+Desde agosto de 2026 el sitio **no publica ni el algoritmo ni la foto**. `portrait.js`
+solo trae la animación (322 líneas); el análisis de la imagen (`buildMask`, 391 líneas,
+más `morph` y las 20 constantes de ajuste) se ejecuta una vez en local y lo que se
+sirve es `portrait-mask.js`: 58×45 celdas, 16 bits de brillo por celda, 6,8 KB de
+base64. Verificado al hacer el cambio: **0 celdas cambian de tono y 0 cambian la luz
+de las gotas** respecto al retrato anterior.
+
+`perfil.png` sigue en local (está en `.gitignore`) pero ya no se sirve.
+
+### Cómo regenerar la máscara si cambia la foto
+
+El algoritmo ya no está en el árbol de trabajo: vive en el historial, en el último
+commit antes del precálculo.
+
+```bash
+git show d2a5fcf:portrait.js > /tmp/portrait-con-algoritmo.js
+```
+
+Después: servir el sitio en local, cargar esa copia en una página **sin la CSP** (la
+del sitio bloquea el `fetch` que hace falta para instrumentar), reemplazar en el
+fuente `mask = buildMask(img);` por `mask = buildMask(img); window.__m = mask;`,
+evaluarlo con la foto nueva, y volcar `window.__m` a 16 bits big-endian en base64:
+
+```js
+const bytes = new Uint8Array(m.length * 2);
+for (let i = 0; i < m.length; i++) {
+  const v = Math.round(Math.min(1, Math.max(0, m[i])) * 65535);
+  bytes[i*2] = v >> 8; bytes[i*2+1] = v & 255;
+}
+```
+
+Con foto nueva hay que reajustar antes las constantes siguiendo la receta de arriba;
+el precálculo es el último paso, no el primero.
+
+**Ojo con el historial**: quitar el algoritmo y la foto de `main` no los quita del
+repositorio, que es público. Siguen recuperables con `git show` desde cualquier
+commit anterior. Eliminarlos de verdad exigiría reescribir el historial y forzar el
+push, con todos los SHA cambiados.

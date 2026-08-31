@@ -255,8 +255,9 @@
           <p>Aquí los microservicios dejaron de ser "lo que toca usar" para convertirse en algo que entendía de
           verdad: por qué se separan, cuándo compensa, y qué pasa cuando uno se cae. También donde Kafka pasó de
           línea en el CV a herramienta del día a día.</p>
-          <p>El caso concreto: un cambio de precio tiene que llegar a todos los servicios
-          que muestran ese producto. Resolverlo con llamadas entre servicios los acopla y
+          <p>El caso concreto: cualquier cambio en un producto del catálogo —un precio nuevo,
+          un alta— tiene que llegar a todos los servicios que lo muestran, y en ese dominio
+          eran unos 150 comunicándose por Kafka. Resolverlo con llamadas entre servicios los acopla y
           hace que uno caído arrastre al resto; publicándolo como evento, cada consumidor
           lo procesa a su ritmo, confirma el offset cuando ha terminado de verdad, y lo que
           falla acaba en una cola aparte en vez de perderse.</p>

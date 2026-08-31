@@ -120,7 +120,7 @@ button{ font-family: inherit; }
   flex-shrink:0;
 }
 .win:not(.active) .win-title{ background: linear-gradient(90deg,#808080,#b5b5b5); }
-.win-title-text{ font-size: 13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.win-title-text{ margin: 0; font-size: 13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .win-btns{ display:flex; gap:2px; }
 .wbtn{
   width: 18px; height:16px; background: var(--face); color:#000;

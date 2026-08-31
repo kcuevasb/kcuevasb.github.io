@@ -1,0 +1,5 @@
+# CV publico: todo indexable.
+User-agent: *
+Allow: /
+
+Sitemap: https://kcuevasb.github.io/sitemap.xml

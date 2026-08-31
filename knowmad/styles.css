@@ -172,7 +172,7 @@ button.tree-file.active .fi{ color: #fff; }
 .sk-bar b{ display:block; height:100%; background: var(--kw); }
 
 .md{ padding: 20px 26px; max-width: 74ch; }
-.md h1{ font-family: var(--font-code); font-size: 17px; color: var(--mth); margin: 0 0 14px; font-weight: 600; }
+.md h2{ font-family: var(--font-code); font-size: 17px; color: var(--mth); margin: 0 0 14px; font-weight: 600; }
 .md p{ font-size: 13.5px; line-height:1.65; color: var(--fg); margin: 0 0 12px; }
 .md strong{ color: #fff; }
 .md em{ color: var(--fg-dim); }

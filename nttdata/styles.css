@@ -162,7 +162,7 @@ button.tree-file.active{ background: var(--tree-select); }
 .sk-bar b{ display:block; height:100%; background: var(--accent); }
 
 .md{ padding: 20px 26px; font-family: var(--font-ui); max-width: 68ch; }
-.md h1{ font-family: var(--font-code); font-size: 18px; color: var(--ink); margin: 0 0 14px; }
+.md h2{ font-family: var(--font-code); font-size: 18px; color: var(--ink); margin: 0 0 14px; }
 .md p{ font-size: 13.5px; line-height:1.6; color: var(--ink); margin: 0 0 12px; }
 
 /* ---------- Bottom: console ---------- */

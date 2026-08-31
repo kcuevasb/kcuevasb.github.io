@@ -131,6 +131,18 @@ body{
 }
 .cv-contact a:hover{ color: var(--fg); border-color: var(--fg-dim); }
 
+
+/* Nota bajo el contacto: explica por que el enlace a GitHub no lleva a un
+   muro de repos, y aprovecha para enlazar lo unico publico que hay. */
+.cv-note{
+  font-size: 15px;
+  margin: 6px 0 0;
+  color: var(--fg-dim);
+  max-width: 62ch;
+}
+.cv-note a{ color: var(--fg-dim); text-decoration: underline; text-underline-offset: 2px; }
+.cv-note a:hover{ color: var(--fg); }
+
 @media (max-width: 720px){
   .cv-head{ flex-direction: column; text-align:center; gap: 20px; }
   /* Mas especifico que el align-self de la regla base, que si no lo pegaria
@@ -415,10 +427,10 @@ body{
 .export-link{
   display: inline-flex; align-items:center; gap: 8px;
   align-self: flex-start;
-  /* auto: se come todo el hueco que sobra hasta el borde de abajo del marco.
-     Con el retrato a 240px ese sobrante son unos 25px, asi que el salto queda
-     al triple que los del texto: separa sin abrir un vacio. */
-  margin-top: auto;
+  /* Medida fija y no auto: desde que la columna lleva la nota de los repos es
+     mas alta que el marco, asi que auto colapsaba a cero y el enlace quedaba
+     pegado al texto de encima. */
+  margin-top: 18px;
   color: var(--fg-dim);
   font-size: 15px;
   text-decoration: none;

@@ -157,13 +157,21 @@
 
       <div class="project-grid">
 
-        <article class="pixel-card project-card">
+        <article class="pixel-card project-card project-card-lead">
           <h3>cartelera-app <span class="ptag">Java · Spring Boot · in production</span></h3>
           <p>A personal replacement for TV Time when it shut down: tracking series and films with Google login,
-          real multi-user support, friends, chat and an activity feed. Hexagonal architecture from
-          scratch, Caffeine cache, incremental library saving. In production, with real users who are
-          not me.</p>
+          real multi-user support, friends, chat and an activity feed. In production, with real users who are
+          not me, and 474 titles migrated from TV Time without losing one.</p>
           <div class="stack"><span>Java</span><span>Spring Boot</span><span>Arq. Hexagonal</span><span>PostgreSQL</span><span>Docker</span><span>Render</span></div>
+          <div class="proj-why">
+            <p class="why-title">Three decisions</p>
+            <ul>
+
+            <li><b>Hexagonal</b> · every new integration goes in without touching what already works. Three times so far: SendGrid, Firebase and the OMDb ratings.</li>
+            <li><b>Caching</b> · 6h on already-published records; search and trending deliberately left out, because there a stale result is a wrong one.</li>
+            <li><b>Incremental saving</b> · marking one episode as watched used to rewrite the whole library; normal edits now go item by item.</li>
+            </ul>
+          </div>
           <a class="pixel-link" href="https://cartelera-app.onrender.com" target="_blank" rel="noopener">&gt; see it in production ↗</a>
         </article>
 

@@ -156,12 +156,21 @@
 
       <div class="project-grid">
 
-        <article class="pixel-card project-card">
+        <article class="pixel-card project-card project-card-lead">
           <h3>cartelera-app <span class="ptag">Java · Spring Boot · en producción</span></h3>
           <p>Sustituto personal de TV Time cuando cerró: seguimiento de series y películas con login Google,
-          multiusuario real, amigos, chat y feed de actividad. Arquitectura hexagonal desde cero, caché con
-          Caffeine, guardado incremental de biblioteca. En producción, con usuarios reales que no son yo.</p>
+          multiusuario real, amigos, chat y feed de actividad. En producción, con usuarios reales que no son
+          yo, y 474 títulos migrados desde TV Time sin perder uno.</p>
           <div class="stack"><span>Java</span><span>Spring Boot</span><span>Arq. Hexagonal</span><span>PostgreSQL</span><span>Docker</span><span>Render</span></div>
+          <div class="proj-why">
+            <p class="why-title">Tres decisiones</p>
+            <ul>
+
+            <li><b>Hexagonal</b> · cada integración nueva entra sin tocar lo que ya funciona. Ha pasado tres veces: SendGrid, Firebase y las notas de OMDb.</li>
+            <li><b>Caché</b> · 6 h en las fichas ya publicadas; búsqueda y tendencias fuera a propósito, porque ahí un resultado viejo es un resultado malo.</li>
+            <li><b>Guardado incremental</b> · marcar un episodio como visto reescribía la biblioteca entera; ahora la edición normal va por ítem.</li>
+            </ul>
+          </div>
           <a class="pixel-link" href="https://cartelera-app.onrender.com" target="_blank" rel="noopener">&gt; ver en producción ↗</a>
         </article>
 

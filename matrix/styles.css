@@ -394,6 +394,35 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
 .project-card-ghost{ border-style: dashed; opacity: 0.85; }
 .project-card-ghost h3{ color: var(--fg-dim); }
 
+
+/* cartelera-app ocupa la fila entera: es el unico proyecto en el stack
+   profesional y en produccion, y ademas es el que lleva el bloque de
+   decisiones. En una sola columna crecia a 870px y estiraba a sus dos vecinas
+   por el stretch de la rejilla; a lo ancho el texto respira y la fila baja. */
+.project-card-lead{ grid-column: 1 / -1; }
+@media (min-width: 900px){
+  .project-card-lead .proj-why ul{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Las decisiones de cartelera-app. Es el unico proyecto en el stack
+   profesional y en produccion, asi que es el que aguanta contar el porque y
+   no solo el que: separado del parrafo para que se lea como ficha tecnica. */
+.proj-why{ margin-top: 14px; border-top: 1px solid #143a1c; padding-top: 12px; }
+.proj-why .why-title{
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--amber);
+  margin: 0 0 8px;
+}
+.proj-why ul{ margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 7px; }
+.proj-why ul li{ color: var(--fg-dim); font-size: 16px; line-height: 1.45; }
+.proj-why b{ color: var(--green); font-weight: normal; }
+
 /* ---------- Contacto / consola ---------- */
 .contact-links{ display:flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
 

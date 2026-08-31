@@ -230,3 +230,13 @@ button.tree-file.active .fi{ color: #fff; }
 @media screen{
   .back-link{ margin-right: 124px; }
 }
+
+/* El unico diagrama del sitio. Va aqui porque el flujo de eventos es el
+   concepto que mejor demuestra el nivel tecnico y el que peor se cuenta en
+   prosa. SVG en linea, sin dependencias y con los tonos del propio IDE. */
+.kafka-flow{ margin: 16px 0 0; }
+.kafka-flow svg{ width: 100%; height: auto; max-width: 640px; display: block; }
+.kafka-flow figcaption{
+  font-family: var(--font-code); font-size: 11px; color: var(--fg-dim);
+  line-height: 1.5; margin-top: 6px; max-width: 640px;
+}

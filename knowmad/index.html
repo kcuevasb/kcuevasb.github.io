@@ -261,6 +261,41 @@
           hace que uno caído arrastre al resto; publicándolo como evento, cada consumidor
           lo procesa a su ritmo, confirma el offset cuando ha terminado de verdad, y lo que
           falla acaba en una cola aparte en vez de perderse.</p>
+          <figure class="kafka-flow">
+            <svg viewBox="0 0 640 210" role="img" aria-labelledby="flow-t-knowmadindexhtml">
+              <title id="flow-t-knowmadindexhtml">Nadie llama a nadie: el catálogo publica y cada servicio consume a su ritmo. Lo que falla no se pierde, se aparta.</title>
+              <defs>
+                <marker id="fl-knowmadindexhtml" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                  <path d="M0 0 L7 3.5 L0 7 z" fill="#6897bb"/>
+                </marker>
+              </defs>
+              <g font-family="Consolas, monospace" font-size="12">
+                <rect x="4" y="80" width="118" height="44" rx="3" fill="#313335" stroke="#6a8759"/>
+                <text x="63" y="98" fill="#6a8759" text-anchor="middle">catálogo</text>
+                <text x="63" y="114" fill="#808080" text-anchor="middle">evento</text>
+
+                <line x1="124" y1="102" x2="196" y2="102" stroke="#6897bb" marker-end="url(#fl-knowmadindexhtml)"/>
+
+                <rect x="200" y="70" width="196" height="64" rx="3" fill="#2b2b2b" stroke="#bbb529"/>
+                <text x="298" y="94" fill="#bbb529" text-anchor="middle">topic</text>
+                <text x="298" y="112" fill="#a9b7c6" text-anchor="middle" font-size="10.5">catalogo.producto.actualizado</text>
+
+                <line x1="398" y1="86" x2="474" y2="46" stroke="#6897bb" marker-end="url(#fl-knowmadindexhtml)"/>
+                <line x1="398" y1="102" x2="474" y2="102" stroke="#6897bb" marker-end="url(#fl-knowmadindexhtml)"/>
+                <line x1="398" y1="118" x2="474" y2="158" stroke="#6897bb" marker-end="url(#fl-knowmadindexhtml)"/>
+
+                <rect x="478" y="26" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="49" fill="#a9b7c6" text-anchor="middle">servicio A</text>
+                <rect x="478" y="84" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="107" fill="#a9b7c6" text-anchor="middle">servicio B</text>
+                <rect x="478" y="142" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="165" fill="#808080" text-anchor="middle">…150</text>
+
+                <text x="440" y="196" fill="#cc7832" text-anchor="middle" font-size="10.5">ack manual · DLQ</text>
+              </g>
+            </svg>
+            <figcaption>Nadie llama a nadie: el catálogo publica y cada servicio consume a su ritmo. Lo que falla no se pierde, se aparta.</figcaption>
+          </figure>
           <p><em>La etapa anterior (NTT Data) y la actual (Sopra Steria) tienen su propio capítulo.</em></p>
         </div>
       </div>

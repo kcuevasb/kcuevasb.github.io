@@ -258,6 +258,41 @@ where Kafka went from a line on the CV to an everyday tool.</p>
           going down drags the rest with it; published as an event, each consumer handles it
           at its own pace, commits the offset once it has actually finished, and whatever
           fails ends up in a separate queue instead of being lost.</p>
+          <figure class="kafka-flow">
+            <svg viewBox="0 0 640 210" role="img" aria-labelledby="flow-t-enknowmadindexhtml">
+              <title id="flow-t-enknowmadindexhtml">Nobody calls anybody: the catalogue publishes and each service consumes at its own pace. What fails is not lost, it is set aside.</title>
+              <defs>
+                <marker id="fl-enknowmadindexhtml" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                  <path d="M0 0 L7 3.5 L0 7 z" fill="#6897bb"/>
+                </marker>
+              </defs>
+              <g font-family="Consolas, monospace" font-size="12">
+                <rect x="4" y="80" width="118" height="44" rx="3" fill="#313335" stroke="#6a8759"/>
+                <text x="63" y="98" fill="#6a8759" text-anchor="middle">catalogue</text>
+                <text x="63" y="114" fill="#808080" text-anchor="middle">event</text>
+
+                <line x1="124" y1="102" x2="196" y2="102" stroke="#6897bb" marker-end="url(#fl-enknowmadindexhtml)"/>
+
+                <rect x="200" y="70" width="196" height="64" rx="3" fill="#2b2b2b" stroke="#bbb529"/>
+                <text x="298" y="94" fill="#bbb529" text-anchor="middle">topic</text>
+                <text x="298" y="112" fill="#a9b7c6" text-anchor="middle" font-size="10.5">catalogo.producto.actualizado</text>
+
+                <line x1="398" y1="86" x2="474" y2="46" stroke="#6897bb" marker-end="url(#fl-enknowmadindexhtml)"/>
+                <line x1="398" y1="102" x2="474" y2="102" stroke="#6897bb" marker-end="url(#fl-enknowmadindexhtml)"/>
+                <line x1="398" y1="118" x2="474" y2="158" stroke="#6897bb" marker-end="url(#fl-enknowmadindexhtml)"/>
+
+                <rect x="478" y="26" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="49" fill="#a9b7c6" text-anchor="middle">service A</text>
+                <rect x="478" y="84" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="107" fill="#a9b7c6" text-anchor="middle">service B</text>
+                <rect x="478" y="142" width="120" height="36" rx="3" fill="#313335" stroke="#555759"/>
+                <text x="538" y="165" fill="#808080" text-anchor="middle">…150</text>
+
+                <text x="440" y="196" fill="#cc7832" text-anchor="middle" font-size="10.5">manual ack · DLQ</text>
+              </g>
+            </svg>
+            <figcaption>Nobody calls anybody: the catalogue publishes and each service consumes at its own pace. What fails is not lost, it is set aside.</figcaption>
+          </figure>
           <p><em>The previous stage (NTT Data) and the current one (Sopra Steria) have their own chapter.</em></p>
         </div>
       </div>

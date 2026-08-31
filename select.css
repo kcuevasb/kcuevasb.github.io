@@ -148,6 +148,55 @@ body{
   .cv-head .export-link{ align-self:center; margin-top: 22px; }
 }
 
+
+/* ---------- Stack principal ----------
+   Va entre la cabecera y los capitulos porque es lo que busca un recruiter en
+   los primeros segundos y antes solo estaba dentro de los capitulos. Agrupado
+   por funcion en vez de una lista plana: se lee de un vistazo si el perfil
+   encaja, sin barras ni porcentajes. */
+.stack-band{ margin-bottom: 34px; }
+
+.stack{
+  display: grid;
+  /* auto-fit y no un numero fijo de columnas: con 6 grupos caben 3 en ancho,
+     2 en tablet y 1 en movil sin escribir un breakpoint por cada caso. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px 28px;
+  margin: 0;
+}
+
+.stack-group{
+  /* La pagina centra el texto por defecto; aqui no, o el contenido queda
+     flotando lejos de la barra que lo agrupa. */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 2px solid #2a2f3a;
+  padding-left: 12px;
+}
+
+.stack dt{
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.stack dd{
+  font-family: var(--font-term);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--fg);
+  margin: 0;
+}
+
+@media (max-width: 560px){
+  .stack{ gap: 12px 0; }
+  .stack dd{ font-size: 18px; }
+}
+
 /* ---------- Trayectoria: bloques de CV ----------
    Antes los cinco capítulos iban en una fila de tarjetas verticales, todas
    compitiendo por el mismo ancho. En un CV lo que manda es el orden de

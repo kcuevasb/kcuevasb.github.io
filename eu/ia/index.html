@@ -175,6 +175,15 @@
         <span class="chip">Kafka Avro</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
         <span class="chip">GKE/Kubernetes</span><span class="chip">Artifactory</span><span class="chip">Ark. hexagonala</span>
       </div>
+    
+      <div class="role-why">
+        <p class="why-title">Hiru erabaki</p>
+        <ul>
+        <li><b>Idenpotentzia</b> · Kafkaren birbidalketak PostgreSQLko adierazpen indize batekin detektatzen dira, ez UNIQUE arrunt batekin: benetako bikoiztua bereizten du taula blokeatu gabe eta idazketa moteldu gabe.</li>
+        <li><b>Birprozesatzea aparte</b> · erroreak berreskuratzeko logika bere zerbitzuan bizi da eta ez fluxu nagusiaren barruan; horrela bide onak ez du hori jasan behar eta bakoitza bere kabuz hedatzen eta eskalatzen da.</li>
+        <li><b>Eskalatzea</b> · CPUaren arabera erreplikak igotzeak ez zuen ezertarako balio erreplikak baino Kafka partizio gutxiago izanda: eskalatze automatikoak topicaren benetako paralelismoari lotuta joan behar du, ez baliabideen metrikari soilik.</li>
+        </ul>
+      </div>
     </article>
 
     <p class="prose-note">Aurreko etapa bakoitzak bere kapitulua du, orduan erabiltzen nuen tresnaren estetikarekin:

@@ -175,6 +175,15 @@
         <span class="chip">Kafka Avro</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
         <span class="chip">GKE/Kubernetes</span><span class="chip">Artifactory</span><span class="chip">Arq. Hexagonal</span>
       </div>
+    
+      <div class="role-why">
+        <p class="why-title">Tres decisiones</p>
+        <ul>
+        <li><b>Idempotencia</b> · las reentregas de Kafka se detectan con un índice de expresión en PostgreSQL, no con un UNIQUE al uso: distingue el duplicado real sin bloquear la tabla ni penalizar la escritura.</li>
+        <li><b>Reproceso aparte</b> · la lógica de recuperación de errores vive en su propio servicio y no dentro del flujo principal, así el camino feliz no carga con ella y cada uno se despliega y escala por su cuenta.</li>
+        <li><b>Escalado</b> · subir réplicas por CPU no servía de nada habiendo menos particiones de Kafka que réplicas: el autoescalado tiene que ir atado al paralelismo real del topic, no solo a la métrica de recursos.</li>
+        </ul>
+      </div>
     </article>
 
     <p class="prose-note">Las etapas anteriores tienen cada una su propio capítulo, con la estética de la

@@ -175,6 +175,15 @@
         <span class="chip">Kafka Avro</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
         <span class="chip">GKE/Kubernetes</span><span class="chip">Artifactory</span><span class="chip">Hexagonal arch.</span>
       </div>
+    
+      <div class="role-why">
+        <p class="why-title">Three decisions</p>
+        <ul>
+        <li><b>Idempotency</b> · Kafka redeliveries are caught with an expression index in PostgreSQL rather than a plain UNIQUE constraint: it tells a real duplicate apart without locking the table or slowing writes down.</li>
+        <li><b>Reprocessing apart</b> · error-recovery logic lives in its own service instead of inside the main flow, so the happy path does not carry it and each one deploys and scales on its own.</li>
+        <li><b>Scaling</b> · adding replicas on CPU was useless with fewer Kafka partitions than replicas: autoscaling has to track the topic's real parallelism, not just a resource metric.</li>
+        </ul>
+      </div>
     </article>
 
     <p class="prose-note">Each earlier stage has its own chapter, styled after the tool I used back then:

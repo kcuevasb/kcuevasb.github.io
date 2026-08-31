@@ -90,6 +90,7 @@
           <li>Queries against relational (PostgreSQL) and non-relational (MongoDB) databases; development of inter-service communication and data aggregation services.</li>
           <li>Support on architecture design, including microservices built from scratch with hexagonal architecture; deployment on GKE/Kubernetes.</li>
           <li>Code quality with Sonar; unit and integration tests with Mockito/JUnit; asynchronous events with Kafka Avro.</li>
+            <li>Idempotent consumers against Kafka redeliveries, and autoscaling tied to the partition count rather than CPU alone — without enough partitions there is nothing to parallelise.</li>
         </ul>
         <p class="stack">Java 17+ · Spring Boot 4 · Kafka Avro · PostgreSQL · MongoDB · GKE/Kubernetes · Artifactory · Sonar</p>
       </article>

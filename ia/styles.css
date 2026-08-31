@@ -211,3 +211,12 @@ a{ color: inherit; }
   .role-card-head time{ margin-left:0; }
   .role-card-head .tag{ margin-left:0; }
 }
+
+/* Las decisiones de la etapa actual. Anonimizadas a proposito: el porque se
+   sostiene sin nombres de microservicio ni de namespace del cliente. */
+.role-why{ margin-top: 14px; border-top: 1px solid #e5e1ee; padding-top: 12px; }
+.role-why .why-title{ font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: #5b57d1; margin: 0 0 8px; }
+.role-why ul{ margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.role-why li{ line-height: 1.5; }
+.role-why b{ color: #1f1e2b; }

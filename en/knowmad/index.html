@@ -250,6 +250,11 @@
           <p>This is where microservices stopped being "what you are supposed to use" and became something I
 actually understood: why they are split, when it pays off, and what happens when one goes down. Also
 where Kafka went from a line on the CV to an everyday tool.</p>
+          <p>The concrete case: a price change has to reach every service that shows that
+          product. Solving it with service-to-service calls couples them, and one service
+          going down drags the rest with it; published as an event, each consumer handles it
+          at its own pace, commits the offset once it has actually finished, and whatever
+          fails ends up in a separate queue instead of being lost.</p>
           <p><em>The previous stage (NTT Data) and the current one (Sopra Steria) have their own chapter.</em></p>
         </div>
       </div>

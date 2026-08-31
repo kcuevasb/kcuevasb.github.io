@@ -431,6 +431,27 @@ body{
 }
 .export-link:hover{ color: var(--fg); border-color: var(--fg-dim); }
 
+
+/* ---------- Cierre de la portada ----------
+   Repite contacto y PDF al final del recorrido. No es redundancia: la
+   cabecera queda fuera de pantalla en cuanto se baja a los capitulos. */
+.cv-outro{
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 28px 0 10px;
+  border-top: 1px solid #2a2f3a;
+}
+.outro-lead{
+  font-family: var(--font-pixel); font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--fg-dim); margin: 0;
+}
+.outro-links{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap: 10px 20px; }
+.outro-links a{ font-size: 17px; color: var(--fg-dim); text-decoration:none;
+  border-bottom: 1px dashed #3a3f4c; padding-bottom: 2px; }
+.outro-links a:hover{ color: var(--fg); border-color: var(--fg-dim); }
+.outro-cta{
+  border: 1px solid #2a2f3a !important; border-radius: 20px;
+  padding: 8px 16px !important; }
+
 /* ---------- Pie ----------
    Sustituye al cartel de navegacion por teclado. El prompt es el mismo que
    aparece en la miniatura del capitulo de Matrix, asi que el pie remata la

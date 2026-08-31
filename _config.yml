@@ -1,0 +1,6 @@
+# GitHub Pages sirve por defecto TODO lo que hay en el repo, y en este el repo
+# ES el sitio. CLAUDE.md es documentacion interna del proyecto: util para el
+# repositorio, pero no tiene por que quedar legible en kcuevasb.github.io.
+# Excluyendolo aqui sigue versionado y deja de publicarse.
+exclude:
+  - CLAUDE.md

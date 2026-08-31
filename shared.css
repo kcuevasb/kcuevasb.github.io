@@ -21,3 +21,17 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* Navegacion entre capitulos. Va al final de cada uno, fuera de su estetica:
+   es cronologia del CV, no parte del escritorio ni del IDE. Discreta a
+   proposito, para no competir con el contenido del capitulo. */
+.chapter-nav{
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  max-width: 1000px; margin: 0 auto; padding: 18px 20px 26px;
+  font-family: system-ui, sans-serif; font-size: 14px;
+}
+.chapter-nav a{ color: #8890a0; text-decoration: none; border-bottom: 1px dashed #3a3f4c; padding-bottom: 2px; }
+.chapter-nav a:hover, .chapter-nav a:focus-visible{ color: #eef1f5; border-color: #8890a0; }
+.chapter-nav .cn-next{ margin-left: auto; text-align: right; }
+@media print{ .chapter-nav{ display: none; } }

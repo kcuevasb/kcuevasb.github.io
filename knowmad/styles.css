@@ -219,8 +219,8 @@ button.tree-file.active .fi{ color: #fff; }
   .project-backdrop{ display:block; position: fixed; inset:0; z-index:45; background: rgba(0,0,0,0.5); }
   .project-backdrop[hidden]{ display:none; }
   .ide-bottom{ height: 120px; }
-  .code{ font-size: 12px; }
-  .console-out{ font-size: 10px; }
+  .code{ font-size: 14px; }
+  .console-out{ font-size: 12px; }
 }
 
 /* Hueco para el selector de idioma, que va fijo arriba a la derecha por

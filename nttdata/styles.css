@@ -197,7 +197,7 @@ button.tree-file.active{ background: var(--tree-select); }
   .explorer-backdrop[hidden]{ display:none; }
   .chapter-tag{ display:none; }
   .ide-bottom{ height: 110px; }
-  .code{ font-size: 12px; }
+  .code{ font-size: 14px; }
 }
 
 /* Hueco para el selector de idioma, que va fijo arriba a la derecha por

@@ -499,3 +499,14 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
   .pixel-nav button, .fx-toggle, .job-head{ min-height: 44px; }
   .pixel-btn{ min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
 }
+
+/* Marca los proyectos construidos escribiendo antes la especificacion que el
+   codigo. Es metodo, no stack, asi que no va con las etiquetas de tecnologia. */
+.sdd{
+  font-family: var(--font-term);
+  font-size: 13px;
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  padding: 1px 7px;
+  letter-spacing: .5px;
+}

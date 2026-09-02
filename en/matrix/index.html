@@ -153,16 +153,16 @@
     <section id="proyectos" class="section">
       <h2 class="section-title">// 03 · self_taught_projects --with-ai</h2>
       <p class="section-intro">Real projects, finished and in use — starting with me. None of them is a demo or a half-finished
-        tutorial: if they are here it is because they work. The code is private; what can be shown is the
-        problem they solve and the decisions behind them.</p>
+        tutorial: if they are here it is because they work. The code is private; what can be shown is what they
+        are for and how they were thought out. The ones marked <b>spec-first</b> are built the
+        other way round: first the project constitution and the specification of each feature,
+        and only once that is settled, the code.</p>
 
       <div class="project-grid">
 
         <article class="pixel-card project-card project-card-lead">
-          <h3>cartelera-app <span class="ptag">Java · Spring Boot · in production</span></h3>
-          <p>A personal replacement for TV Time when it shut down: tracking series and films with Google login,
-          real multi-user support, friends, chat and an activity feed. In production, with real users who are
-          not me, and 474 titles migrated from TV Time without losing one.</p>
+          <h3>cartelera-app <span class="ptag">Java · Spring Boot · in production</span> <span class="sdd">spec-first</span></h3>
+          <p>A personal replacement for TV Time when it shut down: following series and films, with friends, chat and an activity feed. In production, with real users who are not me, and 474 titles migrated without losing one.</p>
           <div class="stack"><span>Java</span><span>Spring Boot</span><span>Arq. Hexagonal</span><span>PostgreSQL</span><span>Docker</span><span>Render</span></div>
           <div class="proj-why">
             <p class="why-title">Three decisions</p>
@@ -178,26 +178,19 @@
 
         <article class="pixel-card project-card">
           <h3>StiEx <span class="ptag">Native Android</span></h3>
-          <p>Export and import WhatsApp stickers without rooting the phone or relying on dodgy third-party apps.
-          It reads WhatsApp's protected folder through the Storage Access Framework, turns photos into
-          stickers respecting WhatsApp's real limits to the letter (≤30 per pack, ≤100KB static / 500KB
-          animated) and publishes them with the official third-party API.</p>
+          <p>Export and import WhatsApp stickers without rooting the phone or relying on dodgy third-party apps. It turns photos into stickers respecting WhatsApp's real limits to the letter, and publishes them the official way.</p>
           <div class="stack"><span>Kotlin</span><span>Jetpack Compose</span><span>SAF</span><span>WebP</span></div>
         </article>
 
         <article class="pixel-card project-card">
           <h3>gim-app <span class="ptag">Expo / React Native</span></h3>
-          <p>Training and nutrition end to end, not a spreadsheet on steroids. It generates routines with a
-          rule-based algorithm (goal, level, days, equipment) without leaning on an AI for something that
-          does not need one, guides the session with a rest timer, and keeps a pantry tracker that works
-          out when each product runs out without storing a history nobody is going to read. Auth and data
-          on Supabase with proper Row Level Security.</p>
+          <p>Training and nutrition end to end, not a spreadsheet on steroids. Routines come from a rule-based algorithm and not an AI, because this does not need one, and the pantry tracker works out on its own when each thing runs out.</p>
           <div class="stack"><span>Expo</span><span>React Native</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span></div>
         </article>
 
         <article class="pixel-card project-card">
-          <h3>Fuga <span class="ptag">Expo / React Native</span></h3>
-          <p>Escape rooms played, rated, favourited or queued, on top of a curated catalogue. Anyone can propose a new room, but only accounts flagged as curators approve it — and making someone a curator is done straight in the database, with no screen for it, on purpose. Auth and data on Supabase with Row Level Security, and fifteen migrations that trace how the model grew.</p>
+          <h3>Fuga <span class="ptag">Expo / React Native</span> <span class="sdd">spec-first</span></h3>
+          <p>Escape rooms played, rated and queued, on top of a curated catalogue. Anyone proposes a new room and only curator accounts approve it. This is where the method went furthest: seventeen features, each one specified before being written.</p>
           <div class="stack"><span>Expo</span><span>React Native</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span></div>
         </article>
 

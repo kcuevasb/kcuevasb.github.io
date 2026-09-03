@@ -207,50 +207,51 @@ body{
    izquierda, como la ficha de un puesto. */
 .cv-block{ text-align:left; margin-bottom: 34px; }
 
-/* --- Filtro de vista: reordena y atenua, nunca oculta ---
-   Atenuada NO es apagada: la seccion sigue siendo clicable y sigue en el orden
-   de tabulacion, asi que nadie pierde contenido por haber pulsado un boton.
-   Y por eso tampoco hace falta un aria-live avisando de que algo ha
-   desaparecido: no desaparece nada. */
+/* --- Filtro de vista de la portada ---
+   Cuatro vistas: todo, experiencia laboral, fuera del trabajo y cronologia.
+   La barra va deliberadamente apagada y solo se enciende cuando el raton o el
+   teclado se acercan: es una herramienta, no una parte del contenido, y en una
+   portada que ya tiene un retrato animado y cinco tarjetas de colores no puede
+   competir con ellos por la atencion. */
 .view-filter{
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 8px; margin: 0 0 24px;
+  gap: 3px; margin: 0 0 20px;
+  opacity: .5; transition: opacity .22s ease;
 }
+.view-filter:hover, .view-filter:focus-within{ opacity: 1; }
 /* display:flex gana a la regla de fabrica de [hidden], asi que hay que
    devolverle el display:none a mano o la barra se ve igual sin JavaScript. */
 .view-filter[hidden]{ display: none; }
 .filter-label{
-  font-family: var(--font-pixel); font-size: 10px; letter-spacing: 1.2px;
-  text-transform: uppercase; color: var(--fg-dim); margin-right: 4px;
+  font-family: var(--font-pixel); font-size: 8px; letter-spacing: 1.2px;
+  text-transform: uppercase; color: #545c6b; margin-right: 6px;
 }
 /* El radio de verdad sigue ahi, y con el las flechas del teclado y el
-   anuncio de "1 de 3" del lector de pantalla. Solo se saca de la vista:
+   anuncio de "1 de 4" del lector de pantalla. Solo se saca de la vista:
    display:none lo sacaria tambien del orden de tabulacion. */
 .view-filter input{
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
   border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
 }
 .view-filter label{
-  font-family: var(--font-term); font-size: 17px; line-height: 1;
-  color: var(--fg-dim); border: 1px solid #2a2f3a; border-radius: 999px;
-  padding: 7px 14px 5px; cursor: pointer;
-  transition: color .18s ease, border-color .18s ease, background .18s ease;
+  font-family: var(--font-term); font-size: 15px; line-height: 1;
+  color: #6e7787; border: 0; background: transparent; border-radius: 4px;
+  padding: 5px 10px 3px; cursor: pointer;
+  transition: color .18s ease, background .18s ease;
 }
-.view-filter label:hover{ color: var(--fg); border-color: #465066; }
-.view-filter input:checked + label{
-  color: #12151c; background: var(--accent); border-color: var(--accent);
-}
+.view-filter label:hover{ color: var(--fg); background: #171b24; }
+.view-filter input:checked + label{ color: var(--accent); background: #171b24; }
 .view-filter input:focus-visible + label{
-  outline: 2px solid var(--accent); outline-offset: 3px;
+  outline: 2px solid var(--accent); outline-offset: 2px;
 }
 
+/* Los bloques que se van no se atenuan: se ocultan. La transicion se queda
+   para los que SIGUEN en pantalla, que son los que se mueven a su sitio
+   nuevo, y para los que entran, que lo hacen desde abajo. */
 .cv-block{ transition: transform .42s cubic-bezier(.22,.72,.2,1), opacity .26s ease; }
-.cv-block.is-muted{ opacity: .34; }
-.cv-block.is-muted:hover{ opacity: .78; }
-.cv-block.is-muted:focus-within{ opacity: 1; }
 
 @media (prefers-reduced-motion: reduce){
-  .cv-block, .view-filter label{ transition: none; }
+  .cv-block, .view-filter label, .view-filter{ transition: none; }
 }
 
 .block-title{
@@ -396,7 +397,7 @@ body{
 /* El halo va en el <li>, no en la tarjeta: .card ya usa box-shadow para el
    salto del hover y una sombra permanente ahi se pisaria con ella. El outline
    si puede ir en la tarjeta, que no lo usa nadie. */
-.entries-now li{ border-radius: 6px; box-shadow: 0 0 34px rgba(91,87,209,.42); }
+.lead-slot{ border-radius: 6px; box-shadow: 0 0 34px rgba(91,87,209,.42); }
 .card-lead{ outline: 2px solid #5b57d1; outline-offset: 3px; }
 
 /* --- Comienzos -> Por mi cuenta ---

@@ -1,14 +1,15 @@
 /* Filtro de vista de la portada.
  *
- * Reordena y atenua; nunca oculta. Con cinco tarjetas que caben en una
- * pantalla, esconder dos pide un clic para ahorrar poco y deja a quien haya
- * filtrado sin ver el resto de la pagina. Atenuando, quien busca una cosa la
- * encuentra arriba y quien solo pasa la vista lo sigue teniendo todo delante.
+ * Cuatro vistas: todo, experiencia laboral, fuera del trabajo y cronologia.
+ * Las tres primeras muestran y ocultan bloques enteros. La cuarta es distinta:
+ * rompe la agrupacion por bloques y pone las cinco tarjetas seguidas, del 01
+ * al 05, que es el orden en que pasaron las cosas.
  *
- * El orden se cambia MOVIENDO los nodos, no con `order` de CSS: con `order`
- * el foco del teclado sigue yendo por el orden del HTML y deja de coincidir
- * con lo que se ve, que es justo el fallo que documenta la WCAG. Moviendo los
- * nodos, orden visual, orden de lectura y orden de tabulacion son el mismo.
+ * La cronologia MUEVE las tarjetas a otra lista en vez de duplicarlas, asi que
+ * cada una guarda de donde viene. Al volver no se reinsertan una a una con
+ * insertBefore (el hermano que se guardo puede haberse movido tambien): se
+ * reconstruye cada lista de golpe, que ademas es lo unico que garantiza el
+ * orden original.
  *
  * La animacion es FLIP: se mide donde estaba cada bloque, se cambia el DOM, se
  * mide donde ha quedado, se le aplica la diferencia como transformacion y se
@@ -22,8 +23,23 @@
   var wrap = document.querySelector('.chapters');
   if (!bar || !wrap) return;
 
-  var blocks = Array.prototype.slice.call(wrap.querySelectorAll('.cv-block'));
-  if (blocks.length < 2) return;
+  var blocks = [].slice.call(wrap.querySelectorAll('.cv-block'));
+  var strip = wrap.querySelector('.entries-timeline');
+  var cards = [].slice.call(wrap.querySelectorAll('.entries > li[data-order]'));
+  if (!blocks.length || !strip || !cards.length) return;
+
+  // De donde sale cada tarjeta, agrupado por lista, para poder devolverlas.
+  var homes = [];
+  cards.forEach(function (li) {
+    var list = li.parentNode, slot = null, i;
+    for (i = 0; i < homes.length; i++) if (homes[i].list === list) slot = homes[i];
+    if (!slot) { slot = { list: list, items: [] }; homes.push(slot); }
+    slot.items.push(li);
+  });
+
+  var byDate = cards.slice().sort(function (a, b) {
+    return (+a.dataset.order) - (+b.dataset.order);
+  });
 
   // Sin JavaScript la barra no haria nada, asi que llega oculta del servidor
   // y solo aparece si hemos llegado hasta aqui.
@@ -31,47 +47,61 @@
 
   var quiet = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  function shows(block, view) {
+    var g = block.dataset.group;
+    if (view === 'cron') return g === 'timeline';
+    if (g === 'timeline') return false;
+    return view === 'all' || g === view;
+  }
+
   function apply(view, animate) {
-    var before = null, i;
+    var before = null;
     if (animate) {
-      before = [];
-      for (i = 0; i < blocks.length; i++) {
-        before.push(blocks[i].getBoundingClientRect().top);
-      }
+      before = blocks.map(function (b) {
+        return b.hidden ? null : b.getBoundingClientRect().top;
+      });
     }
 
-    var chosen = [], rest = [];
-    for (i = 0; i < blocks.length; i++) {
-      var pick = (view === 'all' || blocks[i].dataset.group === view);
-      (pick ? chosen : rest).push(blocks[i]);
-      blocks[i].classList.toggle('is-muted', !pick);
+    if (view === 'cron') {
+      byDate.forEach(function (li) { strip.appendChild(li); });
+    } else {
+      homes.forEach(function (slot) {
+        slot.items.forEach(function (li) { slot.list.appendChild(li); });
+      });
     }
-    var order = chosen.concat(rest);
-    for (i = 0; i < order.length; i++) wrap.appendChild(order[i]);
+
+    blocks.forEach(function (b) { b.hidden = !shows(b, view); });
 
     if (!animate) return;
 
     var moved = false;
-    var deltas = [];
-    for (i = 0; i < blocks.length; i++) {
-      deltas.push(before[i] - blocks[i].getBoundingClientRect().top);
-    }
-    for (i = 0; i < blocks.length; i++) {
-      if (!deltas[i]) continue;
+    blocks.forEach(function (b, i) {
+      if (b.hidden) return;
+      if (before[i] === null) {
+        // Bloque que no estaba: entra desde abajo y transparente.
+        b.style.transition = 'none';
+        b.style.opacity = '0';
+        b.style.transform = 'translateY(12px)';
+        moved = true;
+        return;
+      }
+      var dy = before[i] - b.getBoundingClientRect().top;
+      if (!dy) return;
+      b.style.transition = 'none';
+      b.style.transform = 'translateY(' + dy + 'px)';
       moved = true;
-      blocks[i].style.transition = 'none';
-      blocks[i].style.transform = 'translateY(' + deltas[i] + 'px)';
-    }
+    });
     if (!moved) return;
 
     // Reflujo forzado: sin el, el navegador agrupa el "ponte donde estabas" y
     // el "vuelve a tu sitio" en un solo cambio y no se anima nada.
     void wrap.offsetWidth;
 
-    for (i = 0; i < blocks.length; i++) {
-      blocks[i].style.transition = '';
-      blocks[i].style.transform = '';
-    }
+    blocks.forEach(function (b) {
+      b.style.transition = '';
+      b.style.transform = '';
+      b.style.opacity = '';
+    });
   }
 
   bar.addEventListener('change', function (e) {

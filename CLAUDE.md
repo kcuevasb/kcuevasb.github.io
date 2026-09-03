@@ -61,18 +61,30 @@ propia página ("Capítulo 04 — donde estoy ahora"), así que tocarlos aquí l
 descuadra en quince páginas.
 
 Encima de los bloques hay un **filtro de vista** (`filter.js`, sin texto dentro,
-uno solo para los tres idiomas) que **reordena y atenúa, nunca oculta**: sube al
-principio el grupo elegido y deja el otro al 34% de opacidad, clicable y en el
-orden de tabulación. Con cinco tarjetas que caben en una pantalla, esconder dos
-pediría un clic para ahorrar poco y dejaría a quien filtró sin ver el resto; por
-lo mismo tampoco hace falta un `aria-live`, porque no desaparece nada. Tres cosas
-que no hay que "simplificar": el orden se cambia **moviendo los nodos**, no con
-`order` de CSS (con `order`, el foco del teclado sigue el orden del HTML y deja de
-coincidir con lo que se ve); la animación es **FLIP**, que es lo único que anima un
-reflujo sin animar `top` ni `height`; y la barra llega del servidor con `hidden` y
-lo quita el script, porque sin JavaScript sería una fila de botones que no hace
-nada — ojo, `display:flex` gana a la regla de fábrica de `[hidden]`, así que hay
-que devolverle el `display:none` a mano.
+uno solo para los tres idiomas) con cuatro opciones: *Todo*, *Experiencia
+laboral*, *Fuera del trabajo* y *Cronología*. Las tres primeras muestran y
+ocultan bloques enteros. La cuarta rompe la agrupación: mueve las cinco tarjetas
+a una sección aparte (`.entries-timeline`, que viaja vacía en el HTML) ordenadas
+del 01 al 05, y las devuelve a su sitio al salir.
+
+Se probó antes una versión que **atenuaba** en vez de ocultar; Kepa la vio y pidió
+que se ocultase. La barra en cambio sí va deliberadamente apagada (opacidad .5) y
+solo se enciende al acercarse: es una herramienta, no contenido.
+
+Cuatro cosas que no hay que "simplificar":
+
+- **El JavaScript mueve las tarjetas, no las duplica**, así que cada una guarda de
+  dónde viene. Al volver se **reconstruye cada lista entera**, no se reinserta una
+  a una con `insertBefore`: el hermano que guardaste puede haberse movido también.
+- **La animación es FLIP**, lo único que anima un reflujo sin animar `top` ni
+  `height`.
+- **Son radios de verdad**, solo sacados de la vista con `clip-path` (`display:none`
+  los sacaría del orden de tabulación): así vienen gratis las flechas del teclado y
+  el "1 de 4" del lector de pantalla.
+- **La barra llega del servidor con `hidden` y lo quita el script**, porque sin
+  JavaScript sería una fila de botones que no hace nada — ojo, `display:flex` gana a
+  la regla de fábrica de `[hidden]`, así que hay que devolverle el `display:none` a
+  mano.
 
 ## Tres idiomas
 
@@ -94,6 +106,25 @@ Al traducir: las reglas generales con `/g` sobre identificadores van **al final*
 después de la prosa, o se comen el texto que necesitan las reglas específicas. Y en
 el chat de `/ia/` las palabras clave que emparejan la pregunta del usuario hay que
 **sustituirlas** por términos del idioma nuevo, no traducirlas.
+
+## Trampa al editar estos ficheros con scripts
+
+Los `.html` y el `select.css` tienen **finales de línea mezclados** (unos CRLF,
+otros LF), así que toda sustitución tiene que tolerar `?
+` y **abortar si no
+encuentra lo que busca** en vez de seguir como si nada.
+
+Y una que costó dos rondas: **no uses referencias a grupos de captura** (``) en
+la cadena de reemplazo de un `re.sub` escrito desde aquí. La tubería que escribe
+el fichero se come un nivel de barras y `` acaba siendo el carácter 0x01 en vez
+de una referencia — se comió el `<a>` entero de las cinco tarjetas de la portada,
+y el HTML roto **seguía pasando las comprobaciones numéricas** (las tarjetas
+existían, el orden era correcto) porque el navegador corrige el marcado. Solo se
+vio en una captura. Usa una lambda como reemplazo, y **mira la página** antes de
+dar por bueno un cambio estructural.
+
+Lo mismo pasa con los escapes en CSS: `content: "F6"` escrito desde un
+heredoc acabó siendo un 0x17 literal. Si necesitas una barra, `chr(92)`.
 
 ## Seguridad
 

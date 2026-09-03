@@ -157,6 +157,8 @@
     <label for="view-work">Lan esperientzia</label>
     <input type="radio" name="view" id="view-extra" value="extra">
     <label for="view-extra">Lanetik kanpo</label>
+    <input type="radio" name="view" id="view-cron" value="cron">
+    <label for="view-cron">Kronologia</label>
   </div>
 
   <div class="chapters">
@@ -164,7 +166,7 @@
     <h2 class="block-title">Gaur egun</h2>
 
     <ol class="entries entries-now">
-      <li>
+      <li data-order="4" class="lead-slot">
         <a class="card card-ia card-lead" href="/eu/ia/">
           <div class="preview preview-ia" aria-hidden="true">
             <div class="p-chat">
@@ -191,7 +193,7 @@
     <h2 class="block-title">Aurreko lan esperientzia</h2>
 
     <ol class="entries">
-      <li>
+      <li data-order="3">
         <a class="card card-intellij" href="/eu/knowmad/">
           <div class="preview preview-intellij" aria-hidden="true">
             <div class="p-ij">
@@ -212,7 +214,7 @@
         </a>
       </li>
 
-      <li>
+      <li data-order="2">
         <a class="card card-eclipse" href="/eu/nttdata/">
           <div class="preview preview-eclipse" aria-hidden="true">
             <div class="p-ide">
@@ -239,7 +241,7 @@
     <h2 class="block-title">Hastapenak <span class="arc-sep" aria-hidden="true">⟶</span> Neure kabuz</h2>
 
     <ol class="entries entries-arc">
-      <li>
+      <li data-order="1">
         <a class="card card-win98" href="/eu/win98/">
           <div class="preview preview-win98" aria-hidden="true">
             <div class="p-win">
@@ -260,7 +262,7 @@
         </a>
       </li>
 
-      <li>
+      <li data-order="5">
         <a class="card card-matrix" href="/eu/matrix/">
           <div class="preview preview-matrix" aria-hidden="true">
             <div class="p-glyphs">
@@ -282,6 +284,13 @@
         </a>
       </li>
     </ol>
+  </section>
+
+  <section class="cv-block" data-group="timeline" hidden>
+    <h2 class="block-title">01etik 05era</h2>
+
+    <!-- Ver index.html (castellano). -->
+    <ol class="entries entries-timeline"></ol>
   </section>
   </div>
 

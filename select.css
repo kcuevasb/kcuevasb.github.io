@@ -216,7 +216,7 @@ body{
 .view-filter{
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
   gap: 3px; margin: 0 0 20px;
-  opacity: .5; transition: opacity .22s ease;
+  opacity: .45; transition: opacity .22s ease;
 }
 .view-filter:hover, .view-filter:focus-within{ opacity: 1; }
 /* display:flex gana a la regla de fabrica de [hidden], asi que hay que
@@ -239,8 +239,16 @@ body{
   padding: 5px 10px 3px; cursor: pointer;
   transition: color .18s ease, background .18s ease;
 }
+/* En reposo NADA se enciende, ni siquiera la opcion activa: el ambar se veia
+   a traves de la opacidad y seguia siendo lo que tiraba del ojo en esa zona de
+   la pagina. La activa solo se distingue por ir un punto mas clara que sus
+   companeras, y el color aparece cuando el raton (o el teclado) llega. */
+.view-filter input:checked + label{ color: #98a1b0; background: transparent; }
 .view-filter label:hover{ color: var(--fg); background: #171b24; }
-.view-filter input:checked + label{ color: var(--accent); background: #171b24; }
+.view-filter:hover input:checked + label,
+.view-filter:focus-within input:checked + label{
+  color: var(--accent); background: #171b24;
+}
 .view-filter input:focus-visible + label{
   outline: 2px solid var(--accent); outline-offset: 2px;
 }

@@ -366,15 +366,15 @@ body{
 /* Hueco propio para la flecha: con los 20px de la rejilla se pegaba a los
    bordes de las dos tarjetas. Solo la separacion horizontal, que en una
    columna las tarjetas se apilan y ahi manda la vertical, mas abajo. */
-.entries-arc{ column-gap: 96px; }
+.entries-arc{ column-gap: 120px; }
 .entries-arc li:first-child{ position: relative; }
 /* Asta */
 .entries-arc li:first-child::after{
   content: "";
   position: absolute;
-  left: calc(100% + 12px);
+  left: calc(100% + 13px);
   top: 50%;
-  width: 66px; height: 7px;
+  width: 84px; height: 7px;
   margin-top: -3.5px;
   background: var(--accent);
   clip-path: polygon(0 43%, 100% 0, 100% 100%, 0 57%);
@@ -385,13 +385,13 @@ body{
 .entries-arc li:first-child::before{
   content: "";
   position: absolute;
-  left: calc(100% + 74px);
+  left: calc(100% + 93px);
   top: 50%;
   width: 0; height: 0;
-  margin-top: -7px;
-  border-left: 12px solid var(--accent);
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
+  margin-top: -8px;
+  border-left: 14px solid var(--accent);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
   pointer-events: none;
 }
 
@@ -400,27 +400,27 @@ body{
    rota: se redibuja. Rotar el asta obligaba a compensar el origen y la cuna
    acababa descentrada; con las dos piezas definidas de nuevo cada una cae
    donde tiene que caer.
-   El corte NO es redondo, sale de la cuenta: dos pistas de 320px + los 96px
-   de separacion + los 18px de padding del body a cada lado = 772px. Medido,
+   El corte NO es redondo, sale de la cuenta: dos pistas de 320px + los 120px
+   de separacion + los 18px de padding del body a cada lado = 796px. Medido,
    no supuesto: la vez anterior el corte se puso a ojo y a 700px las tarjetas
    ya estaban apiladas mientras la flecha seguia apuntando a la derecha, hacia
    un hueco que ya no existia. */
-@media (max-width: 771px){
+@media (max-width: 795px){
   /* En vertical el hueco tiene que dar para la flecha entera; los 20px de la
      rejilla son para tarjetas que solo se apilan. */
-  .entries-arc{ row-gap: 76px; }
+  .entries-arc{ row-gap: 84px; }
   .entries-arc li:first-child::after{
     left: 50%; top: calc(100% + 12px);
-    width: 7px; height: 40px;
+    width: 7px; height: 48px;
     margin-top: 0; margin-left: -3.5px;
     clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
   }
   .entries-arc li:first-child::before{
-    left: 50%; top: calc(100% + 48px);
-    margin-top: 0; margin-left: -7px;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 12px solid var(--accent);
+    left: 50%; top: calc(100% + 56px);
+    margin-top: 0; margin-left: -8px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 14px solid var(--accent);
     border-bottom: 0;
   }
 }

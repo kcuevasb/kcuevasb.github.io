@@ -168,6 +168,11 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
 }
 
 .fx-toggle{
+  /* La barra usa space-between, asi que este boton acaba pegado a la derecha,
+     justo debajo del selector de idioma, que va fijo y con z-index 99999: las
+     banderas se comian el clic. Se aparta lo que ocupan (tres banderas de 26px
+     mas separaciones, unos 100px) sin moverlas a ellas. Solo en pantalla: al
+     imprimir no hay ni banderas ni boton. */
   font-family: var(--font-term);
   font-size: 15px;
   background: transparent;
@@ -178,6 +183,10 @@ main{ max-width: 980px; margin: 0 auto; padding: 0 20px 60px; }
 }
 .fx-toggle[aria-pressed="false"]{ color: var(--fg-dim); border-color: #333; }
 .fx-toggle:hover{ color: var(--green); border-color: var(--green); }
+
+@media screen{
+  .fx-toggle{ margin-right: 120px; }
+}
 
 /* ---------- Pixel primitives ---------- */
 .pixel-card{

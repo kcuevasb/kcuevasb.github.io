@@ -338,24 +338,20 @@ body{
 }
 
 /* --- Actualmente: el puesto de ahora abre la portada ---
-   La portada dejo de bajar en orden cronologico. Lo primero que busca quien
-   entra es donde estoy AHORA, asi que esa tarjeta va sola, mas ancha y con la
-   miniatura al lado en vez de encima: se lee como destacada sin necesitar un
-   cartel que lo diga. */
-.entries-now{ grid-template-columns: min(680px, 100%); }
+   La portada dejo de bajar en orden cronologico: lo primero que busca quien
+   entra es donde estoy AHORA. Lo que destaca esa tarjeta es el titulo de la
+   seccion y el halo, NO un tamano distinto: se probo a ponerla al ancho de la
+   pagina con la miniatura al lado y salia al reves de lo buscado. La tarjeta
+   importante quedaba con 680x155 para dos lineas y una fecha, o sea la mas
+   VACIA de la portada, mientras las de debajo iban densas; y la miniatura del
+   chat, dibujada para 320x96 encima del texto, estirada de lado dejaba las dos
+   burbujas nadando en el rectangulo mas brillante de la pagina. Misma forma
+   que las demas, entonces, y que la jerarquia la ponga el encabezado. */
 /* El halo va en el <li>, no en la tarjeta: .card ya usa box-shadow para el
    salto del hover y una sombra permanente ahi se pisaria con ella. El outline
    si puede ir en la tarjeta, que no lo usa nadie. */
-.entries-now li{ border-radius: 6px; box-shadow: 0 0 30px rgba(91,87,209,.32); }
+.entries-now li{ border-radius: 6px; box-shadow: 0 0 34px rgba(91,87,209,.42); }
 .card-lead{ outline: 2px solid #5b57d1; outline-offset: 3px; }
-
-@media (min-width: 722px){
-  .card-lead{ flex-direction: row; align-items: stretch; }
-  /* height:auto pisa el alto fijo de .preview-ia, que se puso pensando en la
-     miniatura encima del texto; aqui la columna manda el alto. */
-  .card-lead .preview{ flex: 0 0 250px; width: 250px; height: auto; }
-  .card-lead .card-body{ justify-content: center; padding-bottom: 9px; }
-}
 
 /* --- Comienzos -> Por mi cuenta ---
    Las dos puntas que no son un empleo, juntas porque cuentan lo mismo en dos
@@ -387,11 +383,6 @@ body{
    supuesto: a 700px las tarjetas ya estaban apiladas y la flecha seguia
    apuntando a la derecha, hacia un hueco que ya no existia. */
 @media (max-width: 721px){
-  /* Sin sitio para la miniatura al lado, la tarjeta destacada vuelve a ser
-     una columna, y entonces tiene que medir lo mismo que las demas: 19px
-     mas ancha se lee como un descuadre, no como un destacado. Aqui lo que
-     la destaca es el halo. */
-  .entries-now{ grid-template-columns: min(320px, 100%); }
   .entries-arc li:first-child::after{
     left: 50%; top: calc(100% + 10px);
     transform: translate(-50%, -50%) rotate(90deg);

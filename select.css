@@ -337,6 +337,67 @@ body{
   .card-go{ opacity: .9; transform:none; }
 }
 
+/* --- Actualmente: el puesto de ahora abre la portada ---
+   La portada dejo de bajar en orden cronologico. Lo primero que busca quien
+   entra es donde estoy AHORA, asi que esa tarjeta va sola, mas ancha y con la
+   miniatura al lado en vez de encima: se lee como destacada sin necesitar un
+   cartel que lo diga. */
+.entries-now{ grid-template-columns: min(680px, 100%); }
+/* El halo va en el <li>, no en la tarjeta: .card ya usa box-shadow para el
+   salto del hover y una sombra permanente ahi se pisaria con ella. El outline
+   si puede ir en la tarjeta, que no lo usa nadie. */
+.entries-now li{ border-radius: 6px; box-shadow: 0 0 30px rgba(91,87,209,.32); }
+.card-lead{ outline: 2px solid #5b57d1; outline-offset: 3px; }
+
+@media (min-width: 722px){
+  .card-lead{ flex-direction: row; align-items: stretch; }
+  /* height:auto pisa el alto fijo de .preview-ia, que se puso pensando en la
+     miniatura encima del texto; aqui la columna manda el alto. */
+  .card-lead .preview{ flex: 0 0 250px; width: 250px; height: auto; }
+  .card-lead .card-body{ justify-content: center; padding-bottom: 9px; }
+}
+
+/* --- Comienzos -> Por mi cuenta ---
+   Las dos puntas que no son un empleo, juntas porque cuentan lo mismo en dos
+   momentos. La flecha es un ::after de la primera tarjeta y no un <li> propio:
+   un elemento de lista que solo contiene una flecha ensucia el arbol de
+   accesibilidad sin aportar nada. */
+.arc-sep{ color: var(--accent); }
+/* Hueco propio para la flecha: con los 20px de la rejilla se pegaba a los
+   bordes de las dos tarjetas. Solo la separacion horizontal, que en una
+   columna las tarjetas se apilan y ahi los 20px estan bien. */
+.entries-arc{ column-gap: 46px; }
+.entries-arc li:first-child{ position: relative; }
+.entries-arc li:first-child::after{
+  content: "\27F6";
+  position: absolute;
+  left: calc(100% + 23px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-term);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--accent);
+  pointer-events: none;
+}
+/* Por debajo de dos columnas las tarjetas se apilan, asi que la flecha baja al
+   hueco entre ellas y gira para apuntar hacia donde de verdad sigue la lectura.
+   El corte NO es redondo, sale de la cuenta: dos pistas de 320px + los 46px de
+   separacion + los 18px de padding del body a cada lado = 722px. Medido, no
+   supuesto: a 700px las tarjetas ya estaban apiladas y la flecha seguia
+   apuntando a la derecha, hacia un hueco que ya no existia. */
+@media (max-width: 721px){
+  /* Sin sitio para la miniatura al lado, la tarjeta destacada vuelve a ser
+     una columna, y entonces tiene que medir lo mismo que las demas: 19px
+     mas ancha se lee como un descuadre, no como un destacado. Aqui lo que
+     la destaca es el halo. */
+  .entries-now{ grid-template-columns: min(320px, 100%); }
+  .entries-arc li:first-child::after{
+    left: 50%; top: calc(100% + 10px);
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}
+
 /* --- Matrix card theme --- */
 .card-matrix{ border-color: #0aa62f; }
 .card-matrix:hover{ border-color: #00ff41; box-shadow: -6px 0 0 0 #063d14; }

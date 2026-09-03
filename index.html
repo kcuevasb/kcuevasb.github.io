@@ -147,81 +147,20 @@
       <div class="stack-group"><dt>IA aplicada</dt><dd>Claude Code · Agentes · MCPs</dd></div>
     </dl>
   </section>
+  <!-- El recorrido ya no baja de mas antiguo a mas nuevo: lo primero que se
+       busca es donde estoy AHORA, no donde empece. Sopra abre la pagina en una
+       tarjeta ancha y destacada, debajo va el resto de la trayectoria de mas
+       reciente a mas antigua, y al final las dos puntas que no son un empleo,
+       unidas por una flecha porque cuentan lo mismo en dos momentos.
+       Los numeros 01..05 NO se renumeran: identifican el capitulo y cada uno
+       los imprime tambien en su propia pagina ("Capitulo 04 - donde estoy
+       ahora"), asi que renumerarlos aqui los descuadraria en quince paginas. -->
   <section class="cv-block">
-    <h2 class="block-title">Inicios</h2>
+    <h2 class="block-title">Actualmente</h2>
 
-    <ol class="entries">
+    <ol class="entries entries-now">
       <li>
-        <a class="card card-win98" href="win98/" data-key="1">
-          <div class="preview preview-win98" aria-hidden="true">
-            <div class="p-win">
-              <div class="p-titlebar"><span>CV.exe</span><span class="p-x">×</span></div>
-              <div class="p-body"><div class="p-icon"></div><div class="p-line"></div><div class="p-line short"></div></div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-head">
-              <h3><span class="card-index">01</span> ANTES DEL CÓDIGO</h3>
-            </div>
-            <p class="card-desc">Formación, aficiones y a qué me dedicaba antes del código.</p>
-            <div class="card-foot">
-              <span class="card-skin">oct 91 — jul 2017</span>
-              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ol>
-  </section>
-
-  <section class="cv-block">
-    <h2 class="block-title">Experiencia laboral</h2>
-
-    <ol class="entries">
-      <li>
-        <a class="card card-eclipse" href="nttdata/" data-key="2">
-          <div class="preview preview-eclipse" aria-hidden="true">
-            <div class="p-ide">
-              <div class="p-ide-tree"></div>
-              <div class="p-ide-code"><span class="p-kw">public class</span><span class="p-typ"> NTTData</span></div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-head">
-              <h3><span class="card-index">02</span> NTT DATA</h3>
-            </div>
-            <p class="card-desc">Cinco años, cinco proyectos. Casi todo sanidad, y Java del de antes.</p>
-            <div class="card-foot">
-              <span class="card-skin">jul 2017 — nov 2022</span>
-              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a class="card card-intellij" href="knowmad/" data-key="3">
-          <div class="preview preview-intellij" aria-hidden="true">
-            <div class="p-ij">
-              <div class="p-ij-tree"></div>
-              <div class="p-ij-code"><span class="p-ann">@Service</span><br><span class="p-kw2">class</span> <span class="p-typ2">ElCorteIngles</span></div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-head">
-              <h3><span class="card-index">03</span> KNOWMAD MOOD</h3>
-            </div>
-            <p class="card-desc">BeeDigital y El Corte Inglés. Unos 150 microservicios hablando por Kafka.</p>
-            <div class="card-foot">
-              <span class="card-skin">nov 2022 — sep 2025</span>
-              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
-            </div>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a class="card card-ia" href="ia/" data-key="4">
+        <a class="card card-ia card-lead" href="ia/">
           <div class="preview preview-ia" aria-hidden="true">
             <div class="p-chat">
               <div class="p-bubble p-bubble-user">¿en qué trabajas?</div>
@@ -244,11 +183,80 @@
   </section>
 
   <section class="cv-block">
-    <h2 class="block-title">Proyectos</h2>
+    <h2 class="block-title">Experiencia pasada</h2>
 
     <ol class="entries">
       <li>
-        <a class="card card-matrix" href="matrix/" data-key="5">
+        <a class="card card-intellij" href="knowmad/">
+          <div class="preview preview-intellij" aria-hidden="true">
+            <div class="p-ij">
+              <div class="p-ij-tree"></div>
+              <div class="p-ij-code"><span class="p-ann">@Service</span><br><span class="p-kw2">class</span> <span class="p-typ2">ElCorteIngles</span></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3><span class="card-index">03</span> KNOWMAD MOOD</h3>
+            </div>
+            <p class="card-desc">BeeDigital y El Corte Inglés. Unos 150 microservicios hablando por Kafka.</p>
+            <div class="card-foot">
+              <span class="card-skin">nov 2022 — sep 2025</span>
+              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a class="card card-eclipse" href="nttdata/">
+          <div class="preview preview-eclipse" aria-hidden="true">
+            <div class="p-ide">
+              <div class="p-ide-tree"></div>
+              <div class="p-ide-code"><span class="p-kw">public class</span><span class="p-typ"> NTTData</span></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3><span class="card-index">02</span> NTT DATA</h3>
+            </div>
+            <p class="card-desc">Cinco años, cinco proyectos. Casi todo sanidad, y Java del de antes.</p>
+            <div class="card-foot">
+              <span class="card-skin">jul 2017 — nov 2022</span>
+              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cv-block">
+    <h2 class="block-title">Comienzos <span class="arc-sep" aria-hidden="true">⟶</span> Por mi cuenta</h2>
+
+    <ol class="entries entries-arc">
+      <li>
+        <a class="card card-win98" href="win98/">
+          <div class="preview preview-win98" aria-hidden="true">
+            <div class="p-win">
+              <div class="p-titlebar"><span>CV.exe</span><span class="p-x">×</span></div>
+              <div class="p-body"><div class="p-icon"></div><div class="p-line"></div><div class="p-line short"></div></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3><span class="card-index">01</span> ANTES DEL CÓDIGO</h3>
+            </div>
+            <p class="card-desc">Formación, aficiones y a qué me dedicaba antes del código.</p>
+            <div class="card-foot">
+              <span class="card-skin">oct 91 — jul 2017</span>
+              <span class="card-go">Abrir capítulo <span aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li>
+        <a class="card card-matrix" href="matrix/">
           <div class="preview preview-matrix" aria-hidden="true">
             <div class="p-glyphs">
               <span>ﾊ</span><span>1</span><span>ｱ</span><span>0</span><span>ｳ</span><span>ｴ</span>

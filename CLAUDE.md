@@ -68,8 +68,13 @@ a una sección aparte (`.entries-timeline`, que viaja vacía en el HTML) ordenad
 del 01 al 05, y las devuelve a su sitio al salir.
 
 Se probó antes una versión que **atenuaba** en vez de ocultar; Kepa la vio y pidió
-que se ocultase. La barra en cambio sí va deliberadamente apagada (opacidad .5) y
-solo se enciende al acercarse: es una herramienta, no contenido.
+que se ocultase. La barra en cambio sí va deliberadamente apagada (opacidad .45) y
+solo se enciende al acercarse (`:hover, :focus-within`): es una herramienta, no
+contenido. Primera versión: solo bajaba la opacidad de la barra entera, pero la
+opción activa seguía en ámbar y ese color se veía A TRAVÉS de la opacidad — seguía
+siendo lo que más llamaba la atención. Fix: la opción activa también se apaga en
+reposo (gris `#98a1b0`, sin fondo) y el ámbar solo aparece si la barra ya está
+encendida.
 
 Cuatro cosas que no hay que "simplificar":
 
@@ -110,7 +115,8 @@ el chat de `/ia/` las palabras clave que emparejan la pregunta del usuario hay q
 ## Trampa al editar estos ficheros con scripts
 
 Los `.html` y el `select.css` tienen **finales de línea mezclados** (unos CRLF,
-otros LF), así que toda sustitución tiene que tolerar `?
+otros LF), así que toda sustitución tiene que tolerar `
+?
 ` y **abortar si no
 encuentra lo que busca** en vez de seguir como si nada.
 

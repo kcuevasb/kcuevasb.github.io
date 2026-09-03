@@ -148,7 +148,19 @@
     </dl>
   </section>
   <!-- Ver index.html (castellano) para el porque de este orden. -->
-  <section class="cv-block">
+  <!-- Ver index.html (castellano) para el porque de este control. -->
+  <div class="view-filter" role="radiogroup" aria-label="View chapters" hidden>
+    <span class="filter-label" aria-hidden="true">View</span>
+    <input type="radio" name="view" id="view-all" value="all" checked>
+    <label for="view-all">All</label>
+    <input type="radio" name="view" id="view-work" value="work">
+    <label for="view-work">Work experience</label>
+    <input type="radio" name="view" id="view-extra" value="extra">
+    <label for="view-extra">Outside work</label>
+  </div>
+
+  <div class="chapters">
+  <section class="cv-block" data-group="work">
     <h2 class="block-title">Right now</h2>
 
     <ol class="entries entries-now">
@@ -175,7 +187,7 @@
     </ol>
   </section>
 
-  <section class="cv-block">
+  <section class="cv-block" data-group="work">
     <h2 class="block-title">Past experience</h2>
 
     <ol class="entries">
@@ -223,7 +235,7 @@
     </ol>
   </section>
 
-  <section class="cv-block">
+  <section class="cv-block" data-group="extra">
     <h2 class="block-title">Beginnings <span class="arc-sep" aria-hidden="true">⟶</span> On my own</h2>
 
     <ol class="entries entries-arc">
@@ -271,6 +283,7 @@
       </li>
     </ol>
   </section>
+  </div>
 
 
   <!-- Donde antes estaba el cartel de "usa las flechas". Toma la forma del
@@ -293,6 +306,7 @@
 </main>
 
 
+<script src="/filter.js"></script>
 <script src="/portrait-mask.js"></script>
 <script src="/portrait.js"></script>
 </body>

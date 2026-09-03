@@ -155,7 +155,24 @@
        Los numeros 01..05 NO se renumeran: identifican el capitulo y cada uno
        los imprime tambien en su propia pagina ("Capitulo 04 - donde estoy
        ahora"), asi que renumerarlos aqui los descuadraria en quince paginas. -->
-  <section class="cv-block">
+  <!-- Filtro de vista. Reordena y atenua, NUNCA oculta: con cinco tarjetas,
+       esconder dos pide un clic para ahorrar poco y deja a quien filtra sin ver
+       el resto de la pagina. Atenuando, quien busca una cosa la encuentra
+       arriba y quien solo pasa la vista lo sigue teniendo todo delante.
+       Llega con hidden y lo quita el script: sin JavaScript seria una barra de
+       botones que no hace nada. -->
+  <div class="view-filter" role="radiogroup" aria-label="Ver capitulos" hidden>
+    <span class="filter-label" aria-hidden="true">Ver</span>
+    <input type="radio" name="view" id="view-all" value="all" checked>
+    <label for="view-all">Todo</label>
+    <input type="radio" name="view" id="view-work" value="work">
+    <label for="view-work">Experiencia laboral</label>
+    <input type="radio" name="view" id="view-extra" value="extra">
+    <label for="view-extra">Fuera del trabajo</label>
+  </div>
+
+  <div class="chapters">
+  <section class="cv-block" data-group="work">
     <h2 class="block-title">Actualmente</h2>
 
     <ol class="entries entries-now">
@@ -182,7 +199,7 @@
     </ol>
   </section>
 
-  <section class="cv-block">
+  <section class="cv-block" data-group="work">
     <h2 class="block-title">Experiencia pasada</h2>
 
     <ol class="entries">
@@ -230,7 +247,7 @@
     </ol>
   </section>
 
-  <section class="cv-block">
+  <section class="cv-block" data-group="extra">
     <h2 class="block-title">Comienzos <span class="arc-sep" aria-hidden="true">⟶</span> Por mi cuenta</h2>
 
     <ol class="entries entries-arc">
@@ -278,6 +295,7 @@
       </li>
     </ol>
   </section>
+  </div>
 
 
   <!-- Donde antes estaba el cartel de "usa las flechas". Toma la forma del
@@ -300,6 +318,7 @@
 </main>
 
 
+<script src="/filter.js"></script>
 <script src="/portrait-mask.js"></script>
 <script src="/portrait.js"></script>
 </body>

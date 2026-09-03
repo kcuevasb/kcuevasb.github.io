@@ -48,10 +48,31 @@ La progresión Eclipse claro (2017) → IntelliJ oscuro (2022) → chat IA (2025
 cronológica e intencional: el tema visual cuenta la época.
 
 **La portada es una cabecera de CV**, no un selector suelto: retrato + nombre +
-rol + resumen + contacto + enlace al PDF, y debajo los capítulos como tarjetas
-agrupadas en tres bloques (*Inicios* | *Experiencia laboral* | *Proyectos*). La
-columna de texto se estira al alto del marco del retrato y el enlace al PDF cierra
-abajo cuadrando con su borde inferior.
+rol + resumen + contacto + enlace al PDF. La columna de texto se estira al alto del
+marco del retrato y el enlace al PDF cierra abajo cuadrando con su borde inferior.
+
+Debajo, los capítulos en tres bloques que **ya no bajan en orden cronológico**,
+porque lo primero que se busca es dónde estoy ahora: *Actualmente* (Sopra, sola y
+con halo) | *Experiencia pasada* (Knowmad, NTT Data — de más reciente a más
+antigua) | *Comienzos ⟶ Por mi cuenta* (las dos puntas que no son un empleo,
+unidas por una flecha dibujada). **Los números 01–05 de las tarjetas NO se
+renumeran**: identifican el capítulo y cada capítulo los imprime también en su
+propia página ("Capítulo 04 — donde estoy ahora"), así que tocarlos aquí los
+descuadra en quince páginas.
+
+Encima de los bloques hay un **filtro de vista** (`filter.js`, sin texto dentro,
+uno solo para los tres idiomas) que **reordena y atenúa, nunca oculta**: sube al
+principio el grupo elegido y deja el otro al 34% de opacidad, clicable y en el
+orden de tabulación. Con cinco tarjetas que caben en una pantalla, esconder dos
+pediría un clic para ahorrar poco y dejaría a quien filtró sin ver el resto; por
+lo mismo tampoco hace falta un `aria-live`, porque no desaparece nada. Tres cosas
+que no hay que "simplificar": el orden se cambia **moviendo los nodos**, no con
+`order` de CSS (con `order`, el foco del teclado sigue el orden del HTML y deja de
+coincidir con lo que se ve); la animación es **FLIP**, que es lo único que anima un
+reflujo sin animar `top` ni `height`; y la barra llega del servidor con `hidden` y
+lo quita el script, porque sin JavaScript sería una fila de botones que no hace
+nada — ojo, `display:flex` gana a la regla de fábrica de `[hidden]`, así que hay
+que devolverle el `display:none` a mano.
 
 ## Tres idiomas
 

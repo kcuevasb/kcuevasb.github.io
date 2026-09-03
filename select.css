@@ -207,6 +207,52 @@ body{
    izquierda, como la ficha de un puesto. */
 .cv-block{ text-align:left; margin-bottom: 34px; }
 
+/* --- Filtro de vista: reordena y atenua, nunca oculta ---
+   Atenuada NO es apagada: la seccion sigue siendo clicable y sigue en el orden
+   de tabulacion, asi que nadie pierde contenido por haber pulsado un boton.
+   Y por eso tampoco hace falta un aria-live avisando de que algo ha
+   desaparecido: no desaparece nada. */
+.view-filter{
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 8px; margin: 0 0 24px;
+}
+/* display:flex gana a la regla de fabrica de [hidden], asi que hay que
+   devolverle el display:none a mano o la barra se ve igual sin JavaScript. */
+.view-filter[hidden]{ display: none; }
+.filter-label{
+  font-family: var(--font-pixel); font-size: 10px; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--fg-dim); margin-right: 4px;
+}
+/* El radio de verdad sigue ahi, y con el las flechas del teclado y el
+   anuncio de "1 de 3" del lector de pantalla. Solo se saca de la vista:
+   display:none lo sacaria tambien del orden de tabulacion. */
+.view-filter input{
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+}
+.view-filter label{
+  font-family: var(--font-term); font-size: 17px; line-height: 1;
+  color: var(--fg-dim); border: 1px solid #2a2f3a; border-radius: 999px;
+  padding: 7px 14px 5px; cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.view-filter label:hover{ color: var(--fg); border-color: #465066; }
+.view-filter input:checked + label{
+  color: #12151c; background: var(--accent); border-color: var(--accent);
+}
+.view-filter input:focus-visible + label{
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+
+.cv-block{ transition: transform .42s cubic-bezier(.22,.72,.2,1), opacity .26s ease; }
+.cv-block.is-muted{ opacity: .34; }
+.cv-block.is-muted:hover{ opacity: .78; }
+.cv-block.is-muted:focus-within{ opacity: 1; }
+
+@media (prefers-reduced-motion: reduce){
+  .cv-block, .view-filter label{ transition: none; }
+}
+
 .block-title{
   font-family: var(--font-pixel);
   font-size: 12px;

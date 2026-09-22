@@ -21,7 +21,7 @@ body{
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 a{ color: inherit; text-decoration: none; }
@@ -96,12 +96,12 @@ a{ color: inherit; text-decoration: none; }
 
 /* ---------- Main content ---------- */
 .main{ display: table-cell; vertical-align: top; padding: 9mm 10mm 6mm 9mm; }
-.main-block{ margin-bottom: 5px; }
+.main-block{ margin-bottom: 20px; }
 .main-block:last-child{ margin-bottom: 0; }
 .main h2{
   font-family: var(--font-sans); font-weight: 700; font-size: 11.5px;
   text-transform: uppercase; letter-spacing: 1.2px; color: var(--navy);
-  border-bottom: 2px solid var(--navy); padding-bottom: 3px; margin: 0 0 6px;
+  border-bottom: 2px solid var(--navy); padding-bottom: 3px; margin: 0 0 9px;
 }
 
 /* Entries are allowed to break across a page if they ever have to — a
@@ -110,27 +110,27 @@ a{ color: inherit; text-decoration: none; }
    gap on page 1 instead of just flowing. The real fix is fitting on one
    page; this is a safety net so a near-miss degrades gracefully instead
    of a big gap + spillover page. */
-.entry{ position: relative; padding-left: 16px; margin-bottom: 7px; }
+.entry{ position: relative; padding-left: 16px; margin-bottom: 16px; }
 .entry:last-child{ margin-bottom: 0; }
 .entry::before{
-  content:""; position:absolute; left: 4px; top: 3px; bottom: -7px; width:1px; background: var(--line);
+  content:""; position:absolute; left: 4px; top: 3px; bottom: -16px; width:1px; background: var(--line);
 }
 .entry:last-child::before{ display:none; }
 .dot{ position:absolute; left: 0px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
 
-.entry-head{ display:flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 2px; break-after: avoid; page-break-after: avoid; }
+.entry-head{ display:flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 3px; break-after: avoid; page-break-after: avoid; }
 .entry-head h3{ font-family: var(--font-serif); font-weight: 600; font-size: 12.5px; margin:0; color: var(--ink); }
 .entry-head h3 em{ font-weight: 400; font-style: normal; color: var(--ink-dim); font-size: 11px; }
 .entry-head time{ font-size: 9.5px; color: var(--ink-dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
-.entry ul{ margin: 0 0 3px; padding-left: 14px; }
-.entry li{ margin-bottom: 1px; font-size: 10.5px; line-height: 1.35; color: var(--ink); }
+.entry ul{ margin: 0 0 5px; padding-left: 14px; }
+.entry li{ margin-bottom: 3px; font-size: 10.5px; line-height: 1.42; color: var(--ink); }
 .entry li::marker{ color: var(--accent); }
 
-.stack{ margin: 1px 0 2px; font-size: 8.5px; color: var(--ink-dim); line-height: 1.3; }
+.stack{ margin: 2px 0 4px; font-size: 8.5px; color: var(--ink-dim); line-height: 1.3; }
 
-.sub-role{ margin-top: 4px; }
-.sub-role:first-of-type{ margin-top: 2px; }
+.sub-role{ margin-top: 11px; }
+.sub-role:first-of-type{ margin-top: 5px; }
 .sub-role-head{ display:flex; justify-content: space-between; align-items: baseline; gap: 10px; break-after: avoid; page-break-after: avoid; }
 .sub-role-head strong{ font-size: 10.5px; color: var(--ink); font-weight: 600; }
 .sub-role-head time{ font-size: 8.5px; color: var(--ink-dim); white-space: nowrap; }

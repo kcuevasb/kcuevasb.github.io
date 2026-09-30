@@ -22,8 +22,8 @@
 (function () {
   'use strict';
 
-  var SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-  var SUPABASE_ANON_KEY = 'TU-CLAVE-ANONIMA';
+  var SUPABASE_URL = 'https://kqsidslztbhjupqrnazw.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_mCstmoJZDJFXsLGyrEMkTg_2lyQ3XBX';
 
   var flip = document.getElementById('portrait-flip');
   var out = document.getElementById('visit-count');

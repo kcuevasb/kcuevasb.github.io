@@ -396,20 +396,32 @@ diferencia es que ahora cada llamada deja una fila con datos, asi que un
 abuso masivo se notaria en la tabla (muchas filas seguidas con el mismo
 referrer o el mismo intervalo entre `created_at`), no es invisible.
 
-**Conectarlo de verdad** requiere tres cosas que hoy son placeholders:
-1. Ejecutar el SQL de arriba en un proyecto de Supabase (nuevo o uno propio;
-   no reutilizar el de Fuga/gim-app, que son apps distintas).
-2. Sustituir `SUPABASE_URL` y `SUPABASE_ANON_KEY` en `visits.js` por los
-   reales (Configuracion → API del proyecto).
-3. Cambiar `connect-src 'none'` por `connect-src https://<ref>.supabase.co`
-   en la CSP de `index.html`, `en/index.html` y `eu/index.html` — en ningun
-   otro sitio, porque son las unicas paginas con el easter egg.
+**Conectado desde septiembre de 2026**, proyecto propio de Supabase (no el de
+Fuga ni gim-app, que son apps distintas): `SUPABASE_URL`/`SUPABASE_ANON_KEY`
+en `visits.js` son la clave `sb_publishable_...` real, y la CSP de las tres
+portadas abre `connect-src` solo a ese origen concreto, nunca a `*`.
 
-Hasta entonces, la CSP actual bloquea la llamada por diseno (verificado: dos
-errores de CSP en consola, uno por intento) y `visits.js` lo captura y muestra
-un guion largo (—) en vez de romper nada. Es el mismo camino que seguiria en
-produccion si Supabase estuviera caido, asi que probarlo con la CSP cerrada
-prueba tambien ese caso.
+Verificado con la API real por `curl` antes de conectar el sitio: `log_visit`
+inserta y devuelve `{visit_token, total}`, `read_visit_total` lee sin sumar,
+`mark_visit_flipped` marca por token, y un intento de leer la tabla
+directamente con la clave anonima (`GET /rest/v1/visits?select=*`) devuelve
+`[]` — la RLS sin politicas la deja opaca de verdad, no es solo teoria. Y en
+el navegador: recargar la portada dentro de la misma sesion no vuelve a
+sumar (mismo `token` en `sessionStorage`, mismo total), y las tres portadas
+comparten sesion por ser el mismo origen, asi que pasar de `/` a `/en/` a
+`/eu/` tampoco infla el numero.
+
+Si en algun momento la CSP vuelve a `connect-src 'none'` (por ejemplo al
+probar en local sin querer sumar visitas reales), `visits.js` lo captura y
+muestra un guion largo (—) en vez de romper nada — es el mismo camino que
+seguiria en produccion si Supabase estuviera caido.
+
+**Nota de mantenimiento**: las primeras filas de la tabla son de la
+verificacion por `curl` de cuando se conecto esto (visitas de prueba, no
+reales). Si en algun momento se quiere el contador a cero de verdad, hay que
+entrar al SQL Editor de Supabase y ejecutar
+`truncate table visits restart identity;` a mano — la clave anonima no
+tiene permiso para borrar, a proposito.
 
 ## Máscara precalculada del retrato
 

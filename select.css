@@ -77,20 +77,70 @@ body{
   background:#05070a;
   padding: 12px 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  /* La perspectiva vive en el marco, no en la pieza que gira: asi el punto
+     de fuga queda fijo aunque .portrait-flip-inner cambie de tamaño. */
+  perspective: 900px;
+  cursor: pointer;
 }
+.portrait:focus-visible{ outline: 2px solid #0aa62f; outline-offset: 3px; }
+
 /* El retrato de verdad es este canvas: la lluvia de Matrix donde la cara no
    la dibujan los glifos sino cuanto brilla cada celda (ver portrait.js). El
    ASCII estatico de respaldo vive dentro de <noscript>, asi que con JS ni
-   se pinta: antes se veia un instante antes de que apareciera el canvas. */
-#portrait-rain{
-  display: block;
-  /* El cuadrado se reserva desde el primer pintado, antes de que el JS mida
-     y dimensione el canvas: sin esto la cabecera da un salto al aparecer. */
-  aspect-ratio: 1;
+   se pinta: antes se veia un instante antes de que apareciera el canvas.
+
+   El volteo es la pieza que gira en 3D (preserve-3d) dentro del marco fijo
+   de .portrait; cada cara es absoluta y oculta su reverso (backface-
+   visibility) para que en todo momento se vea solo una. El tamaño cuadrado
+   que antes llevaba #portrait-rain vive ahora aqui, un nivel mas arriba,
+   porque el canvas pasa a ocupar el 100% de su cara. */
+.portrait-flip-inner{
+  position: relative;
   width: 240px;
   max-width: 100%;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.4, .15, .2, 1);
+}
+.portrait.is-flipped .portrait-flip-inner{ transform: rotateY(180deg); }
+@media (prefers-reduced-motion: reduce){
+  .portrait-flip-inner{ transition: none; }
+}
+
+.portrait-front, .portrait-back{
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+#portrait-rain{
+  display: block;
+  width: 100%;
+  height: 100%;
   /* Lo pinta portrait.js; aqui solo el color de reposo del primer frame. */
   background: #05070a;
+}
+
+/* El reverso: mismo hueco, la cara ya viene girada 180 para leerse del
+   derecho cuando el padre completa el giro. El patron diagonal es un guino
+   al reverso de una carta de coleccion, con el verde de la lluvia en vez de
+   un logo. */
+.portrait-back{
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+  background:
+    repeating-linear-gradient(45deg, rgba(10,166,47,.12) 0 2px, transparent 2px 14px),
+    #05070a;
+}
+.visit-label{
+  margin: 0;
+  font-family: var(--font-pixel); font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase; color: #0aa62f; text-align: center;
+}
+.visit-num{
+  margin: 0;
+  font-family: var(--font-term); font-size: 36px; color: #00ff41;
+  text-shadow: 0 0 10px rgba(0,255,65,.5);
 }
 #ascii-portrait{
   margin:0;

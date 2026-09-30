@@ -63,8 +63,11 @@
        entrar en un capítulo. Ahora nombre, rol y contacto salen primero, y
        las tarjetas pasan a ser la sección "trayectoria" de este CV. -->
   <header class="cv-head">
-    <div class="portrait" aria-label="Retrato de Kepa Cuevas Barrasa en ASCII" role="img">
-    <canvas id="portrait-rain" aria-hidden="true"></canvas>
+    <div class="portrait" id="portrait-flip" tabindex="0" role="button"
+         aria-label="Retrato de Kepa Cuevas Barrasa en ASCII. Doble clic, o Intro, para ver el contador de visitas." aria-pressed="false">
+      <div class="portrait-flip-inner">
+        <div class="portrait-front">
+          <canvas id="portrait-rain" aria-hidden="true"></canvas>
     <!-- El mismo retrato en ASCII estatico, solo para quien no tenga JS. Va
          dentro de <noscript> y no suelto: suelto se pintaba siempre, y como
          el canvas tarda en aparecer (espera a la foto y a la fuente), se veia
@@ -116,7 +119,13 @@
 ｯｮｪﾝﾃﾏﾂｹﾓﾀ76ｵ7ﾇﾀﾈ71ﾇ1ﾛﾀﾛ9ﾎ50907ｸﾓｷﾑｹﾑﾑｶｾﾈﾔﾀ68ｾｶｾｸﾘｽﾛ8ﾎ8393ｻ49ﾄｼｩﾌﾗﾕｩﾍﾕﾌﾌｭﾗﾐﾚｺﾕｿﾌ
 ﾒﾒｴﾖﾜｸﾁﾀｶﾀｵ5ﾔ57ｾﾔﾀ1ｾﾔ938ｵﾈﾔﾛ026ｻ1ﾁﾖｽｹｹｽｷｷｽｳﾁﾑｷｸｳﾔﾘ12ﾎｻﾎ549ﾛ2ﾎﾉｼｨｿｭｩﾌｼﾌﾕｿｴｱｺﾕｩﾚﾅｩ
 ｹｽｸﾑｽ7ﾈﾙﾀ7ﾔ3ｾ3ﾀﾀ249ﾛ2ﾙﾛ353ﾀ11ﾀｻﾙｻ61ﾓｽｷﾘﾑﾑﾖｹﾓﾇﾀﾖﾁｳｾ235380941ﾀ7ｨｨﾍｩﾌｪｬﾐﾚｮｧｨｭﾆﾆｺﾝﾆｨ</pre>
-    </noscript>
+        </noscript>
+        </div>
+        <div class="portrait-back" aria-hidden="true">
+          <p class="visit-label">Visitas totales</p>
+          <p class="visit-num" id="visit-count">···</p>
+        </div>
+      </div>
     </div>
 
     <div class="cv-id">
@@ -332,5 +341,6 @@
 <script src="/filter.js"></script>
 <script src="/portrait-mask.js"></script>
 <script src="/portrait.js"></script>
+<script src="/visits.js"></script>
 </body>
 </html>

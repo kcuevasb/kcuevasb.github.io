@@ -138,8 +138,19 @@ Es un sitio estático público: **no se puede ocultar el contenido**, y ofuscar 
 bloquear el clic derecho es placebo. Lo que sí aplica y ya está puesto: CSP en cada
 página vía `<meta http-equiv>` con `script-src 'self'` sin `'unsafe-inline'` (viable
 porque no hay ni un `<script>` en línea — si algún día se añade uno, la CSP deja de
-proteger), `rel="noopener"` en todo enlace externo, y ni analítica ni cookies ni
-peticiones de red desde el JS.
+proteger), `rel="noopener"` en todo enlace externo, y ni analítica ni cookies.
+
+**Una única excepción documentada a "cero peticiones de red desde el JS"**: el
+contador de visitas del easter egg del retrato (`visits.js`, solo en las tres
+portadas) llama a un proyecto de Supabase propio — no un tercero genérico, un
+backend que Kepa controla. La `connect-src` de esas tres páginas se abre
+únicamente a ese origen, nunca a `*`. La tabla no tiene ninguna política de RLS
+que la abra: la clave anónima (pública, va en el JS) solo puede ejecutar dos
+funciones `SECURITY DEFINER` — sumar 1 y devolver el total, o solo leer el
+total — nunca tocar la tabla directamente. Sigue siendo cierto que cualquiera
+con esa clave podría inflar el contador llamando en bucle a la de sumar: es la
+misma limitación de cualquier contador de visitas público, no un fallo de esta
+implementación.
 
 Dos cosas conscientes, decididas por Kepa, que **no** hay que "arreglar" por
 iniciativa propia: `perfil.png` se sirve a resolución completa (reducirla cambia el
@@ -262,6 +273,80 @@ Lo genérico está en el skill `web-vanilla`; esto es lo que solo aplica aquí.
 - **Exportar un canvas animado como imagen fija, GIF o vídeo (avatar, `og:image`) sin poder ver la página**. Cuatro piezas, todas necesarias: (1) **shim de `requestAnimationFrame` a `setTimeout`** antes de cargar el script, o el panel que no compone frames deja el canvas en negro; (2) **exporta la capa BASE, no el frame compuesto** — en un retrato de lluvia de Matrix las gotas encienden columnas al azar, y lo que en movimiento da vida, congelado son rayas brillantes que no tienen que ver con la cara y emborronan el retrato (el usuario lo detectó al primer vistazo con una imagen de referencia); (3) para que la cara se lea a tamaño de avatar, **parchea el fuente al vuelo** subiendo la rejilla (58×45 → 84×65) y **levanta el fondo del negro** a un verde tenue (`if (mask[i] < FLOOR_FIGURA) mask[i] = 0.13`), que es lo que recorta la silueta; al subir la rejilla hay que escalar las constantes que van en celdas (`PROFILE_W`, `CLOSE_W`, `SHOULDER_IN`, `MORPH`) o la geometría del hombro se descuadra — verifícalo comparando el perfil de anchos por fila, normalizado, contra el de la rejilla original; (4) **no leas la imagen por el contexto**: un PNG de 640×640 son ~430 KB en base64. Levanta un receptor HTTP local de 15 líneas con `Access-Control-Allow-Origin: *` y que la página haga `fetch(..., {method:'POST', body: canvas.toDataURL()})`. Sirve igual para volcar 96 fotogramas seguidos y montarlos con ffmpeg.
 - **No "optimices" la foto de origen de un generador de arte: el resultado cambia**. Servir la foto original completa de alguien es exposición real (en un CV, 1483×1364 y 1,7MB descargables), y la reacción natural es reducirla — pero el pipeline analiza bordes sobre un fondo con bandas, y el remuestreo mueve la máscara. Medido contra el original: a 1000px cambian 200 de 2610 celdas y 2 de silueta; a 500px, 332 y 8; a 400px, 373 y 21. **No hay un tamaño gratis**, así que no es una optimización sino un cambio de diseño: hay que enseñarlo y que lo decida quien aprobó el retrato. Y el matiz que cierra el tema: la foto **no se puede ocultar**, porque el generador la necesita en el navegador; reducirla limita la calidad de la copia que se lleva un scraper, nada más.
 - **Añadir un idioma a un selector de banderas es un cambio de layout, no solo de contenido**. La tercera bandera ensanchó la barra de 68 a 100px y se comió el hueco que tenían reservado las barras de tres capítulos (`margin-right: 88px`), solapando en los tres idiomas — no solo en el nuevo. Regla: **cada bandera son ~32px** (26 de ancho más la separación), así que el hueco reservado tiene que derivarse del número de idiomas, y hay que volver a medir el solape después de añadir uno. Y genera el bloque del selector **con un script sobre todas las páginas** en vez de editarlas una a una: con 21 páginas × 3 idiomas, el `aria-current`, el `hreflang`, la bandera y el nombre del idioma en la lengua de cada página son cuatro cosas que se descuadran solas.
+## Contador de visitas (easter egg del retrato)
+
+Doble clic (o Enter con el foco en el marco) sobre el retrato de la portada lo
+voltea en 3D — como abrir una carta de coleccion — y detras aparece el numero
+total de visitas que ha recibido el sitio. Vive en las tres portadas
+(`#portrait-flip` en el HTML, el CSS de `.portrait-flip-inner`/`.portrait-back`
+en `select.css`, la logica en `visits.js`, compartido porque no lleva texto).
+
+**Backend**: un proyecto de Supabase con una tabla de una sola fila y dos
+funciones `SECURITY DEFINER`, sin ninguna politica de RLS que abra la tabla:
+
+```sql
+create table if not exists site_visits (
+  id boolean primary key default true,
+  count bigint not null default 0,
+  constraint site_visits_single_row check (id)
+);
+
+insert into site_visits (id, count) values (true, 0) on conflict (id) do nothing;
+
+alter table site_visits enable row level security;
+-- Sin politicas: ni siquiera anon puede hacer SELECT/UPDATE directo a la tabla.
+
+create or replace function bump_site_visits()
+returns bigint
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  new_count bigint;
+begin
+  update site_visits set count = count + 1 where id = true
+  returning count into new_count;
+  return new_count;
+end;
+$$;
+
+create or replace function read_site_visits()
+returns bigint
+language sql
+security definer
+set search_path = public
+as $$
+  select count from site_visits where id = true;
+$$;
+
+revoke all on function bump_site_visits() from public;
+revoke all on function read_site_visits() from public;
+grant execute on function bump_site_visits() to anon;
+grant execute on function read_site_visits() to anon;
+```
+
+`bump_site_visits` suma 1 y devuelve el total; `read_site_visits` solo lee, sin
+sumar. `visits.js` llama a la primera una vez por sesion de pestaña
+(`sessionStorage`) y a la segunda el resto de veces que la portada se vuelve a
+cargar en esa misma sesion, para que navegar fuera y volver no infle el numero
+pero el contador mostrado siga siendo el real.
+
+**Conectarlo de verdad** requiere tres cosas que hoy son placeholders:
+1. Ejecutar el SQL de arriba en un proyecto de Supabase (nuevo o uno propio;
+   no reutilizar el de Fuga/gim-app, que son apps distintas).
+2. Sustituir `SUPABASE_URL` y `SUPABASE_ANON_KEY` en `visits.js` por los
+   reales (Configuracion → API del proyecto).
+3. Cambiar `connect-src 'none'` por `connect-src https://<ref>.supabase.co`
+   en la CSP de `index.html`, `en/index.html` y `eu/index.html` — en ningun
+   otro sitio, porque son las unicas paginas con el easter egg.
+
+Hasta entonces, la CSP actual bloquea la llamada por diseno (verificado: dos
+errores de CSP en consola, uno por intento) y `visits.js` lo captura y muestra
+un guion largo (—) en vez de romper nada. Es el mismo camino que seguiria en
+produccion si Supabase estuviera caido, asi que probarlo con la CSP cerrada
+prueba tambien ese caso.
+
 ## Máscara precalculada del retrato
 
 Desde agosto de 2026 el sitio **no publica ni el algoritmo ni la foto**. `portrait.js`

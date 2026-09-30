@@ -281,56 +281,120 @@ total de visitas que ha recibido el sitio. Vive en las tres portadas
 (`#portrait-flip` en el HTML, el CSS de `.portrait-flip-inner`/`.portrait-back`
 en `select.css`, la logica en `visits.js`, compartido porque no lleva texto).
 
-**Backend**: un proyecto de Supabase con una tabla de una sola fila y dos
-funciones `SECURITY DEFINER`, sin ninguna politica de RLS que abra la tabla:
+**No es solo un contador: es un registro por visita** (idioma, referrer,
+idioma del navegador, zona horaria, ancho de ventana, si se llego a voltear
+la tarjeta). Eso es, en sustancia, analitica casera — asi que se decidio
+explicitamente **sin IP y sin User-Agent completo**: aislado cada campo no
+identifica a nadie, pero IP+UA+hora+resolucion juntos por fila es la
+definicion tecnica de *fingerprinting*, y el RGPD lo trata como dato
+personal en cuanto permite distinguir a un visitante de otro. El aviso de
+privacidad en el pie (una frase, no una politica) queda pendiente — hasta
+que exista, no anadir mas campos de los de aqui.
+
+**Backend**: un proyecto de Supabase, una tabla de logs y tres funciones
+`SECURITY DEFINER`, sin ninguna politica de RLS que abra la tabla — nadie
+externo lee ni escribe filas directamente, solo a traves de estas funciones:
 
 ```sql
-create table if not exists site_visits (
-  id boolean primary key default true,
-  count bigint not null default 0,
-  constraint site_visits_single_row check (id)
+create table if not exists visits (
+  id bigint generated always as identity primary key,
+  token uuid not null default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  lang text not null check (lang in ('es','en','eu')),
+  referrer text,
+  browser_lang text,
+  timezone text,
+  viewport_width integer,
+  flipped boolean not null default false
 );
 
-insert into site_visits (id, count) values (true, 0) on conflict (id) do nothing;
+create unique index if not exists visits_token_idx on visits (token);
 
-alter table site_visits enable row level security;
--- Sin politicas: ni siquiera anon puede hacer SELECT/UPDATE directo a la tabla.
+alter table visits enable row level security;
+-- Sin politicas: la tabla es opaca desde fuera, solo se toca via funciones.
 
-create or replace function bump_site_visits()
-returns bigint
+-- Registra una visita y devuelve un token de sesion (no el id secuencial:
+-- un id predecible dejaria adivinar cuantas visitas hay, o tocar filas
+-- ajenas desde mark_visit_flipped) y el total acumulado.
+create or replace function log_visit(
+  p_lang text,
+  p_referrer text default null,
+  p_browser_lang text default null,
+  p_timezone text default null,
+  p_viewport_width integer default null
+)
+returns table(visit_token uuid, total bigint)
 language plpgsql
 security definer
 set search_path = public
 as $$
 declare
-  new_count bigint;
+  v_token uuid;
+  v_total bigint;
 begin
-  update site_visits set count = count + 1 where id = true
-  returning count into new_count;
-  return new_count;
+  if p_lang not in ('es', 'en', 'eu') then
+    p_lang := 'es';
+  end if;
+
+  insert into visits (lang, referrer, browser_lang, timezone, viewport_width)
+  values (
+    p_lang,
+    left(p_referrer, 500),
+    left(p_browser_lang, 50),
+    left(p_timezone, 100),
+    p_viewport_width
+  )
+  returning token into v_token;
+
+  select count(*) into v_total from visits;
+
+  return query select v_token, v_total;
 end;
 $$;
 
-create or replace function read_site_visits()
+-- Lee el total sin registrar una visita nueva (para cuando ya se conto en
+-- esta sesion y solo se ha vuelto a cargar la portada).
+create or replace function read_visit_total()
 returns bigint
 language sql
 security definer
 set search_path = public
 as $$
-  select count from site_visits where id = true;
+  select count(*) from visits;
 $$;
 
-revoke all on function bump_site_visits() from public;
-revoke all on function read_site_visits() from public;
-grant execute on function bump_site_visits() to anon;
-grant execute on function read_site_visits() to anon;
+-- Marca como "volteada" la visita de ESTA sesion, identificada por su
+-- token (no adivinable) en vez de su id.
+create or replace function mark_visit_flipped(p_token uuid)
+returns void
+language sql
+security definer
+set search_path = public
+as $$
+  update visits set flipped = true where token = p_token;
+$$;
+
+revoke all on function log_visit(text, text, text, text, integer) from public;
+revoke all on function read_visit_total() from public;
+revoke all on function mark_visit_flipped(uuid) from public;
+grant execute on function log_visit(text, text, text, text, integer) to anon;
+grant execute on function read_visit_total() to anon;
+grant execute on function mark_visit_flipped(uuid) to anon;
 ```
 
-`bump_site_visits` suma 1 y devuelve el total; `read_site_visits` solo lee, sin
-sumar. `visits.js` llama a la primera una vez por sesion de pestaña
-(`sessionStorage`) y a la segunda el resto de veces que la portada se vuelve a
-cargar en esa misma sesion, para que navegar fuera y volver no infle el numero
-pero el contador mostrado siga siendo el real.
+`visits.js` llama a `log_visit` una vez por sesion de pestaña
+(`sessionStorage`), guarda el `token` que devuelve (no el id) y lo reutiliza
+si dentro de la misma sesion se vuelve a la portada — ahi solo llama a
+`read_visit_total`, para no inflar el numero al navegar y volver. Si el
+visitante voltea la tarjeta, se llama una vez a `mark_visit_flipped` con ese
+mismo token.
+
+Sigue habiendo un limite que no se puede cerrar del todo: cualquiera con la
+clave anonima (es publica, va en el JS) puede llamar a `log_visit` en bucle
+e inflar el total, igual que con el diseno anterior de un solo contador — la
+diferencia es que ahora cada llamada deja una fila con datos, asi que un
+abuso masivo se notaria en la tabla (muchas filas seguidas con el mismo
+referrer o el mismo intervalo entre `created_at`), no es invisible.
 
 **Conectarlo de verdad** requiere tres cosas que hoy son placeholders:
 1. Ejecutar el SQL de arriba en un proyecto de Supabase (nuevo o uno propio;

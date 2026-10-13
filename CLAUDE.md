@@ -108,7 +108,7 @@ con un script sobre las 21 páginas: a mano se descuadran solos el `aria-current
 `hreflang`, la bandera y el nombre del idioma en la lengua de cada página.
 
 **⚠️ El euskera lo tradujo Claude y está pendiente de que lo revise Kepa** (él tiene
-C1). No darlo por bueno; las dudas mayores están en las declinaciones del resumen de
+B2). No darlo por bueno; las dudas mayores están en las declinaciones del resumen de
 la portada y en los párrafos del capítulo Matrix.
 
 Al traducir: las reglas generales con `/g` sobre identificadores van **al final**,

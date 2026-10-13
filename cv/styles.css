@@ -96,12 +96,12 @@ a{ color: inherit; text-decoration: none; }
 
 /* ---------- Main content ---------- */
 .main{ display: table-cell; vertical-align: top; padding: 9mm 10mm 6mm 9mm; }
-.main-block{ margin-bottom: 20px; }
+.main-block{ margin-bottom: 26px; }
 .main-block:last-child{ margin-bottom: 0; }
 .main h2{
   font-family: var(--font-sans); font-weight: 700; font-size: 11.5px;
   text-transform: uppercase; letter-spacing: 1.2px; color: var(--navy);
-  border-bottom: 2px solid var(--navy); padding-bottom: 3px; margin: 0 0 9px;
+  border-bottom: 2px solid var(--navy); padding-bottom: 3px; margin: 0 0 12px;
 }
 
 /* Entries are allowed to break across a page if they ever have to — a
@@ -110,15 +110,15 @@ a{ color: inherit; text-decoration: none; }
    gap on page 1 instead of just flowing. The real fix is fitting on one
    page; this is a safety net so a near-miss degrades gracefully instead
    of a big gap + spillover page. */
-.entry{ position: relative; padding-left: 16px; margin-bottom: 16px; }
+.entry{ --gap: 20px; position: relative; padding-left: 16px; margin-bottom: var(--gap); }
 .entry:last-child{ margin-bottom: 0; }
 /* Eje de la linea de tiempo: nace en la base de un punto y llega a la cima del
    siguiente. Los puntos van a 6px del borde (el centro de un titulo de 14-16px)
-   y entre entradas hay 16px, asi que llega 16 + 6 = 22px mas alla. Dos pixeles de ancho centrados en
+   y entre entradas hay --gap, asi que llega --gap + 6px mas alla. Dos pixeles de ancho centrados en
    el punto (x = 4px): con 1px caia a medio pixel y se veia corrido respecto al
    punto. El color propio es porque --line era casi blanco sobre blanco. */
 .entry::before{
-  content:""; position:absolute; left: 3px; top: 14px; bottom: -22px; width: 2px; background: #c3cad8;
+  content:""; position:absolute; left: 3px; top: 14px; bottom: calc(-1 * (var(--gap) + 6px)); width: 2px; background: #c3cad8;
 }
 .entry:last-child::before{ display:none; }
 .dot{ position:absolute; left: 0px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
@@ -129,7 +129,7 @@ a{ color: inherit; text-decoration: none; }
 .entry-head time{ font-size: 10.5px; color: var(--ink-dim); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .entry ul{ margin: 0 0 5px; padding-left: 14px; }
-.entry li{ margin-bottom: 4px; font-size: 11.5px; line-height: 1.42; color: var(--ink); }
+.entry li{ margin-bottom: 5px; font-size: 12px; line-height: 1.48; color: var(--ink); }
 .entry li::marker{ color: var(--accent); }
 
 .stack{ margin: 2px 0 4px; font-size: 9.5px; color: var(--ink-dim); line-height: 1.3; }
@@ -137,9 +137,9 @@ a{ color: inherit; text-decoration: none; }
 /* El puesto actual manda: es lo primero que se lee y lo que mas pesa en una
    candidatura, asi que va un punto por encima del resto en titulo y texto. */
 .main-block:first-child .entry:nth-child(2) .entry-head h3{ font-size: 16px; }
-.main-block:first-child .entry:nth-child(2) li{ font-size: 12.5px; }
+.main-block:first-child .entry:nth-child(2) li{ font-size: 13px; }
 .main-block:first-child .entry:nth-child(2) .stack{ font-size: 10.5px; }
-.sub-role{ margin-top: 11px; }
+.sub-role{ margin-top: 14px; }
 .sub-role:first-of-type{ margin-top: 5px; }
 .sub-role-head{ display:flex; justify-content: space-between; align-items: baseline; gap: 10px; break-after: avoid; page-break-after: avoid; }
 .sub-role-head strong{ font-size: 11.5px; color: var(--ink); font-weight: 600; }

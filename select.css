@@ -460,76 +460,61 @@ body{
 /* Sin capitulo todavia: no es un enlace, asi que no se levanta al pasar el raton. */
 .card-gft{ cursor: default; }
 .card-gft:hover{ transform: none; box-shadow: none; }
+.entries-now{ margin-bottom: 20px; }
+/* Miniatura de la tarjeta sin capitulo: del mismo alto que las demas, para que
+   las tres filas de la piramide tengan la misma anatomia. Discontinua porque
+   todavia no hay nada detras. */
+.preview-gft{
+  height: 96px; display: flex; align-items: center; justify-content: center;
+  background: #0f1119; border: 2px dashed #4a4680;
+  font-family: var(--font-term); font-size: 17px; color: #a9a5f0;
+}
+.p-soon-k{ color: #5b57d1; margin-right: 8px; }
 
 /* --- Comienzos -> Por mi cuenta ---
    Las dos puntas que no son un empleo, juntas porque cuentan lo mismo en dos
-   momentos. La flecha va en pseudoelementos de la primera tarjeta y no en un
-   <li> propio: un elemento de lista que solo contiene una flecha ensucia el
-   arbol de accesibilidad sin aportar nada.
-   No es un glifo, son dos piezas dibujadas: un asta en cuna que nace en un
-   pelo y engorda hasta la punta, y la cabeza. Un caracter (el ⟶ que habia
-   antes) no se puede alargar sin engordarlo entero, y a 22px ya se leia como
-   un simbolo suelto entre dos tarjetas, no como un recorrido de una a otra. */
+   momentos. Son la BASE de la piramide de la portada (una tarjeta arriba, tres
+   en medio y estas dos abajo): por eso se reparten por TODO el ancho, una en
+   cada extremo, en vez de quedarse juntas en el centro y dejar la fila de
+   encima mas ancha que el suelo.
+   La flecha ocupa la columna del medio y es un elemento de la propia rejilla
+   (el ::before del <ol>), no una pieza pegada a una tarjeta: se estira sola
+   con el hueco que quede, y un <li> que solo contiene una flecha ensuciaria el
+   arbol de accesibilidad.
+   No es un glifo: es un asta en cuna que nace en un pelo y engorda hasta la
+   punta, mas la cabeza, todo en un solo clip-path. Un caracter no se puede
+   alargar sin engordarlo entero. */
 .arc-sep{ color: var(--accent); }
-/* Hueco propio para la flecha: con los 20px de la rejilla se pegaba a los
-   bordes de las dos tarjetas. Solo la separacion horizontal, que en una
-   columna las tarjetas se apilan y ahi manda la vertical, mas abajo. */
-.entries-arc{ column-gap: 120px; }
-.entries-arc li:first-child{ position: relative; }
-/* Asta */
-.entries-arc li:first-child::after{
-  content: "";
-  position: absolute;
-  left: calc(100% + 13px);
-  top: 50%;
-  width: 84px; height: 7px;
-  margin-top: -3.5px;
-  background: var(--accent);
-  clip-path: polygon(0 43%, 100% 0, 100% 100%, 0 57%);
-  pointer-events: none;
+.entries-arc{
+  grid-template-columns: min(320px, 100%) minmax(0, 1fr) min(320px, 100%);
 }
-/* Cabeza. Triangulo de bordes, no un glifo: asi casa al pixel con el ancho
-   del asta y no depende de como resuelva la fuente el trazo. */
-.entries-arc li:first-child::before{
+.entries-arc > li:first-child{ grid-column: 1; grid-row: 1; }
+.entries-arc > li:last-child{ grid-column: 3; grid-row: 1; }
+.entries-arc::before{
   content: "";
-  position: absolute;
-  left: calc(100% + 93px);
-  top: 50%;
-  width: 0; height: 0;
-  margin-top: -8px;
-  border-left: 14px solid var(--accent);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
+  grid-column: 2; grid-row: 1;
+  align-self: center; justify-self: center;
+  width: calc(100% - 28px); max-width: 280px; height: 18px;
+  background: var(--accent);
+  clip-path: polygon(0 43%, calc(100% - 15px) 30%, calc(100% - 15px) 0, 100% 50%,
+                     calc(100% - 15px) 100%, calc(100% - 15px) 70%, 0 57%);
   pointer-events: none;
 }
 
-/* Por debajo de dos columnas las tarjetas se apilan, asi que la flecha baja al
-   hueco entre ellas y apunta hacia donde de verdad sigue la lectura. No se
-   rota: se redibuja. Rotar el asta obligaba a compensar el origen y la cuna
-   acababa descentrada; con las dos piezas definidas de nuevo cada una cae
-   donde tiene que caer.
-   El corte NO es redondo, sale de la cuenta: dos pistas de 320px + los 120px
-   de separacion + los 18px de padding del body a cada lado = 796px. Medido,
-   no supuesto: la vez anterior el corte se puso a ojo y a 700px las tarjetas
-   ya estaban apiladas mientras la flecha seguia apuntando a la derecha, hacia
-   un hueco que ya no existia. */
-@media (max-width: 795px){
-  /* En vertical el hueco tiene que dar para la flecha entera; los 20px de la
-     rejilla son para tarjetas que solo se apilan. */
-  .entries-arc{ row-gap: 84px; }
-  .entries-arc li:first-child::after{
-    left: 50%; top: calc(100% + 12px);
-    width: 7px; height: 48px;
-    margin-top: 0; margin-left: -3.5px;
-    clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
-  }
-  .entries-arc li:first-child::before{
-    left: 50%; top: calc(100% + 56px);
-    margin-top: 0; margin-left: -8px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 14px solid var(--accent);
-    border-bottom: 0;
+/* Por debajo de este ancho las tarjetas se apilan y la flecha baja al hueco
+   entre ellas apuntando hacia donde sigue la lectura. Se redibuja, no se rota:
+   rotar el asta obligaba a compensar el origen y la cuna acababa descentrada.
+   El corte sale de la cuenta: dos pistas de 320px + 2 huecos de 20px + unos
+   100px para que la flecha se lea como flecha + 36px de padding del body. */
+@media (max-width: 860px){
+  .entries-arc{ grid-template-columns: min(320px, 100%); row-gap: 14px; }
+  .entries-arc > li:first-child{ grid-column: 1; grid-row: 1; }
+  .entries-arc > li:last-child{ grid-column: 1; grid-row: 3; }
+  .entries-arc::before{
+    grid-column: 1; grid-row: 2;
+    width: 18px; max-width: none; height: 60px;
+    clip-path: polygon(43% 0, 57% 0, 70% calc(100% - 15px), 100% calc(100% - 15px),
+                       50% 100%, 0 calc(100% - 15px), 30% calc(100% - 15px));
   }
 }
 
@@ -668,3 +653,12 @@ body{
 @media (prefers-reduced-motion: reduce){
   .foot-caret{ animation: none; }
 }
+
+/* Tarjetas claras: la descripcion, el numero y la fecha se quedaban demasiado
+   palidos contra el fondo. Va al final para ganar a las reglas de cada skin. */
+.card-ia .card-desc{ color: #3b3852; }
+.card-ia .card-index{ color: #6c678f; }
+.card-ia .card-skin{ opacity: 1; }
+.card-eclipse .card-desc{ color: #3a3a3a; }
+.card-eclipse .card-index{ color: #6a6a6a; }
+.card-eclipse .card-skin{ opacity: 1; }

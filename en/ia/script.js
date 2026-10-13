@@ -174,7 +174,7 @@ composer.addEventListener('submit', (e) => {
 
   const redirect = matchRedirect(q);
   if (redirect){
-    appendCustomExchange(q, `<p>That one is covered in ${redirect} — this chapter only covers my current stage, at Sopra Steria. Head back to the selector to see it.</p>`);
+    appendCustomExchange(q, `<p>That one is covered in ${redirect} — this chapter only covers my stage at Sopra Steria. Head back to the selector to see it.</p>`);
     return;
   }
 

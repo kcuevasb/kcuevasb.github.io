@@ -52,9 +52,10 @@ rol + resumen + contacto + enlace al PDF. La columna de texto se estira al alto 
 marco del retrato y el enlace al PDF cierra abajo cuadrando con su borde inferior.
 
 Debajo, los capítulos en tres bloques que **ya no bajan en orden cronológico**,
-porque lo primero que se busca es dónde estoy ahora: *Actualmente* (Sopra, sola y
-con halo) | *Experiencia pasada* (Knowmad, NTT Data — de más reciente a más
-antigua) | *Comienzos ⟶ Por mi cuenta* (las dos puntas que no son un empleo,
+porque lo primero que se busca es dónde estoy ahora: *Actualmente* (GFT, sola y
+con halo; desde octubre de 2026, **sin capítulo ni número** hasta que haya proyecto que
+contar, por eso es un `<div>` y no un enlace) | *Experiencia pasada* (Sopra,
+Knowmad, NTT Data — de más reciente a más antigua) | *Comienzos ⟶ Por mi cuenta* (las dos puntas que no son un empleo,
 unidas por una flecha dibujada). **Los números 01–05 de las tarjetas NO se
 renumeran**: identifican el capítulo y cada capítulo los imprime también en su
 propia página ("Capítulo 04 — donde estoy ahora"), así que tocarlos aquí los
@@ -63,9 +64,10 @@ descuadra en quince páginas.
 Encima de los bloques hay un **filtro de vista** (`filter.js`, sin texto dentro,
 uno solo para los tres idiomas) con cuatro opciones: *Todo*, *Experiencia
 laboral*, *Fuera del trabajo* y *Cronología*. Las tres primeras muestran y
-ocultan bloques enteros. La cuarta rompe la agrupación: mueve las cinco tarjetas
+ocultan bloques enteros. La cuarta rompe la agrupación: mueve las tarjetas
 a una sección aparte (`.entries-timeline`, que viaja vacía en el HTML) ordenadas
-del 01 al 05, y las devuelve a su sitio al salir.
+por `data-order`: del 01 al 05 y, al final, GFT (`data-order="6"`, sin número
+visible), y las devuelve a su sitio al salir.
 
 Se probó antes una versión que **atenuaba** en vez de ocultar; Kepa la vio y pidió
 que se ocultase. La barra en cambio sí va deliberadamente apagada (opacidad .45) y

@@ -2,8 +2,9 @@
  *
  * Cuatro vistas: todo, experiencia laboral, fuera del trabajo y cronologia.
  * Las tres primeras muestran y ocultan bloques enteros. La cuarta es distinta:
- * rompe la agrupacion por bloques y pone las cinco tarjetas seguidas, del 01
- * al 05, que es el orden en que pasaron las cosas.
+ * rompe la agrupacion por bloques y pone las tarjetas seguidas, del 01
+ * al 05 y despues el puesto actual (sin numero: aun no tiene capitulo),
+ * que es el orden en que pasaron las cosas.
  *
  * La cronologia MUEVE las tarjetas a otra lista en vez de duplicarlas, asi que
  * cada una guarda de donde viene. Al volver no se reinsertan una a una con

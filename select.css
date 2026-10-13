@@ -457,6 +457,9 @@ body{
    si puede ir en la tarjeta, que no lo usa nadie. */
 .lead-slot{ border-radius: 6px; box-shadow: 0 0 34px rgba(91,87,209,.42); }
 .card-lead{ outline: 2px solid #5b57d1; outline-offset: 3px; }
+/* Sin capitulo todavia: no es un enlace, asi que no se levanta al pasar el raton. */
+.card-gft{ cursor: default; }
+.card-gft:hover{ transform: none; box-shadow: none; }
 
 /* --- Comienzos -> Por mi cuenta ---
    Las dos puntas que no son un empleo, juntas porque cuentan lo mismo en dos

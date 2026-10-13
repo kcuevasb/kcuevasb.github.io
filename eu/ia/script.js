@@ -174,7 +174,7 @@ composer.addEventListener('submit', (e) => {
 
   const redirect = matchRedirect(q);
   if (redirect){
-    appendCustomExchange(q, `<p>Hori ${redirect} kontatzen dut — kapitulu hau nire uneko etapan bakarrik zentratzen da, Sopra Sterian. Itzuli aukeratzailera ikusteko.</p>`);
+    appendCustomExchange(q, `<p>Hori ${redirect} kontatzen dut — kapitulu hau nire Sopra Steriako etapan bakarrik zentratzen da. Itzuli aukeratzailera ikusteko.</p>`);
     return;
   }
 

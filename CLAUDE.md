@@ -55,7 +55,7 @@ Debajo, los capítulos en tres bloques que **ya no bajan en orden cronológico**
 porque lo primero que se busca es dónde estoy ahora: *Actualmente* (GFT, sola y
 con halo; desde octubre de 2026, **sin capítulo ni número** hasta que haya proyecto que
 contar, por eso es un `<div>` y no un enlace; su tarjeta y su entrada en `/cv/` solo
-dicen "banca, Java 25 y Spring Boot 4 clásico, IA first" — **sin nombrar el
+dicen "banca, Java 25 y Spring Boot 4, IA first" — **sin nombrar el
 proyecto ni el cliente**, por petición expresa de Kepa) | *Experiencia pasada* (Sopra,
 Knowmad, NTT Data — de más reciente a más antigua) | *Comienzos ⟶ Por mi cuenta* (las dos puntas que no son un empleo,
 unidas por una flecha dibujada). **Los números 01–05 de las tarjetas NO se
